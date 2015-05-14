@@ -13,4 +13,26 @@
 
 package fr.schawnndev.api;
 
-public class Menu {}
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Menu {
+
+    @Getter @Setter
+    private String name;
+
+    private List<SubMenu> subMenus;
+
+    public Menu(String name){
+        this.name = name;
+        this.subMenus = new ArrayList<>();
+    }
+
+    public void addSubMenu(SubMenu subMenu){
+        subMenus.add(subMenu);
+    }
+
+}

@@ -13,4 +13,21 @@
 
 package fr.schawnndev.api.events;
 
-public class ClickEvent {}
+import fr.schawnndev.api.enums.ClickType;
+import lombok.Getter;
+import org.bukkit.entity.Player;
+
+public class ClickEvent {
+
+    @Getter
+    private Player player;
+
+    @Getter
+    private ClickType clickType;
+
+    public ClickEvent(Player player, ClickType clickType){
+        this.player = player;
+        this.clickType = clickType;
+    }
+
+}

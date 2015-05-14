@@ -13,4 +13,19 @@
 
 package fr.schawnndev;
 
-public class LCCosmetiques {}
+import lombok.Getter;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class LCCosmetiques extends JavaPlugin {
+
+    @Getter
+    private static LCCosmetiques instance;
+
+    public void onEnable(){
+        instance = this;
+    }
+
+    public void onDisable() {}
+
+}

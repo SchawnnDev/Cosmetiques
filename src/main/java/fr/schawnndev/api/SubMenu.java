@@ -13,4 +13,21 @@
 
 package fr.schawnndev.api;
 
-public class SubMenu {}
+import lombok.Getter;
+import lombok.Setter;
+
+public class SubMenu {
+
+    @Getter
+    @Setter
+    private String name;
+
+    @Getter @Setter
+    private Menu menu;
+
+    public SubMenu(String name, Menu menu){
+        this.name = name;
+        this.menu = menu;
+    }
+
+}
