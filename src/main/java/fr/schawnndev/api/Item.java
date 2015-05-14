@@ -13,6 +13,7 @@
 
 package fr.schawnndev.api;
 
+import fr.schawnndev.api.interfaces.Click;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Material;
@@ -41,28 +42,34 @@ public class Item {
     @Getter @Setter
     private int price;
 
-    public Item(String name, int price, Material material){
+    @Getter @Setter
+    private Click click;
+
+    public Item(String name, int price, Material material, Click click){
         this.name = name;
         this.material = material;
         this.damage = -1;
         this.data = -1;
         this.price = price;
+        this.click = click;
     }
 
-    public Item(String name, int price, Material material, short damage){
+    public Item(String name, int price, Material material, short damage, Click click){
         this.name = name;
         this.material = material;
         this.damage = damage;
         this.data = -1;
         this.price = price;
+        this.click = click;
     }
 
-    public Item(String name, int price, Material material, short damage, byte data){
+    public Item(String name, int price, Material material, short damage, byte data, Click click){
         this.name = name;
         this.material = material;
         this.damage = damage;
         this.data = data;
         this.price = price;
+        this.click = click;
     }
 
     public void addLore(String lore){
