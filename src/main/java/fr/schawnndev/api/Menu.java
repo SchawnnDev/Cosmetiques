@@ -15,6 +15,8 @@ package fr.schawnndev.api;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,9 @@ public class Menu {
 
     private List<SubMenu> subMenus;
 
+    @Getter
+    private Inventory inventory;
+
     public Menu(String name){
         this.name = name;
         this.subMenus = new ArrayList<>();
@@ -33,6 +38,14 @@ public class Menu {
 
     public void addSubMenu(SubMenu subMenu){
         subMenus.add(subMenu);
+    }
+
+    public void open(Player player){
+
+    }
+
+    public void build(){
+
     }
 
 }
