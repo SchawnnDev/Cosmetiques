@@ -14,9 +14,11 @@
 package fr.schawnndev.api;
 
 import fr.schawnndev.api.interfaces.Click;
+import fr.schawnndev.sql.SQLManager;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -137,6 +139,53 @@ public class Item {
                 lore.add("      ");
                 lore.add("§bPrix : §6" + price + " §bLCCoins");
             }
+        }
+
+        // set
+
+        itemMeta.setLore(lore);
+        itemMeta.setDisplayName(name);
+        itemStack.setItemMeta(itemMeta);
+
+        // return
+
+        return itemStack;
+    }
+
+    public ItemStack build(Player player){
+
+        // vars
+
+        ItemStack itemStack;
+
+        // init stack
+
+        if(data == -1){
+            itemStack = new ItemStack(material, 1, damage);
+        } else if (damage == -1){
+            itemStack = new ItemStack(material, 1);
+        } else {
+            itemStack = new ItemStack(material, 1, damage, data);
+        }
+
+        // lore
+
+        List<String> lore = this.lore;
+
+
+        if(!SQLManager.hasCosmetic(player, id)) {
+            if (vip) {
+                lore.add("      ");
+                lore.add("§bPrix : §6Réservé aux §eVIP");
+            } else {
+                if (price != -1) {
+                    lore.add("      ");
+                    lore.add("§bPrix : §6" + price + " §bLCCoins");
+                }
+            }
+        } else {
+            lore.add("     ");
+            lore.add("§aVous possedez ce gadget !");
         }
 
         // set

@@ -147,9 +147,11 @@ public class SubMenu {
             while (positions[count] != 1)
                 count++;
 
+            positions[count] = 0;
+
             InventoryPosition inv = (InventoryPosition) ItemDisponibility.getInventoryPositions().toArray()[count];
 
-            inventory.setItem(converter.convert(inv.getColonne(), inv.getLigne()), item.build(1));
+            inventory.setItem(converter.convert(inv.getColonne(), inv.getLigne()), item.build(player));
 
         }
     }
