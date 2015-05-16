@@ -53,10 +53,14 @@ public class SubMenu {
     }
 
     public void open(Player player){
+        build(player);
+
+
+
         player.openInventory(inventory);
     }
 
-    public void build(){
+    public void build(Player player){
         inventory = Bukkit.createInventory(null, converter.convert(6,8), name);
 
         ItemStack glass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 0, glassColor.getData());
