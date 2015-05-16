@@ -16,6 +16,7 @@ package fr.schawnndev;
 import fr.schawnndev.api.Item;
 import fr.schawnndev.api.events.ClickEvent;
 import fr.schawnndev.api.interfaces.Click;
+import fr.schawnndev.api.utils.ItemDisponibility;
 import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -27,6 +28,9 @@ public class LCCosmetiques extends JavaPlugin {
 
     public void onEnable() {
         instance = this;
+        new ItemDisponibility();
+
+
     }
 
     public void onDisable() {}
