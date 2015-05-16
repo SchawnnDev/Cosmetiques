@@ -27,13 +27,6 @@ public class LCCosmetiques extends JavaPlugin {
 
     public void onEnable() {
         instance = this;
-
-        Item item = new Item("salut", 1, Material.COOKED_RABBIT, new Click() {
-            @Override
-            public void onClick(ClickEvent e) {
-
-            }
-        });
     }
 
     public void onDisable() {}

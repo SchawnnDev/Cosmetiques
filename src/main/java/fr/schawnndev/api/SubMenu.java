@@ -61,6 +61,7 @@ public class SubMenu {
 
         ItemStack glass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 0, glassColor.getData());
 
+        inventory.setItem(converter.convert(1, 5), Manager.getHead(Bukkit.getPlayer("ss")).build(1));
 
 
     }

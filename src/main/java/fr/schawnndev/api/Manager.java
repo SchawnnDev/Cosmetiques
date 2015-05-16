@@ -13,13 +13,28 @@
 
 package fr.schawnndev.api;
 
+import fr.schawnndev.api.events.ClickEvent;
+import fr.schawnndev.api.interfaces.Click;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.SkullMeta;
 
 public class Manager {
 
-    public static ItemStack getHead(Player player){
-        ItemStack head = new ItemStack(8 /* Head ItemStack */);
+    public static Item getHead(Player player){
+
+        Item head = new Item("head", -1, false, Material.SKULL, (short) 3, null, new Click() {
+            @Override
+            public void onClick(ClickEvent e) {
+                e.setCancelled(true);
+            }
+        });
+
+
+        SkullMeta im = (SkullMeta) head.getRawItemStack().getItemMeta();
+        im.setOwner(player.getName());
+        head.setItemMeta(im);
 
         //TODO: MySQL
 

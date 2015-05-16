@@ -24,6 +24,12 @@ import java.util.List;
 
 public class Item {
 
+    @Getter
+    private String id;
+
+    @Getter @Setter
+    private boolean vip;
+
     @Getter @Setter
     private List<String> lore;
 
@@ -45,31 +51,43 @@ public class Item {
     @Getter @Setter
     private Click click;
 
-    public Item(String name, int price, Material material, Click click){
-        this.name = name;
+    @Getter @Setter
+    private ItemMeta itemMeta;
+
+    public Item(String id, int price, boolean vip, Material material, ItemMeta itemMeta, Click click){
+        this.name = "";
         this.material = material;
         this.damage = -1;
         this.data = -1;
         this.price = price;
         this.click = click;
+        this.vip = vip;
+        this.id = id;
+        this.itemMeta = itemMeta == null ? getRawItemStack().getItemMeta() : itemMeta;
     }
 
-    public Item(String name, int price, Material material, short damage, Click click){
-        this.name = name;
+    public Item(String id, int price, boolean vip, Material material, short damage, ItemMeta itemMeta, Click click){
+        this.name = "";
         this.material = material;
         this.damage = damage;
         this.data = -1;
         this.price = price;
         this.click = click;
+        this.vip = vip;
+        this.id = id;
+        this.itemMeta = itemMeta == null ? getRawItemStack().getItemMeta() : itemMeta;
     }
 
-    public Item(String name, int price, Material material, short damage, byte data, Click click){
-        this.name = name;
+    public Item(String id, int price, boolean vip, Material material, short damage, byte data, ItemMeta itemMeta, Click click){
+        this.name = "";
         this.material = material;
         this.damage = damage;
         this.data = data;
         this.price = price;
         this.click = click;
+        this.vip = vip;
+        this.id = id;
+        this.itemMeta = itemMeta == null ? getRawItemStack().getItemMeta() : itemMeta;
     }
 
     public void addLore(String lore){
@@ -82,12 +100,20 @@ public class Item {
         }
     }
 
+    public ItemStack getRawItemStack(){
+        if(data == -1)
+            return new ItemStack(material, 1, damage);
+         else if (damage == -1)
+            return new ItemStack(material, 1);
+         else
+            return new ItemStack(material, 1, damage, data);
+    }
+
     public ItemStack build(int count){
 
         // vars
 
         ItemStack itemStack;
-        ItemMeta itemMeta;
 
         // init stack
 
@@ -99,17 +125,18 @@ public class Item {
             itemStack = new ItemStack(material, count, damage, data);
         }
 
-        // init meta
-
-        itemMeta = itemStack.getItemMeta();
-
         // lore
 
         List<String> lore = this.lore;
 
-        if(price != -1) {
+        if(vip){
             lore.add("      ");
-            lore.add("Prix: " + price);
+            lore.add("§bPrix : §6Réservé aux §eVIP");
+        } else {
+            if(price != -1) {
+                lore.add("      ");
+                lore.add("§bPrix : §6" + price + " §bLCCoins");
+            }
         }
 
         // set

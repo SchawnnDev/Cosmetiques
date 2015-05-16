@@ -36,6 +36,20 @@
             <version>1.12.6</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>LegendCraft</groupId>
+            <artifactId>LCMaster</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/LCMaster.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>LegendCraft</groupId>
+            <artifactId>LCPerms</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/LCPerms.jar</systemPath>
+        </dependency>
     </dependencies>
     <build>
         <defaultGoal>clean install</defaultGoal>
