@@ -173,7 +173,7 @@ public class Item {
         List<String> lore = this.lore;
 
 
-        if(!SQLManager.hasCosmetic(player, id)) {
+        if(!SQLManager.hasBuyCosmetic(player, id)) {
             if (vip) {
                 lore.add("      ");
                 lore.add("§bPrix : §6Réservé aux §eVIP");

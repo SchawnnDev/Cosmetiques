@@ -13,10 +13,15 @@
 
 package fr.schawnndev.api;
 
+import fr.schawnndev.api.events.ClickEvent;
+import fr.schawnndev.api.interfaces.Click;
+import fr.schawnndev.math.PositionConverter;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +33,15 @@ public class Menu {
 
     private List<SubMenu> subMenus;
 
+    private PositionConverter converter;
+
     @Getter
     private Inventory inventory;
 
     public Menu(String name){
         this.name = name;
         this.subMenus = new ArrayList<>();
+        this.converter = new PositionConverter();
     }
 
     public void addSubMenu(SubMenu subMenu){
@@ -45,6 +53,37 @@ public class Menu {
     }
 
     public void build(){
+
+
+        Item glass = new Item("glass", -1, false, Material.STAINED_GLASS_PANE, (short) 0, glassColor.getData(), null, new Click(){
+            @Override
+            public void onClick(ClickEvent e) {
+                e.setCancelled(true);
+            }
+        });
+
+        glass.setName("§7-");
+
+        ItemStack glassStack = glass.build(1);
+
+        inventory.setItem(converter.convert(1, 3), glassStack);
+        inventory.setItem(converter.convert(1, 7), glassStack);
+        inventory.setItem(converter.convert(2, 2), glassStack);
+        inventory.setItem(converter.convert(2, 3), glassStack);
+        inventory.setItem(converter.convert(2, 7), glassStack);
+        inventory.setItem(converter.convert(2, 8), glassStack);
+        inventory.setItem(converter.convert(3, 2), glassStack);
+        inventory.setItem(converter.convert(3, 8), glassStack);
+        inventory.setItem(converter.convert(4, 2), glassStack);
+        inventory.setItem(converter.convert(4, 8), glassStack);
+        inventory.setItem(converter.convert(5, 2), glassStack);
+        inventory.setItem(converter.convert(5, 3), glassStack);
+        inventory.setItem(converter.convert(5, 7), glassStack);
+        inventory.setItem(converter.convert(5, 8), glassStack);
+        inventory.setItem(converter.convert(3, 2), glassStack);
+        inventory.setItem(converter.convert(3, 8), glassStack);
+        inventory.setItem(converter.convert(6, 3), glassStack);
+        inventory.setItem(converter.convert(6, 7), glassStack);
 
     }
 

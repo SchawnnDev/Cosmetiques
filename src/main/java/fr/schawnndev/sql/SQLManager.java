@@ -33,7 +33,7 @@ public class SQLManager {
      *
      */
 
-    public static boolean hasCosmetic(Player player, String cosmetic){
+    public static boolean hasBuyCosmetic(Player player, String cosmetic){
 
         try {
             Statement statement = connection.createStatement();
@@ -42,11 +42,11 @@ public class SQLManager {
 
             resultSet.next();
 
-            if(resultSet.getString("uuid") == null) {
+            if(resultSet.getString("uuid") == null)
                 return false;
-            } else if (resultSet.getString("achats") == null) {
+            else if (resultSet.getString("achats") == null)
                 return false;
-            } else {
+            else {
                 String[] cosmetics = resultSet.getString("achats").split(",");
 
                 for(int i = 0; i < cosmetic.length(); i++)
