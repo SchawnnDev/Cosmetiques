@@ -69,13 +69,13 @@ public class Particule {
 
                     // 1er cercle
 
-                    PacketManager.sendPacket(observer, PacketManager.getPacket(particleType.getPacketName(), (float) (X - Math.sin(pi * (YAW) / 180 + compteur)), (float) (Y + 1 - Math.sin(compteur)), (float) (Z + Math.cos(pi * (YAW) / 180 + compteur)), 0F, 0F, 0F, 0F, 1));
-                    PacketManager.sendPacket(observer, PacketManager.getPacket(particleType.getPacketName(), (float) (X + Math.sin(pi * (YAW) / 180 + compteur)), (float) (Y + 1 + Math.sin(compteur)), (float) (Z - Math.cos(pi * (YAW) / 180 + compteur)), 0F, 0F, 0F, 0F, 1));
+                    PacketManager.sendPacket(observer, PacketManager.getPacket(particleType.getPacketName(), (float) (X - Math.sin(pi * YAW / 180 + compteur)), (float) (Y + 1 - Math.sin(compteur)), (float) (Z + Math.cos(pi * YAW / 180 + compteur)), 0F, 0F, 0F, 0F, 1));
+                    PacketManager.sendPacket(observer, PacketManager.getPacket(particleType.getPacketName(), (float) (X + Math.sin(pi * YAW / 180 + compteur)), (float) (Y + 1 + Math.sin(compteur)), (float) (Z - Math.cos(pi * YAW / 180 + compteur)), 0F, 0F, 0F, 0F, 1));
 
                     // 2eme cercle
 
-                    PacketManager.sendPacket(observer, PacketManager.getPacket(particleType.getPacketName(), (float) (X - Math.sin(pi * (YAW) / 180 + compteur)), (float) (Y + 1 + Math.sin(compteur)), (float) (Z + Math.cos(pi * (YAW) / 180 + compteur)), 0F, 0F, 0F, 0F, 1));
-                    PacketManager.sendPacket(observer, PacketManager.getPacket(particleType.getPacketName(), (float) (X + Math.sin(pi * (YAW) / 180 + compteur)), (float) (Y + 1 - Math.sin(compteur)), (float) (Z - Math.cos(pi * (YAW) / 180 + compteur)), 0F, 0F, 0F, 0F, 1));
+                    PacketManager.sendPacket(observer, PacketManager.getPacket(particleType.getPacketName(), (float) (X - Math.sin(pi * YAW / 180 + compteur)), (float) (Y + 1 + Math.sin(compteur)), (float) (Z + Math.cos(pi * YAW / 180 + compteur)), 0F, 0F, 0F, 0F, 1));
+                    PacketManager.sendPacket(observer, PacketManager.getPacket(particleType.getPacketName(), (float) (X + Math.sin(pi * YAW / 180 + compteur)), (float) (Y + 1 - Math.sin(compteur)), (float) (Z - Math.cos(pi * YAW / 180 + compteur)), 0F, 0F, 0F, 0F, 1));
                 }
 
             }
