@@ -40,7 +40,8 @@ public class SQL {
         this.hostname = hostname;
         this.database = database;
         this.user = user;
-        this.password = password;
+
+        this.password = password.equalsIgnoreCase("no") ? "" : password;
     }
 
     public void start() {
@@ -51,6 +52,7 @@ public class SQL {
                 try {
                     Class.forName("com.mysql.jdbc.Driver");
                     SQLManager.setConnection(DriverManager.getConnection("jdbc:mysql://" + hostname + ":3306/" + database, user, password));
+                    SQLManager.setStatement(SQLManager.getConnection().createStatement());
                 } catch (ClassNotFoundException | SQLException e) {
                     e.printStackTrace();
                 }

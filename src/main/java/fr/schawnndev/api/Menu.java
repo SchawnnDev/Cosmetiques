@@ -15,6 +15,7 @@ package fr.schawnndev.api;
 
 import fr.schawnndev.api.events.ClickEvent;
 import fr.schawnndev.api.interfaces.Click;
+import fr.schawnndev.api.utils.GlassColor;
 import fr.schawnndev.math.PositionConverter;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,8 +39,12 @@ public class Menu {
     @Getter
     private Inventory inventory;
 
-    public Menu(String name){
+    @Getter
+    private GlassColor glassColor;
+
+    public Menu(String name, GlassColor glassColor){
         this.name = name;
+        this.glassColor = glassColor;
         this.subMenus = new ArrayList<>();
         this.converter = new PositionConverter();
     }

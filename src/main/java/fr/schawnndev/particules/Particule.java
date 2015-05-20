@@ -14,24 +14,30 @@
 package fr.schawnndev.particules;
 
 import fr.schawnndev.LCCosmetiques;
-import fr.schawnndev.utils.PacketManager;
+import fr.schawnndev.particules.utils.ParticleEffect;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
+
+import java.util.UUID;
 
 public class Particule {
 
-    public Player player;
-    private ParticleType particleType;
+    @Getter
+    public UUID player;
+
+    private ParticleEffect particleEffect;
     private int shed_id;
     private float compteur;
     private double pi;
     public boolean isStarted;
 
-    public Particule(Player player, ParticleType particleType){
+    public Particule(UUID player, ParticleEffect particleEffect){
         this.player = player;
         this.shed_id = 0;
-        this.particleType = particleType;
+        this.particleEffect = particleEffect;
         this.compteur = 0f;
         this.pi = 3.14159265358979323846;
         this.isStarted = false;
@@ -56,27 +62,24 @@ public class Particule {
 
                 // Location actuelle du joueur
 
-                Location playerLoc = player.getLocation();
-
-                final double X = playerLoc.getX();
-                final double Y = playerLoc.getY();
-                final double Z = playerLoc.getZ();
-                final float YAW = playerLoc.getYaw();
-
-                // Pour montrer les particules à tout le monde
-
-                for (Player observer : Bukkit.getOnlinePlayers()) {
-
-                    // 1er cercle
-
-                    PacketManager.sendPacket(observer, PacketManager.getPacket(particleType.getPacketName(), (float) (X - Math.sin(pi * YAW / 180 + compteur)), (float) (Y + 1 - Math.sin(compteur)), (float) (Z + Math.cos(pi * YAW / 180 + compteur)), 0F, 0F, 0F, 0F, 1));
-                    PacketManager.sendPacket(observer, PacketManager.getPacket(particleType.getPacketName(), (float) (X + Math.sin(pi * YAW / 180 + compteur)), (float) (Y + 1 + Math.sin(compteur)), (float) (Z - Math.cos(pi * YAW / 180 + compteur)), 0F, 0F, 0F, 0F, 1));
-
-                    // 2eme cercle
-
-                    PacketManager.sendPacket(observer, PacketManager.getPacket(particleType.getPacketName(), (float) (X - Math.sin(pi * YAW / 180 + compteur)), (float) (Y + 1 + Math.sin(compteur)), (float) (Z + Math.cos(pi * YAW / 180 + compteur)), 0F, 0F, 0F, 0F, 1));
-                    PacketManager.sendPacket(observer, PacketManager.getPacket(particleType.getPacketName(), (float) (X + Math.sin(pi * YAW / 180 + compteur)), (float) (Y + 1 - Math.sin(compteur)), (float) (Z - Math.cos(pi * YAW / 180 + compteur)), 0F, 0F, 0F, 0F, 1));
+                if(Bukkit.getPlayer(player) == null){
+                    stop();
+                    return;
                 }
+
+                Player p = Bukkit.getPlayer(player);
+
+                Location playerLoc = p.getLocation();
+
+                // 1er cercle
+
+                particleEffect.display(0f, 0f, 0f, 0.01f, 1, new Location(playerLoc.getWorld(), (playerLoc.getX() - Math.sin(3.14159265358979323846 * playerLoc.getYaw() / 180 + compteur)), (playerLoc.getY() + 1 - Math.sin(compteur)), (playerLoc.getZ() + Math.cos(3.14159265358979323846 * playerLoc.getYaw() / 180 + compteur))), 128);
+                particleEffect.display(0f, 0f, 0f, 0.01f, 1, new Location(playerLoc.getWorld(), (playerLoc.getX() + Math.sin(3.14159265358979323846 * playerLoc.getYaw() / 180 + compteur)), (playerLoc.getY() + 1 + Math.sin(compteur)), (playerLoc.getZ() - Math.cos(3.14159265358979323846 * playerLoc.getYaw() / 180 + compteur))), 128);
+
+                // 2eme cercle
+
+                particleEffect.display(0f, 0f, 0f, 0.01f, 1, new Location(playerLoc.getWorld(), (playerLoc.getX() - Math.sin(3.14159265358979323846 * playerLoc.getYaw() / 180 + compteur)), (playerLoc.getY() + 1 + Math.sin(compteur)), (playerLoc.getZ() + Math.cos(3.14159265358979323846 * playerLoc.getYaw() / 180 + compteur))), 128);
+                particleEffect.display(0f, 0f, 0f, 0.01f, 1, new Location(playerLoc.getWorld(), (playerLoc.getX() + Math.sin(3.14159265358979323846 * playerLoc.getYaw() / 180 + compteur)), (playerLoc.getY() + 1 - Math.sin(compteur)), (playerLoc.getZ() - Math.cos(3.14159265358979323846 * playerLoc.getYaw() / 180 + compteur))), 128);
 
             }
 

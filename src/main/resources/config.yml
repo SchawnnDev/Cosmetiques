@@ -1,0 +1,5 @@
+db:
+  host: localhost
+  repo: default
+  user: user
+  pass: pass

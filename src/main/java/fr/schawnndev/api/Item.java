@@ -56,6 +56,18 @@ public class Item {
     @Getter @Setter
     private ItemMeta itemMeta;
 
+    public Item(String id, int price, boolean vip, Material material, ItemMeta itemMeta){
+        this.name = "";
+        this.material = material;
+        this.damage = -1;
+        this.data = -1;
+        this.price = price;
+        this.click = null;
+        this.vip = vip;
+        this.id = id;
+        this.itemMeta = itemMeta == null ? getRawItemStack().getItemMeta() : itemMeta;
+    }
+
     public Item(String id, int price, boolean vip, Material material, ItemMeta itemMeta, Click click){
         this.name = "";
         this.material = material;
@@ -68,6 +80,18 @@ public class Item {
         this.itemMeta = itemMeta == null ? getRawItemStack().getItemMeta() : itemMeta;
     }
 
+    public Item(String id, int price, boolean vip, Material material, short damage, ItemMeta itemMeta){
+        this.name = "";
+        this.material = material;
+        this.damage = damage;
+        this.data = -1;
+        this.price = price;
+        this.click = null;
+        this.vip = vip;
+        this.id = id;
+        this.itemMeta = itemMeta == null ? getRawItemStack().getItemMeta() : itemMeta;
+    }
+
     public Item(String id, int price, boolean vip, Material material, short damage, ItemMeta itemMeta, Click click){
         this.name = "";
         this.material = material;
@@ -75,6 +99,18 @@ public class Item {
         this.data = -1;
         this.price = price;
         this.click = click;
+        this.vip = vip;
+        this.id = id;
+        this.itemMeta = itemMeta == null ? getRawItemStack().getItemMeta() : itemMeta;
+    }
+
+    public Item(String id, int price, boolean vip, Material material, short damage, byte data, ItemMeta itemMeta){
+        this.name = "";
+        this.material = material;
+        this.damage = damage;
+        this.data = data;
+        this.price = price;
+        this.click = null;
         this.vip = vip;
         this.id = id;
         this.itemMeta = itemMeta == null ? getRawItemStack().getItemMeta() : itemMeta;
@@ -142,6 +178,31 @@ public class Item {
         }
 
         // set
+
+        itemMeta.setLore(lore);
+        itemMeta.setDisplayName(name);
+        itemStack.setItemMeta(itemMeta);
+
+        // return
+
+        return itemStack;
+    }
+
+    public ItemStack buildRaw(int count){
+
+        // vars
+
+        ItemStack itemStack;
+
+        // init stack
+
+        if(data == -1){
+            itemStack = new ItemStack(material, count, damage);
+        } else if (damage == -1){
+            itemStack = new ItemStack(material, count);
+        } else {
+            itemStack = new ItemStack(material, count, damage, data);
+        }
 
         itemMeta.setLore(lore);
         itemMeta.setDisplayName(name);

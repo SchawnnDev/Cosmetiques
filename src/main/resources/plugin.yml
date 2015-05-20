@@ -2,3 +2,10 @@ name: LCCosmetiques
 version: 1.0
 main: fr.schawnndev.LCCosmetiques
 author: SchawnnDev
+commands:
+  particule:
+    description: Salut
+  b:
+    description: Salut
+  a:
+    description: Salut
