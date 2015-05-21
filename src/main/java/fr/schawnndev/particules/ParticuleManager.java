@@ -20,21 +20,21 @@ import java.util.List;
 
 public class ParticuleManager {
 
-    private static List<Particule> particles = new ArrayList<>();
+    private static List<aaaaaa> particles = new ArrayList<>();
 
     public static boolean hasParticle(Player player){
-        for(Particule p : particles)
+        for(aaaaaa p : particles)
             if(p.getPlayer() == player.getUniqueId())
                 return true;
         return false;
     }
 
-    public static void removeParticle(Particule particule){
+    public static void removeParticle(aaaaaa particule){
         if(particles.contains(particule))
             particles.remove(particule);
     }
 
-    public static void addParticle(Particule particule){
+    public static void addParticle(aaaaaa particule){
         if(!particles.contains(particule))
             particles.remove(particule);
     }
@@ -42,14 +42,14 @@ public class ParticuleManager {
     public static void removeParticle(Player player){
         if(!hasParticle(player)) return;
 
-        Particule particule = getParticule(player);
+        aaaaaa particule = getParticule(player);
 
         if(particles.contains(particule))
             particles.remove(particule);
     }
 
-    public static Particule getParticule(Player player){
-        for(Particule p : particles)
+    public static aaaaaa getParticule(Player player){
+        for(aaaaaa p : particles)
             if(p.getPlayer() == player.getUniqueId())
                 return p;
 

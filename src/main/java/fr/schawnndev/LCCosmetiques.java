@@ -16,9 +16,9 @@ package fr.schawnndev;
 import fr.schawnndev.data.ItemStackManager;
 import fr.schawnndev.listeners.ServerListener;
 import fr.schawnndev.menus.MenuManager;
-import fr.schawnndev.particules.Particule;
+import fr.schawnndev.particules.aaaaaa;
 import fr.schawnndev.particules.ParticuleManager;
-import fr.schawnndev.particules.utils.ParticleEffect;
+import fr.schawnndev.particules.ParticleEffect;
 import fr.schawnndev.sql.SQL;
 import fr.schawnndev.sql.SQLManager;
 import lombok.Getter;
@@ -94,7 +94,7 @@ public class LCCosmetiques extends JavaPlugin{
 
                     if(SQLManager.hasBuyCosmetic(player, "coeurs")) {
 
-                        Particule particle = new Particule(player.getUniqueId(), ParticleEffect.HEART);
+                        aaaaaa particle = new aaaaaa(player.getUniqueId(), ParticleEffect.HEART);
 
                         particle.start();
 

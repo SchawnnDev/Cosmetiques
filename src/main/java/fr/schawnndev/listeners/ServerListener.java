@@ -16,7 +16,7 @@ package fr.schawnndev.listeners;
 import fr.schawnndev.CosmetiqueManager;
 import fr.schawnndev.LCCosmetiques;
 import fr.schawnndev.menus.MenuManager;
-import fr.schawnndev.particules.Particule;
+import fr.schawnndev.particules.aaaaaa;
 import fr.schawnndev.particules.ParticuleManager;
 import fr.schawnndev.sql.SQLManager;
 import org.bukkit.entity.Player;
@@ -51,7 +51,7 @@ public class ServerListener implements Listener {
         CosmetiqueManager.removeCosmetique(e.getPlayer());
 
         if(ParticuleManager.hasParticle(e.getPlayer())) {
-            Particule particule = ParticuleManager.getParticule(e.getPlayer());
+            aaaaaa particule = ParticuleManager.getParticule(e.getPlayer());
             particule.stop();
             ParticuleManager.removeParticle(particule);
         }
