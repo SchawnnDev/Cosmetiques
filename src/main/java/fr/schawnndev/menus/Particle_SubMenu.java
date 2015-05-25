@@ -21,10 +21,8 @@ import fr.schawnndev.api.utils.GlassColor;
 import fr.schawnndev.api.utils.ItemDisponibility;
 import fr.schawnndev.data.ItemStackManager;
 import fr.schawnndev.math.PositionConverter;
-import fr.schawnndev.particules.Particle;
 import fr.schawnndev.particules.ParticleManager;
 import fr.schawnndev.sql.SQLManager;
-import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -41,52 +39,46 @@ import java.util.List;
 
 public class Particle_SubMenu implements Listener {
 
-    @Getter
-    private static Inventory basicInventory;
-
     private static PositionConverter positionConverter = new PositionConverter();
 
     public Particle_SubMenu(){
         Bukkit.getPluginManager().registerEvents(this, LCCosmetiques.getInstance());
+    }
 
-        basicInventory = Bukkit.createInventory(null, 6*9, "§6Particules");
+    public static void open(Player player){
+        Inventory inv = Bukkit.createInventory(null, 6*9, "§6Particules");
 
         ItemStack glassStack = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)0, GlassColor.WHITE.getData());
         ItemMeta glassMeta = glassStack.getItemMeta();
         glassMeta.setDisplayName("§7-");
         glassStack.setItemMeta(glassMeta);
 
-        basicInventory.setItem(positionConverter.convert(3, 1), glassStack);
-        basicInventory.setItem(positionConverter.convert(7, 1), glassStack);
-        basicInventory.setItem(positionConverter.convert(2, 2), glassStack);
-        basicInventory.setItem(positionConverter.convert(3, 2), glassStack);
-        basicInventory.setItem(positionConverter.convert(7, 2), glassStack);
-        basicInventory.setItem(positionConverter.convert(8, 2), glassStack);
-        basicInventory.setItem(positionConverter.convert(2, 3), glassStack);
-        basicInventory.setItem(positionConverter.convert(8, 3), glassStack);
-        basicInventory.setItem(positionConverter.convert(2, 4), glassStack);
-        basicInventory.setItem(positionConverter.convert(8, 4), glassStack);
-        basicInventory.setItem(positionConverter.convert(2, 5), glassStack);
-        basicInventory.setItem(positionConverter.convert(3, 5), glassStack);
-        basicInventory.setItem(positionConverter.convert(7, 5), glassStack);
-        basicInventory.setItem(positionConverter.convert(8, 5), glassStack);
-        basicInventory.setItem(positionConverter.convert(2, 3), glassStack);
-        basicInventory.setItem(positionConverter.convert(8, 3), glassStack);
-        basicInventory.setItem(positionConverter.convert(3, 6), glassStack);
-        basicInventory.setItem(positionConverter.convert(7, 6), glassStack);
+        inv.setItem(positionConverter.convert(3, 1), glassStack);
+        inv.setItem(positionConverter.convert(7, 1), glassStack);
+        inv.setItem(positionConverter.convert(2, 2), glassStack);
+        inv.setItem(positionConverter.convert(3, 2), glassStack);
+        inv.setItem(positionConverter.convert(7, 2), glassStack);
+        inv.setItem(positionConverter.convert(8, 2), glassStack);
+        inv.setItem(positionConverter.convert(2, 3), glassStack);
+        inv.setItem(positionConverter.convert(8, 3), glassStack);
+        inv.setItem(positionConverter.convert(2, 4), glassStack);
+        inv.setItem(positionConverter.convert(8, 4), glassStack);
+        inv.setItem(positionConverter.convert(2, 5), glassStack);
+        inv.setItem(positionConverter.convert(3, 5), glassStack);
+        inv.setItem(positionConverter.convert(7, 5), glassStack);
+        inv.setItem(positionConverter.convert(8, 5), glassStack);
+        inv.setItem(positionConverter.convert(2, 3), glassStack);
+        inv.setItem(positionConverter.convert(8, 3), glassStack);
+        inv.setItem(positionConverter.convert(3, 6), glassStack);
+        inv.setItem(positionConverter.convert(7, 6), glassStack);
 
         ItemStack cosmetiques = new ItemStack(Material.BLAZE_POWDER);
         ItemMeta cosmetiquesMeta = cosmetiques.getItemMeta();
         cosmetiquesMeta.setDisplayName("§5§lParticules");
         cosmetiques.setItemMeta(cosmetiquesMeta);
 
-        basicInventory.setItem(positionConverter.convert(1, 1), cosmetiques);
-        basicInventory.setItem(positionConverter.convert(9, 1), cosmetiques);
-
-    }
-
-    public static void open(Player player){
-        Inventory inv = getBasicInventory();
+        inv.setItem(positionConverter.convert(1, 1), cosmetiques);
+        inv.setItem(positionConverter.convert(9, 1), cosmetiques);
         inv.setItem(positionConverter.convert(5, 1), ItemStackManager.getHead(player));
 
         List<ItemStack> items = generateItemStacks(player);
@@ -183,13 +175,13 @@ public class Particle_SubMenu implements Listener {
 
     @EventHandler
     public void onClick(InventoryClickEvent e){
-        if(e.getInventory() != null && e.getInventory().getName() != null && e.getInventory().getName().equals(basicInventory.getName())){
+        if(e.getInventory() != null && e.getInventory().getName() != null && e.getInventory().getName().equals("§6Particules")){
             Player player = (Player) e.getWhoClicked();
 
             e.setCancelled(true);
             e.setCursor(new ItemStack(Material.AIR));
 
-            if(e.getCurrentItem().hasItemMeta() && e.getCurrentItem().getItemMeta().getDisplayName() != null) {
+            if(e.getCurrentItem() != null && e.getCurrentItem().hasItemMeta() && e.getCurrentItem().getItemMeta().getDisplayName() != null) {
 
                 switch (e.getCurrentItem().getItemMeta().getDisplayName()){
                     case "§cCoeurs":

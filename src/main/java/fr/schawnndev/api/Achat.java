@@ -29,6 +29,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Random;
 
 public class Achat {
 
@@ -68,13 +69,14 @@ public class Achat {
         this.generated = false;
         this.isOpened = false;
         this.allowToBuy = true;
-        this.inventoryName = "§bAchat: §c" + id + ((player.getDisplayName().length() > 9) ? " §b/ §c" + player.getDisplayName() : "");
+        this.inventoryName = "§6Achat: §c" + id + " §6| §c#" + new Random().nextInt(99);
+        this.cosmetiqueType = cosmetiqueType;
         System.out.println("Nouvel achat de " + player.getName() + " | id: " + id + " | date: " + new Date().toLocaleString());
         Manager.achats.add(this);
     }
 
     public void generate(){
-        inventory = Bukkit.createInventory(null, 4*9, inventoryName);
+        inventory = Bukkit.createInventory(null, 5*9, inventoryName);
 
         PositionConverter converter = new PositionConverter();
 
@@ -101,7 +103,15 @@ public class Achat {
         inventory.setItem(converter.convert(4, 3), glassCyanStack);
         inventory.setItem(converter.convert(6, 3), glassCyanStack);
 
-        ItemStack woolGreen = new ItemStack(Material.WOOL, 1, (short) 0, (byte)10);
+        inventory.setItem(converter.convert(1, 2), glassBlueStack);
+        inventory.setItem(converter.convert(1, 3), glassBlueStack);
+        inventory.setItem(converter.convert(1, 4), glassBlueStack);
+
+        inventory.setItem(converter.convert(9, 2), glassBlueStack);
+        inventory.setItem(converter.convert(9, 3), glassBlueStack);
+        inventory.setItem(converter.convert(9, 4), glassBlueStack);
+
+        ItemStack woolGreen = new ItemStack(Material.WOOL, 1, (short) 0, (byte)5);
         ItemMeta woolGreenMeta = woolGreen.getItemMeta();
         woolGreenMeta.setDisplayName("§aValider");
         woolGreen.setItemMeta(woolGreenMeta);
@@ -113,7 +123,7 @@ public class Achat {
         inventory.setItem(converter.convert(2, 4), woolGreen);
         inventory.setItem(converter.convert(3, 4), woolGreen);
 
-        ItemStack woolRed = new ItemStack(Material.WOOL, 1, (short)0, (byte) 1);
+        ItemStack woolRed = new ItemStack(Material.WOOL, 1, (short)0, (byte) 14);
         ItemMeta woolRedMeta = woolRed.getItemMeta();
         woolRedMeta.setDisplayName("§cAnnuler");
         woolRed.setItemMeta(woolRedMeta);
@@ -129,7 +139,7 @@ public class Achat {
         ItemMeta itemMeta = itemStack.getItemMeta();
         String cosmetiqueTypeString = cosmetiqueType.toString().toLowerCase().substring(0, 1).toUpperCase() + cosmetiqueType.toString().toLowerCase().substring(1);
         itemMeta.setDisplayName("§6" + cosmetiqueTypeString + ": " + id);
-        itemMeta.setLore(Arrays.asList("§7------------","§bPrix: §6" + price + " §bLCCoins"));
+        itemMeta.setLore(Arrays.asList("§7------------","§bPrix: §6" + price + " §bLCoins"));
         itemStack.setItemMeta(itemMeta);
 
         inventory.setItem(converter.convert(5, 3), itemStack);
@@ -167,12 +177,15 @@ public class Achat {
 
             SQLManager.addCosmetic(player, id);
 
+            money -= price;
+
+            LCMaster.api.setCoins(player.getName(), money);
+
             if(cosmetiqueType == CosmetiqueType.GADGET)
                 CosmetiqueManager.setCurrentCosmetique(player, Cosmetique.valueOf(id.toUpperCase()), false);
 
             finish(false, false);
             player.sendMessage("§aTu viens d'acheter §b " + id);
-            player.sendMessage("§cTu as maintenant §b" + price + "§c LCCoins.");
             System.out.println("Achat confirme de " + player.getName() + " | id: " + id + " | date: " + new Date().toLocaleString());
 
         }

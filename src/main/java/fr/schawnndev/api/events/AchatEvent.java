@@ -34,7 +34,7 @@ public class AchatEvent implements Listener {
     public void onClick(InventoryClickEvent e){
         Player player = (Player) e.getWhoClicked();
 
-        if(Manager.playersBuying.contains(player.getUniqueId()) && e.getInventory() != null && e.getInventory().getName() != null && e.getInventory().getName().contains("§bAchat:")) {
+        if(Manager.playersBuying.contains(player.getUniqueId()) && e.getInventory() != null && e.getInventory().getName() != null && e.getInventory().getName().contains("§6Achat:")) {
 
             Achat achat = Manager.getAchat(player.getUniqueId());
 
@@ -42,7 +42,7 @@ public class AchatEvent implements Listener {
             e.setCursor(new ItemStack(Material.AIR));
 
             if(achat != null && achat.isOpened() && !achat.isFinishToPay()){
-                if (e.getCurrentItem().hasItemMeta() && e.getCurrentItem().getItemMeta().getDisplayName() != null) {
+                if (e.getCurrentItem() != null && e.getCurrentItem().hasItemMeta() && e.getCurrentItem().getItemMeta().getDisplayName() != null) {
                     switch (e.getCurrentItem().getItemMeta().getDisplayName()) {
                         case "§aValider":
                             achat.buy();
