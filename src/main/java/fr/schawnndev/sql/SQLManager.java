@@ -66,7 +66,7 @@ public class SQLManager {
         return cosmetic;
     }
 
-    private static List<String> getCosmetics(Player player){
+    public static List<String> getCosmetics(Player player){
         List<String> cosmetics = new ArrayList<>();
 
         if(!isInDataBase(player))

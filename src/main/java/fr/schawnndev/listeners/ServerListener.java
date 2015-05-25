@@ -15,16 +15,21 @@ package fr.schawnndev.listeners;
 
 import fr.schawnndev.CosmetiqueManager;
 import fr.schawnndev.LCCosmetiques;
+import fr.schawnndev.api.Manager;
 import fr.schawnndev.menus.MenuManager;
-import fr.schawnndev.particules.aaaaaa;
-import fr.schawnndev.particules.ParticuleManager;
 import fr.schawnndev.sql.SQLManager;
+import javafx.scene.input.Mnemonic;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.*;
 import org.bukkit.event.player.*;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class ServerListener implements Listener {
+
+    public ServerListener(){
+        Bukkit.getPluginManager().registerEvents(this, LCCosmetiques.getInstance());
+    }
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
@@ -50,11 +55,11 @@ public class ServerListener implements Listener {
         SQLManager.setActiveCosmetic(e.getPlayer(), CosmetiqueManager.getCosmetiqueString(e.getPlayer()));
         CosmetiqueManager.removeCosmetique(e.getPlayer());
 
-        if(ParticuleManager.hasParticle(e.getPlayer())) {
-            aaaaaa particule = ParticuleManager.getParticule(e.getPlayer());
-            particule.stop();
-            ParticuleManager.removeParticle(particule);
-        }
+        if(Manager.playersBuying.contains(e.getPlayer().getUniqueId()))
+            Manager.playersBuying.remove(e.getPlayer().getUniqueId());
+        if(Manager.hasAchat(e.getPlayer().getUniqueId()))
+            Manager.achats.remove(Manager.getAchat(e.getPlayer().getUniqueId()));
+
     }
 
 }

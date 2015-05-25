@@ -14,20 +14,20 @@
 package fr.schawnndev.particules.particules;
 
 import fr.schawnndev.CosmetiqueManager.Cosmetique;
-import fr.schawnndev.particules.Particule;
+import fr.schawnndev.particules.Particle;
 import lombok.Getter;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class ParticleRedstone extends Particule {
+public class ParticleRedstone extends Particle {
 
     @Getter
     public Cosmetique cosmetique = Cosmetique.REDSTONE;
 
     @Getter
-    private static Map<UUID, Integer> tasks = new HashMap<>();
+    private Map<UUID, Integer> tasks = new HashMap<>();
 
     @Override
     public void startParticle(UUID uuid) {

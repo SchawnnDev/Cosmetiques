@@ -20,25 +20,28 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 public class Manager {
 
-    public static Item getHead(Player player){
+    public static List<Achat> achats = new ArrayList<>();
 
-        Item head = new Item("head", -1, false, Material.SKULL, (short) 3, null, new Click() {
-            @Override
-            public void onClick(ClickEvent e) {
-                e.setCancelled(true);
-            }
-        });
+    public static List<UUID> playersBuying = new ArrayList<>();
 
+    public static Achat getAchat(UUID uuid){
+        for(Achat a : achats)
+            if(a.getPlayer().getUniqueId() == uuid)
+                return a;
+        return null;
+    }
 
-        SkullMeta im = (SkullMeta) head.getRawItemStack().getItemMeta();
-        im.setOwner(player.getName());
-        head.setItemMeta(im);
-
-        //TODO: MySQL
-
-        return head;
+    public static boolean hasAchat(UUID uuid){
+        for(Achat a : achats)
+            if(a.getPlayer().getUniqueId() == uuid)
+                return true;
+        return false;
     }
 
 }

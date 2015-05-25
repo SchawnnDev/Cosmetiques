@@ -13,7 +13,7 @@
 
 package fr.schawnndev.particules.particules;
 
-import fr.schawnndev.particules.Particule;
+import fr.schawnndev.particules.Particle;
 import fr.schawnndev.CosmetiqueManager.Cosmetique;
 import lombok.Getter;
 
@@ -21,13 +21,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class ParticleLegendary extends Particule {
+public class ParticleLegendary extends Particle {
 
     @Getter
     public Cosmetique cosmetique = Cosmetique.LEGENDARY;
 
     @Getter
-    private static Map<UUID, Integer> tasks = new HashMap<>();
+    private Map<UUID, Integer> tasks = new HashMap<>();
 
     @Override
     public void startParticle(UUID uuid) {

@@ -30,6 +30,13 @@ public class CosmetiqueManager {
         cosmetiques.put(player.getUniqueId(), cosmetique);
     }
 
+    public static void setCurrentCosmetique(Player player, Cosmetique cosmetique, boolean withMessage){
+        player.getInventory().setItem(5, ItemStackManager.getItemStack(cosmetique));
+
+        if(withMessage)
+            player.sendMessage("§aTu viens d'activer §b"+ cosmetique.toString().toString());
+    }
+
     public static void removeCosmetique(Player player){
         if(cosmetiques.containsKey(player.getUniqueId()))
             cosmetiques.remove(player.getUniqueId());
@@ -52,6 +59,16 @@ public class CosmetiqueManager {
 
     public static ItemStack getPlayerItem(Cosmetique cosmetique){
         return ItemStackManager.getPlayerItems().get(cosmetique);
+    }
+
+    public static boolean isParticle(String cosmetique){
+        cosmetique.toUpperCase();
+
+        for(Cosmetique c : Cosmetique.values())
+            if(c.getCosmetiqueType() == CosmetiqueType.PARTICLE && c.toString().toUpperCase().equals(cosmetique))
+                return true;
+
+        return  false;
     }
 
     public enum CosmetiqueType {
@@ -82,7 +99,7 @@ public class CosmetiqueManager {
 
         MAGICIEN(CosmetiqueType.PARTICLE, false, 900),
         PLUIE(CosmetiqueType.PARTICLE, false, 1200),
-        COEUR(CosmetiqueType.PARTICLE, false, 1500),
+        COEURS(CosmetiqueType.PARTICLE, false, 1500),
         LAVE(CosmetiqueType.PARTICLE, false, 600),
         CONTENT(CosmetiqueType.PARTICLE, false, 900),
         FUMEE(CosmetiqueType.PARTICLE, false, 1800),
@@ -99,8 +116,16 @@ public class CosmetiqueManager {
         @Getter
         private CosmetiqueType cosmetiqueType;
 
+        @Getter
+        private boolean vip;
+
+        @Getter
+        private int price;
+
         private Cosmetique(CosmetiqueType cosmetiqueType, boolean vip, int price){
             this.cosmetiqueType = cosmetiqueType;
+            this.vip=vip;
+            this.price=price;
         }
 
     }

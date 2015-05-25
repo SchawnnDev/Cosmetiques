@@ -13,11 +13,13 @@
 
 package fr.schawnndev;
 
+import fr.schawnndev.api.events.AchatEvent;
 import fr.schawnndev.data.ItemStackManager;
 import fr.schawnndev.listeners.ServerListener;
+import fr.schawnndev.menus.Main_Menu;
 import fr.schawnndev.menus.MenuManager;
 import fr.schawnndev.particules.aaaaaa;
-import fr.schawnndev.particules.ParticuleManager;
+import fr.schawnndev.particules.ParticleManager;
 import fr.schawnndev.particules.ParticleEffect;
 import fr.schawnndev.sql.SQL;
 import fr.schawnndev.sql.SQLManager;
@@ -48,7 +50,8 @@ public class LCCosmetiques extends JavaPlugin{
 
         // Listeners
 
-        Bukkit.getPluginManager().registerEvents(new ServerListener(), this);
+        new ServerListener();
+        new AchatEvent();
 
         // SQL
 
@@ -67,6 +70,8 @@ public class LCCosmetiques extends JavaPlugin{
 
         saveDefaultConfig();
 
+        new ItemStackManager();
+
     }
 
     public void onDisable() {
@@ -79,46 +84,12 @@ public class LCCosmetiques extends JavaPlugin{
      *
      */
 
-
-
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        if(label.equalsIgnoreCase("particule")){
-            Player player = (Player)sender;
-
-            if(args.length == 0){
-
-                try {
-
-                    if(SQLManager.hasBuyCosmetic(player, "coeurs")) {
-
-                        aaaaaa particle = new aaaaaa(player.getUniqueId(), ParticleEffect.HEART);
-
-                        particle.start();
-
-                        ParticuleManager.addParticle(particle);
-                    } else {
-                        player.sendMessage("§cTu n'as pas cette particule !");
-                        return true;
-                    }
-
-                } catch (Exception e){
-                    player.sendMessage("§cErreur (Voir console) ! " + e.getMessage());
-                    e.printStackTrace();
-                    return true;
-                }
-
-            } else {
-                player.sendMessage("§cTrop d'arguments: /particule <particule>");
-                return true;
-            }
-        }
-
         if(label.equalsIgnoreCase("a")){
             Player player = (Player)sender;
-            player.getInventory().addItem(ItemStackManager.getHead(player));
+            Main_Menu.open(player);
             return true;
         }
 

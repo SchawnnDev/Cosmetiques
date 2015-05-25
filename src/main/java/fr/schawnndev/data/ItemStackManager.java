@@ -15,12 +15,13 @@ package fr.schawnndev.data;
 
 import com.icroque.lcperms.LCPerms;
 import fr.lyneteam.lcmaster.LCMaster;
-import fr.schawnndev.CosmetiqueManager;
+import fr.schawnndev.CosmetiqueManager.*;
 import lombok.Getter;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.*;
@@ -28,7 +29,22 @@ import java.util.*;
 public class ItemStackManager {
 
     @Getter
-    private static Map<CosmetiqueManager.Cosmetique, ItemStack> playerItems = new HashMap<>();
+    private static Map<Cosmetique, ItemStack> playerItems = new HashMap<>();
+
+    public ItemStackManager(){
+        playerItems.put(Cosmetique.AUCUN, new ItemStack(Material.AIR));
+        playerItems.put(Cosmetique.DOUBLE_JUMP, buildItemStack(Material.FEATHER, "§bDouble Jump"));
+        playerItems.put(Cosmetique.MUSIC, buildItemStack(Material.getMaterial(2258), "§2Music"));
+        playerItems.put(Cosmetique.GATEAU_EMPOISONNE, buildItemStack(Material.CAKE, "§3Gâteau empoisonné"));
+        playerItems.put(Cosmetique.LAISSE, buildItemStack(Material.LEASH, "§4Lesse"));
+        playerItems.put(Cosmetique.CANON, buildItemStack(Material.SULPHUR, "§fCanon"));
+        playerItems.put(Cosmetique.APPLE, buildItemStack(Material.GOLDEN_APPLE, "§aApple"));
+        playerItems.put(Cosmetique.ENCRE, buildItemStack(Material.INK_SACK, "§cEncre"));
+        playerItems.put(Cosmetique.CANNE_A_PECHE, buildItemStack(Material.FISHING_ROD, "§6Canne à pêche"));
+        playerItems.put(Cosmetique.FIREBALL, buildItemStack(Material.FIREBALL, "§aFireball"));
+        playerItems.put(Cosmetique.TNT, buildItemStack(Material.TNT, "§7TNT"));
+        playerItems.put(Cosmetique.ARTIFICE, buildItemStack(Material.FIREWORK, "§514 juillet"));
+    }
 
     public static ItemStack getHead(Player player){
    //     Item head = new Item("head", -1, false, Material.SKULL, (short) 3, null);
@@ -44,6 +60,20 @@ public class ItemStackManager {
         itemStack.setItemMeta(im);
 
         return itemStack;
+    }
+
+    public static ItemStack buildItemStack(Material material, String name){
+
+        ItemStack itemStack = new ItemStack(material);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.setDisplayName(name);
+        itemStack.setItemMeta(itemMeta);
+
+        return itemStack;
+    }
+
+    public static ItemStack getItemStack(Cosmetique cosmetique){
+        return (playerItems.containsKey(cosmetique) ? playerItems.get(cosmetique) : new ItemStack(Material.AIR));
     }
 
 }

@@ -71,7 +71,7 @@ public class SubMenu {
     public void build(Player player){
         inventory = Bukkit.createInventory(null, converter.convert(6,8), name);
 
-        inventory.setItem(converter.convert(1, 5), Manager.getHead(player).build(1));
+       // inventory.setItem(converter.convert(1, 5), Manager.getHead(player).build(1));
 
         // Glass
 

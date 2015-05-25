@@ -13,10 +13,14 @@
 
 package fr.schawnndev.menus;
 
+import fr.schawnndev.api.utils.ItemDisponibility;
 import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MenuManager {
 
@@ -33,6 +37,45 @@ public class MenuManager {
         itemMeta.setDisplayName("§f=== §5Cosmétiques §f===  ");
         cosmeticItem.setItemMeta(itemMeta);
 
+        new Gadget_SubMenu();
+        new Particle_SubMenu();
+        new Main_Menu();
+        new ItemDisponibility();
+
     }
+
+    public static List<String> getNewLore(String lore){
+        List<String> l = new ArrayList<>();
+        l.add(lore);
+        return l;
+    }
+
+    public static ItemStack buildItem(ItemStack itemStack, int prix, boolean vip, String displayName, List<String> lore, boolean hasGadget){
+        ItemStack finalItemStack = itemStack;
+        ItemMeta finalItemMeta = finalItemStack.getItemMeta();
+
+        if(!hasGadget) {
+
+            if (vip) {
+                lore.add("§7------------");
+                lore.add("§bPrix : §6Réservé aux §eVIP");
+            } else {
+                if (prix != -1) {
+                    lore.add("§7------------");
+                    lore.add("§bPrix : §6" + prix + " §bLCCoins");
+                }
+            }
+        } else {
+            lore.add("§7------------");
+            lore.add("§aTu possèdes ce gadget.");
+        }
+
+        finalItemMeta.setDisplayName(displayName);
+        finalItemMeta.setLore(lore);
+        finalItemStack.setItemMeta(finalItemMeta);
+
+        return finalItemStack;
+    }
+
 
 }

@@ -26,15 +26,15 @@ public class ItemDisponibility {
         this.inventoryPositions = new ArrayList<>();
 
         inventoryPositions.add(new InventoryPosition(3, 3));
-        inventoryPositions.add(new InventoryPosition(3, 4));
-        inventoryPositions.add(new InventoryPosition(3, 5));
-        inventoryPositions.add(new InventoryPosition(3, 6));
-        inventoryPositions.add(new InventoryPosition(3, 7));
         inventoryPositions.add(new InventoryPosition(4, 3));
+        inventoryPositions.add(new InventoryPosition(5, 3));
+        inventoryPositions.add(new InventoryPosition(6, 3));
+        inventoryPositions.add(new InventoryPosition(7, 3));
+        inventoryPositions.add(new InventoryPosition(3, 4));
         inventoryPositions.add(new InventoryPosition(4, 4));
-        inventoryPositions.add(new InventoryPosition(4, 5));
-        inventoryPositions.add(new InventoryPosition(4, 6));
-        inventoryPositions.add(new InventoryPosition(4, 7));
+        inventoryPositions.add(new InventoryPosition(5, 4));
+        inventoryPositions.add(new InventoryPosition(6, 4));
+        inventoryPositions.add(new InventoryPosition(7, 4));
         inventoryPositions.add(new InventoryPosition(5, 5));
 
 
