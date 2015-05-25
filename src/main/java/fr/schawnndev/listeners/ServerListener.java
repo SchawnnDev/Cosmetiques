@@ -18,7 +18,6 @@ import fr.schawnndev.LCCosmetiques;
 import fr.schawnndev.api.Manager;
 import fr.schawnndev.menus.MenuManager;
 import fr.schawnndev.sql.SQLManager;
-import javafx.scene.input.Mnemonic;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.*;
