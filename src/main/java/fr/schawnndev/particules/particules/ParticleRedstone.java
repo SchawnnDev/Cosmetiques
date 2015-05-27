@@ -17,6 +17,7 @@ import fr.schawnndev.CosmetiqueManager;
 import fr.schawnndev.CosmetiqueManager.Cosmetique;
 import fr.schawnndev.LCCosmetiques;
 import fr.schawnndev.math.FastMath;
+import fr.schawnndev.math.RotateVector;
 import fr.schawnndev.particules.Particle;
 import fr.schawnndev.particules.ParticleEffect;
 import lombok.Getter;
@@ -75,7 +76,7 @@ public class ParticleRedstone extends Particle {
                                 v.setZ(zFactor * r * -Math.sin(s));
                                 v.setY(yFactor + yOffset - 1.0F);
 
-                                rotateVector(v, xRotation, yRotation, zRotation);
+                                RotateVector.rotateVector(v, xRotation, yRotation, zRotation);
                                 ParticleEffect.REDSTONE.display(0f, 0f, 0f, 0f, 1, l.add(v), 128);
                                 l.subtract(v);
                             }
@@ -93,37 +94,6 @@ public class ParticleRedstone extends Particle {
     public void stopParticle(UUID uuid) {
         if(tasks.containsKey(uuid))
             Bukkit.getScheduler().cancelTask(tasks.get(uuid));
-    }
-
-    private final Vector rotateArounX(Vector v, double a) {
-        double cos = Math.cos(a);
-        double sin = Math.sin(a);
-        double y = v.getY() * cos - v.getZ() * sin;
-        double z = v.getY() * sin + v.getZ() * cos;
-        return v.setY(y).setZ(z);
-    }
-
-    private final Vector rotateAroundY(Vector v, double a) {
-        double cos = Math.cos(a);
-        double sin = Math.sin(a);
-        double x = v.getX() * cos + v.getZ() * sin;
-        double z = v.getX() * -sin + v.getZ() * cos;
-        return v.setX(x).setZ(z);
-    }
-
-    private final Vector rotateAroundZ(Vector v, double a) {
-        double cos = Math.cos(a);
-        double sin = Math.sin(a);
-        double x = v.getX() * cos - v.getY() * sin;
-        double y = v.getX() * sin + v.getY() * cos;
-        return v.setX(x).setY(y);
-    }
-
-    private final Vector rotateVector(Vector v, double aX, double aY, double aZ) {
-        rotateArounX(v, aX);
-        rotateAroundY(v, aY);
-        rotateAroundZ(v, aZ);
-        return v;
     }
 
 }
