@@ -55,7 +55,7 @@ public class ItemStackManager {
         im.setOwner(player.getName());
         im.setDisplayName("§6Informations du compte");
         im.setLore(Arrays.asList(("§7Pseudo : §a" + player.getName() + " (" + ChatColor.translateAlternateColorCodes('&', LCPerms.api.getGroup(player)) + "§a)"), ("§7Solde LCoins : §6" + LCMaster.api.getCoins(player.getName()) + " ⛃ §a(x " + LCMaster.api.getMultiplicator(player) + "§a)")));
-        //      head.addLore("§7Pseudo : §a" + player.getName() + " (" + "§cFondateur" + "§a)");
+  //      head.addLore("§7Pseudo : §a" + player.getName() + " (" + "§cFondateur" + "§a)");
   //      head.addLore("§7Solde LCCOins : §6" + "221020" + " ⛃ §a(x " + "9" + "§a)");
         itemStack.setItemMeta(im);
 

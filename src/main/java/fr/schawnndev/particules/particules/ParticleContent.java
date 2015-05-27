@@ -13,5 +13,73 @@
 
 package fr.schawnndev.particules.particules;
 
-public class ParticleContent {
+import fr.schawnndev.CosmetiqueManager;
+import fr.schawnndev.LCCosmetiques;
+import fr.schawnndev.math.Randoms;
+import fr.schawnndev.particules.Particle;
+import fr.schawnndev.particules.ParticleEffect;
+import lombok.Getter;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+public class ParticleContent  extends Particle {
+
+    @Getter
+    public CosmetiqueManager.Cosmetique cosmetique = CosmetiqueManager.Cosmetique.CONTENT;
+
+    @Getter
+    private Map<UUID, Integer> tasks = new HashMap<>();
+
+    @Override
+    public void startParticle(final UUID uuid) {
+
+        tasks.put(uuid,
+
+                Bukkit.getScheduler().runTaskTimer(LCCosmetiques.getInstance(), new Runnable() {
+
+                    float c = 0;
+                    float a = 0;
+                    boolean r = false;
+                    Player player = Bukkit.getPlayer(uuid);
+
+                    @Override
+                    public void run() {
+                        c += 0.2;
+                        a += 0.4;
+                        if (c > 8 && !r)
+                            r = true;
+                        else if (r && c > 0)
+                            c -= 0.4;
+                        else
+                            r = false;
+
+                        if (player != null && player.isOnline()) {
+
+                            Location loc = player.getLocation();
+
+                            float x = (float) (loc.getX() + Math.cos(a));
+                            float y = (float) (loc.getY() + c/4);
+                            float z = (float) (loc.getZ() + Math.sin(a));
+
+                            ParticleEffect.VILLAGER_HAPPY.display(0f, 0f, 0f, 0.01f, 1, new Location(loc.getWorld(), x, y, z), 128);
+
+                        } else {
+                            stopParticle(uuid);
+                        }
+                    }
+
+                }, 0l, 2l).getTaskId());
+    }
+
+    @Override
+    public void stopParticle(UUID uuid) {
+        if(tasks.containsKey(uuid))
+            Bukkit.getScheduler().cancelTask(tasks.get(uuid));
+    }
+
 }

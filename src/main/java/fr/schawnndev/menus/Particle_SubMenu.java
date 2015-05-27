@@ -184,6 +184,90 @@ public class Particle_SubMenu implements Listener {
             if(e.getCurrentItem() != null && e.getCurrentItem().hasItemMeta() && e.getCurrentItem().getItemMeta().getDisplayName() != null) {
 
                 switch (e.getCurrentItem().getItemMeta().getDisplayName()){
+                    case "§5Magicien":
+
+                        if(!ParticleManager.isParticleActive(player, "magicien")){
+
+                            if(Cosmetique.MAGICIEN.isVip()){
+
+                                if(player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")){
+                                    if(ParticleManager.hasParticleActive(player)){
+                                        ParticleManager.removeActiveParticle(player);
+                                    }
+
+                                    player.closeInventory();
+                                    player.sendMessage("§aTu viens d'activer la particule §bredstone§a !");
+                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
+                                    ParticleManager.getParticleMagicien().startParticle(player.getUniqueId());
+                                } else {
+                                    player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
+                                    player.sendMessage("§cTu dois être VIP pour utiliser §bredstone !");
+                                }
+
+                            } else {
+                                if(SQLManager.hasBuyCosmetic(player, "magicien")){
+
+                                    if(ParticleManager.hasParticleActive(player)){
+                                        ParticleManager.removeActiveParticle(player);
+                                    }
+
+                                    player.closeInventory();
+                                    player.sendMessage("§aTu viens d'activer la particule §bredstone§a !");
+                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
+                                    ParticleManager.getParticleMagicien().startParticle(player.getUniqueId());
+                                } else {
+                                    Achat achat = new Achat("magicien", Cosmetique.MAGICIEN.getPrice(), CosmetiqueManager.CosmetiqueType.PARTICLE, player);
+                                    achat.generate();
+                                    achat.proceedOpening();
+                                }
+                            }
+                        } else {
+                            player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
+                        }
+
+                        break;
+                    case "§4Redstone":
+
+                        if(!ParticleManager.isParticleActive(player, "redstone")){
+
+                            if(Cosmetique.REDSTONE.isVip()){
+
+                                if(player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")){
+                                    if(ParticleManager.hasParticleActive(player)){
+                                        ParticleManager.removeActiveParticle(player);
+                                    }
+
+                                    player.closeInventory();
+                                    player.sendMessage("§aTu viens d'activer la particule §bredstone§a !");
+                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
+                                    ParticleManager.getParticleRedstone().startParticle(player.getUniqueId());
+                                } else {
+                                    player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
+                                    player.sendMessage("§cTu dois être VIP pour utiliser §bredstone !");
+                                }
+
+                            } else {
+                                if(SQLManager.hasBuyCosmetic(player, "redstone")){
+
+                                    if(ParticleManager.hasParticleActive(player)){
+                                        ParticleManager.removeActiveParticle(player);
+                                    }
+
+                                    player.closeInventory();
+                                    player.sendMessage("§aTu viens d'activer la particule §bredstone§a !");
+                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
+                                    ParticleManager.getParticleRedstone().startParticle(player.getUniqueId());
+                                } else {
+                                    Achat achat = new Achat("redstone", Cosmetique.COEURS.getPrice(), CosmetiqueManager.CosmetiqueType.PARTICLE, player);
+                                    achat.generate();
+                                    achat.proceedOpening();
+                                }
+                            }
+                        } else {
+                            player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
+                        }
+
+                        break;
                     case "§cCoeurs":
 
                         if(!ParticleManager.isParticleActive(player, "coeurs")){
@@ -221,9 +305,6 @@ public class Particle_SubMenu implements Listener {
                                     achat.proceedOpening();
                                 }
                             }
-
-
-
                         } else {
                             player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
                         }
@@ -262,6 +343,49 @@ public class Particle_SubMenu implements Listener {
                                     ParticleManager.getParticleFlames().startParticle(player.getUniqueId());
                                 } else {
                                     Achat achat = new Achat("flames", Cosmetique.FLAMES.getPrice(), CosmetiqueManager.CosmetiqueType.PARTICLE, player);
+                                    achat.generate();
+                                    achat.proceedOpening();
+                                }
+                            }
+
+                        } else {
+                            player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
+                        }
+
+                        break;
+                    case "§aContent":
+
+                        if(!ParticleManager.isParticleActive(player, "content")){
+
+                            if(Cosmetique.CONTENT.isVip()){
+
+                                if(player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")){
+                                    if(ParticleManager.hasParticleActive(player)){
+                                        ParticleManager.removeActiveParticle(player);
+                                    }
+
+                                    player.closeInventory();
+                                    player.sendMessage("§aTu viens d'activer la particule §bcontent§a !");
+                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
+                                    ParticleManager.getParticleContent().startParticle(player.getUniqueId());
+                                } else {
+                                    player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
+                                    player.sendMessage("§cTu dois être VIP pour utiliser §bcontent !");
+                                }
+
+                            } else {
+                                if(SQLManager.hasBuyCosmetic(player, "content")){
+
+                                    if(ParticleManager.hasParticleActive(player)){
+                                        ParticleManager.removeActiveParticle(player);
+                                    }
+
+                                    player.closeInventory();
+                                    player.sendMessage("§aTu viens d'activer la particule §bcontent§a !");
+                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
+                                    ParticleManager.getParticleContent().startParticle(player.getUniqueId());
+                                } else {
+                                    Achat achat = new Achat("content", Cosmetique.CONTENT.getPrice(), CosmetiqueManager.CosmetiqueType.PARTICLE, player);
                                     achat.generate();
                                     achat.proceedOpening();
                                 }
@@ -312,6 +436,49 @@ public class Particle_SubMenu implements Listener {
                         } else {
                             player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
                         }
+                        break;
+                    case "§bSpirales":
+
+                        if(!ParticleManager.isParticleActive(player, "spirales")){
+
+                            if(Cosmetique.SPIRALES.isVip()){
+
+                                if(player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")){
+                                    if(ParticleManager.hasParticleActive(player)){
+                                        ParticleManager.removeActiveParticle(player);
+                                    }
+
+                                    player.closeInventory();
+                                    player.sendMessage("§aTu viens d'activer la particule §bspirales§a !");
+                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
+                                    ParticleManager.getParticleSpirales().startParticle(player.getUniqueId());
+                                } else {
+                                    player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
+                                    player.sendMessage("§cTu dois être VIP pour utiliser §bspirales !");
+                                }
+
+                            } else {
+                                if(SQLManager.hasBuyCosmetic(player, "spirales")){
+
+                                    if(ParticleManager.hasParticleActive(player)){
+                                        ParticleManager.removeActiveParticle(player);
+                                    }
+
+                                    player.closeInventory();
+                                    player.sendMessage("§aTu viens d'activer la particule §bspirales§a !");
+                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
+                                    ParticleManager.getParticleSpirales().startParticle(player.getUniqueId());
+                                } else {
+                                    Achat achat = new Achat("spirales", Cosmetique.SPIRALES.getPrice(), CosmetiqueManager.CosmetiqueType.PARTICLE, player);
+                                    achat.generate();
+                                    achat.proceedOpening();
+                                }
+                            }
+
+                        } else {
+                            player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
+                        }
+
                         break;
                     case "§3Pluie":
                         if(!ParticleManager.isParticleActive(player, "pluie")){

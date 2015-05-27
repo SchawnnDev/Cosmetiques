@@ -35,7 +35,7 @@ public class ServerListener implements Listener {
 
         final Player player = e.getPlayer();
 
-        CosmetiqueManager.setCosmetique(e.getPlayer(), CosmetiqueManager.getCosmetiqueFromString(SQLManager.getActiveCosmetic(e.getPlayer())));
+  //      CosmetiqueManager.setCosmetique(e.getPlayer(), CosmetiqueManager.getCosmetiqueFromString(SQLManager.getActiveCosmetic(e.getPlayer())));
 
         new BukkitRunnable(){
             @Override
@@ -51,7 +51,7 @@ public class ServerListener implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent e){
 
-        SQLManager.setActiveCosmetic(e.getPlayer(), CosmetiqueManager.getCosmetiqueString(e.getPlayer()));
+    //    SQLManager.setActiveCosmetic(e.getPlayer(), CosmetiqueManager.getCosmetiqueString(e.getPlayer()));
         CosmetiqueManager.removeCosmetique(e.getPlayer());
 
         if(Manager.playersBuying.contains(e.getPlayer().getUniqueId()))

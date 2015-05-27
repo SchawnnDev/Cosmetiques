@@ -13,10 +13,7 @@
 
 package fr.schawnndev.particules;
 
-import fr.schawnndev.particules.particules.ParticleCoeur;
-import fr.schawnndev.particules.particules.ParticleFlames;
-import fr.schawnndev.particules.particules.ParticleNotes;
-import fr.schawnndev.particules.particules.ParticlePluie;
+import fr.schawnndev.particules.particules.*;
 import lombok.Getter;
 import org.bukkit.entity.Player;
 
@@ -34,6 +31,14 @@ public class ParticleManager {
     private static ParticleNotes particleNotes = new ParticleNotes();
     @Getter
     private static ParticleFlames particleFlames = new ParticleFlames();
+    @Getter
+    private static ParticleSpirales particleSpirales = new ParticleSpirales();
+    @Getter
+    private static ParticleContent particleContent = new ParticleContent();
+    @Getter
+    private static ParticleRedstone particleRedstone = new ParticleRedstone();
+    @Getter
+    private static ParticleMagicien particleMagicien = new ParticleMagicien();
 
     public static boolean hasParticleActive(Player player){
         UUID uuid = player.getUniqueId();
@@ -45,6 +50,14 @@ public class ParticleManager {
         if(particleNotes.getTasks().containsKey(uuid))
             return true;
         if(particlePluie.getTasks().containsKey(uuid))
+            return true;
+        if(particleSpirales.getTasks().containsKey(uuid))
+            return true;
+        if(particleContent.getTasks().containsKey(uuid))
+            return true;
+        if(particleRedstone.getTasks().containsKey(uuid))
+            return true;
+        if(particleMagicien.getTasks().containsKey(uuid))
             return true;
 
         return false;
@@ -61,6 +74,15 @@ public class ParticleManager {
             return true;
         if(particle.equalsIgnoreCase("pluie") && particlePluie.getTasks().containsKey(uuid))
             return true;
+        if(particle.equalsIgnoreCase("spirales") && particleSpirales.getTasks().containsKey(uuid))
+            return true;
+        if(particle.equalsIgnoreCase("content") && particleContent.getTasks().containsKey(uuid))
+            return true;
+        if(particle.equalsIgnoreCase("redstone") && particleRedstone.getTasks().containsKey(uuid))
+            return true;
+        if(particle.equalsIgnoreCase("magicien") && particleMagicien.getTasks().containsKey(uuid))
+            return true;
+
 
         return false;
     }
@@ -76,7 +98,14 @@ public class ParticleManager {
             particleNotes.stopParticle(uuid);
         if(particlePluie.getTasks().containsKey(uuid))
             particlePluie.stopParticle(uuid);
-
+        if(particleSpirales.getTasks().containsKey(uuid))
+            particleSpirales.stopParticle(uuid);
+        if(particleContent.getTasks().containsKey(uuid))
+            particleContent.stopParticle(uuid);
+        if(particleRedstone.getTasks().containsKey(uuid))
+            particleRedstone.stopParticle(uuid);
+        if(particleMagicien.getTasks().containsKey(uuid))
+            particleMagicien.stopParticle(uuid);
     }
 
 

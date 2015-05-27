@@ -15,6 +15,7 @@ package fr.schawnndev.particules.particules;
 
 import fr.schawnndev.CosmetiqueManager.Cosmetique;
 import fr.schawnndev.LCCosmetiques;
+import fr.schawnndev.math.Randoms;
 import fr.schawnndev.particules.ParticleEffect;
 import fr.schawnndev.particules.Particle;
 import lombok.Getter;
@@ -65,8 +66,7 @@ public class ParticleNotes extends Particle {
                             float y = (float) (loc.getY() + c/4);
                             float z = (float) (loc.getZ() + Math.sin(a));
 
-                            ParticleEffect.NOTE.display(0f, 0f, 0f, 0.01f, 1, new Location(loc.getWorld(), x, y, z), 128);
-
+                            ParticleEffect.NOTE.display(new ParticleEffect.NoteColor(Randoms.randomRangeInt(0, 24)), new Location(loc.getWorld(), x, y, z), 128);
                         } else {
                             stopParticle(uuid);
                         }

@@ -24,7 +24,9 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -128,6 +130,13 @@ public class Main_Menu implements Listener {
             Manager.achats.remove(player.getUniqueId());
 
         player.openInventory(basicInventory);
+    }
+
+    @EventHandler
+    public void onInteract(PlayerInteractEvent e){
+        if(e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR)
+            if(e.getItem() != null && e.getItem().getType() == Material.JUKEBOX && e.getItem().hasItemMeta() && e.getItem().getItemMeta().getDisplayName() != null && e.getItem().getItemMeta().getDisplayName().equals("§f=== §5Cosmétiques §f===  "))
+                open(e.getPlayer());
     }
 
     @EventHandler

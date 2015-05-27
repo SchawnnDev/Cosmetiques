@@ -21,6 +21,7 @@ import fr.schawnndev.menus.MenuManager;
 import fr.schawnndev.particules.aaaaaa;
 import fr.schawnndev.particules.ParticleManager;
 import fr.schawnndev.particules.ParticleEffect;
+import fr.schawnndev.particules.particules.ParticleSpirales;
 import fr.schawnndev.sql.SQL;
 import fr.schawnndev.sql.SQLManager;
 import lombok.Getter;
@@ -95,11 +96,8 @@ public class LCCosmetiques extends JavaPlugin{
 
         if(label.equalsIgnoreCase("b")){
             Player player = (Player)sender;
-            if(SQLManager.hasBuyCosmetic(player, "helix"))
-                player.sendMessage("§cTu as !");
-            else
-                player.sendMessage("§cTu as pas !");
-            return true;
+                player.sendMessage("nop ! trop ou pas assez d'args");
+                return true;
         }
 
 

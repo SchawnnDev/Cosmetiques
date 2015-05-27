@@ -13,5 +13,86 @@
 
 package fr.schawnndev.particules.particules;
 
-public class ParticleMagicien {
+import fr.schawnndev.CosmetiqueManager;
+import fr.schawnndev.LCCosmetiques;
+import fr.schawnndev.math.FastMath;
+import fr.schawnndev.math.Randoms;
+import fr.schawnndev.math.RotateVector;
+import fr.schawnndev.particules.Particle;
+import fr.schawnndev.particules.ParticleEffect;
+import lombok.Getter;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+public class ParticleMagicien extends Particle {
+
+    @Getter
+    public CosmetiqueManager.Cosmetique cosmetique = CosmetiqueManager.Cosmetique.MAGICIEN;
+
+    @Getter
+    private Map<UUID, Integer> tasks = new HashMap<>();
+
+    @Override
+    public void startParticle(final UUID uuid) {
+
+        tasks.put(uuid,
+
+                Bukkit.getScheduler().runTaskTimer(LCCosmetiques.getInstance(), new Runnable() {
+
+                    Player player = Bukkit.getPlayer(uuid);
+                    private int p = 150;
+                    private int pPerIteration = 12;
+                    private float s = 1.0F;
+                    private float xFactor = 1.0F;
+                    private float yFactor = 0.6F;
+                    private float zFactor = 1.0F;
+                    private float yOffset = 0.6F;
+                    private double xRotation;
+                    private double yRotation;
+                    private double zRotation = 0.0D;
+                    private int step;
+
+                    @Override
+                    public void run() {
+                        if (player != null && player.isOnline()) {
+
+                            Location l = player.getLocation();
+                            Vector v = new Vector();
+
+                            for (int i = 0; i < pPerIteration; i++)
+                            {
+                                step += 1;
+
+                                float t = 3.142f / p * step;
+                                float r = FastMath.sin(t * 2.718f * pPerIteration / p) * s;
+                                float s = r * 3.142f * t;
+
+                                v.setX(xFactor * r * -FastMath.cos(s));
+                                v.setZ(zFactor * r * -FastMath.sin(s));
+                                v.setY(yFactor * FastMath.cos(r / 3.1415f * s) + yOffset);
+
+                                RotateVector.rotateVector(v, xRotation, yRotation, zRotation);
+                                ParticleEffect.ENCHANTMENT_TABLE.display(0f, 0f, 0f, 0f, 1, l.add(v), 128);
+
+                                l.subtract(v);
+                            }
+                        } else {
+                            stopParticle(uuid);
+                        }
+                    }
+
+                }, 0l, 2l).getTaskId());
+        }
+
+        @Override
+        public void stopParticle(UUID uuid) {
+            if(tasks.containsKey(uuid))
+                Bukkit.getScheduler().cancelTask(tasks.get(uuid));
+        }
 }
