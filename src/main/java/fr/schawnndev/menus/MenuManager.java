@@ -63,12 +63,12 @@ public class MenuManager {
             } else {
                 if (prix != -1) {
                     lore.add("§7------------");
-                    lore.add("§bPrix : §6" + prix + " §bLCCoins");
+                    lore.add("§bPrix : §6" + prix + " §bLCoins");
                 }
             }
         } else {
             lore.add("§7------------");
-            lore.add("§aTu possèdes " + (cosmetiqueType == CosmetiqueManager.CosmetiqueType.PARTICLE ? "cette particule." : cosmetiqueType == CosmetiqueManager.CosmetiqueType.GADGET ? "ce gadget." : "ce pet."));
+            lore.add("§aVous possédez " + (cosmetiqueType == CosmetiqueManager.CosmetiqueType.PARTICLE ? "cette particule." : cosmetiqueType == CosmetiqueManager.CosmetiqueType.GADGET ? "ce gadget." : "ce pet."));
         }
 
         finalItemMeta.setDisplayName(displayName);

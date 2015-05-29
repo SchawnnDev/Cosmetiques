@@ -16,7 +16,6 @@ package fr.schawnndev.particules.particules;
 import fr.schawnndev.CosmetiqueManager;
 import fr.schawnndev.LCCosmetiques;
 import fr.schawnndev.math.FastMath;
-import fr.schawnndev.math.Randoms;
 import fr.schawnndev.math.RotateVector;
 import fr.schawnndev.particules.Particle;
 import fr.schawnndev.particules.ParticleEffect;
