@@ -13,6 +13,7 @@
 
 package fr.schawnndev.menus;
 
+import fr.schawnndev.CosmetiqueManager;
 import fr.schawnndev.api.utils.ItemDisponibility;
 import lombok.Getter;
 import org.bukkit.Material;
@@ -50,7 +51,7 @@ public class MenuManager {
         return l;
     }
 
-    public static ItemStack buildItem(ItemStack itemStack, int prix, boolean vip, String displayName, List<String> lore, boolean hasGadget){
+    public static ItemStack buildItem(ItemStack itemStack, int prix, boolean vip, String displayName, List<String> lore, boolean hasGadget, CosmetiqueManager.CosmetiqueType cosmetiqueType){
         ItemStack finalItemStack = itemStack;
         ItemMeta finalItemMeta = finalItemStack.getItemMeta();
 
@@ -67,7 +68,7 @@ public class MenuManager {
             }
         } else {
             lore.add("§7------------");
-            lore.add("§aTu possèdes ce gadget.");
+            lore.add("§aTu possèdes " + (cosmetiqueType == CosmetiqueManager.CosmetiqueType.PARTICLE ? "cette particule." : cosmetiqueType == CosmetiqueManager.CosmetiqueType.GADGET ? "ce gadget." : "ce pet."));
         }
 
         finalItemMeta.setDisplayName(displayName);

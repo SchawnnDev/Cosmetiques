@@ -18,6 +18,8 @@ import fr.schawnndev.CosmetiqueManager;
 import fr.schawnndev.CosmetiqueManager.*;
 import fr.schawnndev.api.utils.GlassColor;
 import fr.schawnndev.math.PositionConverter;
+import fr.schawnndev.particules.ParticleManager;
+import fr.schawnndev.particules.particules.ParticleMagicien;
 import fr.schawnndev.sql.SQLManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -185,8 +187,11 @@ public class Achat {
                 CosmetiqueManager.setCurrentCosmetique(player, Cosmetique.valueOf(id.toUpperCase()), false);
 
             finish(false, false);
-            player.sendMessage("§aTu viens d'acheter §b " + id);
+            player.sendMessage("§aTu viens d'acheter §b" + id);
             System.out.println("Achat confirme de " + player.getName() + " | id: " + id + " | date: " + new Date().toLocaleString());
+
+            if(cosmetiqueType == CosmetiqueType.PARTICLE)
+                ParticleManager.activeParticleByName(player, id);
 
         }
 

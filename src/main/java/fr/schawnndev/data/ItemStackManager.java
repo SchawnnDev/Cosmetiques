@@ -47,16 +47,12 @@ public class ItemStackManager {
     }
 
     public static ItemStack getHead(Player player){
-   //     Item head = new Item("head", -1, false, Material.SKULL, (short) 3, null);
-
         ItemStack itemStack = new ItemStack(Material.SKULL_ITEM, 1, (short)3);
 
         SkullMeta im = (SkullMeta) itemStack.getItemMeta();
         im.setOwner(player.getName());
-        im.setDisplayName("§6Informations du compte");
-        im.setLore(Arrays.asList(("§7Pseudo : §a" + player.getName() + " (" + ChatColor.translateAlternateColorCodes('&', LCPerms.api.getGroup(player)) + "§a)"), ("§7Solde LCoins : §6" + LCMaster.api.getCoins(player.getName()) + " ⛃ §a(x " + LCMaster.api.getMultiplicator(player) + "§a)")));
-  //      head.addLore("§7Pseudo : §a" + player.getName() + " (" + "§cFondateur" + "§a)");
-  //      head.addLore("§7Solde LCCOins : §6" + "221020" + " ⛃ §a(x " + "9" + "§a)");
+        im.setDisplayName("§6Mon compte");
+        im.setLore(Arrays.asList("§7Solde LCoins : §6" + LCMaster.api.getCoins(player.getName()) + " ⛃"));
         itemStack.setItemMeta(im);
 
         return itemStack;

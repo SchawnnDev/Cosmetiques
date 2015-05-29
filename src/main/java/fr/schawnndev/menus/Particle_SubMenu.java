@@ -46,7 +46,7 @@ public class Particle_SubMenu implements Listener {
     }
 
     public static void open(Player player){
-        Inventory inv = Bukkit.createInventory(null, 6*9, "§6Particules");
+        Inventory inv = Bukkit.createInventory(null, 6*9, "              §6§oParticules");
 
         ItemStack glassStack = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)0, GlassColor.WHITE.getData());
         ItemMeta glassMeta = glassStack.getItemMeta();
@@ -72,12 +72,19 @@ public class Particle_SubMenu implements Listener {
         inv.setItem(positionConverter.convert(3, 6), glassStack);
         inv.setItem(positionConverter.convert(7, 6), glassStack);
 
-        ItemStack cosmetiques = new ItemStack(Material.BLAZE_POWDER);
+        ItemStack cosmetiques = new ItemStack(Material.MELON_SEEDS);
         ItemMeta cosmetiquesMeta = cosmetiques.getItemMeta();
-        cosmetiquesMeta.setDisplayName("§5§lParticules");
+        cosmetiquesMeta.setDisplayName("§6Particules");
         cosmetiques.setItemMeta(cosmetiquesMeta);
 
+        ItemStack retour = new ItemStack(Material.ARROW);
+        ItemMeta retourMeta = retour.getItemMeta();
+        retourMeta.setDisplayName("§7<===");
+        retourMeta.setLore(MenuManager.getNewLore("§6Page précédente"));
+        retour.setItemMeta(retourMeta);
+
         inv.setItem(positionConverter.convert(1, 1), cosmetiques);
+        inv.setItem(positionConverter.convert(2, 6), retour);
         inv.setItem(positionConverter.convert(9, 1), cosmetiques);
         inv.setItem(positionConverter.convert(5, 1), ItemStackManager.getHead(player));
 
@@ -110,72 +117,77 @@ public class Particle_SubMenu implements Listener {
         List<String> cosmetics = SQLManager.getCosmetics(player);
 
         List<String> magicienLore = new ArrayList<>();
-        magicienLore.add("§7Tu as toujours rêvé d'être un magicien ?");
-        magicienLore.add("§7Alors cette particule va bien te décrire.");
+        magicienLore.add("§7Entourez-vous de petites particules d'enchantements");
+        magicienLore.add("§7mystérieuses et sympathiques.");
 
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.ENCHANTMENT_TABLE), Cosmetique.MAGICIEN.getPrice(),
-                Cosmetique.MAGICIEN.isVip(), "§5Magicien", magicienLore, cosmetics.contains("magicien")));
+                Cosmetique.MAGICIEN.isVip(), "§5Magicien", magicienLore, cosmetics.contains("magicien"), CosmetiqueManager.CosmetiqueType.PARTICLE));
 
-        List<String> pluieLore = new ArrayList<>();
-        pluieLore.add("§7Je crois que tu as oublié du parapluie :P");
+        List<String> pluieLore = MenuManager.getNewLore("§7Il me semble que vous avez oublié votre parapluie.");
 
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.WATER_BUCKET), Cosmetique.PLUIE.getPrice(),
-                Cosmetique.PLUIE.isVip(), "§3Pluie", pluieLore, cosmetics.contains("pluie")));
+                Cosmetique.PLUIE.isVip(), "§3Pluie", pluieLore, cosmetics.contains("pluie"), CosmetiqueManager.CosmetiqueType.PARTICLE));
 
         List<String> laveLore = new ArrayList<>();
-        laveLore.add("§7C'est chaud tout ça..");
+        laveLore.add("§7Un bon bain dans de la lave, qui");
+        laveLore.add("§7n'en a jamais rêvé ?");
 
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.LAVA_BUCKET), Cosmetique.LAVE.getPrice(),
-                Cosmetique.LAVE.isVip(), "§6Lave", laveLore, cosmetics.contains("lave")));
+                Cosmetique.LAVE.isVip(), "§6Lave", laveLore, cosmetics.contains("lave"), CosmetiqueManager.CosmetiqueType.PARTICLE));
 
         List<String> notesLore = new ArrayList<>();
-        notesLore.add("§7Au yééééé..");
+        notesLore.add("§7Exprimez vos talents de danseur grâce à");
+        notesLore.add("§7ces petites particules en forme de note.");
 
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.JUKEBOX), Cosmetique.NOTES.getPrice(),
-                Cosmetique.NOTES.isVip(), "§dNotes", notesLore, cosmetics.contains("notes")));
+                Cosmetique.NOTES.isVip(), "§dNotes", notesLore, cosmetics.contains("notes"), CosmetiqueManager.CosmetiqueType.PARTICLE));
 
         List<String> emeraldLore = new ArrayList<>();
-        emeraldLore.add("§7Au yééééé..");
+        emeraldLore.add("§7Laissez parler votre humeur.");
 
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.EMERALD), Cosmetique.CONTENT.getPrice(),
-                Cosmetique.CONTENT.isVip(), "§aContent", emeraldLore, cosmetics.contains("content")));
+                Cosmetique.CONTENT.isVip(), "§aContent", emeraldLore, cosmetics.contains("content"), CosmetiqueManager.CosmetiqueType.PARTICLE));
 
-        List<String> fumeeLore = MenuManager.getNewLore("§7Au yééééé..");
+        List<String> fumeeLore = MenuManager.getNewLore("§7Attention ça brûle !");
 
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.SULPHUR), Cosmetique.FUMEE.getPrice(),
-                Cosmetique.FUMEE.isVip(), "§7Fumée", fumeeLore, cosmetics.contains("fumee")));
+                Cosmetique.FUMEE.isVip(), "§7Fumée", fumeeLore, cosmetics.contains("fumee"), CosmetiqueManager.CosmetiqueType.PARTICLE));
 
-        List<String> flamesListener = MenuManager.getNewLore("§7Attention ça brûle !");
+        List<String> flamesLore = new ArrayList<>();
+        flamesLore.add("§7Les flammes vous encerclent telle une barrière");
+        flamesLore.add("§7protectrice.");
 
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.MOB_SPAWNER), Cosmetique.FLAMES.getPrice(),
-                Cosmetique.FLAMES.isVip(), "§eFlames", flamesListener, cosmetics.contains("flames")));
+                Cosmetique.FLAMES.isVip(), "§eFlames", flamesLore, cosmetics.contains("flames"), CosmetiqueManager.CosmetiqueType.PARTICLE));
 
-        List<String> spiralesLore = MenuManager.getNewLore("§7Au yééééé..");
+        List<String> spiralesLore = MenuManager.getNewLore("§7Faites apparaître votre aura de puissance.");
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.GLASS_BOTTLE), Cosmetique.SPIRALES.getPrice(),
-                Cosmetique.SPIRALES.isVip(), "§bSpirales", spiralesLore, cosmetics.contains("spirales")));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.POTION), Cosmetique.SPIRALES.getPrice(),
+                Cosmetique.SPIRALES.isVip(), "§bSpirales", spiralesLore, cosmetics.contains("spirales"), CosmetiqueManager.CosmetiqueType.PARTICLE));
 
-        List<String> redstoneLore = MenuManager.getNewLore("§7Au yééééé..");
+        List<String> redstoneLore = MenuManager.getNewLore("§7Vous ressemblez à aypierre...");
 
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.REDSTONE), Cosmetique.REDSTONE.getPrice(),
-                Cosmetique.REDSTONE.isVip(), "§4Redstone", redstoneLore, cosmetics.contains("redstone")));
+                Cosmetique.REDSTONE.isVip(), "§4Redstone", redstoneLore, cosmetics.contains("redstone"), CosmetiqueManager.CosmetiqueType.PARTICLE));
 
-        List<String> coeursLore = MenuManager.getNewLore("§7Montrez votre amour !");
+        List<String> coeursLore = MenuManager.getNewLore("§7Laissez parler vos sentiments !");
 
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.RED_ROSE), Cosmetique.COEURS.getPrice(),
-                Cosmetique.COEURS.isVip(), "§cCoeurs", coeursLore, cosmetics.contains("coeurs")));
+                Cosmetique.COEURS.isVip(), "§cCoeurs", coeursLore, cosmetics.contains("coeurs"), CosmetiqueManager.CosmetiqueType.PARTICLE));
 
-        List<String> legendaryLore = MenuManager.getNewLore("§7Au yééééé..");
+        List<String> legendaryLore = new ArrayList<>();
+        legendaryLore.add("§7Seuls les riches auront la chance de pouvoir");
+        legendaryLore.add("§7se payer cette particule si secrète !");
 
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.GOLDEN_APPLE, 1, (short)0, (byte)1), Cosmetique.LEGENDARY.getPrice(),
-                Cosmetique.LEGENDARY.isVip(), "§cLege§3ndary", legendaryLore, cosmetics.contains("legendary")));
+                Cosmetique.LEGENDARY.isVip(), "§cLege§3ndary", legendaryLore, cosmetics.contains("legendary"), CosmetiqueManager.CosmetiqueType.PARTICLE));
 
         return itemStacks;
     }
 
     @EventHandler
     public void onClick(InventoryClickEvent e){
-        if(e.getInventory() != null && e.getInventory().getName() != null && e.getInventory().getName().equals("§6Particules")){
+        if(e.getInventory() != null && e.getInventory().getName() != null && e.getInventory().getName().equals("              §6§oParticules")){
             Player player = (Player) e.getWhoClicked();
 
             e.setCancelled(true);
@@ -184,6 +196,52 @@ public class Particle_SubMenu implements Listener {
             if(e.getCurrentItem() != null && e.getCurrentItem().hasItemMeta() && e.getCurrentItem().getItemMeta().getDisplayName() != null) {
 
                 switch (e.getCurrentItem().getItemMeta().getDisplayName()){
+                    case "§7<===":
+                        Main_Menu.open(player);
+                        break;
+
+                    case "§7Fumée":
+
+                        if(!ParticleManager.isParticleActive(player, "fumee")){
+
+                            if(Cosmetique.FUMEE.isVip()){
+
+                                if(player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")){
+                                    if(ParticleManager.hasParticleActive(player)){
+                                        ParticleManager.removeActiveParticle(player);
+                                    }
+
+                                    player.closeInventory();
+                                    player.sendMessage("§aTu viens d'activer la particule §bfumée§a !");
+                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
+                                    ParticleManager.getParticleFumee().startParticle(player.getUniqueId());
+                                } else {
+                                    player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
+                                    player.sendMessage("§cTu dois être VIP pour utiliser §bfumée !");
+                                }
+
+                            } else {
+                                if(SQLManager.hasBuyCosmetic(player, "fumee")){
+
+                                    if(ParticleManager.hasParticleActive(player)){
+                                        ParticleManager.removeActiveParticle(player);
+                                    }
+
+                                    player.closeInventory();
+                                    player.sendMessage("§aTu viens d'activer la particule §bfumée§a !");
+                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
+                                    ParticleManager.getParticleFumee().startParticle(player.getUniqueId());
+                                } else {
+                                    Achat achat = new Achat("fumee", Cosmetique.FUMEE.getPrice(), CosmetiqueManager.CosmetiqueType.PARTICLE, player);
+                                    achat.generate();
+                                    achat.proceedOpening();
+                                }
+                            }
+                        } else {
+                            player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
+                        }
+
+                        break;
                     case "§5Magicien":
 
                         if(!ParticleManager.isParticleActive(player, "magicien")){
@@ -196,12 +254,12 @@ public class Particle_SubMenu implements Listener {
                                     }
 
                                     player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bredstone§a !");
+                                    player.sendMessage("§aTu viens d'activer la particule §bmagicien§a !");
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.getParticleMagicien().startParticle(player.getUniqueId());
                                 } else {
                                     player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
-                                    player.sendMessage("§cTu dois être VIP pour utiliser §bredstone !");
+                                    player.sendMessage("§cTu dois être VIP pour utiliser §bmagicien !");
                                 }
 
                             } else {
@@ -212,7 +270,7 @@ public class Particle_SubMenu implements Listener {
                                     }
 
                                     player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bredstone§a !");
+                                    player.sendMessage("§aTu viens d'activer la particule §bmagicien§a !");
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.getParticleMagicien().startParticle(player.getUniqueId());
                                 } else {

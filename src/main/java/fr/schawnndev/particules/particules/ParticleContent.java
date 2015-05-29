@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class ParticleContent  extends Particle {
+public class ParticleContent extends Particle {
 
     @Getter
     public CosmetiqueManager.Cosmetique cosmetique = CosmetiqueManager.Cosmetique.CONTENT;
@@ -78,8 +78,10 @@ public class ParticleContent  extends Particle {
 
     @Override
     public void stopParticle(UUID uuid) {
-        if(tasks.containsKey(uuid))
+        if (tasks.containsKey(uuid)) {
             Bukkit.getScheduler().cancelTask(tasks.get(uuid));
+            tasks.remove(uuid);
+        }
     }
 
 }

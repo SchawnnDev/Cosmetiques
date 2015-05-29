@@ -49,13 +49,13 @@ public class ParticleMagicien extends Particle {
                     private int p = 150;
                     private int pPerIteration = 12;
                     private float s = 1.0F;
-                    private float xFactor = 1.0F;
-                    private float yFactor = 0.6F;
-                    private float zFactor = 1.0F;
-                    private float yOffset = 0.6F;
+                    private float xFactor = 1.0f;
+                    private float yFactor = 0.6f;
+                    private float zFactor = 1.0f;
+                    private float yOffset = 0.6f;
                     private double xRotation;
                     private double yRotation;
-                    private double zRotation = 0.0D;
+                    private double zRotation = 0.0d;
                     private int step;
 
                     @Override
@@ -65,17 +65,16 @@ public class ParticleMagicien extends Particle {
                             Location l = player.getLocation();
                             Vector v = new Vector();
 
-                            for (int i = 0; i < pPerIteration; i++)
-                            {
+                            for (int i = 0; i < pPerIteration; i++) {
                                 step += 1;
 
-                                float t = 3.142f / p * step;
+                                float t = 3.141f / p * step;
                                 float r = FastMath.sin(t * 2.718f * pPerIteration / p) * s;
-                                float s = r * 3.142f * t;
+                                float s = r * 3.141f * t;
 
                                 v.setX(xFactor * r * -FastMath.cos(s));
                                 v.setZ(zFactor * r * -FastMath.sin(s));
-                                v.setY(yFactor * FastMath.cos(r / 3.1415f * s) + yOffset);
+                                v.setY(yFactor * r + yOffset + 2.0f);
 
                                 RotateVector.rotateVector(v, xRotation, yRotation, zRotation);
                                 ParticleEffect.ENCHANTMENT_TABLE.display(0f, 0f, 0f, 0f, 1, l.add(v), 128);
@@ -86,13 +85,14 @@ public class ParticleMagicien extends Particle {
                             stopParticle(uuid);
                         }
                     }
-
                 }, 0l, 2l).getTaskId());
-        }
+    }
 
-        @Override
-        public void stopParticle(UUID uuid) {
-            if(tasks.containsKey(uuid))
-                Bukkit.getScheduler().cancelTask(tasks.get(uuid));
+    @Override
+    public void stopParticle(UUID uuid) {
+        if (tasks.containsKey(uuid)) {
+            Bukkit.getScheduler().cancelTask(tasks.get(uuid));
+            tasks.remove(uuid);
         }
+    }
 }

@@ -44,7 +44,7 @@ public class ServerListener implements Listener {
                     player.getInventory().setItem(4, CosmetiqueManager.getPlayerItem(CosmetiqueManager.getCosmetique(player)));
                 player.getInventory().setItem(8, MenuManager.getCosmeticItem());
             }
-        }.runTaskLater(LCCosmetiques.getInstance(), 20L);
+        }.runTaskLater(LCCosmetiques.getInstance(), 5l);
 
     }
 

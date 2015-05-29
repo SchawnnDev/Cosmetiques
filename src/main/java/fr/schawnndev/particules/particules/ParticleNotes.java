@@ -77,8 +77,10 @@ public class ParticleNotes extends Particle {
 
     @Override
     public void stopParticle(UUID uuid) {
-        if(tasks.containsKey(uuid))
+        if (tasks.containsKey(uuid)) {
             Bukkit.getScheduler().cancelTask(tasks.get(uuid));
+            tasks.remove(uuid);
+        }
     }
 
 }

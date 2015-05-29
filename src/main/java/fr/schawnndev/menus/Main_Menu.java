@@ -16,6 +16,7 @@ package fr.schawnndev.menus;
 import fr.schawnndev.LCCosmetiques;
 import fr.schawnndev.api.Manager;
 import fr.schawnndev.api.utils.GlassColor;
+import fr.schawnndev.data.ItemStackManager;
 import fr.schawnndev.math.PositionConverter;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -33,78 +34,69 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class Main_Menu implements Listener {
 
-    @Getter
-    private static Inventory basicInventory;
-
     private static PositionConverter positionConverter = new PositionConverter();
 
     public Main_Menu(){
         Bukkit.getPluginManager().registerEvents(this, LCCosmetiques.getInstance());
+    }
 
-        basicInventory = Bukkit.createInventory(null, 6*9, "§6Cosmétiques");
+    public static void open(Player player){
+        Inventory inv = Bukkit.createInventory(null, 6*9, "             §6§oCosmétiques");
 
         ItemStack glassStack = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)0, GlassColor.WHITE.getData());
         ItemMeta glassMeta = glassStack.getItemMeta();
         glassMeta.setDisplayName("§7-");
         glassStack.setItemMeta(glassMeta);
 
-        basicInventory.setItem(positionConverter.convert(3, 1), glassStack);
-        basicInventory.setItem(positionConverter.convert(7, 1), glassStack);
-        basicInventory.setItem(positionConverter.convert(2, 2), glassStack);
-        basicInventory.setItem(positionConverter.convert(3, 2), glassStack);
-        basicInventory.setItem(positionConverter.convert(7, 2), glassStack);
-        basicInventory.setItem(positionConverter.convert(8, 2), glassStack);
-        basicInventory.setItem(positionConverter.convert(2, 3), glassStack);
-        basicInventory.setItem(positionConverter.convert(8, 3), glassStack);
-        basicInventory.setItem(positionConverter.convert(2, 4), glassStack);
-        basicInventory.setItem(positionConverter.convert(8, 4), glassStack);
-        basicInventory.setItem(positionConverter.convert(2, 5), glassStack);
-        basicInventory.setItem(positionConverter.convert(3, 5), glassStack);
-        basicInventory.setItem(positionConverter.convert(7, 5), glassStack);
-        basicInventory.setItem(positionConverter.convert(8, 5), glassStack);
-        basicInventory.setItem(positionConverter.convert(2, 3), glassStack);
-        basicInventory.setItem(positionConverter.convert(8, 3), glassStack);
-        basicInventory.setItem(positionConverter.convert(3, 6), glassStack);
-        basicInventory.setItem(positionConverter.convert(7, 6), glassStack);
-
-        ItemStack cosmetiques = new ItemStack(Material.JUKEBOX);
-        ItemMeta cosmetiquesMeta = cosmetiques.getItemMeta();
-        cosmetiquesMeta.setDisplayName("§5§lCosmétiques");
-        cosmetiques.setItemMeta(cosmetiquesMeta);
-
-        basicInventory.setItem(positionConverter.convert(1, 1), cosmetiques);
-        basicInventory.setItem(positionConverter.convert(9, 1), cosmetiques);
+        inv.setItem(positionConverter.convert(3, 1), glassStack);
+        inv.setItem(positionConverter.convert(7, 1), glassStack);
+        inv.setItem(positionConverter.convert(2, 2), glassStack);
+        inv.setItem(positionConverter.convert(3, 2), glassStack);
+        inv.setItem(positionConverter.convert(7, 2), glassStack);
+        inv.setItem(positionConverter.convert(8, 2), glassStack);
+        inv.setItem(positionConverter.convert(2, 3), glassStack);
+        inv.setItem(positionConverter.convert(8, 3), glassStack);
+        inv.setItem(positionConverter.convert(2, 4), glassStack);
+        inv.setItem(positionConverter.convert(8, 4), glassStack);
+        inv.setItem(positionConverter.convert(2, 5), glassStack);
+        inv.setItem(positionConverter.convert(3, 5), glassStack);
+        inv.setItem(positionConverter.convert(7, 5), glassStack);
+        inv.setItem(positionConverter.convert(8, 5), glassStack);
+        inv.setItem(positionConverter.convert(2, 3), glassStack);
+        inv.setItem(positionConverter.convert(8, 3), glassStack);
+        inv.setItem(positionConverter.convert(3, 6), glassStack);
+        inv.setItem(positionConverter.convert(7, 6), glassStack);
 
         /**
          *  Item: particules
          */
 
-        ItemStack particules = new ItemStack(Material.BLAZE_POWDER);
+        ItemStack particules = new ItemStack(Material.MELON_SEEDS);
         ItemMeta particulesMeta = particules.getItemMeta();
-        particulesMeta.setDisplayName("§6§lParticules");
+        particulesMeta.setDisplayName("§6Particules");
         particules.setItemMeta(particulesMeta);
 
-        basicInventory.setItem(positionConverter.convert(5, 3), particules);
+        inv.setItem(positionConverter.convert(5, 3), particules);
 
         ItemStack colorant = new ItemStack(Material.INK_SACK, 1, (short)0, (byte)8); // 8 = gris & 10 = vert
         ItemMeta colorantMeta = particules.getItemMeta();
         colorantMeta.setDisplayName("§cDésactivé");
         colorant.setItemMeta(colorantMeta);
 
-        basicInventory.setItem(positionConverter.convert(5, 4), colorant);
+        inv.setItem(positionConverter.convert(5, 4), colorant);
 
         /**
          *  Item: gadgets
          */
 
-        ItemStack gadgets = new ItemStack(Material.REDSTONE);
+        ItemStack gadgets = new ItemStack(356);
         ItemMeta gadgetsMeta = gadgets.getItemMeta();
-        gadgetsMeta.setDisplayName("§c§lGadgets");
+        gadgetsMeta.setDisplayName("§cGadgets");
         gadgets.setItemMeta(gadgetsMeta);
 
-        basicInventory.setItem(positionConverter.convert(7, 3), gadgets);
+        inv.setItem(positionConverter.convert(7, 3), gadgets);
 
-        basicInventory.setItem(positionConverter.convert(7, 4), colorant);
+        inv.setItem(positionConverter.convert(7, 4), colorant);
 
         /**
          *  Item: animaux
@@ -112,16 +104,23 @@ public class Main_Menu implements Listener {
 
         ItemStack animaux = new ItemStack(Material.DIAMOND_BARDING);
         ItemMeta animauxMeta = animaux.getItemMeta();
-        animauxMeta.setDisplayName("§3§lAnimaux");
+        animauxMeta.setDisplayName("§3Pets");
         animaux.setItemMeta(animauxMeta);
 
-        basicInventory.setItem(positionConverter.convert(3, 3), animaux);
+        inv.setItem(positionConverter.convert(3, 3), animaux);
 
-        basicInventory.setItem(positionConverter.convert(3, 4), colorant);
+        inv.setItem(positionConverter.convert(3, 4), colorant);
 
-    }
+        /**
+         *  Item: head
+         */
 
-    public static void open(Player player){
+        inv.setItem(positionConverter.convert(5, 1), ItemStackManager.getHead(player));
+
+        /**
+         *  Achats
+         */
+
 
         if(Manager.playersBuying.contains(player.getUniqueId()))
             Manager.playersBuying.remove(player.getUniqueId());
@@ -129,7 +128,11 @@ public class Main_Menu implements Listener {
         if(Manager.achats.contains(player.getUniqueId()))
             Manager.achats.remove(player.getUniqueId());
 
-        player.openInventory(basicInventory);
+        /**
+         *  Open
+         */
+
+        player.openInventory(inv);
     }
 
     @EventHandler
@@ -141,7 +144,7 @@ public class Main_Menu implements Listener {
 
     @EventHandler
     public void onClick(InventoryClickEvent e){
-        if(e.getInventory() != null && e.getInventory().getName() != null && e.getInventory().getName().equals(basicInventory.getName())){
+        if(e.getInventory() != null && e.getInventory().getName() != null && e.getInventory().getName().equals("             §6§oCosmétiques")){
             Player player = (Player) e.getWhoClicked();
 
             e.setCancelled(true);
@@ -150,17 +153,15 @@ public class Main_Menu implements Listener {
             if(e.getCurrentItem() != null && e.getCurrentItem().hasItemMeta() && e.getCurrentItem().getItemMeta().getDisplayName() != null) {
 
                 switch (e.getCurrentItem().getItemMeta().getDisplayName()){
-                    case "§c§lGadgets":
+                    case "§cGadgets":
+                        Gadget_SubMenu.open(player);
+                        break;
+                    case "§3Pets":
                         player.closeInventory();
                         player.sendMessage("§cEn dev'");
                         player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
                         break;
-                    case "§3§lAnimaux":
-                        player.closeInventory();
-                        player.sendMessage("§cEn dev'");
-                        player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
-                        break;
-                    case "§6§lParticules":
+                    case "§6Particules":
                         Particle_SubMenu.open(player);
                         break;
                     default:
