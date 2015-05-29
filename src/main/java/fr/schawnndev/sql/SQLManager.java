@@ -13,6 +13,8 @@
 
 package fr.schawnndev.sql;
 
+import fr.schawnndev.CosmetiqueManager;
+import fr.schawnndev.CosmetiqueManager.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.entity.Player;
@@ -144,7 +146,6 @@ public class SQLManager {
             e.printStackTrace();
         }
 
-
     }
 
     public static void removeCosmetic(Player player, String cosmetic){
@@ -179,7 +180,7 @@ public class SQLManager {
     public static void addToDataBase(Player player){
 
         try {
-            statement.executeUpdate("INSERT INTO LC_COSMETIQUES (`uuid`, `achats`, `current_active`) VALUES ('" + player.getUniqueId().toString() + "', '"+ "aucun" +"', '"+ "aucun"+"');");
+            statement.executeUpdate("INSERT INTO LC_COSMETIQUES (`uuid`, `achats`, `current_active_particle`, `current_active_gadget`, `current_active_pet`) VALUES ('" + player.getUniqueId().toString() + "', '"+ "aucun" +"', '"+ "aucun"+"', '"+ "aucun"+"', '"+ "aucun"+"');");
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -201,11 +202,11 @@ public class SQLManager {
         return false;
     }
 
-    public static boolean hasActiveCosmetic(Player player){
-        return !getActiveCosmetic(player).equalsIgnoreCase("aucun");
+    public static boolean hasActiveCosmetic(Player player, CosmetiqueType cosmetiqueType){
+        return !getActiveCosmetic(player, cosmetiqueType).equalsIgnoreCase("aucun");
     }
 
-    public static String getActiveCosmetic(Player player){
+    public static String getActiveCosmetic(Player player, CosmetiqueType cosmetiqueType){
 
         if(!isInDataBase(player))
             addToDataBase(player);
@@ -215,7 +216,7 @@ public class SQLManager {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM LC_COSMETIQUES WHERE uuid = '" + player.getUniqueId().toString() + "';");
 
             if(resultSet.next()){
-                return resultSet.getString("current_active");
+                return resultSet.getString(cosmetiqueType.getMySQLTable());
             } else {
                 return "aucun";
             }
@@ -228,14 +229,24 @@ public class SQLManager {
         return "aucun";
     }
 
-    public static void setActiveCosmetic(Player player, String activeCosmetic){
+    public static void setActiveCosmetic(Player player, String activeCosmetic, CosmetiqueType cosmetiqueType){
 
         if(!isInDataBase(player))
             addToDataBase(player);
 
-        try  {
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE LC_COSMETIQUES SET current_active=? WHERE uuid=?");
+        try {
+            PreparedStatement preparedStatement;
+
+            if(cosmetiqueType == CosmetiqueType.GADGET){
+                preparedStatement = connection.prepareStatement("UPDATE LC_COSMETIQUES SET current_active_gadget=? WHERE uuid=?");
+            } else if (cosmetiqueType == CosmetiqueType.PARTICLE){
+                preparedStatement = connection.prepareStatement("UPDATE LC_COSMETIQUES SET current_active_particle=? WHERE uuid=?");
+            } else {
+                preparedStatement = connection.prepareStatement("UPDATE LC_COSMETIQUES SET current_active_pet=? WHERE uuid=?");
+            }
+
             preparedStatement.setString(1, activeCosmetic);
+            preparedStatement.setString(2, player.getUniqueId().toString());
             preparedStatement.executeUpdate();
         } catch (SQLException e){
             e.printStackTrace();

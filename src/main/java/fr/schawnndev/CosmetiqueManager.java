@@ -19,35 +19,17 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 public class CosmetiqueManager {
 
-    private static Map<UUID, Cosmetique> cosmetiques = new HashMap<>();
-
-    public static void setCosmetique(Player player, Cosmetique cosmetique){
-        cosmetiques.put(player.getUniqueId(), cosmetique);
-    }
-
     public static void setCurrentCosmetique(Player player, Cosmetique cosmetique, boolean withMessage){
         player.getInventory().setItem(5, ItemStackManager.getItemStack(cosmetique));
 
         if(withMessage)
-            player.sendMessage("§aTu viens d'activer §b"+ cosmetique.toString().toString());
-    }
-
-    public static void removeCosmetique(Player player){
-        if(cosmetiques.containsKey(player.getUniqueId()))
-            cosmetiques.remove(player.getUniqueId());
-    }
-
-    public static Cosmetique getCosmetique(Player player){
-        return cosmetiques.get(player.getUniqueId());
-    }
-
-    public static String getCosmetiqueString(Player player){
-        return cosmetiques.get(player.getUniqueId()).toString().toLowerCase();
+            player.sendMessage("§aTu viens d'activer §b"+ cosmetique.toString());
     }
 
     public static Cosmetique getCosmetiqueFromString(String cosmetique){
@@ -72,9 +54,17 @@ public class CosmetiqueManager {
     }
 
     public enum CosmetiqueType {
-        GADGET,
-        PET,
-        PARTICLE;
+        GADGET("current_active_gadget"),
+        PET("current_active_pet"),
+        PARTICLE("current_active_particle");
+
+        @Getter
+        private String MySQLTable;
+
+        private CosmetiqueType(String MySQLTable){
+            this.MySQLTable = MySQLTable;
+        }
+
     }
 
     public enum Cosmetique {

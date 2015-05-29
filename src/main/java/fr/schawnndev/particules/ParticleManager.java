@@ -13,18 +13,17 @@
 
 package fr.schawnndev.particules;
 
+import fr.schawnndev.CosmetiqueManager;
 import fr.schawnndev.particules.particules.*;
 import lombok.Getter;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class ParticleManager {
 
     @Getter
-    private static ParticleCoeur particleCoeur = new ParticleCoeur();
+    private static ParticleCoeurs particleCoeurs = new ParticleCoeurs();
     @Getter
     private static ParticlePluie particlePluie = new ParticlePluie();
     @Getter
@@ -42,10 +41,13 @@ public class ParticleManager {
     @Getter
     private static ParticleFumee particleFumee = new ParticleFumee();
 
+    @Getter
+    private static Map<UUID, String> activeParticles = new HashMap<>();
+
     public static boolean hasParticleActive(Player player){
         UUID uuid = player.getUniqueId();
 
-        if(particleCoeur.getTasks().containsKey(uuid))
+        if(particleCoeurs.getTasks().containsKey(uuid))
             return true;
         if(particleFlames.getTasks().containsKey(uuid))
             return true;
@@ -72,31 +74,65 @@ public class ParticleManager {
 
         removeActiveParticle(player);
 
-        if(particle.equalsIgnoreCase("coeurs"))
-            particleCoeur.startParticle(uuid);
-        else if(particle.equalsIgnoreCase("flames"))
-            particleFlames.startParticle(uuid);
-        else if(particle.equalsIgnoreCase("notes"))
-            particleNotes.startParticle(uuid);
-        else if(particle.equalsIgnoreCase("pluie"))
-            particlePluie.startParticle(uuid);
-        else if(particle.equalsIgnoreCase("spirales"))
-            particleSpirales.startParticle(uuid);
-        else if(particle.equalsIgnoreCase("content"))
-            particleContent.startParticle(uuid);
-        else if(particle.equalsIgnoreCase("redstone"))
-            particleRedstone.startParticle(uuid);
-        else if(particle.equalsIgnoreCase("magicien"))
-            particleMagicien.startParticle(uuid);
-        else if(particle.equalsIgnoreCase("fumee"))
-            particleFumee.startParticle(uuid);
+
+
+        if(CosmetiqueManager.Cosmetique.valueOf(particle.toUpperCase()).isVip()) {
+            if (player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")) {
+
+                if (particle.equalsIgnoreCase("coeurs"))
+                    particleCoeurs.startParticle(uuid);
+                else if (particle.equalsIgnoreCase("flames"))
+                    particleFlames.startParticle(uuid);
+                else if (particle.equalsIgnoreCase("notes"))
+                    particleNotes.startParticle(uuid);
+                else if (particle.equalsIgnoreCase("pluie"))
+                    particlePluie.startParticle(uuid);
+                else if (particle.equalsIgnoreCase("spirales"))
+                    particleSpirales.startParticle(uuid);
+                else if (particle.equalsIgnoreCase("content"))
+                    particleContent.startParticle(uuid);
+                else if (particle.equalsIgnoreCase("redstone"))
+                    particleRedstone.startParticle(uuid);
+                else if (particle.equalsIgnoreCase("magicien"))
+                    particleMagicien.startParticle(uuid);
+                else if (particle.equalsIgnoreCase("fumee"))
+                    particleFumee.startParticle(uuid);
+
+                getActiveParticles().put(player.getUniqueId(), particle);
+
+            }
+
+        } else {
+
+            if (particle.equalsIgnoreCase("coeurs"))
+                particleCoeurs.startParticle(uuid);
+            else if (particle.equalsIgnoreCase("flames"))
+                particleFlames.startParticle(uuid);
+            else if (particle.equalsIgnoreCase("notes"))
+                particleNotes.startParticle(uuid);
+            else if (particle.equalsIgnoreCase("pluie"))
+                particlePluie.startParticle(uuid);
+            else if (particle.equalsIgnoreCase("spirales"))
+                particleSpirales.startParticle(uuid);
+            else if (particle.equalsIgnoreCase("content"))
+                particleContent.startParticle(uuid);
+            else if (particle.equalsIgnoreCase("redstone"))
+                particleRedstone.startParticle(uuid);
+            else if (particle.equalsIgnoreCase("magicien"))
+                particleMagicien.startParticle(uuid);
+            else if (particle.equalsIgnoreCase("fumee"))
+                particleFumee.startParticle(uuid);
+
+            getActiveParticles().put(player.getUniqueId(), particle);
+
+        }
 
     }
 
     public static boolean isParticleActive(Player player, String particle){
         UUID uuid = player.getUniqueId();
 
-        if(particle.equalsIgnoreCase("coeurs") && particleCoeur.getTasks().containsKey(uuid))
+        if(particle.equalsIgnoreCase("coeurs") && particleCoeurs.getTasks().containsKey(uuid))
             return true;
         if(particle.equalsIgnoreCase("flames") && particleFlames.getTasks().containsKey(uuid))
             return true;
@@ -121,8 +157,8 @@ public class ParticleManager {
     public static void removeActiveParticle(Player player){
         UUID uuid = player.getUniqueId();
 
-        if(particleCoeur.getTasks().containsKey(uuid))
-            particleCoeur.stopParticle(uuid);
+        if(particleCoeurs.getTasks().containsKey(uuid))
+            particleCoeurs.stopParticle(uuid);
         if(particleFlames.getTasks().containsKey(uuid))
             particleFlames.stopParticle(uuid);
         if(particleNotes.getTasks().containsKey(uuid))
@@ -139,6 +175,8 @@ public class ParticleManager {
             particleMagicien.stopParticle(uuid);
         if(particleFumee.getTasks().containsKey(uuid))
             particleFumee.stopParticle(uuid);
+
+        getActiveParticles().remove(player.getUniqueId());
 
     }
 

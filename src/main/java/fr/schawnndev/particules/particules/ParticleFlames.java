@@ -17,6 +17,7 @@ import fr.schawnndev.LCCosmetiques;
 import fr.schawnndev.particules.ParticleEffect;
 import fr.schawnndev.particules.Particle;
 import fr.schawnndev.CosmetiqueManager.Cosmetique;
+import fr.schawnndev.particules.ParticleManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -36,6 +37,8 @@ public class ParticleFlames extends Particle {
 
     @Override
     public void startParticle(final UUID uuid) {
+
+        ParticleManager.getActiveParticles().put(uuid, "flames");
 
         tasks.put(uuid,
 

@@ -20,6 +20,7 @@ import fr.schawnndev.math.Randoms;
 import fr.schawnndev.math.RotateVector;
 import fr.schawnndev.particules.Particle;
 import fr.schawnndev.particules.ParticleEffect;
+import fr.schawnndev.particules.ParticleManager;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
@@ -41,6 +42,8 @@ public class ParticleSpirales extends Particle {
 
     @Override
     public void startParticle(final UUID uuid) {
+
+        ParticleManager.getActiveParticles().put(uuid, "spirales");
 
         tasks.put(uuid,
 

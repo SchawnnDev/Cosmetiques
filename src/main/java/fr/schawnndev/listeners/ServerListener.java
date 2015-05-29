@@ -17,6 +17,7 @@ import fr.schawnndev.CosmetiqueManager;
 import fr.schawnndev.LCCosmetiques;
 import fr.schawnndev.api.Manager;
 import fr.schawnndev.menus.MenuManager;
+import fr.schawnndev.particules.ParticleManager;
 import fr.schawnndev.sql.SQLManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -35,27 +36,37 @@ public class ServerListener implements Listener {
 
         final Player player = e.getPlayer();
 
-  //      CosmetiqueManager.setCosmetique(e.getPlayer(), CosmetiqueManager.getCosmetiqueFromString(SQLManager.getActiveCosmetic(e.getPlayer())));
+        if(SQLManager.hasActiveCosmetic(e.getPlayer(), CosmetiqueManager.CosmetiqueType.PARTICLE)){
+
+            String particle = SQLManager.getActiveCosmetic(e.getPlayer(), CosmetiqueManager.CosmetiqueType.PARTICLE);
+
+            ParticleManager.activeParticleByName(e.getPlayer(), particle);
+
+        }
+
 
         new BukkitRunnable(){
             @Override
             public void run() {
-                if(CosmetiqueManager.getCosmetique(player) != CosmetiqueManager.Cosmetique.AUCUN)
-                    player.getInventory().setItem(4, CosmetiqueManager.getPlayerItem(CosmetiqueManager.getCosmetique(player)));
                 player.getInventory().setItem(8, MenuManager.getCosmeticItem());
             }
-        }.runTaskLater(LCCosmetiques.getInstance(), 5l);
+        }.runTaskLater(LCCosmetiques.getInstance(), 3l);
 
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent e){
 
-    //    SQLManager.setActiveCosmetic(e.getPlayer(), CosmetiqueManager.getCosmetiqueString(e.getPlayer()));
-        CosmetiqueManager.removeCosmetique(e.getPlayer());
+        if(ParticleManager.getActiveParticles().containsKey(e.getPlayer().getUniqueId())) {
+            SQLManager.setActiveCosmetic(e.getPlayer(), ParticleManager.getActiveParticles().get(e.getPlayer().getUniqueId()), CosmetiqueManager.CosmetiqueType.PARTICLE);
+            ParticleManager.getActiveParticles().remove(e.getPlayer().getUniqueId());
+        } else {
+            SQLManager.setActiveCosmetic(e.getPlayer(), "aucun", CosmetiqueManager.CosmetiqueType.PARTICLE);
+        }
 
         if(Manager.playersBuying.contains(e.getPlayer().getUniqueId()))
             Manager.playersBuying.remove(e.getPlayer().getUniqueId());
+
         if(Manager.hasAchat(e.getPlayer().getUniqueId()))
             Manager.achats.remove(Manager.getAchat(e.getPlayer().getUniqueId()));
 

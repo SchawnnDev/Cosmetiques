@@ -19,6 +19,7 @@ import fr.schawnndev.math.FastMath;
 import fr.schawnndev.math.RotateVector;
 import fr.schawnndev.particules.Particle;
 import fr.schawnndev.particules.ParticleEffect;
+import fr.schawnndev.particules.ParticleManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -39,6 +40,9 @@ public class ParticleMagicien extends Particle {
 
     @Override
     public void startParticle(final UUID uuid) {
+
+        ParticleManager.getActiveParticles().put(uuid, "magicien");
+
 
         tasks.put(uuid,
 

@@ -18,6 +18,7 @@ import fr.schawnndev.LCCosmetiques;
 import fr.schawnndev.math.Randoms;
 import fr.schawnndev.particules.Particle;
 import fr.schawnndev.particules.ParticleEffect;
+import fr.schawnndev.particules.ParticleManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -37,6 +38,8 @@ public class ParticleContent extends Particle {
 
     @Override
     public void startParticle(final UUID uuid) {
+
+        ParticleManager.getActiveParticles().put(uuid, "content");
 
         tasks.put(uuid,
 

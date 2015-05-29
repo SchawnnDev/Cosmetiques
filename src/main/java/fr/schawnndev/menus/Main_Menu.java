@@ -13,11 +13,14 @@
 
 package fr.schawnndev.menus;
 
+import fr.schawnndev.CosmetiqueManager;
 import fr.schawnndev.LCCosmetiques;
 import fr.schawnndev.api.Manager;
 import fr.schawnndev.api.utils.GlassColor;
 import fr.schawnndev.data.ItemStackManager;
 import fr.schawnndev.math.PositionConverter;
+import fr.schawnndev.particules.ParticleManager;
+import fr.schawnndev.sql.SQLManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -78,12 +81,15 @@ public class Main_Menu implements Listener {
 
         inv.setItem(positionConverter.convert(5, 3), particules);
 
-        ItemStack colorant = new ItemStack(Material.INK_SACK, 1, (short)0, (byte)8); // 8 = gris & 10 = vert
-        ItemMeta colorantMeta = particules.getItemMeta();
-        colorantMeta.setDisplayName("§cDésactivé");
-        colorant.setItemMeta(colorantMeta);
+        //
 
-        inv.setItem(positionConverter.convert(5, 4), colorant);
+        byte couleur_particules = ParticleManager.getActiveParticles().containsKey(player.getUniqueId()) ? (byte)10 : (byte)8;
+        ItemStack colorant_particules = new ItemStack(Material.INK_SACK, 1, (short)0, couleur_particules);
+        ItemMeta colorant_particulesMeta = colorant_particules.getItemMeta();
+        colorant_particulesMeta.setDisplayName(couleur_particules == 10 ? "§aDésactiver les particules" : "§cActiver les particules");
+        colorant_particules.setItemMeta(colorant_particulesMeta);
+
+        inv.setItem(positionConverter.convert(5, 4), colorant_particules);
 
         /**
          *  Item: gadgets
@@ -96,7 +102,15 @@ public class Main_Menu implements Listener {
 
         inv.setItem(positionConverter.convert(7, 3), gadgets);
 
-        inv.setItem(positionConverter.convert(7, 4), colorant);
+        //
+
+        byte couleur_gadgets = false ? (byte)10 : (byte)8;
+        ItemStack colorant_gadgets = new ItemStack(Material.INK_SACK, 1, (short)0, couleur_gadgets);
+        ItemMeta colorant_gadgetsMeta = colorant_gadgets.getItemMeta();
+        colorant_gadgetsMeta.setDisplayName(couleur_gadgets == 10 ? "§aDésactiver les gadgets" : "§cActiver les gadgets");
+        colorant_gadgets.setItemMeta(colorant_gadgetsMeta);
+
+        inv.setItem(positionConverter.convert(7, 4), colorant_gadgets);
 
         /**
          *  Item: animaux
@@ -109,7 +123,15 @@ public class Main_Menu implements Listener {
 
         inv.setItem(positionConverter.convert(3, 3), animaux);
 
-        inv.setItem(positionConverter.convert(3, 4), colorant);
+        //
+
+        byte couleur_pets = false ? (byte)10 : (byte)8;
+        ItemStack colorant_pets = new ItemStack(Material.INK_SACK, 1, (short)0, couleur_pets);
+        ItemMeta colorant_petsMeta = colorant_pets.getItemMeta();
+        colorant_petsMeta.setDisplayName(couleur_pets == 10 ? "§aDésactiver les pets" : "§cActiver les pets");
+        colorant_pets.setItemMeta(colorant_petsMeta);
+
+        inv.setItem(positionConverter.convert(3, 4), colorant_pets);
 
         /**
          *  Item: head
@@ -162,6 +184,13 @@ public class Main_Menu implements Listener {
                         player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
                         break;
                     case "§6Particules":
+                        Particle_SubMenu.open(player);
+                        break;
+                    case "§aDésactiver les particules":
+                        ParticleManager.removeActiveParticle(player);
+                        open(player);
+                        break;
+                    case "§cActiver les particules":
                         Particle_SubMenu.open(player);
                         break;
                     default:
