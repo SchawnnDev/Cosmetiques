@@ -17,6 +17,7 @@ import fr.schawnndev.CosmetiqueManager;
 import fr.schawnndev.api.utils.ItemDisponibility;
 import lombok.Getter;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -44,6 +45,7 @@ public class MenuManager {
         new ItemDisponibility();
 
     }
+
 
     public static List<String> getNewLore(String lore){
         List<String> l = new ArrayList<>();

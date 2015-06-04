@@ -40,6 +40,8 @@ public class ParticleManager {
     private static ParticleMagicien particleMagicien = new ParticleMagicien();
     @Getter
     private static ParticleFumee particleFumee = new ParticleFumee();
+    @Getter
+    private static ParticleLave particleLave = new ParticleLave();
 
     @Getter
     private static Map<UUID, String> activeParticles = new HashMap<>();
@@ -65,6 +67,8 @@ public class ParticleManager {
             return true;
         if(particleFumee.getTasks().containsKey(uuid))
             return true;
+        if(particleLave.getTasks().containsKey(uuid))
+            return true;
 
         return false;
     }
@@ -73,8 +77,6 @@ public class ParticleManager {
         UUID uuid = player.getUniqueId();
 
         removeActiveParticle(player);
-
-
 
         if(CosmetiqueManager.Cosmetique.valueOf(particle.toUpperCase()).isVip()) {
             if (player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")) {
@@ -97,6 +99,8 @@ public class ParticleManager {
                     particleMagicien.startParticle(uuid);
                 else if (particle.equalsIgnoreCase("fumee"))
                     particleFumee.startParticle(uuid);
+                else if (particle.equalsIgnoreCase("lave"))
+                    particleLave.startParticle(uuid);
 
                 getActiveParticles().put(player.getUniqueId(), particle);
 
@@ -122,6 +126,8 @@ public class ParticleManager {
                 particleMagicien.startParticle(uuid);
             else if (particle.equalsIgnoreCase("fumee"))
                 particleFumee.startParticle(uuid);
+            else if (particle.equalsIgnoreCase("lave"))
+                particleLave.startParticle(uuid);
 
             getActiveParticles().put(player.getUniqueId(), particle);
 
@@ -150,6 +156,8 @@ public class ParticleManager {
             return true;
         if(particle.equalsIgnoreCase("fumee") && particleFumee.getTasks().containsKey(uuid))
             return true;
+        if(particle.equalsIgnoreCase("lave") && particleLave.getTasks().containsKey(uuid))
+            return true;
 
         return false;
     }
@@ -175,6 +183,8 @@ public class ParticleManager {
             particleMagicien.stopParticle(uuid);
         if(particleFumee.getTasks().containsKey(uuid))
             particleFumee.stopParticle(uuid);
+        if(particleLave.getTasks().containsKey(uuid))
+            particleLave.stopParticle(uuid);
 
         getActiveParticles().remove(player.getUniqueId());
 

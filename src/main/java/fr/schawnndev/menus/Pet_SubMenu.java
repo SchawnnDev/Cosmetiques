@@ -2,9 +2,9 @@
  * ******************************************************
  *  * Copyright (C) 2015 SchawnnDev <contact@schawnndev.fr>
  *  *
- *  * This file (fr.schawnndev.menus.Gadget_SubMenu) is part of LCCosmetiques.
+ *  * This file (fr.schawnndev.menus.Pet_SubMenu) is part of LCCosmetiques.
  *  *
- *  * Created by SchawnnDev on 20/05/15 19:15.
+ *  * Created by SchawnnDev on 31/05/15 00:47.
  *  *
  *  * LCCosmetiques can not be copied and/or distributed without the express
  *  * permission of SchawnnDev.
@@ -15,17 +15,13 @@ package fr.schawnndev.menus;
 
 import fr.schawnndev.CosmetiqueManager;
 import fr.schawnndev.LCCosmetiques;
-import fr.schawnndev.api.Achat;
 import fr.schawnndev.api.utils.GlassColor;
 import fr.schawnndev.api.utils.ItemDisponibility;
 import fr.schawnndev.data.ItemStackManager;
-import fr.schawnndev.gadgets.GadgetManager;
 import fr.schawnndev.math.PositionConverter;
-import fr.schawnndev.particules.ParticleManager;
 import fr.schawnndev.sql.SQLManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -37,16 +33,16 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Gadget_SubMenu implements Listener {
+public class Pet_SubMenu implements Listener {
 
     private static PositionConverter positionConverter = new PositionConverter();
 
-    public Gadget_SubMenu(){
+    public Pet_SubMenu(){
         Bukkit.getPluginManager().registerEvents(this, LCCosmetiques.getInstance());
     }
 
     public static void open(Player player){
-        Inventory inv = Bukkit.createInventory(null, 6*9, "               §6§oGadgets");
+        Inventory inv = Bukkit.createInventory(null, 6*9, "               §6§oPets");
 
         ItemStack glassStack = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)0, GlassColor.WHITE.getData());
         ItemMeta glassMeta = glassStack.getItemMeta();
@@ -74,7 +70,7 @@ public class Gadget_SubMenu implements Listener {
 
         ItemStack cosmetiques = new ItemStack(356);
         ItemMeta cosmetiquesMeta = cosmetiques.getItemMeta();
-        cosmetiquesMeta.setDisplayName("§cGadgets");
+        cosmetiquesMeta.setDisplayName("§cPets");
         cosmetiques.setItemMeta(cosmetiquesMeta);
 
         ItemStack retour = new ItemStack(Material.ARROW);
@@ -218,7 +214,7 @@ public class Gadget_SubMenu implements Listener {
 
     @EventHandler
     public void onClick(InventoryClickEvent e){
-        if(e.getInventory() != null && e.getInventory().getName() != null && e.getInventory().getName().equals("               §6§oGadgets")){
+        if(e.getInventory() != null && e.getInventory().getName() != null && e.getInventory().getName().equals("               §6§oPets")){
             Player player = (Player) e.getWhoClicked();
 
             e.setCancelled(true);
@@ -229,44 +225,6 @@ public class Gadget_SubMenu implements Listener {
                 switch (e.getCurrentItem().getItemMeta().getDisplayName()){
                     case "§7<===":
                         Main_Menu.open(player);
-                        break;
-
-                    case "§7TNT":
-
-                        if(GadgetManager.hasGadget(player, "tnt")){
-                            player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
-                        } else {
-
-                            if (CosmetiqueManager.Cosmetique.TNT.isVip()) {
-
-                                if (player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")) {
-
-                                    player.getInventory().setItem(4, ItemStackManager.getItemStack(CosmetiqueManager.Cosmetique.TNT));
-
-                                    player.closeInventory();
-                                    player.sendMessage("§aTu viens de séléctionner le gadget §bTNT§a !");
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
-                                    GadgetManager.addGadget(player, "tnt", false);
-                                } else {
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
-                                    player.sendMessage("§cTu dois VIP pour utiliser le gadget §bTNT§a !");
-                                }
-
-                            } else {
-                                if (SQLManager.hasBuyCosmetic(player, "tnt")) {
-                                    player.closeInventory();
-                                    player.getInventory().setItem(4, ItemStackManager.getItemStack(CosmetiqueManager.Cosmetique.TNT));
-                                    player.sendMessage("§aTu viens de séléctioner le gadget §bTNT§a !");
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
-                                    GadgetManager.addGadget(player, "tnt", false);
-                                } else {
-                                    Achat achat = new Achat("tnt", CosmetiqueManager.Cosmetique.TNT, player);
-                                    achat.generate();
-                                    achat.proceedOpening();
-                                }
-                            }
-                        }
-
                         break;
 
                     default:

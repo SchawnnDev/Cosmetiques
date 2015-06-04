@@ -17,6 +17,8 @@ import fr.lyneteam.lcmaster.LCMaster;
 import fr.schawnndev.CosmetiqueManager;
 import fr.schawnndev.CosmetiqueManager.*;
 import fr.schawnndev.api.utils.GlassColor;
+import fr.schawnndev.data.ItemStackManager;
+import fr.schawnndev.gadgets.GadgetManager;
 import fr.schawnndev.math.PositionConverter;
 import fr.schawnndev.particules.ParticleManager;
 import fr.schawnndev.particules.particules.ParticleMagicien;
@@ -24,6 +26,7 @@ import fr.schawnndev.sql.SQLManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -42,7 +45,7 @@ public class Achat {
     private String id;
 
     @Getter
-    private CosmetiqueType cosmetiqueType;
+    private Cosmetique cosmetique;
 
     @Getter
     private Player player;
@@ -64,15 +67,15 @@ public class Achat {
 
     private Inventory inventory;
 
-    public Achat(String id, int price, CosmetiqueType cosmetiqueType, Player player){
+    public Achat(String id, Cosmetique cosmetique, Player player){
         this.id = id;
-        this.price = price;
+        this.price = cosmetique.getPrice();
         this.player = player;
         this.generated = false;
         this.isOpened = false;
         this.allowToBuy = true;
         this.inventoryName = "§6Achat: §c" + id + " §6| §c#" + new Random().nextInt(99);
-        this.cosmetiqueType = cosmetiqueType;
+        this.cosmetique = cosmetique;
         System.out.println("Nouvel achat de " + player.getName() + " | id: " + id + " | date: " + new Date().toLocaleString());
         Manager.achats.add(this);
     }
@@ -139,7 +142,7 @@ public class Achat {
 
         ItemStack itemStack = new ItemStack(Material.CAKE, 1);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        String cosmetiqueTypeString = cosmetiqueType.toString().toLowerCase().substring(0, 1).toUpperCase() + cosmetiqueType.toString().toLowerCase().substring(1);
+        String cosmetiqueTypeString = cosmetique.getCosmetiqueType().toString().toLowerCase().substring(0, 1).toUpperCase() + cosmetique.getCosmetiqueType().toString().toLowerCase().substring(1);
         itemMeta.setDisplayName("§6" + cosmetiqueTypeString + ": " + id);
         itemMeta.setLore(Arrays.asList("§7------------","§bPrix: §6" + price + " §bLCoins"));
         itemStack.setItemMeta(itemMeta);
@@ -150,9 +153,9 @@ public class Achat {
     }
 
     public void proceedOpening(){
-        int money = LCMaster.api.getCoins(player.getName());
+        float money = LCMaster.api.getCoins(player.getName());
 
-        if(money >= price) {
+        if(money >= (float) price) {
             allowToBuy = true;
             open();
         } else {
@@ -173,9 +176,9 @@ public class Achat {
     public void buy(){
         if(!isOpened()) return;
 
-        int money = LCMaster.api.getCoins(player.getName());
+        float money = LCMaster.api.getCoins(player.getName());
 
-        if(money >= price && !SQLManager.hasBuyCosmetic(player, id)) {
+        if(money >= (float) price && !SQLManager.hasBuyCosmetic(player, id)) {
 
             SQLManager.addCosmetic(player, id);
 
@@ -183,15 +186,16 @@ public class Achat {
 
             LCMaster.api.setCoins(player.getName(), money);
 
-            if(cosmetiqueType == CosmetiqueType.GADGET)
-                CosmetiqueManager.setCurrentCosmetique(player, Cosmetique.valueOf(id.toUpperCase()), false);
-
             finish(false, false);
             player.sendMessage("§aTu viens d'acheter §b" + id);
             System.out.println("Achat confirme de " + player.getName() + " | id: " + id + " | date: " + new Date().toLocaleString());
 
-            if(cosmetiqueType == CosmetiqueType.PARTICLE)
+            if(cosmetique.getCosmetiqueType() == CosmetiqueType.PARTICLE)
                 ParticleManager.activeParticleByName(player, id);
+            else if (cosmetique.getCosmetiqueType() == CosmetiqueType.GADGET){
+                player.getInventory().setItem(4, ItemStackManager.getItemStack(cosmetique));
+                GadgetManager.addGadget(player, id, false);
+            }
 
         }
 
@@ -207,12 +211,15 @@ public class Achat {
 
         player.closeInventory();
 
-        if(annuler)
+        if(annuler) {
             player.sendMessage("§cTu as annulé l'achat de " + id);
+            System.out.println("Achat annule (annule par joueur) de " + player.getName() + " | id: " + id + " | date: " + new Date().toLocaleString());
+        }
 
-        if(hasNotEnoughtCoins)
+        if(hasNotEnoughtCoins) {
             player.sendMessage("§cTu n'as pas assez de LCCoins.");
-
+            System.out.println("Achat annule (pas assez de coins) de " + player.getName() + " | id: " + id + " | date: " + new Date().toLocaleString());
+        }
     }
 
 }

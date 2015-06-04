@@ -18,6 +18,7 @@ import fr.schawnndev.LCCosmetiques;
 import fr.schawnndev.api.Manager;
 import fr.schawnndev.api.utils.GlassColor;
 import fr.schawnndev.data.ItemStackManager;
+import fr.schawnndev.gadgets.GadgetManager;
 import fr.schawnndev.math.PositionConverter;
 import fr.schawnndev.particules.ParticleManager;
 import fr.schawnndev.sql.SQLManager;
@@ -104,7 +105,7 @@ public class Main_Menu implements Listener {
 
         //
 
-        byte couleur_gadgets = false ? (byte)10 : (byte)8;
+        byte couleur_gadgets = GadgetManager.hasGadgetActive(player) ? (byte)10 : (byte)8;
         ItemStack colorant_gadgets = new ItemStack(Material.INK_SACK, 1, (short)0, couleur_gadgets);
         ItemMeta colorant_gadgetsMeta = colorant_gadgets.getItemMeta();
         colorant_gadgetsMeta.setDisplayName(couleur_gadgets == 10 ? "§aDésactiver les gadgets" : "§cActiver les gadgets");
@@ -179,9 +180,7 @@ public class Main_Menu implements Listener {
                         Gadget_SubMenu.open(player);
                         break;
                     case "§3Pets":
-                        player.closeInventory();
-                        player.sendMessage("§cEn dev'");
-                        player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
+                        Pet_SubMenu.open(player);
                         break;
                     case "§6Particules":
                         Particle_SubMenu.open(player);
@@ -192,6 +191,14 @@ public class Main_Menu implements Listener {
                         break;
                     case "§cActiver les particules":
                         Particle_SubMenu.open(player);
+                        break;
+                    case "§aDésactiver les gadgets":
+                        GadgetManager.addGadget(player, "aucun", false);
+                        player.getInventory().setItem(4, new ItemStack(Material.AIR));
+                        open(player);
+                        break;
+                    case "§cActiver les gadgets":
+                        Gadget_SubMenu.open(player);
                         break;
                     default:
                         break;

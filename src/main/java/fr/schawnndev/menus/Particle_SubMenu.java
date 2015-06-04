@@ -200,6 +200,48 @@ public class Particle_SubMenu implements Listener {
                         Main_Menu.open(player);
                         break;
 
+                    case "§6Lave":
+
+                        if(!ParticleManager.isParticleActive(player, "lave")){
+
+                            if(Cosmetique.LAVE.isVip()){
+
+                                if(player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")){
+                                    if(ParticleManager.hasParticleActive(player)){
+                                        ParticleManager.removeActiveParticle(player);
+                                    }
+
+                                    player.closeInventory();
+                                    player.sendMessage("§aTu viens d'activer la particule §blave§a !");
+                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
+                                    ParticleManager.activeParticleByName(player, "lave");
+                                } else {
+                                    player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
+                                    player.sendMessage("§cTu dois être VIP pour utiliser §blave !");
+                                }
+
+                            } else {
+                                if(SQLManager.hasBuyCosmetic(player, "lave")){
+
+                                    if(ParticleManager.hasParticleActive(player)){
+                                        ParticleManager.removeActiveParticle(player);
+                                    }
+
+                                    player.closeInventory();
+                                    player.sendMessage("§aTu viens d'activer la particule §blave§a !");
+                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
+                                    ParticleManager.activeParticleByName(player, "lave");
+                                } else {
+                                    Achat achat = new Achat("lave", Cosmetique.LAVE, player);
+                                    achat.generate();
+                                    achat.proceedOpening();
+                                }
+                            }
+                        } else {
+                            player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
+                        }
+
+                        break;
                     case "§7Fumée":
 
                         if(!ParticleManager.isParticleActive(player, "fumee")){
@@ -232,7 +274,7 @@ public class Particle_SubMenu implements Listener {
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "fumee");
                                 } else {
-                                    Achat achat = new Achat("fumee", Cosmetique.FUMEE.getPrice(), CosmetiqueManager.CosmetiqueType.PARTICLE, player);
+                                    Achat achat = new Achat("fumee", Cosmetique.FUMEE, player);
                                     achat.generate();
                                     achat.proceedOpening();
                                 }
@@ -274,7 +316,7 @@ public class Particle_SubMenu implements Listener {
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "magicien");
                                 } else {
-                                    Achat achat = new Achat("magicien", Cosmetique.MAGICIEN.getPrice(), CosmetiqueManager.CosmetiqueType.PARTICLE, player);
+                                    Achat achat = new Achat("magicien", Cosmetique.MAGICIEN, player);
                                     achat.generate();
                                     achat.proceedOpening();
                                 }
@@ -316,7 +358,7 @@ public class Particle_SubMenu implements Listener {
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "redstone");
                                 } else {
-                                    Achat achat = new Achat("redstone", Cosmetique.COEURS.getPrice(), CosmetiqueManager.CosmetiqueType.PARTICLE, player);
+                                    Achat achat = new Achat("redstone", Cosmetique.REDSTONE, player);
                                     achat.generate();
                                     achat.proceedOpening();
                                 }
@@ -358,7 +400,7 @@ public class Particle_SubMenu implements Listener {
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "coeurs");
                                 } else {
-                                    Achat achat = new Achat("coeurs", Cosmetique.COEURS.getPrice(), CosmetiqueManager.CosmetiqueType.PARTICLE, player);
+                                    Achat achat = new Achat("coeurs", Cosmetique.COEURS, player);
                                     achat.generate();
                                     achat.proceedOpening();
                                 }
@@ -400,7 +442,7 @@ public class Particle_SubMenu implements Listener {
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "flames");
                                 } else {
-                                    Achat achat = new Achat("flames", Cosmetique.FLAMES.getPrice(), CosmetiqueManager.CosmetiqueType.PARTICLE, player);
+                                    Achat achat = new Achat("flames", Cosmetique.FLAMES, player);
                                     achat.generate();
                                     achat.proceedOpening();
                                 }
@@ -443,7 +485,7 @@ public class Particle_SubMenu implements Listener {
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "content");
                                 } else {
-                                    Achat achat = new Achat("content", Cosmetique.CONTENT.getPrice(), CosmetiqueManager.CosmetiqueType.PARTICLE, player);
+                                    Achat achat = new Achat("content", Cosmetique.CONTENT, player);
                                     achat.generate();
                                     achat.proceedOpening();
                                 }
@@ -485,7 +527,7 @@ public class Particle_SubMenu implements Listener {
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "notes");
                                 } else {
-                                    Achat achat = new Achat("notes", Cosmetique.NOTES.getPrice(), CosmetiqueManager.CosmetiqueType.PARTICLE, player);
+                                    Achat achat = new Achat("notes", Cosmetique.NOTES, player);
                                     achat.generate();
                                     achat.proceedOpening();
                                 }
@@ -527,7 +569,7 @@ public class Particle_SubMenu implements Listener {
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "spirales");
                                 } else {
-                                    Achat achat = new Achat("spirales", Cosmetique.SPIRALES.getPrice(), CosmetiqueManager.CosmetiqueType.PARTICLE, player);
+                                    Achat achat = new Achat("spirales", Cosmetique.SPIRALES, player);
                                     achat.generate();
                                     achat.proceedOpening();
                                 }
@@ -569,7 +611,7 @@ public class Particle_SubMenu implements Listener {
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "pluie");
                                 } else {
-                                    Achat achat = new Achat("pluie", Cosmetique.PLUIE.getPrice(), CosmetiqueManager.CosmetiqueType.PARTICLE, player);
+                                    Achat achat = new Achat("pluie", Cosmetique.PLUIE, player);
                                     achat.generate();
                                     achat.proceedOpening();
                                 }

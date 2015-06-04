@@ -26,7 +26,7 @@ import java.util.UUID;
 public class CosmetiqueManager {
 
     public static void setCurrentCosmetique(Player player, Cosmetique cosmetique, boolean withMessage){
-        player.getInventory().setItem(5, ItemStackManager.getItemStack(cosmetique));
+        player.getInventory().setItem(4, ItemStackManager.getItemStack(cosmetique));
 
         if(withMessage)
             player.sendMessage("§aTu viens d'activer §b"+ cosmetique.toString());

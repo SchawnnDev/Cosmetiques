@@ -41,7 +41,7 @@ public class ItemStackManager {
         playerItems.put(Cosmetique.APPLE, buildItemStack(Material.GOLDEN_APPLE, "§aApple"));
         playerItems.put(Cosmetique.ENCRE, buildItemStack(Material.INK_SACK, "§cEncre"));
         playerItems.put(Cosmetique.CANNE_A_PECHE, buildItemStack(Material.FISHING_ROD, "§6Canne à pêche"));
-        playerItems.put(Cosmetique.FIREBALL, buildItemStack(Material.FIREBALL, "§aFireball"));
+        playerItems.put(Cosmetique.FIREBALL, buildItemStack(Material.FIREBALL, "§2I believe I can Fly"));
         playerItems.put(Cosmetique.TNT, buildItemStack(Material.TNT, "§7TNT"));
         playerItems.put(Cosmetique.ARTIFICE, buildItemStack(Material.FIREWORK, "§514 juillet"));
     }
@@ -66,6 +66,17 @@ public class ItemStackManager {
         itemStack.setItemMeta(itemMeta);
 
         return itemStack;
+    }
+
+    public static ItemStack getItemStackByName(String cosmetic){
+
+        Cosmetique cosmetique = Cosmetique.AUCUN;
+
+        try {
+             cosmetique = Cosmetique.valueOf(cosmetic.toUpperCase());
+        } catch (Exception e){}
+
+        return (playerItems.containsKey(cosmetique) ? playerItems.get(cosmetique) : new ItemStack(Material.AIR));
     }
 
     public static ItemStack getItemStack(Cosmetique cosmetique){

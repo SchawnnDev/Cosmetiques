@@ -15,6 +15,8 @@ package fr.schawnndev;
 
 import fr.schawnndev.api.events.AchatEvent;
 import fr.schawnndev.data.ItemStackManager;
+import fr.schawnndev.gadgets.GadgetListener;
+import fr.schawnndev.gadgets.GadgetManager;
 import fr.schawnndev.listeners.ServerListener;
 import fr.schawnndev.menus.Main_Menu;
 import fr.schawnndev.menus.MenuManager;
@@ -47,6 +49,7 @@ public class LCCosmetiques extends JavaPlugin{
 
         new ServerListener();
         new AchatEvent();
+        new GadgetListener();
 
         // SQL
 
@@ -84,14 +87,14 @@ public class LCCosmetiques extends JavaPlugin{
 
         if(label.equalsIgnoreCase("a")){
             Player player = (Player)sender;
-            Main_Menu.open(player);
+            player.sendMessage("ping");
             return true;
         }
 
         if(label.equalsIgnoreCase("b")){
             Player player = (Player)sender;
-                player.sendMessage("nop ! trop ou pas assez d'args");
-                return true;
+            player.sendMessage("pong");
+            return true;
         }
 
 
