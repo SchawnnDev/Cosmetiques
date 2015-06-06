@@ -17,7 +17,7 @@ import org.bukkit.util.Vector;
 
 public class RotateVector {
 
-    public static final Vector rotateAroundX(Vector v, double a) {
+    public static void rotateAroundX(Vector v, double a) {
         double cos = Math.cos(a);
         double sin = Math.sin(a);
         double y = v.getY() * cos - v.getZ() * sin;
@@ -25,7 +25,7 @@ public class RotateVector {
         return v.setY(y).setZ(z);
     }
 
-    public static final Vector rotateAroundY(Vector v, double a) {
+    public static void rotateAroundY(Vector v, double a) {
         double cos = Math.cos(a);
         double sin = Math.sin(a);
         double x = v.getX() * cos + v.getZ() * sin;
@@ -33,7 +33,7 @@ public class RotateVector {
         return v.setX(x).setZ(z);
     }
 
-    public static final Vector rotateAroundZ(Vector v, double a) {
+    public static void rotateAroundZ(Vector v, double a) {
         double cos = Math.cos(a);
         double sin = Math.sin(a);
         double x = v.getX() * cos - v.getY() * sin;
@@ -41,7 +41,7 @@ public class RotateVector {
         return v.setX(x).setY(y);
     }
 
-    public static final Vector rotateVector(Vector v, double aX, double aY, double aZ) {
+    public static void rotateVector(Vector v, double aX, double aY, double aZ) {
         rotateAroundX(v, aX);
         rotateAroundY(v, aY);
         rotateAroundZ(v, aZ);

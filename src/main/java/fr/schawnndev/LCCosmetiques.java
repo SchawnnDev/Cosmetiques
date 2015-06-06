@@ -20,8 +20,13 @@ import fr.schawnndev.gadgets.GadgetManager;
 import fr.schawnndev.listeners.ServerListener;
 import fr.schawnndev.menus.Main_Menu;
 import fr.schawnndev.menus.MenuManager;
+import fr.schawnndev.pets.Pet;
+import fr.schawnndev.pets.PetListener;
+import fr.schawnndev.pets.PetManager;
+import fr.schawnndev.pets.pets.PetEntityType;
 import fr.schawnndev.sql.SQL;
 import lombok.Getter;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -50,6 +55,7 @@ public class LCCosmetiques extends JavaPlugin{
         new ServerListener();
         new AchatEvent();
         new GadgetListener();
+        new PetListener();
 
         // SQL
 
@@ -70,10 +76,17 @@ public class LCCosmetiques extends JavaPlugin{
 
         new ItemStackManager();
 
+        // Entities
+
+        PetEntityType.registerEntities();
+
     }
 
     public void onDisable() {
+
         sql.stop();
+        PetEntityType.unregisterEntities();
+
     }
 
     /**
@@ -87,14 +100,27 @@ public class LCCosmetiques extends JavaPlugin{
 
         if(label.equalsIgnoreCase("a")){
             Player player = (Player)sender;
-            player.sendMessage("ping");
+            player.sendMessage("§aadded pet");
+            PetManager.addPlayerPet(player, CosmetiqueManager.Cosmetique.POULET);
             return true;
         }
 
         if(label.equalsIgnoreCase("b")){
             Player player = (Player)sender;
-            player.sendMessage("pong");
-            return true;
+
+            if(args.length == 0){
+                player.sendMessage("§cpas assez d'args !");
+                return true;
+            } else if (args.length == 1){
+                Pet pet = PetManager.getPet(player);
+                pet.setName(args[0]);
+                player.sendMessage("§achanged pet name to : " + ChatColor.translateAlternateColorCodes('&', args[0]));
+                return true;
+            } else {
+                player.sendMessage("§ctrop d'args !");
+                return true;
+            }
+
         }
 
 

@@ -39,7 +39,7 @@ public class SQLManager {
 
     public static boolean hasBuyCosmetic(Player player, String cosmetic){
         List<String> cosmetics = getCosmetics(player);
-        return cosmetics.contains("aucun") ? false : cosmetics.contains(cosmetic);
+        return !cosmetics.contains("aucun") && cosmetics.contains(cosmetic);
     }
 
     private static String[] getSplittedCosmetics(Player player){

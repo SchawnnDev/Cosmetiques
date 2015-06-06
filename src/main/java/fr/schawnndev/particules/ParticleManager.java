@@ -67,10 +67,8 @@ public class ParticleManager {
             return true;
         if(particleFumee.getTasks().containsKey(uuid))
             return true;
-        if(particleLave.getTasks().containsKey(uuid))
-            return true;
+        return particleLave.getTasks().containsKey(uuid);
 
-        return false;
     }
 
     public static void activeParticleByName(Player player, String particle){
@@ -156,10 +154,8 @@ public class ParticleManager {
             return true;
         if(particle.equalsIgnoreCase("fumee") && particleFumee.getTasks().containsKey(uuid))
             return true;
-        if(particle.equalsIgnoreCase("lave") && particleLave.getTasks().containsKey(uuid))
-            return true;
+        return particle.equalsIgnoreCase("lave") && particleLave.getTasks().containsKey(uuid);
 
-        return false;
     }
 
     public static void removeActiveParticle(Player player){

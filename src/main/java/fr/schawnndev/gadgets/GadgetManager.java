@@ -38,10 +38,8 @@ public class GadgetManager {
     public static boolean hasGadget(Player player, String gadget){
         final UUID uuid = player.getUniqueId();
 
-        if(activeGadgets.containsKey(uuid) && activeGadgets.get(uuid).equalsIgnoreCase(gadget))
-            return true;
+        return activeGadgets.containsKey(uuid) && activeGadgets.get(uuid).equalsIgnoreCase(gadget);
 
-        return false;
     }
 
     public static String getGadget(Player player){
@@ -56,10 +54,8 @@ public class GadgetManager {
     public static boolean hasGadgetActive(Player player){
         final UUID uuid = player.getUniqueId();
 
-        if(activeGadgets.containsKey(uuid) && !activeGadgets.get(uuid).equalsIgnoreCase("aucun"))
-            return true;
+        return activeGadgets.containsKey(uuid) && !activeGadgets.get(uuid).equalsIgnoreCase("aucun");
 
-        return false;
     }
 
     public static void addGadget(Player player, String gadget, boolean withSQL){

@@ -97,11 +97,21 @@ public class CosmetiqueManager {
         FLAMES(CosmetiqueType.PARTICLE, false, 2000),
         SPIRALES(CosmetiqueType.PARTICLE, false, 1400),
         REDSTONE(CosmetiqueType.PARTICLE, false, 1000),
-        LEGENDARY(CosmetiqueType.PARTICLE, false, 987654321)
+        LEGENDARY(CosmetiqueType.PARTICLE, false, 987654321),
 
-        // Pets (en dev)
+        // Pets
 
-        ;
+        LOUP(CosmetiqueType.PET, true, 0),
+        LAPIN(CosmetiqueType.PET, false, 1400),
+        MOUTON(CosmetiqueType.PET, false, 800),
+        POULET(CosmetiqueType.PET, true, 0),
+        ZOMBIE(CosmetiqueType.PET, true, 0),
+        CREEPER(CosmetiqueType.PET, false, 1200),
+        SQUELETTE(CosmetiqueType.PET, false, 1500),
+        VACHE(CosmetiqueType.PET, false, 600),
+        PIGMAN(CosmetiqueType.PET, false, 1400),
+        CHEVAL(CosmetiqueType.PET, false, 2600),
+        VACHE_CHAMPIGNON(CosmetiqueType.PET, true, 0);
 
         @Getter
         private CosmetiqueType cosmetiqueType;

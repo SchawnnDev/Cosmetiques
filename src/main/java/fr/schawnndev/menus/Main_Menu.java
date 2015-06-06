@@ -126,7 +126,7 @@ public class Main_Menu implements Listener {
 
         //
 
-        byte couleur_pets = false ? (byte)10 : (byte)8;
+        byte couleur_pets = (byte) 8;
         ItemStack colorant_pets = new ItemStack(Material.INK_SACK, 1, (short)0, couleur_pets);
         ItemMeta colorant_petsMeta = colorant_pets.getItemMeta();
         colorant_petsMeta.setDisplayName(couleur_pets == 10 ? "§aDésactiver les pets" : "§cActiver les pets");

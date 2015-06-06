@@ -41,16 +41,18 @@ public class MenuManager {
 
         new Gadget_SubMenu();
         new Particle_SubMenu();
+        new Pet_SubMenu();
         new Main_Menu();
         new ItemDisponibility();
+        new PetManager_Menu();
 
     }
 
 
     public static List<String> getNewLore(String lore){
-        List<String> l = new ArrayList<>();
-        l.add(lore);
-        return l;
+        List<String> _lore = new ArrayList<>();
+        _lore.add(lore);
+        return _lore;
     }
 
     public static ItemStack buildItem(ItemStack itemStack, int prix, boolean vip, String displayName, List<String> lore, boolean hasGadget, CosmetiqueManager.CosmetiqueType cosmetiqueType){

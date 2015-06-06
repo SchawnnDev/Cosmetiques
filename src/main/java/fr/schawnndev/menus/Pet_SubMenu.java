@@ -112,102 +112,38 @@ public class Pet_SubMenu implements Listener {
         List<ItemStack> itemStacks = new ArrayList<>();
         List<String> cosmetics = SQLManager.getCosmetics(player);
 
-        List<String> doublejumpLore = new ArrayList<>();
-        doublejumpLore.add("§7Double Jump sur les §aHubs§7.");
-        doublejumpLore.add("  ");
-        doublejumpLore.add("§7Recharge : §a5 secondes§7.");
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.BONE), CosmetiqueManager.Cosmetique.LOUP.getPrice(),
+                CosmetiqueManager.Cosmetique.LOUP.isVip(), "§eLoup", MenuManager.getNewLore("§7Un compagnon fidèle et minon comme tout."), cosmetics.contains("loup"), CosmetiqueManager.CosmetiqueType.PET));
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.FEATHER), CosmetiqueManager.Cosmetique.DOUBLE_JUMP.getPrice(),
-                CosmetiqueManager.Cosmetique.DOUBLE_JUMP.isVip(), "§bDouble Jump", doublejumpLore, cosmetics.contains("doublejump"), CosmetiqueManager.CosmetiqueType.GADGET));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.RABBIT_FOOT), CosmetiqueManager.Cosmetique.LAPIN.getPrice(),
+                CosmetiqueManager.Cosmetique.LAPIN.isVip(), "§eLapin", MenuManager.getNewLore("§7Un lapin trop mimi !"), cosmetics.contains("lapin"), CosmetiqueManager.CosmetiqueType.PET));
 
-        List<String> musicLore = new ArrayList<>();
-        musicLore.add("§7Faites profiter votre entourage de belles");
-        musicLore.add("§7musiques de Minecraft dans un rayon de 30 blocs.");
-        musicLore.add("  ");
-        musicLore.add("§7Recharge : §a2 minutes§7.");
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.WOOL), CosmetiqueManager.Cosmetique.MOUTON.getPrice(),
+                CosmetiqueManager.Cosmetique.MOUTON.isVip(), "§eMouton", MenuManager.getNewLore("§7Mmmêêêh !") , cosmetics.contains("mouton"), CosmetiqueManager.CosmetiqueType.PET));
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(2258), CosmetiqueManager.Cosmetique.MUSIC.getPrice(),
-                CosmetiqueManager.Cosmetique.MUSIC.isVip(), "§2Music", musicLore, cosmetics.contains("music"), CosmetiqueManager.CosmetiqueType.GADGET));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.FEATHER), CosmetiqueManager.Cosmetique.POULET.getPrice(),
+                CosmetiqueManager.Cosmetique.POULET.isVip(), "§ePoulet", MenuManager.getNewLore("§7Kott.. Kottkottquelette... !"), cosmetics.contains("poulet"), CosmetiqueManager.CosmetiqueType.PET));
 
-        List<String> cakeLore = new ArrayList<>();
-        cakeLore.add("§7Posez un gâteau empoisonné qui va infliger des");
-        cakeLore.add("§7des dégâts d'émpoisonnements qui en mangera");
-        cakeLore.add("  ");
-        cakeLore.add("§7Recharge : §a45 secondes§7.");
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.ROTTEN_FLESH), CosmetiqueManager.Cosmetique.ZOMBIE.getPrice(),
+                CosmetiqueManager.Cosmetique.ZOMBIE.isVip(), "§eZombie", MenuManager.getNewLore("§7Attention, ça mord !"), cosmetics.contains("zombie"), CosmetiqueManager.CosmetiqueType.PET));
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.CAKE), CosmetiqueManager.Cosmetique.GATEAU_EMPOISONNE.getPrice(),
-                CosmetiqueManager.Cosmetique.GATEAU_EMPOISONNE.isVip(), "§3Gâteau Empoisonné",cakeLore , cosmetics.contains("gateauempoisonne"), CosmetiqueManager.CosmetiqueType.GADGET));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.SULPHUR), CosmetiqueManager.Cosmetique.CREEPER.getPrice(),
+                CosmetiqueManager.Cosmetique.CREEPER.isVip(), "§eCreeper", MenuManager.getNewLore("§7Faites attention, ça peut exploser !"), cosmetics.contains("creeper"), CosmetiqueManager.CosmetiqueType.PET));
 
-        List<String> laisseLore = new ArrayList<>();
-        laisseLore.add("§7Attrapez les joueurs avec un simple clic");
-        laisseLore.add("§7et baladez les sur toute la map !");
-        laisseLore.add("  ");
-        laisseLore.add("§7Recharge : §a10 secondes§7.");
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.BOW), CosmetiqueManager.Cosmetique.SQUELETTE.getPrice(),
+                CosmetiqueManager.Cosmetique.SQUELETTE.isVip(), "§eSquelette", MenuManager.getNewLore("§7Ayez une visée de sniper !"), cosmetics.contains("squelette"), CosmetiqueManager.CosmetiqueType.PET));
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.LEASH), CosmetiqueManager.Cosmetique.LAISSE.getPrice(),
-                CosmetiqueManager.Cosmetique.LAISSE.isVip(), "§4Attrape moi, si tu peux !", laisseLore, cosmetics.contains("laisse"), CosmetiqueManager.CosmetiqueType.GADGET));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.LEATHER), CosmetiqueManager.Cosmetique.VACHE.getPrice(),
+                CosmetiqueManager.Cosmetique.VACHE.isVip(), "§eVache", MenuManager.getNewLore("§7Meuh !"), cosmetics.contains("vache"), CosmetiqueManager.CosmetiqueType.PET));
 
-        List<String> canonLore = new ArrayList<>();
-        canonLore.add("§7Invoquez aléatoirement un monstre parmis");
-        canonLore.add("§7un zombie, une araignée, un cochon zombie");
-        canonLore.add("§7ou encore un squelette.");
-        canonLore.add("  ");
-        canonLore.add("§7Recharge : §a15 secondes§7.");
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.GOLD_NUGGET), CosmetiqueManager.Cosmetique.PIGMAN.getPrice(),
+                CosmetiqueManager.Cosmetique.PIGMAN.isVip(), "§ePigman", MenuManager.getNewLore("§7Une bête atroce !"), cosmetics.contains("pigman"), CosmetiqueManager.CosmetiqueType.PET));
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.SULPHUR), CosmetiqueManager.Cosmetique.CANON.getPrice(),
-                CosmetiqueManager.Cosmetique.CANON.isVip(), "§fCanon", canonLore, cosmetics.contains("canon"), CosmetiqueManager.CosmetiqueType.GADGET));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.IRON_BARDING), CosmetiqueManager.Cosmetique.CHEVAL.getPrice(),
+                CosmetiqueManager.Cosmetique.CHEVAL.isVip(), "§eCheval", MenuManager.getNewLore("§7Devenez un vrai aventurier."), cosmetics.contains("cheval"), CosmetiqueManager.CosmetiqueType.PET));
 
-        List<String> appleLore = new ArrayList<>();
-        appleLore.add("§7Oh yééééééé !");
-        appleLore.add("  ");
-        appleLore.add("§7Recharge : §a40 secondes§7.");
-
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.GOLDEN_APPLE), CosmetiqueManager.Cosmetique.APPLE.getPrice(),
-                CosmetiqueManager.Cosmetique.APPLE.isVip(), "§eApple", appleLore, cosmetics.contains("apple"), CosmetiqueManager.CosmetiqueType.GADGET));
-
-        List<String> encreLore = new ArrayList<>();
-        encreLore.add("§7Aveuglez le joueur ciblé pendant §a5 secondes§7 !");
-        encreLore.add("  ");
-        encreLore.add("§7Recharge : §a10 secondes§7.");
-
-        itemStacks.add(MenuManager.buildItem(new ItemStack(351), CosmetiqueManager.Cosmetique.ENCRE.getPrice(),
-                CosmetiqueManager.Cosmetique.ENCRE.isVip(), "§cEncre", encreLore, cosmetics.contains("encre"), CosmetiqueManager.CosmetiqueType.GADGET));
-
-        List<String> canneapechesLore = new ArrayList<>();
-        canneapechesLore.add("§7Téléportez-vous où vous lancez votre hameçon !");
-        canneapechesLore.add("  ");
-        canneapechesLore.add("§7Recharge : §a5 secondes§7.");
-
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.FISHING_ROD), CosmetiqueManager.Cosmetique.CANNE_A_PECHE.getPrice(),
-                CosmetiqueManager.Cosmetique.CANNE_A_PECHE.isVip(), "§6Canne à pêche", canneapechesLore, cosmetics.contains("canneapeche"), CosmetiqueManager.CosmetiqueType.GADGET));
-
-        List<String> ibelieveicanflyLore = new ArrayList<>();
-
-        ibelieveicanflyLore.add("§7Vous rêvez de vous envoyer en l'air ?");
-        ibelieveicanflyLore.add("§7cette fireball est faite pour vous !");
-        ibelieveicanflyLore.add("  ");
-        ibelieveicanflyLore.add("§7Recharge : §a15 secondes§7.");
-
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.FIREBALL), CosmetiqueManager.Cosmetique.FIREBALL.getPrice(),
-                CosmetiqueManager.Cosmetique.FIREBALL.isVip(), "§2I believe I can Fly", ibelieveicanflyLore, cosmetics.contains("fireball"), CosmetiqueManager.CosmetiqueType.GADGET));
-
-        List<String> tntLore = new ArrayList<>();
-
-        tntLore.add("§7Lorsque vous posez la TNT sur le sol, elle explose");
-        tntLore.add("§7puis propulse les joueurs dans un rayon de 30 blocs.");
-        tntLore.add("  ");
-        tntLore.add("§7Recharge : §a15 secondes§7.");
-
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.TNT), CosmetiqueManager.Cosmetique.TNT.getPrice(),
-                CosmetiqueManager.Cosmetique.TNT.isVip(), "§7TNT", tntLore, cosmetics.contains("tnt"), CosmetiqueManager.CosmetiqueType.GADGET));
-
-        List<String> artificeLore = new ArrayList<>();
-        artificeLore.add("§7Propulsez-vous dans les airs avec le feu d'artifice !");
-        artificeLore.add("  ");
-        artificeLore.add("§7Recharge : §a15 secondes§7.");
-
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.FIREWORK), CosmetiqueManager.Cosmetique.ARTIFICE.getPrice(),
-                CosmetiqueManager.Cosmetique.ARTIFICE.isVip(), "§514 Juillet", artificeLore, cosmetics.contains("artifice"), CosmetiqueManager.CosmetiqueType.GADGET));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.RED_MUSHROOM), CosmetiqueManager.Cosmetique.VACHE_CHAMPIGNON.getPrice(),
+                CosmetiqueManager.Cosmetique.VACHE_CHAMPIGNON.isVip(), "§eVache Champignon", MenuManager.getNewLore("§7Des gros champignons partout D:"), cosmetics.contains("vache_champignon"), CosmetiqueManager.CosmetiqueType.PET));
 
         return itemStacks;
     }

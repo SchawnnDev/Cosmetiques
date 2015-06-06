@@ -34,22 +34,22 @@ public class FastMath {
         }
     }
 
-    public static final float sin(float radians)
+    public static float sin(float radians)
     {
         return Sin.table[((int)(radians * 2607.5945F) & 0x3FFF)];
     }
 
-    public static final float cos(float radians)
+    public static float cos(float radians)
     {
         return Sin.table[((int)((radians + 1.570796F) * 2607.5945F) & 0x3FFF)];
     }
 
-    public static final float sinDeg(float degrees)
+    public static float sinDeg(float degrees)
     {
         return Sin.table[((int)(degrees * 45.511112F) & 0x3FFF)];
     }
 
-    public static final float cosDeg(float degrees)
+    public static float cosDeg(float degrees)
     {
         return Sin.table[((int)((degrees + 90.0F) * 45.511112F) & 0x3FFF)];
     }

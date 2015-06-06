@@ -23,7 +23,7 @@ public class ItemDisponibility {
     private static List<InventoryPosition> inventoryPositions;
 
     public ItemDisponibility(){
-        this.inventoryPositions = new ArrayList<>();
+        inventoryPositions = new ArrayList<>();
 
         inventoryPositions.add(new InventoryPosition(3, 3));
         inventoryPositions.add(new InventoryPosition(4, 3));
