@@ -40,7 +40,7 @@ public class PetPoulet extends EntityChicken implements Pet {
     private boolean riding;
 
     public PetPoulet(UUID owner, Cosmetique cosmetique) {
-        super((World) Bukkit.getPlayer(owner).getWorld());
+        super(((CraftWorld) Bukkit.getPlayer(owner).getWorld()).getHandle());
 
         this.plugin = LCCosmetiques.getInstance();
         this.owner = owner;
