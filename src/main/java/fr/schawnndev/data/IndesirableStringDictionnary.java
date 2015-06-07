@@ -45,7 +45,7 @@ public class IndesirableStringDictionnary {
             if(!file.exists())
                 file.createNewFile();
 
-            indesirableStrings.addAll(Files.readAllLines(file.toPath(), Charset.defaultCharset()));
+            indesirableStrings.addAll(Files.readAllLines(file.toPath(), Charset.forName("UTF-8")));
         } catch (IOException e){
             e.printStackTrace();
         }
