@@ -123,7 +123,19 @@ public class LCCosmetiques extends JavaPlugin{
 
         }
 
+        if(label.equalsIgnoreCase("c")){
+            Player player = (Player)sender;
+            player.sendMessage("§aset pet to ride");
+            PetManager.setRide(player);
+            return true;
+        }
 
+        if(label.equalsIgnoreCase("d")){
+            Player player = (Player)sender;
+            player.sendMessage("§apet to hat");
+            PetManager.setHat(player);
+            return true;
+        }
 
 
         return false;

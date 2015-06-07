@@ -184,7 +184,6 @@ public class PetPoulet extends EntityChicken implements Pet {
         getBukkitEntity().remove();
     }
 
-    @Override
     public void g(float sideMot, float forMot) {
         if (passenger == null || !(passenger instanceof EntityHuman)) {
             super.g(sideMot, forMot);
@@ -225,7 +224,7 @@ public class PetPoulet extends EntityChicken implements Pet {
 
         if (jump != null && onGround) {    // Wouldn't want it jumping while on the ground would we?
             try {
-                if (jump.getBoolean(this.passenger)) {
+                if (jump.getBoolean(passenger)) {
                     double jumpHeight = 0.5d;
                     motY = jumpHeight;    // Used all the time in NMS for entity jumping
                 }
