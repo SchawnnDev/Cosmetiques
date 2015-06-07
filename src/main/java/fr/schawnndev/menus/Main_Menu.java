@@ -21,6 +21,7 @@ import fr.schawnndev.data.ItemStackManager;
 import fr.schawnndev.gadgets.GadgetManager;
 import fr.schawnndev.math.PositionConverter;
 import fr.schawnndev.particules.ParticleManager;
+import fr.schawnndev.pets.PetManager;
 import fr.schawnndev.sql.SQLManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -126,7 +127,7 @@ public class Main_Menu implements Listener {
 
         //
 
-        byte couleur_pets = (byte) 8;
+        byte couleur_pets = PetManager.hasActivePet(player) ? (byte)10 : (byte)8;
         ItemStack colorant_pets = new ItemStack(Material.INK_SACK, 1, (short)0, couleur_pets);
         ItemMeta colorant_petsMeta = colorant_pets.getItemMeta();
         colorant_petsMeta.setDisplayName(couleur_pets == 10 ? "§aDésactiver les pets" : "§cActiver les pets");

@@ -39,14 +39,29 @@ public class IndesirableStringDictionnary {
     }
 
     public static void init(){
+
+        System.out.println("Initializing IndesirableStringDictionnary...");
+
+        System.out.println("Checking if file created...");
+
         File file = new File(LCCosmetiques.getInstance().getDataFolder().getPath() + "/dictionnary.txt");
 
         try {
-            if(!file.exists())
+            if(!file.exists()) {
+                System.out.println("File not created... Creating new one !");
                 file.createNewFile();
+            } else {
+                System.out.println("File exists ! Loading strings....");
+            }
 
             indesirableStrings.addAll(Files.readAllLines(file.toPath(), Charset.forName("UTF-8")));
+
+            System.out.println("Strings in file loaded ! Total: " + indesirableStrings.size() + " strings.");
+
         } catch (IOException e){
+            System.err.println("--------------------------------------------------------------");
+            System.err.println("| Attention ! Il faut sauvegarder dictionnary.txt en UTF-8 ! |");
+            System.err.println("--------------------------------------------------------------");
             e.printStackTrace();
         }
 

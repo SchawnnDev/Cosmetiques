@@ -23,6 +23,7 @@ import java.util.*;
 public enum PetEntityType {
 
     POULET("PetChicken", 93, EntityType.CHICKEN, EntityChicken.class, PetPoulet.class),
+    VACHE_CHAMPIGNON("PetVacheChampignon", 96, EntityType.MUSHROOM_COW, EntityMushroomCow.class, PetVacheChampignon.class),
     VACHE("PetVache", 92, EntityType.MUSHROOM_COW, EntityMushroomCow.class, PetVache.class);
  /*   ZOMBIE("PetZombie", 54, EntityType.ZOMBIE, EntityZombie.class, PetEntityZombie.class),
     LAPIN("PetLapin", 101, EntityType.RABBIT, EntityRabbit.class, PetEntityRabbit.class),
@@ -30,7 +31,7 @@ public enum PetEntityType {
     MOUTON("PetMouton", 91, EntityType.SHEEP, EntitySheep.class, PetEntitySheep.class),
     CREEPER("PetCreeper", 50, EntityType.CREEPER, EntityCreeper.class, PetEntityCreeper.class),
     SQUELETTE("PetSkeleton", 51, EntityType.SKELETON, EntitySkeleton.class, PetEntitySkeleton.class),
-    VACHE_CHAMPIGNON("PetVacheChampignon", 96, EntityType.MUSHROOM_COW, EntityMushroomCow.class, PetEntityMushroomCow.class),
+
     PIGMAN("PetPigman", 57, EntityType.PIG_ZOMBIE, EntityPigZombie.class, PetEntityPigman.class),
     CHEVAL("PetCheval", 100, EntityType.HORSE, EntityHorse.class, PetEntityHorse.class),
 

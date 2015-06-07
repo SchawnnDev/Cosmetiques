@@ -15,13 +15,17 @@ package fr.schawnndev.menus;
 
 import fr.schawnndev.CosmetiqueManager;
 import fr.schawnndev.LCCosmetiques;
+import fr.schawnndev.api.Achat;
 import fr.schawnndev.api.utils.GlassColor;
 import fr.schawnndev.api.utils.ItemDisponibility;
 import fr.schawnndev.data.ItemStackManager;
+import fr.schawnndev.gadgets.GadgetManager;
 import fr.schawnndev.math.PositionConverter;
+import fr.schawnndev.pets.PetManager;
 import fr.schawnndev.sql.SQLManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -148,6 +152,41 @@ public class Pet_SubMenu implements Listener {
         return itemStacks;
     }
 
+    private void proceedClick(Player player, CosmetiqueManager.Cosmetique cosmetique,  String id){
+
+        String name = cosmetique == CosmetiqueManager.Cosmetique.VACHE_CHAMPIGNON ? "Vache Champignon" : id.toLowerCase().substring(0, 1).toUpperCase() + id.toLowerCase().substring(1);
+
+        if(PetManager.hasActivePet(player) && PetManager.getPet(player).getCosmetiqueType() == cosmetique){
+            player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
+        } else {
+
+            if (cosmetique.isVip()) {
+
+                if (player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")) {
+                    player.closeInventory();
+                    player.sendMessage("§aTu viens de séléctionner le pet §b" + name + "§a !");
+                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
+                    PetManager.addPlayerPet(player, cosmetique);
+                } else {
+                    player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
+                    player.sendMessage("§cTu dois VIP pour avoir le pet §b" + name + "§c !");
+                }
+
+            } else {
+                if (SQLManager.hasBuyCosmetic(player, id)) {
+                    player.closeInventory();
+                    player.sendMessage("§aTu viens de séléctionner le pet §b" + name + "§a !");
+                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
+                    PetManager.addPlayerPet(player, cosmetique);
+                } else {
+                    Achat achat = new Achat(id, cosmetique, player);
+                    achat.generate();
+                    achat.proceedOpening();
+                }
+            }
+        }
+    }
+
     @EventHandler
     public void onClick(InventoryClickEvent e){
         if(e.getInventory() != null && e.getInventory().getName() != null && e.getInventory().getName().equals("               §6§oPets")){
@@ -159,8 +198,53 @@ public class Pet_SubMenu implements Listener {
             if(e.getCurrentItem() != null && e.getCurrentItem().hasItemMeta() && e.getCurrentItem().getItemMeta().getDisplayName() != null) {
 
                 switch (e.getCurrentItem().getItemMeta().getDisplayName()){
+
                     case "§7<===":
                         Main_Menu.open(player);
+                        break;
+
+                    case "§eVache":
+                        proceedClick(player, CosmetiqueManager.Cosmetique.VACHE, "vache");
+                        break;
+
+                    case "§eCheval":
+                        proceedClick(player, CosmetiqueManager.Cosmetique.CHEVAL, "cheval");
+                        break;
+
+                    case "§eVache Champignon":
+                        proceedClick(player, CosmetiqueManager.Cosmetique.VACHE_CHAMPIGNON, "vachechampignon");
+                        break;
+
+                    case "§ePoulet":
+                        proceedClick(player, CosmetiqueManager.Cosmetique.POULET, "poulet");
+                        break;
+
+                    case "§eZombie":
+                        proceedClick(player, CosmetiqueManager.Cosmetique.ZOMBIE, "zombie");
+                        break;
+
+                    case "§eCreeper":
+                        proceedClick(player, CosmetiqueManager.Cosmetique.CREEPER, "creeper");
+                        break;
+
+                    case "§ePigman":
+                        proceedClick(player, CosmetiqueManager.Cosmetique.PIGMAN, "pigman");
+                        break;
+
+                    case "§eSquelette":
+                        proceedClick(player, CosmetiqueManager.Cosmetique.SQUELETTE, "squelette");
+                        break;
+
+                    case "§eLapin":
+                        proceedClick(player, CosmetiqueManager.Cosmetique.LAPIN, "lapin");
+                        break;
+
+                    case "§eLoup":
+                        proceedClick(player, CosmetiqueManager.Cosmetique.LOUP, "loup");
+                        break;
+
+                    case "§eMouton":
+                        proceedClick(player, CosmetiqueManager.Cosmetique.MOUTON, "mouton");
                         break;
 
                     default:

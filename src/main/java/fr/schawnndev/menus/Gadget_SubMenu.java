@@ -249,7 +249,7 @@ public class Gadget_SubMenu implements Listener {
                                     GadgetManager.addGadget(player, "tnt", false);
                                 } else {
                                     player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
-                                    player.sendMessage("§cTu dois VIP pour utiliser le gadget §bTNT§a !");
+                                    player.sendMessage("§cTu dois VIP pour utiliser le gadget §bTNT§c !");
                                 }
 
                             } else {

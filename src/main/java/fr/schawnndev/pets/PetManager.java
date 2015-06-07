@@ -18,6 +18,7 @@ import fr.schawnndev.LCCosmetiques;
 import fr.schawnndev.pets.pets.PetEntityType;
 import fr.schawnndev.pets.pets.PetPoulet;
 import fr.schawnndev.pets.pets.PetVache;
+import fr.schawnndev.pets.pets.PetVacheChampignon;
 import fr.schawnndev.sql.SQLManager;
 import lombok.Getter;
 import org.bukkit.Location;
@@ -102,7 +103,7 @@ public class PetManager {
         switch (cosmetique){
 
             case VACHE_CHAMPIGNON:
-
+                pet = new PetVacheChampignon(owner.getUniqueId(), cosmetique);
                 break;
 
             case VACHE:

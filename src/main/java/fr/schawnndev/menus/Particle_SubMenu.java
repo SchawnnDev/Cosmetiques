@@ -139,7 +139,7 @@ public class Particle_SubMenu implements Listener {
         notesLore.add("§7Exprimez vos talents de danseur grâce à");
         notesLore.add("§7ces petites particules en forme de note.");
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.JUKEBOX), Cosmetique.NOTES.getPrice(),
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.NOTE_BLOCK), Cosmetique.NOTES.getPrice(),
                 Cosmetique.NOTES.isVip(), "§dNotes", notesLore, cosmetics.contains("notes"), CosmetiqueManager.CosmetiqueType.PARTICLE));
 
         List<String> emeraldLore = new ArrayList<>();
@@ -212,7 +212,7 @@ public class Particle_SubMenu implements Listener {
                                     }
 
                                     player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §blave§a !");
+                                    player.sendMessage("§aTu viens d'activer la particule §blave§c !");
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "lave");
                                 } else {
@@ -228,7 +228,7 @@ public class Particle_SubMenu implements Listener {
                                     }
 
                                     player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §blave§a !");
+                                    player.sendMessage("§aTu viens d'activer la particule §blave§c !");
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "lave");
                                 } else {
@@ -254,7 +254,7 @@ public class Particle_SubMenu implements Listener {
                                     }
 
                                     player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bfumée§a !");
+                                    player.sendMessage("§aTu viens d'activer la particule §bfumée§c !");
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "fumee");
                                 } else {
@@ -270,7 +270,7 @@ public class Particle_SubMenu implements Listener {
                                     }
 
                                     player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bfumée§a !");
+                                    player.sendMessage("§aTu viens d'activer la particule §bfumée§c !");
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "fumee");
                                 } else {
@@ -296,7 +296,7 @@ public class Particle_SubMenu implements Listener {
                                     }
 
                                     player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bmagicien§a !");
+                                    player.sendMessage("§aTu viens d'activer la particule §bmagicien§c !");
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "magicien");
                                 } else {
@@ -312,7 +312,7 @@ public class Particle_SubMenu implements Listener {
                                     }
 
                                     player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bmagicien§a !");
+                                    player.sendMessage("§aTu viens d'activer la particule §bmagicien§c !");
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "magicien");
                                 } else {
@@ -338,7 +338,7 @@ public class Particle_SubMenu implements Listener {
                                     }
 
                                     player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bredstone§a !");
+                                    player.sendMessage("§aTu viens d'activer la particule §bredstone§c !");
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "redstone");
                                 } else {
@@ -354,7 +354,7 @@ public class Particle_SubMenu implements Listener {
                                     }
 
                                     player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bredstone§a !");
+                                    player.sendMessage("§aTu viens d'activer la particule §bredstone§c !");
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "redstone");
                                 } else {
@@ -380,7 +380,7 @@ public class Particle_SubMenu implements Listener {
                                     }
 
                                     player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bcoeurs§a !");
+                                    player.sendMessage("§aTu viens d'activer la particule §bcoeurs§c !");
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "coeurs");
                                 } else {
@@ -396,7 +396,7 @@ public class Particle_SubMenu implements Listener {
                                     }
 
                                     player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bcoeurs§a !");
+                                    player.sendMessage("§aTu viens d'activer la particule §bcoeurs§c !");
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "coeurs");
                                 } else {
@@ -422,7 +422,7 @@ public class Particle_SubMenu implements Listener {
                                     }
 
                                     player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bflames§a !");
+                                    player.sendMessage("§aTu viens d'activer la particule §bflames§c !");
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "flames");
                                 } else {
@@ -438,7 +438,7 @@ public class Particle_SubMenu implements Listener {
                                     }
 
                                     player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bflames§a !");
+                                    player.sendMessage("§aTu viens d'activer la particule §bflames§c !");
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "flames");
                                 } else {
@@ -465,7 +465,7 @@ public class Particle_SubMenu implements Listener {
                                     }
 
                                     player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bcontent§a !");
+                                    player.sendMessage("§aTu viens d'activer la particule §bcontent§c !");
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "content");
                                 } else {
@@ -481,7 +481,7 @@ public class Particle_SubMenu implements Listener {
                                     }
 
                                     player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bcontent§a !");
+                                    player.sendMessage("§aTu viens d'activer la particule §bcontent§c !");
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "content");
                                 } else {
@@ -507,7 +507,7 @@ public class Particle_SubMenu implements Listener {
                                     }
 
                                     player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bnotes§a !");
+                                    player.sendMessage("§aTu viens d'activer la particule §bnotes§c !");
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "notes");
                                 } else {
@@ -523,7 +523,7 @@ public class Particle_SubMenu implements Listener {
                                     }
 
                                     player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bnotes§a !");
+                                    player.sendMessage("§aTu viens d'activer la particule §bnotes§c !");
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "notes");
                                 } else {
@@ -549,7 +549,7 @@ public class Particle_SubMenu implements Listener {
                                     }
 
                                     player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bspirales§a !");
+                                    player.sendMessage("§aTu viens d'activer la particule §bspirales§c !");
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "spirales");
                                 } else {
@@ -565,7 +565,7 @@ public class Particle_SubMenu implements Listener {
                                     }
 
                                     player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bspirales§a !");
+                                    player.sendMessage("§aTu viens d'activer la particule §bspirales§c !");
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "spirales");
                                 } else {
@@ -591,7 +591,7 @@ public class Particle_SubMenu implements Listener {
                                     }
 
                                     player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bpluie§a !");
+                                    player.sendMessage("§aTu viens d'activer la particule §bpluie§c !");
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "pluie");
                                 } else {
@@ -607,7 +607,7 @@ public class Particle_SubMenu implements Listener {
                                     }
 
                                     player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bpluie§a !");
+                                    player.sendMessage("§aTu viens d'activer la particule §bpluie§c !");
                                     player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "pluie");
                                 } else {
