@@ -16,15 +16,17 @@ package fr.schawnndev.pets;
 import fr.schawnndev.LCCosmetiques;
 import fr.schawnndev.menus.PetManager_Menu;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityCombustEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
+import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
-import org.bukkit.event.player.PlayerToggleSneakEvent;
 
 public class PetListener implements Listener {
 
@@ -49,6 +51,12 @@ public class PetListener implements Listener {
     }
 
     @EventHandler
+    public void onDrop(ItemSpawnEvent e){
+        if(e.getEntity() != null && e.getEntity() instanceof Item && e.getEntity().getItemStack() != null && e.getEntity().getItemStack().getType() == Material.EGG)
+            e.setCancelled(true);
+    }
+
+    @EventHandler
     public void onFire(EntityCombustEvent e) {
         Entity entity = e.getEntity();
 
@@ -58,21 +66,14 @@ public class PetListener implements Listener {
     }
 
     @EventHandler
-    public void onPlayerSneak(PlayerToggleSneakEvent e) {
-        Player owner = e.getPlayer();
-
-        if (!owner.isSneaking())
-            PetManager.setHat(owner);
-
-    }
-
-    @EventHandler
     public void onPlayerInteract(PlayerInteractEntityEvent e) {
         Player owner = e.getPlayer();
         Entity entity = e.getRightClicked();
 
-        if(PetManager.hasActivePet(owner))
-            if (PetManager.getPet(owner).equals(PetManager.getEntityPet(entity)))
+
+        if(PetManager.isAPet(entity))
+            if (PetManager.hasActivePet(owner))
+                if (PetManager.getPet(owner).getMCEntity().equals(PetManager.getEntityPet(entity)))
                     PetManager_Menu.open(owner);
 
     }

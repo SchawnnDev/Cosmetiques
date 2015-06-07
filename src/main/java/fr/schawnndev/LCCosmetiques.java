@@ -14,6 +14,7 @@
 package fr.schawnndev;
 
 import fr.schawnndev.api.events.AchatEvent;
+import fr.schawnndev.data.IndesirableStringDictionnary;
 import fr.schawnndev.data.ItemStackManager;
 import fr.schawnndev.gadgets.GadgetListener;
 import fr.schawnndev.gadgets.GadgetManager;
@@ -80,6 +81,10 @@ public class LCCosmetiques extends JavaPlugin{
 
         PetEntityType.registerEntities();
 
+        // Dictionnary
+
+        IndesirableStringDictionnary.init();
+
     }
 
     public void onDisable() {
@@ -100,43 +105,17 @@ public class LCCosmetiques extends JavaPlugin{
 
         if(label.equalsIgnoreCase("a")){
             Player player = (Player)sender;
-            player.sendMessage("§aadded pet");
-            PetManager.addPlayerPet(player, CosmetiqueManager.Cosmetique.POULET);
+            player.sendMessage("§aadded pet vache");
+            PetManager.addPlayerPet(player, CosmetiqueManager.Cosmetique.VACHE);
             return true;
         }
 
         if(label.equalsIgnoreCase("b")){
             Player player = (Player)sender;
-
-            if(args.length == 0){
-                player.sendMessage("§cpas assez d'args !");
-                return true;
-            } else if (args.length == 1){
-                Pet pet = PetManager.getPet(player);
-                pet.setName(args[0]);
-                player.sendMessage("§achanged pet name to : " + ChatColor.translateAlternateColorCodes('&', args[0]));
-                return true;
-            } else {
-                player.sendMessage("§ctrop d'args !");
-                return true;
-            }
+            player.sendMessage("§aadded pet poulet");
+            PetManager.addPlayerPet(player, CosmetiqueManager.Cosmetique.POULET);
 
         }
-
-        if(label.equalsIgnoreCase("c")){
-            Player player = (Player)sender;
-            player.sendMessage("§aset pet to ride");
-            PetManager.setRide(player);
-            return true;
-        }
-
-        if(label.equalsIgnoreCase("d")){
-            Player player = (Player)sender;
-            player.sendMessage("§apet to hat");
-            PetManager.setHat(player);
-            return true;
-        }
-
 
         return false;
     }

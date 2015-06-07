@@ -22,7 +22,8 @@ import java.util.*;
 
 public enum PetEntityType {
 
-    POULET("PetChicken", 93, EntityType.CHICKEN, EntityChicken.class, PetPoulet.class);
+    POULET("PetChicken", 93, EntityType.CHICKEN, EntityChicken.class, PetPoulet.class),
+    VACHE("PetVache", 92, EntityType.MUSHROOM_COW, EntityMushroomCow.class, PetVache.class);
  /*   ZOMBIE("PetZombie", 54, EntityType.ZOMBIE, EntityZombie.class, PetEntityZombie.class),
     LAPIN("PetLapin", 101, EntityType.RABBIT, EntityRabbit.class, PetEntityRabbit.class),
     LOUP("PetLoup", 95, EntityType.WOLF, EntityWolf.class, PetEntityWolf.class),
@@ -30,7 +31,6 @@ public enum PetEntityType {
     CREEPER("PetCreeper", 50, EntityType.CREEPER, EntityCreeper.class, PetEntityCreeper.class),
     SQUELETTE("PetSkeleton", 51, EntityType.SKELETON, EntitySkeleton.class, PetEntitySkeleton.class),
     VACHE_CHAMPIGNON("PetVacheChampignon", 96, EntityType.MUSHROOM_COW, EntityMushroomCow.class, PetEntityMushroomCow.class),
-    VACHE("PetVache", 92, EntityType.MUSHROOM_COW, EntityMushroomCow.class, PetEntityMushroomCow.class),
     PIGMAN("PetPigman", 57, EntityType.PIG_ZOMBIE, EntityPigZombie.class, PetEntityPigman.class),
     CHEVAL("PetCheval", 100, EntityType.HORSE, EntityHorse.class, PetEntityHorse.class),
 
@@ -59,7 +59,7 @@ public enum PetEntityType {
     public static void registerEntities() {
         for (PetEntityType entity : values()) {
             try {
-                List<Map<?, ?>> dataMaps = new ArrayList<Map<?, ?>>();
+                List<Map<?, ?>> dataMaps = new ArrayList<>();
                 for (Field f : EntityTypes.class.getDeclaredFields()) {
                     if (f.getType().getSimpleName().equals(Map.class.getSimpleName())) {
                         f.setAccessible(true);

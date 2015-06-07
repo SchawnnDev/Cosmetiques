@@ -21,7 +21,9 @@ import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
+import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
@@ -49,10 +51,11 @@ public class GadgetTNT extends Gadget implements Listener {
 
     public void proceedExplode(Location location){
 
-        for(Player p : Bukkit.getOnlinePlayers()){
-            if(p.getLocation().distance(location) <= 15){
-                p.setVelocity(p.getLocation().getDirection().multiply(-2.13).setY(1.9903));
-                p.playSound(p.getLocation(), Sound.WOLF_HURT, 1f, 1f);
+        for(Entity e : ((World)Bukkit.getWorlds().toArray()[0]).getEntities()){
+            if(e != null && e.getLocation().distance(location) <= 15){
+                e.setVelocity(e.getLocation().getDirection().multiply(-2.13f).setY(1.7560f));
+                if(e instanceof Player)
+                    ((Player)e).playSound(((Player)e).getLocation(), Sound.WOLF_HURT, 1f, 1f);
             }
         }
     }

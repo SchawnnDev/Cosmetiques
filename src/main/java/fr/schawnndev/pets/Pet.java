@@ -68,9 +68,10 @@ public interface Pet {
 
     /**
      *  Set the Pet on the head from the Owner
+     *  @param arg Set yes or no the Pet on the head from the Owner
      */
 
-    public void setHat();
+    public void setHat(boolean arg);
 
     /**
      *  If the Owner is riding on the Pet
@@ -80,9 +81,10 @@ public interface Pet {
 
     /**
      *  Set the Owner ride on the Pet
+     *  @param arg Set yes or no the Owner ride on the Pet
      */
 
-    public void setRide();
+    public void setRide(boolean arg);
 
     /**
      *  Pet follows the Owner
@@ -115,7 +117,7 @@ public interface Pet {
      * @return The Custom Pet of the Owner
      */
 
-    public PetPoulet spawn(Location location, Player owner);
+    public Pet spawn(Location location, Player owner);
 
     /**
      *  Get the type of the Pet

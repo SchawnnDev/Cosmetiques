@@ -15,6 +15,7 @@ package fr.schawnndev.menus;
 
 import fr.schawnndev.CosmetiqueManager;
 import fr.schawnndev.api.utils.ItemDisponibility;
+import fr.schawnndev.pets.PetChangeNameEvent;
 import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -45,6 +46,7 @@ public class MenuManager {
         new Main_Menu();
         new ItemDisponibility();
         new PetManager_Menu();
+        new PetChangeNameEvent();
 
     }
 

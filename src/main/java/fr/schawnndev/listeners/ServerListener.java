@@ -20,6 +20,7 @@ import fr.schawnndev.data.ItemStackManager;
 import fr.schawnndev.gadgets.GadgetManager;
 import fr.schawnndev.menus.MenuManager;
 import fr.schawnndev.particules.ParticleManager;
+import fr.schawnndev.pets.PetChangeNameEvent;
 import fr.schawnndev.sql.SQLManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -104,6 +105,11 @@ public class ServerListener implements Listener {
 
         if(Manager.hasAchat(e.getPlayer().getUniqueId()))
             Manager.achats.remove(Manager.getAchat(e.getPlayer().getUniqueId()));
+
+        // PetChangeName
+
+        if(PetChangeNameEvent.isChangingPetName(e.getPlayer()))
+            PetChangeNameEvent.removePlayerChangingPetName(e.getPlayer());
 
     }
 

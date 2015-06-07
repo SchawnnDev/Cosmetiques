@@ -17,6 +17,7 @@ import fr.schawnndev.CosmetiqueManager.*;
 import fr.schawnndev.LCCosmetiques;
 import fr.schawnndev.pets.pets.PetEntityType;
 import fr.schawnndev.pets.pets.PetPoulet;
+import fr.schawnndev.pets.pets.PetVache;
 import fr.schawnndev.sql.SQLManager;
 import lombok.Getter;
 import org.bukkit.Location;
@@ -89,8 +90,8 @@ public class PetManager {
             pet.setName(getPetName(owner));
 
         LivingEntity entity = (LivingEntity) pet.getMCEntity();
-        entity.setMaxHealth(2d);
-        pet.getCBukkitEntity().setHealth(2f);
+        entity.setMaxHealth(4d);
+        pet.getCBukkitEntity().setHealth(4f);
 
     }
     public static Pet spawn(Cosmetique cosmetique, Player owner){
@@ -105,7 +106,7 @@ public class PetManager {
                 break;
 
             case VACHE:
-
+                pet = new PetVache(owner.getUniqueId(), cosmetique);
                 break;
 
             case CHEVAL:
@@ -170,29 +171,14 @@ public class PetManager {
         activePets.remove(owner.getUniqueId());
     }
 
-    public static void removeHat(Player owner) {
-        if (hasActivePet(owner) && getPet(owner) != null && owner.getPassenger() != null && owner.getPassenger().equals(getPet(owner).getMCEntity()))
-            setHat(owner);
-    }
-
-    public static void setHat(Player owner) {
+    public static void setHat(Player owner, boolean arg) {
         if (hasActivePet(owner) && getPet(owner) != null)
-            getPet(owner).setHat();
+            getPet(owner).setHat(arg);
     }
 
-    public static void setRide(Player owner) {
+    public static void setRide(Player owner, boolean arg) {
         if (hasActivePet(owner) && getPet(owner) != null)
-            getPet(owner).setRide();
-    }
-
-    public static void unRidePet(Player owner) {
-        if (hasActivePet(owner) && getPet(owner) != null) {
-            Pet pet = getPet(owner);
-
-            if (pet.getMCEntity().getPassenger() != null && pet.getMCEntity().getPassenger().equals(owner))
-                setRide(owner);
-
-        }
+            getPet(owner).setRide(arg);
     }
 
 

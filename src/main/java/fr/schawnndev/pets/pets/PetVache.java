@@ -2,9 +2,9 @@
  * ******************************************************
  *  * Copyright (C) 2015 SchawnnDev <contact@schawnndev.fr>
  *  *
- *  * This file (fr.schawnndev.pets.entities.PetPouletEntity) is part of LCCosmetiques.
+ *  * This file (fr.schawnndev.pets.pets.PetVache) is part of LCCosmetiques.
  *  *
- *  * Created by SchawnnDev on 06/06/15 17:47.
+ *  * Created by SchawnnDev on 07/06/15 14:09.
  *  *
  *  * LCCosmetiques can not be copied and/or distributed without the express
  *  * permission of SchawnnDev.
@@ -30,7 +30,7 @@ import org.bukkit.plugin.Plugin;
 import java.lang.reflect.Field;
 import java.util.UUID;
 
-public class PetPoulet extends EntityChicken implements Pet {
+public class PetVache extends EntityCow implements Pet {
 
     private Plugin plugin;
     private Cosmetique cosmetique;
@@ -39,7 +39,7 @@ public class PetPoulet extends EntityChicken implements Pet {
     private boolean hat;
     private boolean riding;
 
-    public PetPoulet(UUID owner, Cosmetique cosmetique) {
+    public PetVache(UUID owner, Cosmetique cosmetique) {
         super(((CraftWorld) Bukkit.getPlayer(owner).getWorld()).getHandle());
 
         this.plugin = LCCosmetiques.getInstance();
@@ -150,12 +150,11 @@ public class PetPoulet extends EntityChicken implements Pet {
 
             @Override
             public void run() {
-
                 Location entityLocation = getMCEntity().getLocation();
 
                 if (entityLocation.getWorld().equals(getOwner().getWorld()))
-                    if (entityLocation.distance(getOwner().getLocation()) < 20)
-                        if (entityLocation.distance(getOwner().getLocation()) > 3)
+                    if (entityLocation.distance(getOwner().getLocation()) < 15)
+                        if (entityLocation.distance(getOwner().getLocation()) > 4)
                             follow();
                         else
                             navigation.n();
@@ -177,7 +176,7 @@ public class PetPoulet extends EntityChicken implements Pet {
     }
 
     @Override
-    public PetPoulet spawn(Location location, Player owner) {
+    public PetVache spawn(Location location, Player owner) {
         World world = ((CraftWorld) location.getWorld()).getHandle();
         setLocation(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
         world.addEntity(this, CreatureSpawnEvent.SpawnReason.CUSTOM);
@@ -255,7 +254,7 @@ public class PetPoulet extends EntityChicken implements Pet {
 
     }
 
-    public net.minecraft.server.v1_8_R1.EntityCreature getCBukkitEntity() {
+    public EntityCreature getCBukkitEntity() {
         return this;
     }
 }
