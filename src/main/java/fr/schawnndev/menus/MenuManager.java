@@ -13,7 +13,7 @@
 
 package fr.schawnndev.menus;
 
-import fr.schawnndev.CosmetiqueManager;
+import fr.schawnndev.CosmetiqueManager.*;
 import fr.schawnndev.api.utils.ItemDisponibility;
 import fr.schawnndev.pets.PetChangeNameEvent;
 import lombok.Getter;
@@ -57,15 +57,24 @@ public class MenuManager {
         return _lore;
     }
 
-    public static ItemStack buildItem(ItemStack itemStack, int prix, boolean vip, String displayName, List<String> lore, boolean hasGadget, CosmetiqueManager.CosmetiqueType cosmetiqueType){
+    public static ItemStack buildItem(ItemStack itemStack, Cosmetique cosmetique, Player player, String displayName, List<String> lore, boolean hasGadget){
         ItemStack finalItemStack = itemStack;
         ItemMeta finalItemMeta = finalItemStack.getItemMeta();
+        int prix = cosmetique.getPrice();
+        boolean vip = cosmetique.isVip();
+        CosmetiqueType cosmetiqueType = cosmetique.getCosmetiqueType();
 
         if(!hasGadget) {
 
             if (vip) {
-                lore.add("§7------------");
-                lore.add("§bPrix : §6Réservé aux §eVIP");
+
+                if (player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")) {
+                    lore.add("§7------------");
+                    lore.add("§aVous possédez " + (cosmetiqueType == CosmetiqueType.PARTICLE ? "cette particule." : cosmetiqueType == CosmetiqueType.GADGET ? "ce gadget." : "ce pet."));
+                } else {
+                    lore.add("§7------------");
+                    lore.add("§bPrix : §6Réservé aux §eVIP");
+                }
             } else {
                 if (prix != -1) {
                     lore.add("§7------------");
@@ -74,7 +83,7 @@ public class MenuManager {
             }
         } else {
             lore.add("§7------------");
-            lore.add("§aVous possédez " + (cosmetiqueType == CosmetiqueManager.CosmetiqueType.PARTICLE ? "cette particule." : cosmetiqueType == CosmetiqueManager.CosmetiqueType.GADGET ? "ce gadget." : "ce pet."));
+            lore.add("§aVous possédez " + (cosmetiqueType == CosmetiqueType.PARTICLE ? "cette particule." : cosmetiqueType == CosmetiqueType.GADGET ? "ce gadget." : "ce pet."));
         }
 
         finalItemMeta.setDisplayName(displayName);

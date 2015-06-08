@@ -54,22 +54,18 @@ public class PetChangeNameEvent implements Listener {
                 }
 
                 if (timer == 0) {
-                    player.sendMessage("§6§nPour changer le nom de votre pet :");
+                    player.sendMessage("§3Pour renommer votre animal de compagnie,");
                 } else if (timer == 1) {
-                    player.sendMessage("    ");
-                    player.sendMessage("§6Vous devez écrire le nom voulu dans le §atchat§6.");
+                    player.sendMessage("§3vous devez écrire le nom voulu dans le tchat.");
                 } else if (timer == 2) {
                     player.sendMessage("    ");
-                    player.sendMessage("§6Vous pouvez ajouter des §acouleurs §6!");
-                } else if (timer == 3){
+                    player.sendMessage("§3Pour mettre de la couleur, utilisez le préfix §c&§3 suivi d'un numéro.");
+                    player.sendMessage("§3Les numéros de couleurs sont disponible ici : §chttp://bit.ly/1QfKInv");
+                } else if(timer == 3){
                     player.sendMessage("    ");
-                    player.sendMessage("§6Il vous suffit d'ajouter un §a& §6plus le §anombre§6 de la couleur !");
-                    player.sendMessage("§6Les couleurs sont visibles ici: §ahttp://bit.ly/1QfKInv");
-                } else if(timer == 4){
-                    player.sendMessage("    ");
-                    player.sendMessage("§6Vous pouvez écrire le §anom §6de votre pet dans le tchat §6!");
+                    player.sendMessage("§3A présent, écrivez le nom de votre animal de compagnie dans le tchat.");
                     player.playSound(player.getLocation(), Sound.NOTE_PLING, 1f, 2f);
-                } else if (timer == 5){
+                } else if (timer == 4){
                     cancel();
                 }
 
@@ -80,7 +76,7 @@ public class PetChangeNameEvent implements Listener {
         }.runTaskTimer(LCCosmetiques.getInstance(), 0l, 20L);
     }
 
-    public static void addPlayerChangingPetName(Player player){
+    public static void addPlayerChangingPetName(Player player) {
 
         if(!isChangingPetName(player)) {
 
@@ -108,16 +104,16 @@ public class PetChangeNameEvent implements Listener {
 
         } else if (IndesirableStringDictionnary.containsIndesirable(name)){
 
-            player.sendMessage("§cLe pseudo de votre pet contient un mot indésirable.");
+            player.sendMessage("§cLe nom que vous avez mentionné contient un ou plusieurs mots indésirables.");
 
             return;
 
         } else {
 
             if (PetManager.hasActivePet(player))
-                PetManager.getPet(player).setName(ChatColor.translateAlternateColorCodes('&', name));
+                PetManager.getPet(player).setName(_name);
 
-            player.sendMessage("§aLe nouveau nom de votre pet est: " + ChatColor.translateAlternateColorCodes('&', name));
+            player.sendMessage("§3Le nom de votre Pet a été défini en :§f " + _name + "§3.");
 
             removePlayerChangingPetName(player);
 

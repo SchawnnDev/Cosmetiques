@@ -16,6 +16,7 @@ package fr.schawnndev.gadgets;
 import fr.schawnndev.LCCosmetiques;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Server;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

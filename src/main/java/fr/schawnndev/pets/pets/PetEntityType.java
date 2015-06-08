@@ -24,18 +24,16 @@ public enum PetEntityType {
 
     POULET("PetChicken", 93, EntityType.CHICKEN, EntityChicken.class, PetPoulet.class),
     VACHE_CHAMPIGNON("PetVacheChampignon", 96, EntityType.MUSHROOM_COW, EntityMushroomCow.class, PetVacheChampignon.class),
-    VACHE("PetVache", 92, EntityType.MUSHROOM_COW, EntityMushroomCow.class, PetVache.class);
- /*   ZOMBIE("PetZombie", 54, EntityType.ZOMBIE, EntityZombie.class, PetEntityZombie.class),
-    LAPIN("PetLapin", 101, EntityType.RABBIT, EntityRabbit.class, PetEntityRabbit.class),
-    LOUP("PetLoup", 95, EntityType.WOLF, EntityWolf.class, PetEntityWolf.class),
-    MOUTON("PetMouton", 91, EntityType.SHEEP, EntitySheep.class, PetEntitySheep.class),
-    CREEPER("PetCreeper", 50, EntityType.CREEPER, EntityCreeper.class, PetEntityCreeper.class),
-    SQUELETTE("PetSkeleton", 51, EntityType.SKELETON, EntitySkeleton.class, PetEntitySkeleton.class),
+    VACHE("PetVache", 92, EntityType.MUSHROOM_COW, EntityMushroomCow.class, PetVache.class),
+    ZOMBIE("PetZombie", 54, EntityType.ZOMBIE, EntityZombie.class, PetZombie.class),
+    LAPIN("PetLapin", 101, EntityType.RABBIT, EntityRabbit.class, PetLapin.class),
+    LOUP("PetLoup", 95, EntityType.WOLF, EntityWolf.class, PetLoup.class),
+    MOUTON("PetMouton", 91, EntityType.SHEEP, EntitySheep.class, PetMouton.class),
+    CREEPER("PetCreeper", 50, EntityType.CREEPER, EntityCreeper.class, PetCreeper.class),
+    SQUELETTE("PetSkeleton", 51, EntityType.SKELETON, EntitySkeleton.class, PetSquelette.class),
+    PIGMAN("PetPigman", 57, EntityType.PIG_ZOMBIE, EntityPigZombie.class, PetPigman.class),
+    CHEVAL("PetCheval", 100, EntityType.HORSE, EntityHorse.class, PetCheval.class);
 
-    PIGMAN("PetPigman", 57, EntityType.PIG_ZOMBIE, EntityPigZombie.class, PetEntityPigman.class),
-    CHEVAL("PetCheval", 100, EntityType.HORSE, EntityHorse.class, PetEntityHorse.class),
-
-    */
 
     @Getter
     private String name;

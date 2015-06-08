@@ -19,7 +19,6 @@ import fr.schawnndev.api.Achat;
 import fr.schawnndev.api.utils.GlassColor;
 import fr.schawnndev.api.utils.ItemDisponibility;
 import fr.schawnndev.data.ItemStackManager;
-import fr.schawnndev.gadgets.GadgetManager;
 import fr.schawnndev.math.PositionConverter;
 import fr.schawnndev.pets.PetManager;
 import fr.schawnndev.sql.SQLManager;
@@ -116,38 +115,38 @@ public class Pet_SubMenu implements Listener {
         List<ItemStack> itemStacks = new ArrayList<>();
         List<String> cosmetics = SQLManager.getCosmetics(player);
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.BONE), CosmetiqueManager.Cosmetique.LOUP.getPrice(),
-                CosmetiqueManager.Cosmetique.LOUP.isVip(), "§eLoup", MenuManager.getNewLore("§7Un compagnon fidèle et minon comme tout."), cosmetics.contains("loup"), CosmetiqueManager.CosmetiqueType.PET));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.BONE), CosmetiqueManager.Cosmetique.LOUP,
+                player, "§eLoup", MenuManager.getNewLore("§7Un compagnon fidèle et minon comme tout."), cosmetics.contains("loup")));
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.RABBIT_FOOT), CosmetiqueManager.Cosmetique.LAPIN.getPrice(),
-                CosmetiqueManager.Cosmetique.LAPIN.isVip(), "§eLapin", MenuManager.getNewLore("§7Un lapin trop mimi !"), cosmetics.contains("lapin"), CosmetiqueManager.CosmetiqueType.PET));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.RABBIT_FOOT), CosmetiqueManager.Cosmetique.LAPIN,
+                player, "§eLapin", MenuManager.getNewLore("§7Un lapin trop mimi !"), cosmetics.contains("lapin")));
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.WOOL), CosmetiqueManager.Cosmetique.MOUTON.getPrice(),
-                CosmetiqueManager.Cosmetique.MOUTON.isVip(), "§eMouton", MenuManager.getNewLore("§7Mmmêêêh !") , cosmetics.contains("mouton"), CosmetiqueManager.CosmetiqueType.PET));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.WOOL), CosmetiqueManager.Cosmetique.MOUTON,
+                player, "§eMouton", MenuManager.getNewLore("§7Mmmêêêh !") , cosmetics.contains("mouton")));
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.FEATHER), CosmetiqueManager.Cosmetique.POULET.getPrice(),
-                CosmetiqueManager.Cosmetique.POULET.isVip(), "§ePoulet", MenuManager.getNewLore("§7Kott.. Kottkottquelette... !"), cosmetics.contains("poulet"), CosmetiqueManager.CosmetiqueType.PET));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.FEATHER), CosmetiqueManager.Cosmetique.POULET,
+                player, "§ePoulet", MenuManager.getNewLore("§7Kott.. Kottkottquelette... !"), cosmetics.contains("poulet")));
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.ROTTEN_FLESH), CosmetiqueManager.Cosmetique.ZOMBIE.getPrice(),
-                CosmetiqueManager.Cosmetique.ZOMBIE.isVip(), "§eZombie", MenuManager.getNewLore("§7Attention, ça mord !"), cosmetics.contains("zombie"), CosmetiqueManager.CosmetiqueType.PET));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.ROTTEN_FLESH), CosmetiqueManager.Cosmetique.ZOMBIE,
+                player, "§eZombie", MenuManager.getNewLore("§7Attention, ça mord !"), cosmetics.contains("zombie")));
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.SULPHUR), CosmetiqueManager.Cosmetique.CREEPER.getPrice(),
-                CosmetiqueManager.Cosmetique.CREEPER.isVip(), "§eCreeper", MenuManager.getNewLore("§7Faites attention, ça peut exploser !"), cosmetics.contains("creeper"), CosmetiqueManager.CosmetiqueType.PET));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.SULPHUR), CosmetiqueManager.Cosmetique.CREEPER,
+                player, "§eCreeper", MenuManager.getNewLore("§7Faites attention, ça peut exploser !"), cosmetics.contains("creeper")));
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.BOW), CosmetiqueManager.Cosmetique.SQUELETTE.getPrice(),
-                CosmetiqueManager.Cosmetique.SQUELETTE.isVip(), "§eSquelette", MenuManager.getNewLore("§7Ayez une visée de sniper !"), cosmetics.contains("squelette"), CosmetiqueManager.CosmetiqueType.PET));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.BOW), CosmetiqueManager.Cosmetique.SQUELETTE,
+                player, "§eSquelette", MenuManager.getNewLore("§7Ayez une visée de sniper !"), cosmetics.contains("squelette")));
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.LEATHER), CosmetiqueManager.Cosmetique.VACHE.getPrice(),
-                CosmetiqueManager.Cosmetique.VACHE.isVip(), "§eVache", MenuManager.getNewLore("§7Meuh !"), cosmetics.contains("vache"), CosmetiqueManager.CosmetiqueType.PET));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.LEATHER), CosmetiqueManager.Cosmetique.VACHE,
+                player, "§eVache", MenuManager.getNewLore("§7Meuh !"), cosmetics.contains("vache")));
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.GOLD_NUGGET), CosmetiqueManager.Cosmetique.PIGMAN.getPrice(),
-                CosmetiqueManager.Cosmetique.PIGMAN.isVip(), "§ePigman", MenuManager.getNewLore("§7Une bête atroce !"), cosmetics.contains("pigman"), CosmetiqueManager.CosmetiqueType.PET));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.GOLD_NUGGET), CosmetiqueManager.Cosmetique.PIGMAN,
+                player, "§ePigman", MenuManager.getNewLore("§7Une bête atroce !"), cosmetics.contains("pigman")));
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.IRON_BARDING), CosmetiqueManager.Cosmetique.CHEVAL.getPrice(),
-                CosmetiqueManager.Cosmetique.CHEVAL.isVip(), "§eCheval", MenuManager.getNewLore("§7Devenez un vrai aventurier."), cosmetics.contains("cheval"), CosmetiqueManager.CosmetiqueType.PET));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.IRON_BARDING), CosmetiqueManager.Cosmetique.CHEVAL,
+                player, "§eCheval", MenuManager.getNewLore("§7Devenez un vrai aventurier."), cosmetics.contains("cheval")));
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.RED_MUSHROOM), CosmetiqueManager.Cosmetique.VACHE_CHAMPIGNON.getPrice(),
-                CosmetiqueManager.Cosmetique.VACHE_CHAMPIGNON.isVip(), "§eVache Champignon", MenuManager.getNewLore("§7Des gros champignons partout D:"), cosmetics.contains("vache_champignon"), CosmetiqueManager.CosmetiqueType.PET));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.RED_MUSHROOM), CosmetiqueManager.Cosmetique.VACHE_CHAMPIGNON,
+                player, "§eVache Champignon", MenuManager.getNewLore("§7Des gros champignons partout D:"), cosmetics.contains("vache_champignon")));
 
         return itemStacks;
     }

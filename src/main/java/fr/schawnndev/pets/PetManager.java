@@ -29,9 +29,6 @@ public class PetManager {
     @Getter
     private static Map<UUID, Pet> activePets = new HashMap<>();
 
-    @Getter
-    private static Map<UUID, String> petNames = new HashMap<>();
-
     public static boolean isAPet(Entity entity){
         return ((CraftEntity) entity).getHandle() instanceof Pet;
     }
@@ -44,31 +41,23 @@ public class PetManager {
         return activePets.containsKey(owner.getUniqueId());
     }
 
-    public static boolean hasPetName(Player owner){
-        return petNames.containsKey(owner.getUniqueId());
+    public static boolean isOwnerOfPet(Player owner, Entity entity){
+        if(!hasActivePet(owner)) return false;
+        if(PetManager.getPet(owner).getMCEntity().equals(PetManager.getEntityPet(entity))) return true;
+        return false;
     }
-
-    public static String getPetName(Player owner){
-        return petNames.get(owner.getUniqueId());
-    }
-
-    /*
 
     public static String serializeActivePet(Pet pet){
-        return pet.getCosmetiqueType() + "|" + pet.getName();
+        return pet.getCosmetiqueType().getMysqlName() + "|" + pet.getName();
     }
 
-    public static String getActivePetName(Player owner){
-        String[] infos = SQLManager.getActiveCosmetic(owner, CosmetiqueType.PET).split("|");
+    public static String getActivePetName(String[] infos){
         return infos[1];
     }
 
-    public static Cosmetique getActivePetCosmetique(Player owner){
-        String[] infos = SQLManager.getActiveCosmetic(owner, CosmetiqueType.PET).split("|");
-        return Cosmetique.valueOf(infos[0]);
+    public static Cosmetique getActivePetCosmetique(String[] infos){
+        return Cosmetique.getByMySQLName(infos[0]);
     }
-
-    */
 
     public static void addPlayerPet(Player owner, Cosmetique cosmetique){
         if (hasActivePet(owner))
@@ -79,13 +68,25 @@ public class PetManager {
         Pet pet = spawn(cosmetique, owner);
         activePets.put(owner.getUniqueId(), pet);
 
-        initializePet(owner, pet);
+        initializePet(owner, pet, null);
     }
 
-    public static void initializePet(Player owner, Pet pet) {
+    public static void addCustomPlayerPet(Player owner, Cosmetique cosmetique, String petName){
+        if (hasActivePet(owner))
+            if (getPet(owner) != null)
+                removePet(owner);
 
-        if(hasPetName(owner))
-            pet.setName(getPetName(owner));
+
+        Pet pet = spawn(cosmetique, owner);
+        activePets.put(owner.getUniqueId(), pet);
+
+        initializePet(owner, pet, petName);
+    }
+
+    private static void initializePet(Player owner, Pet pet, String petName) {
+
+        if(petName != null)
+            pet.setName(petName);
 
         LivingEntity entity = (LivingEntity) pet.getMCEntity();
         entity.setMaxHealth(4d);
@@ -141,6 +142,9 @@ public class PetManager {
 
             case LOUP:
                 pet = new PetLoup(owner.getUniqueId(), cosmetique);
+                break;
+
+            default:
                 break;
 
         }

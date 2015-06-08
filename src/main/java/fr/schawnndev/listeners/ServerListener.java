@@ -21,6 +21,7 @@ import fr.schawnndev.gadgets.GadgetManager;
 import fr.schawnndev.menus.MenuManager;
 import fr.schawnndev.particules.ParticleManager;
 import fr.schawnndev.pets.PetChangeNameEvent;
+import fr.schawnndev.pets.PetManager;
 import fr.schawnndev.sql.SQLManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -30,6 +31,8 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.*;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class ServerListener implements Listener {
@@ -38,24 +41,48 @@ public class ServerListener implements Listener {
         Bukkit.getPluginManager().registerEvents(this, LCCosmetiques.getInstance());
     }
 
+    @Deprecated
+    private boolean hasActiveCosmetic(Player player, CosmetiqueManager.CosmetiqueType cosmetiqueType, Map<CosmetiqueManager.CosmetiqueType, String> cosmetiqueTypeStringMap){
+
+        if(!cosmetiqueTypeStringMap.containsKey(cosmetiqueType))
+            return false;
+
+        if(cosmetiqueTypeStringMap.get(cosmetiqueType).equalsIgnoreCase("aucun"))
+            return false;
+
+        return true;
+    }
+
+
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
 
         final Player player = e.getPlayer();
 
-        if(SQLManager.hasActiveCosmetic(player, CosmetiqueManager.CosmetiqueType.PARTICLE)){
+        final Map<CosmetiqueManager.CosmetiqueType, String> cosmetiqueTypeStringMap = new HashMap<>();
 
-            String particle = SQLManager.getActiveCosmetic(player, CosmetiqueManager.CosmetiqueType.PARTICLE);
+        for(CosmetiqueManager.CosmetiqueType c : CosmetiqueManager.CosmetiqueType.values())
+            cosmetiqueTypeStringMap.put(c, SQLManager.getActiveCosmetic(player, c));
 
-            ParticleManager.activeParticleByName(player, particle);
+        if(hasActiveCosmetic(player, CosmetiqueManager.CosmetiqueType.PET, cosmetiqueTypeStringMap)){
+
+      //      String[] pet = cosmetiqueTypeStringMap.get(CosmetiqueManager.CosmetiqueType.PET).split("|");
+
+      //      PetManager.addCustomPlayerPet(player, PetManager.getActivePetCosmetique(pet), PetManager.getActivePetName(pet));
+
+        }
+
+        if(hasActiveCosmetic(player, CosmetiqueManager.CosmetiqueType.PARTICLE, cosmetiqueTypeStringMap)){
+
+            ParticleManager.activeParticleByName(player, cosmetiqueTypeStringMap.get(CosmetiqueManager.CosmetiqueType.PARTICLE));
 
         }
 
         boolean _hasActiveGadget = false;
         String _gadget = null;
 
-        if(SQLManager.hasActiveCosmetic(player, CosmetiqueManager.CosmetiqueType.GADGET)) {
-            _gadget = SQLManager.getActiveCosmetic(player, CosmetiqueManager.CosmetiqueType.GADGET);
+        if(hasActiveCosmetic(player, CosmetiqueManager.CosmetiqueType.GADGET, cosmetiqueTypeStringMap)) {
+            _gadget = cosmetiqueTypeStringMap.get(CosmetiqueManager.CosmetiqueType.GADGET);
             _hasActiveGadget = true;
         }
 
@@ -96,6 +123,15 @@ public class ServerListener implements Listener {
             GadgetManager.getActiveGadgets().remove(e.getPlayer().getUniqueId());
         } else {
             SQLManager.setActiveCosmetic(e.getPlayer(), "aucun", CosmetiqueManager.CosmetiqueType.GADGET);
+        }
+
+        // Active pet sql
+
+        if(PetManager.hasActivePet(e.getPlayer())){
+            SQLManager.setActiveCosmetic(e.getPlayer(), PetManager.serializeActivePet(PetManager.getPet(e.getPlayer())), CosmetiqueManager.CosmetiqueType.PET);
+            PetManager.removePet(e.getPlayer());
+        } else {
+            SQLManager.setActiveCosmetic(e.getPlayer(), "aucun", CosmetiqueManager.CosmetiqueType.PET);
         }
 
         // Achats

@@ -18,6 +18,7 @@ import fr.schawnndev.menus.PetManager_Menu;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Horse;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -70,11 +71,17 @@ public class PetListener implements Listener {
         Player owner = e.getPlayer();
         Entity entity = e.getRightClicked();
 
+        if(entity instanceof Horse && PetManager.isAPet(entity) && !PetManager.isOwnerOfPet(owner, entity))
+            e.setCancelled(true);
+
 
         if(PetManager.isAPet(entity))
             if (PetManager.hasActivePet(owner))
-                if (PetManager.getPet(owner).getMCEntity().equals(PetManager.getEntityPet(entity)))
+                if (PetManager.getPet(owner).getMCEntity().equals(PetManager.getEntityPet(entity))){
+                    e.setCancelled(true);
                     PetManager_Menu.open(owner);
+                }
+
 
     }
 

@@ -120,67 +120,56 @@ public class Particle_SubMenu implements Listener {
         magicienLore.add("§7Entourez-vous de petites particules d'enchantements");
         magicienLore.add("§7mystérieuses et sympathiques.");
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.ENCHANTMENT_TABLE), Cosmetique.MAGICIEN.getPrice(),
-                Cosmetique.MAGICIEN.isVip(), "§5Magicien", magicienLore, cosmetics.contains("magicien"), CosmetiqueManager.CosmetiqueType.PARTICLE));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.ENCHANTMENT_TABLE), Cosmetique.MAGICIEN, player, "§5Magicien", magicienLore, cosmetics.contains("magicien")));
 
         List<String> pluieLore = MenuManager.getNewLore("§7Il me semble que vous avez oublié votre parapluie.");
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.WATER_BUCKET), Cosmetique.PLUIE.getPrice(),
-                Cosmetique.PLUIE.isVip(), "§3Pluie", pluieLore, cosmetics.contains("pluie"), CosmetiqueManager.CosmetiqueType.PARTICLE));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.WATER_BUCKET), Cosmetique.PLUIE, player, "§3Pluie", pluieLore, cosmetics.contains("pluie")));
 
         List<String> laveLore = new ArrayList<>();
         laveLore.add("§7Un bon bain dans de la lave, qui");
         laveLore.add("§7n'en a jamais rêvé ?");
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.LAVA_BUCKET), Cosmetique.LAVE.getPrice(),
-                Cosmetique.LAVE.isVip(), "§6Lave", laveLore, cosmetics.contains("lave"), CosmetiqueManager.CosmetiqueType.PARTICLE));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.LAVA_BUCKET), Cosmetique.LAVE, player, "§6Lave", laveLore, cosmetics.contains("lave")));
 
         List<String> notesLore = new ArrayList<>();
         notesLore.add("§7Exprimez vos talents de danseur grâce à");
         notesLore.add("§7ces petites particules en forme de note.");
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.NOTE_BLOCK), Cosmetique.NOTES.getPrice(),
-                Cosmetique.NOTES.isVip(), "§dNotes", notesLore, cosmetics.contains("notes"), CosmetiqueManager.CosmetiqueType.PARTICLE));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.NOTE_BLOCK), Cosmetique.NOTES, player, "§dNotes", notesLore, cosmetics.contains("notes")));
 
         List<String> emeraldLore = new ArrayList<>();
         emeraldLore.add("§7Laissez parler votre humeur.");
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.EMERALD), Cosmetique.CONTENT.getPrice(),
-                Cosmetique.CONTENT.isVip(), "§aContent", emeraldLore, cosmetics.contains("content"), CosmetiqueManager.CosmetiqueType.PARTICLE));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.EMERALD), Cosmetique.CONTENT, player, "§aContent", emeraldLore, cosmetics.contains("content")));
 
         List<String> fumeeLore = MenuManager.getNewLore("§7Attention ça brûle !");
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.SULPHUR), Cosmetique.FUMEE.getPrice(),
-                Cosmetique.FUMEE.isVip(), "§7Fumée", fumeeLore, cosmetics.contains("fumee"), CosmetiqueManager.CosmetiqueType.PARTICLE));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.SULPHUR), Cosmetique.FUMEE, player, "§7Fumée", fumeeLore, cosmetics.contains("fumee")));
 
         List<String> flamesLore = new ArrayList<>();
         flamesLore.add("§7Les flammes vous encerclent telle une barrière");
         flamesLore.add("§7protectrice.");
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.MOB_SPAWNER), Cosmetique.FLAMES.getPrice(),
-                Cosmetique.FLAMES.isVip(), "§eFlames", flamesLore, cosmetics.contains("flames"), CosmetiqueManager.CosmetiqueType.PARTICLE));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.MOB_SPAWNER), Cosmetique.FLAMES, player, "§eFlames", flamesLore, cosmetics.contains("flames")));
 
         List<String> spiralesLore = MenuManager.getNewLore("§7Faites apparaître votre aura de puissance.");
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.POTION), Cosmetique.SPIRALES.getPrice(),
-                Cosmetique.SPIRALES.isVip(), "§bSpirales", spiralesLore, cosmetics.contains("spirales"), CosmetiqueManager.CosmetiqueType.PARTICLE));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.POTION), Cosmetique.SPIRALES, player, "§bSpirales", spiralesLore, cosmetics.contains("spirales")));
 
         List<String> redstoneLore = MenuManager.getNewLore("§7Vous ressemblez à aypierre...");
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.REDSTONE), Cosmetique.REDSTONE.getPrice(),
-                Cosmetique.REDSTONE.isVip(), "§4Redstone", redstoneLore, cosmetics.contains("redstone"), CosmetiqueManager.CosmetiqueType.PARTICLE));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.REDSTONE), Cosmetique.REDSTONE, player, "§4Redstone", redstoneLore, cosmetics.contains("redstone")));
 
         List<String> coeursLore = MenuManager.getNewLore("§7Laissez parler vos sentiments !");
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.RED_ROSE), Cosmetique.COEURS.getPrice(),
-                Cosmetique.COEURS.isVip(), "§cCoeurs", coeursLore, cosmetics.contains("coeurs"), CosmetiqueManager.CosmetiqueType.PARTICLE));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.RED_ROSE), Cosmetique.COEURS, player, "§cCoeurs", coeursLore, cosmetics.contains("coeurs")));
 
         List<String> legendaryLore = new ArrayList<>();
         legendaryLore.add("§7Seuls les riches auront la chance de pouvoir");
         legendaryLore.add("§7se payer cette particule si secrète !");
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.GOLDEN_APPLE, 1, (short)0, (byte)1), Cosmetique.LEGENDARY.getPrice(),
-                Cosmetique.LEGENDARY.isVip(), "§cLege§3ndary", legendaryLore, cosmetics.contains("legendary"), CosmetiqueManager.CosmetiqueType.PARTICLE));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.GOLDEN_APPLE, 1, (short)0, (byte)1), Cosmetique.LEGENDARY, player, "§cLege§3ndary", legendaryLore, cosmetics.contains("legendary")));
 
         return itemStacks;
     }

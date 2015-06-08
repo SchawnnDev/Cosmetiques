@@ -21,7 +21,6 @@ import fr.schawnndev.api.utils.ItemDisponibility;
 import fr.schawnndev.data.ItemStackManager;
 import fr.schawnndev.gadgets.GadgetManager;
 import fr.schawnndev.math.PositionConverter;
-import fr.schawnndev.particules.ParticleManager;
 import fr.schawnndev.sql.SQLManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -121,8 +120,7 @@ public class Gadget_SubMenu implements Listener {
         doublejumpLore.add("  ");
         doublejumpLore.add("§7Recharge : §a5 secondes§7.");
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.FEATHER), CosmetiqueManager.Cosmetique.DOUBLE_JUMP.getPrice(),
-                CosmetiqueManager.Cosmetique.DOUBLE_JUMP.isVip(), "§bDouble Jump", doublejumpLore, cosmetics.contains("doublejump"), CosmetiqueManager.CosmetiqueType.GADGET));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.FEATHER), CosmetiqueManager.Cosmetique.DOUBLE_JUMP, player, "§bDouble Jump", doublejumpLore, cosmetics.contains("doublejump")));
 
         List<String> musicLore = new ArrayList<>();
         musicLore.add("§7Faites profiter votre entourage de belles");
@@ -130,8 +128,7 @@ public class Gadget_SubMenu implements Listener {
         musicLore.add("  ");
         musicLore.add("§7Recharge : §a2 minutes§7.");
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(2258), CosmetiqueManager.Cosmetique.MUSIC.getPrice(),
-                CosmetiqueManager.Cosmetique.MUSIC.isVip(), "§2Music", musicLore, cosmetics.contains("music"), CosmetiqueManager.CosmetiqueType.GADGET));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(2258), CosmetiqueManager.Cosmetique.MUSIC, player, "§2Music", musicLore, cosmetics.contains("music")));
 
         List<String> cakeLore = new ArrayList<>();
         cakeLore.add("§7Posez un gâteau empoisonné qui va infliger des");
@@ -139,8 +136,7 @@ public class Gadget_SubMenu implements Listener {
         cakeLore.add("  ");
         cakeLore.add("§7Recharge : §a45 secondes§7.");
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.CAKE), CosmetiqueManager.Cosmetique.GATEAU_EMPOISONNE.getPrice(),
-                CosmetiqueManager.Cosmetique.GATEAU_EMPOISONNE.isVip(), "§3Gâteau Empoisonné",cakeLore , cosmetics.contains("gateauempoisonne"), CosmetiqueManager.CosmetiqueType.GADGET));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.CAKE), CosmetiqueManager.Cosmetique.GATEAU_EMPOISONNE, player, "§3Gâteau Empoisonné", cakeLore , cosmetics.contains("gateauempoisonne")));
 
         List<String> laisseLore = new ArrayList<>();
         laisseLore.add("§7Attrapez les joueurs avec un simple clic");
@@ -148,8 +144,7 @@ public class Gadget_SubMenu implements Listener {
         laisseLore.add("  ");
         laisseLore.add("§7Recharge : §a10 secondes§7.");
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.LEASH), CosmetiqueManager.Cosmetique.LAISSE.getPrice(),
-                CosmetiqueManager.Cosmetique.LAISSE.isVip(), "§4Attrape moi, si tu peux !", laisseLore, cosmetics.contains("laisse"), CosmetiqueManager.CosmetiqueType.GADGET));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.LEASH), CosmetiqueManager.Cosmetique.LAISSE, player, "§4Attrape moi, si tu peux !", laisseLore, cosmetics.contains("laisse")));
 
         List<String> canonLore = new ArrayList<>();
         canonLore.add("§7Invoquez aléatoirement un monstre parmis");
@@ -158,32 +153,28 @@ public class Gadget_SubMenu implements Listener {
         canonLore.add("  ");
         canonLore.add("§7Recharge : §a15 secondes§7.");
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.SULPHUR), CosmetiqueManager.Cosmetique.CANON.getPrice(),
-                CosmetiqueManager.Cosmetique.CANON.isVip(), "§fCanon", canonLore, cosmetics.contains("canon"), CosmetiqueManager.CosmetiqueType.GADGET));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.SULPHUR), CosmetiqueManager.Cosmetique.CANON, player, "§fCanon", canonLore, cosmetics.contains("canon")));
 
         List<String> appleLore = new ArrayList<>();
         appleLore.add("§7Oh yééééééé !");
         appleLore.add("  ");
         appleLore.add("§7Recharge : §a40 secondes§7.");
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.GOLDEN_APPLE), CosmetiqueManager.Cosmetique.APPLE.getPrice(),
-                CosmetiqueManager.Cosmetique.APPLE.isVip(), "§eApple", appleLore, cosmetics.contains("apple"), CosmetiqueManager.CosmetiqueType.GADGET));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.GOLDEN_APPLE), CosmetiqueManager.Cosmetique.APPLE, player, "§eApple", appleLore, cosmetics.contains("apple")));
 
         List<String> encreLore = new ArrayList<>();
         encreLore.add("§7Aveuglez le joueur ciblé pendant §a5 secondes§7 !");
         encreLore.add("  ");
         encreLore.add("§7Recharge : §a10 secondes§7.");
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(351), CosmetiqueManager.Cosmetique.ENCRE.getPrice(),
-                CosmetiqueManager.Cosmetique.ENCRE.isVip(), "§cEncre", encreLore, cosmetics.contains("encre"), CosmetiqueManager.CosmetiqueType.GADGET));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(351), CosmetiqueManager.Cosmetique.ENCRE, player, "§cEncre", encreLore, cosmetics.contains("encre")));
 
         List<String> canneapechesLore = new ArrayList<>();
         canneapechesLore.add("§7Téléportez-vous où vous lancez votre hameçon !");
         canneapechesLore.add("  ");
         canneapechesLore.add("§7Recharge : §a5 secondes§7.");
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.FISHING_ROD), CosmetiqueManager.Cosmetique.CANNE_A_PECHE.getPrice(),
-                CosmetiqueManager.Cosmetique.CANNE_A_PECHE.isVip(), "§6Canne à pêche", canneapechesLore, cosmetics.contains("canneapeche"), CosmetiqueManager.CosmetiqueType.GADGET));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.FISHING_ROD), CosmetiqueManager.Cosmetique.CANNE_A_PECHE, player, "§6Canne à pêche", canneapechesLore, cosmetics.contains("canneapeche")));
 
         List<String> ibelieveicanflyLore = new ArrayList<>();
 
@@ -192,8 +183,7 @@ public class Gadget_SubMenu implements Listener {
         ibelieveicanflyLore.add("  ");
         ibelieveicanflyLore.add("§7Recharge : §a15 secondes§7.");
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.FIREBALL), CosmetiqueManager.Cosmetique.FIREBALL.getPrice(),
-                CosmetiqueManager.Cosmetique.FIREBALL.isVip(), "§2I believe I can Fly", ibelieveicanflyLore, cosmetics.contains("fireball"), CosmetiqueManager.CosmetiqueType.GADGET));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.FIREBALL), CosmetiqueManager.Cosmetique.FIREBALL, player, "§2I believe I can Fly", ibelieveicanflyLore, cosmetics.contains("fireball")));
 
         List<String> tntLore = new ArrayList<>();
 
@@ -202,16 +192,14 @@ public class Gadget_SubMenu implements Listener {
         tntLore.add("  ");
         tntLore.add("§7Recharge : §a15 secondes§7.");
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.TNT), CosmetiqueManager.Cosmetique.TNT.getPrice(),
-                CosmetiqueManager.Cosmetique.TNT.isVip(), "§7TNT", tntLore, cosmetics.contains("tnt"), CosmetiqueManager.CosmetiqueType.GADGET));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.TNT), CosmetiqueManager.Cosmetique.TNT, player, "§7TNT", tntLore, cosmetics.contains("tnt")));
 
         List<String> artificeLore = new ArrayList<>();
         artificeLore.add("§7Propulsez-vous dans les airs avec le feu d'artifice !");
         artificeLore.add("  ");
         artificeLore.add("§7Recharge : §a15 secondes§7.");
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.FIREWORK), CosmetiqueManager.Cosmetique.ARTIFICE.getPrice(),
-                CosmetiqueManager.Cosmetique.ARTIFICE.isVip(), "§514 Juillet", artificeLore, cosmetics.contains("artifice"), CosmetiqueManager.CosmetiqueType.GADGET));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.FIREWORK), CosmetiqueManager.Cosmetique.ARTIFICE, player, "§514 Juillet", artificeLore, cosmetics.contains("artifice")));
 
         return itemStacks;
     }
