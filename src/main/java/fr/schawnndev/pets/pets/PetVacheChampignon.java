@@ -62,7 +62,7 @@ public class PetVacheChampignon extends EntityMushroomCow implements Pet {
     }
 
     @Override
-    public Player getOwner() {
+    public Player getPetOwner() {
         return Bukkit.getPlayer(this.owner);
     }
 
@@ -74,7 +74,7 @@ public class PetVacheChampignon extends EntityMushroomCow implements Pet {
 
     @Override
     public void teleportToOwner() {
-        getBukkitEntity().teleport(getOwner());
+        getBukkitEntity().teleport(getPetOwner());
     }
 
     @Override
@@ -96,16 +96,16 @@ public class PetVacheChampignon extends EntityMushroomCow implements Pet {
     public void setRide(boolean arg) {
 
         if (arg) {
-            if (getOwner().getPassenger() != null && getOwner().getPassenger().equals(getMCEntity()))
+            if (getPetOwner().getPassenger() != null && getPetOwner().getPassenger().equals(getMCEntity()))
                 getMCEntity().leaveVehicle();
 
-            getMCEntity().teleport(getOwner());
-            getMCEntity().setPassenger(getOwner());
+            getMCEntity().teleport(getPetOwner());
+            getMCEntity().setPassenger(getPetOwner());
 
             riding = true;
 
         } else {
-            getOwner().leaveVehicle();
+            getPetOwner().leaveVehicle();
 
             riding = false;
         }
@@ -116,18 +116,18 @@ public class PetVacheChampignon extends EntityMushroomCow implements Pet {
     public void setHat(boolean arg) {
 
         if (arg) {
-            if (getOwner().getPassenger() == null) {
-                if (getMCEntity().getPassenger() != null && getMCEntity().getPassenger().equals(getOwner()))
-                    getOwner().leaveVehicle();
+            if (getPetOwner().getPassenger() == null) {
+                if (getMCEntity().getPassenger() != null && getMCEntity().getPassenger().equals(getPetOwner()))
+                    getPetOwner().leaveVehicle();
 
-                getBukkitEntity().teleport(getOwner());
-                getOwner().setPassenger(getBukkitEntity());
+                getBukkitEntity().teleport(getPetOwner());
+                getPetOwner().setPassenger(getBukkitEntity());
 
                 hat = true;
             }
         } else {
-            if (PetManager.isAPet(getOwner().getPassenger())) {
-                getOwner().getPassenger().leaveVehicle();
+            if (PetManager.isAPet(getPetOwner().getPassenger())) {
+                getPetOwner().getPassenger().leaveVehicle();
 
                 hat = false;
             }
@@ -137,7 +137,7 @@ public class PetVacheChampignon extends EntityMushroomCow implements Pet {
 
     @Override
     public void follow() {
-        Location ownerLocation = getOwner().getLocation();
+        Location ownerLocation = getPetOwner().getLocation();
         PathEntity pathEntity = navigation.a(ownerLocation.getX(), ownerLocation.getY(), ownerLocation.getZ());
         navigation.a(pathEntity, 1.3f);
     }
@@ -152,13 +152,13 @@ public class PetVacheChampignon extends EntityMushroomCow implements Pet {
             public void run() {
                 Location entityLocation = getMCEntity().getLocation();
 
-                if (entityLocation.getWorld().equals(getOwner().getWorld()))
-                    if (entityLocation.distance(getOwner().getLocation()) < 15)
-                        if (entityLocation.distance(getOwner().getLocation()) > 4)
+                if (entityLocation.getWorld().equals(getPetOwner().getWorld()))
+                    if (entityLocation.distance(getPetOwner().getLocation()) < 15)
+                        if (entityLocation.distance(getPetOwner().getLocation()) > 4)
                             follow();
                         else
                             navigation.n();
-                    else if (getOwner().isOnGround())
+                    else if (getPetOwner().isOnGround())
                         teleportToOwner();
 
             }
@@ -185,7 +185,7 @@ public class PetVacheChampignon extends EntityMushroomCow implements Pet {
 
     @Override
     public void remove() {
-        getOwner().getWorld().playSound(getBukkitEntity().getLocation(), Sound.WOLF_WHINE, 1f, 1f);
+        getPetOwner().getWorld().playSound(getBukkitEntity().getLocation(), Sound.WOLF_WHINE, 1f, 1f);
 
         stopFollow();
 

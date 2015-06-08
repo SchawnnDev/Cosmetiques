@@ -31,7 +31,7 @@ public interface Pet {
      * @return The Owner of the Pet
      */
 
-    public Player getOwner();
+    public Player getPetOwner();
 
     /**
      *  Get the Pet name

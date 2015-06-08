@@ -15,10 +15,7 @@ package fr.schawnndev.pets;
 
 import fr.schawnndev.CosmetiqueManager.*;
 import fr.schawnndev.LCCosmetiques;
-import fr.schawnndev.pets.pets.PetEntityType;
-import fr.schawnndev.pets.pets.PetPoulet;
-import fr.schawnndev.pets.pets.PetVache;
-import fr.schawnndev.pets.pets.PetVacheChampignon;
+import fr.schawnndev.pets.pets.*;
 import fr.schawnndev.sql.SQLManager;
 import lombok.Getter;
 import org.bukkit.Location;
@@ -111,27 +108,27 @@ public class PetManager {
                 break;
 
             case CHEVAL:
-
+                pet = new PetCheval(owner.getUniqueId(), cosmetique);
                 break;
 
             case CREEPER:
-
+                pet = new PetCreeper(owner.getUniqueId(), cosmetique);
                 break;
 
             case PIGMAN:
-
+                pet = new PetPigman(owner.getUniqueId(), cosmetique);
                 break;
 
             case LAPIN:
-
+                pet = new PetLapin(owner.getUniqueId(), cosmetique);
                 break;
 
             case ZOMBIE:
-
+                pet = new PetZombie(owner.getUniqueId(), cosmetique);
                 break;
 
             case SQUELETTE:
-
+                pet = new PetSquelette(owner.getUniqueId(), cosmetique);
                 break;
 
             case POULET:
@@ -139,11 +136,11 @@ public class PetManager {
                 break;
 
             case MOUTON:
-
+                pet = new PetMouton(owner.getUniqueId(), cosmetique);
                 break;
 
             case LOUP:
-
+                pet = new PetLoup(owner.getUniqueId(), cosmetique);
                 break;
 
         }
