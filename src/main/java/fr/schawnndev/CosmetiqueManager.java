@@ -84,19 +84,19 @@ public class CosmetiqueManager {
         CANNE_A_PECHE(CosmetiqueType.GADGET, false, 1800, new ItemStack(Material.FISHING_ROD), "canneapeche"),
         FIREBALL(CosmetiqueType.GADGET, true, 0, new ItemStack(Material.FIREBALL), "fireball"),
         TNT(CosmetiqueType.GADGET, false, 1100, new ItemStack(Material.TNT), "tnt"),
-        ARTIFICE(CosmetiqueType.GADGET, true, 0, new ItemStack(Material.FIREWORK), "artifice"),
+        ARTIFICE(CosmetiqueType.GADGET, false, 900, new ItemStack(Material.FIREWORK), "artifice"),
 
         // Particules
 
         MAGICIEN(CosmetiqueType.PARTICLE, false, 900, new ItemStack(Material.ENCHANTMENT_TABLE), "magicien"),
         PLUIE(CosmetiqueType.PARTICLE, false, 1200, new ItemStack(Material.WATER_BUCKET), "pluie"),
-        COEURS(CosmetiqueType.PARTICLE, false, 1500, new ItemStack(Material.RED_ROSE), "coeurs"),
+        COEURS(CosmetiqueType.PARTICLE, true, 0, new ItemStack(Material.RED_ROSE), "coeurs"),
         LAVE(CosmetiqueType.PARTICLE, false, 600, new ItemStack(Material.LAVA_BUCKET), "lave"),
         CONTENT(CosmetiqueType.PARTICLE, false, 900, new ItemStack(Material.EMERALD), "content"),
         FUMEE(CosmetiqueType.PARTICLE, false, 1800, new ItemStack(Material.SULPHUR), "fumee"),
         NOTES(CosmetiqueType.PARTICLE, false, 1600, new ItemStack(Material.NOTE_BLOCK), "notes"),
         FLAMES(CosmetiqueType.PARTICLE, false, 2000, new ItemStack(Material.MOB_SPAWNER), "flames"),
-        SPIRALES(CosmetiqueType.PARTICLE, false, 1400, new ItemStack(Material.POTION), "spirales"),
+        SPIRALES(CosmetiqueType.PARTICLE, true, 0, new ItemStack(Material.POTION), "spirales"),
         REDSTONE(CosmetiqueType.PARTICLE, false, 1000, new ItemStack(Material.REDSTONE), "redstone"),
         LEGENDARY(CosmetiqueType.PARTICLE, false, 987654321, new ItemStack(Material.GOLDEN_APPLE, 1, (short)0, (byte)1), "legendary"),
 
