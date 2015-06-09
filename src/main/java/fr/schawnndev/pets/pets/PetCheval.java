@@ -56,18 +56,16 @@ public class PetCheval extends EntityHorse implements Pet {
         Random _r = new Random();
 
         setHorse(Horse.Style.values()[_r.nextInt(Horse.Style.values().length)],
-                Horse.Variant.values()[_r.nextInt(Horse.Variant.values().length)],
                 Horse.Color.values()[_r.nextInt(Horse.Color.values().length)]);
 
         startFollow();
     }
 
-    private void setHorse(Horse.Style style, Horse.Variant variant, Horse.Color color){
+    private void setHorse(Horse.Style style,Horse.Color color){
         setTame(true);
-        Horse horse = (Horse) getCBukkitEntity();
+        Horse horse = (Horse) getMCEntity();
         horse.getInventory().setSaddle(new org.bukkit.inventory.ItemStack(272));
         horse.setStyle(style);
-        horse.setVariant(variant);
         horse.setColor(color);
     }
 
