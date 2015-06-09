@@ -46,7 +46,7 @@ public class Main_Menu implements Listener {
     }
 
     public static void open(Player player){
-        Inventory inv = Bukkit.createInventory(null, 6*9, "             §6§oCosmétiques");
+        Inventory inv = Bukkit.createInventory(null, 6*9, "Cosmétiques");
 
         ItemStack glassStack = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)0, GlassColor.WHITE.getData());
         ItemMeta glassMeta = glassStack.getItemMeta();
@@ -85,10 +85,10 @@ public class Main_Menu implements Listener {
 
         //
 
-        byte couleur_particules = ParticleManager.getActiveParticles().containsKey(player.getUniqueId()) ? (byte)10 : (byte)8;
+        byte couleur_particules = ParticleManager.getActiveParticles().containsKey(player.getUniqueId()) ? (byte)8 : (byte)10;
         ItemStack colorant_particules = new ItemStack(Material.INK_SACK, 1, (short)0, couleur_particules);
         ItemMeta colorant_particulesMeta = colorant_particules.getItemMeta();
-        colorant_particulesMeta.setDisplayName(couleur_particules == 10 ? "§aDésactiver les particules" : "§cActiver les particules");
+        colorant_particulesMeta.setDisplayName(couleur_particules == 10 ? "§aChoisir une Particule" : "§cDésactiver votre Particule");
         colorant_particules.setItemMeta(colorant_particulesMeta);
 
         inv.setItem(positionConverter.convert(5, 4), colorant_particules);
@@ -106,10 +106,10 @@ public class Main_Menu implements Listener {
 
         //
 
-        byte couleur_gadgets = GadgetManager.hasGadgetActive(player) ? (byte)10 : (byte)8;
+        byte couleur_gadgets = GadgetManager.hasGadgetActive(player) ? (byte)8 : (byte)10;
         ItemStack colorant_gadgets = new ItemStack(Material.INK_SACK, 1, (short)0, couleur_gadgets);
         ItemMeta colorant_gadgetsMeta = colorant_gadgets.getItemMeta();
-        colorant_gadgetsMeta.setDisplayName(couleur_gadgets == 10 ? "§aDésactiver les gadgets" : "§cActiver les gadgets");
+        colorant_gadgetsMeta.setDisplayName(couleur_gadgets == 10 ? "§aChoisir un Gadget" : "§cDésactiver votre Gadget");
         colorant_gadgets.setItemMeta(colorant_gadgetsMeta);
 
         inv.setItem(positionConverter.convert(7, 4), colorant_gadgets);
@@ -127,10 +127,10 @@ public class Main_Menu implements Listener {
 
         //
 
-        byte couleur_pets = PetManager.hasActivePet(player) ? (byte)10 : (byte)8;
+        byte couleur_pets = PetManager.hasActivePet(player) ? (byte)8 : (byte)10;
         ItemStack colorant_pets = new ItemStack(Material.INK_SACK, 1, (short)0, couleur_pets);
         ItemMeta colorant_petsMeta = colorant_pets.getItemMeta();
-        colorant_petsMeta.setDisplayName(couleur_pets == 10 ? "§aDésactiver les pets" : "§cActiver les pets");
+        colorant_petsMeta.setDisplayName(couleur_pets == 10 ? "§aChoisir un Pet" : "§cDésactiver votre Pet");
         colorant_pets.setItemMeta(colorant_petsMeta);
 
         inv.setItem(positionConverter.convert(3, 4), colorant_pets);
@@ -162,13 +162,13 @@ public class Main_Menu implements Listener {
     @EventHandler
     public void onInteract(PlayerInteractEvent e){
         if(e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR)
-            if(e.getItem() != null && e.getItem().getType() == Material.JUKEBOX && e.getItem().hasItemMeta() && e.getItem().getItemMeta().getDisplayName() != null && e.getItem().getItemMeta().getDisplayName().equals("§f=== §5Cosmétiques §f===  "))
+            if(e.getItem() != null && e.getItem().getType() == Material.JUKEBOX && e.getItem().hasItemMeta() && e.getItem().getItemMeta().getDisplayName() != null && e.getItem().getItemMeta().getDisplayName().equals("§5Cosmétiques"))
                 open(e.getPlayer());
     }
 
     @EventHandler
     public void onClick(InventoryClickEvent e){
-        if(e.getInventory() != null && e.getInventory().getName() != null && e.getInventory().getName().equals("             §6§oCosmétiques")){
+        if(e.getInventory() != null && e.getInventory().getName() != null && e.getInventory().getName().equals("Cosmétiques")){
             Player player = (Player) e.getWhoClicked();
 
             e.setCancelled(true);
@@ -186,20 +186,28 @@ public class Main_Menu implements Listener {
                     case "§6Particules":
                         Particle_SubMenu.open(player);
                         break;
-                    case "§aDésactiver les particules":
+                    case "§cDésactiver votre Particule":
                         ParticleManager.removeActiveParticle(player);
                         open(player);
                         break;
-                    case "§cActiver les particules":
+                    case "§aChoisir une Particule":
                         Particle_SubMenu.open(player);
                         break;
-                    case "§aDésactiver les gadgets":
+                    case "§cDésactiver votre Gadget":
                         GadgetManager.addGadget(player, "aucun", false);
                         player.getInventory().setItem(4, new ItemStack(Material.AIR));
                         open(player);
                         break;
-                    case "§cActiver les gadgets":
+                    case "§aChoisir un Gadget":
                         Gadget_SubMenu.open(player);
+                        break;
+                    case "§cDésactiver votre Pet":
+                        if(PetManager.hasActivePet(player))
+                            PetManager.removePet(player);
+                        open(player);
+                        break;
+                    case "§aChoisir un Pet":
+                        Pet_SubMenu.open(player);
                         break;
                     default:
                         break;

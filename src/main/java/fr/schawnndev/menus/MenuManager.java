@@ -37,7 +37,7 @@ public class MenuManager {
         cosmeticItem = new ItemStack(Material.JUKEBOX);
 
         ItemMeta itemMeta = cosmeticItem.getItemMeta();
-        itemMeta.setDisplayName("§f=== §5Cosmétiques §f===  ");
+        itemMeta.setDisplayName("§5Cosmétiques");
         cosmeticItem.setItemMeta(itemMeta);
 
         new Gadget_SubMenu();
@@ -70,7 +70,8 @@ public class MenuManager {
 
                 if (player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")) {
                     lore.add("§7------------");
-                    lore.add("§aVous possédez " + (cosmetiqueType == CosmetiqueType.PARTICLE ? "cette particule." : cosmetiqueType == CosmetiqueType.GADGET ? "ce gadget." : "ce pet."));
+                    lore.add("§aVous possédez ce Pet grâce à votre grade.");
+                    lore.add("§a» Equiper " + (cosmetiqueType == CosmetiqueType.PARTICLE ? "cette Particule." : cosmetiqueType == CosmetiqueType.GADGET ? "ce Gadget." : "ce Pet."));
                 } else {
                     lore.add("§7------------");
                     lore.add("§bPrix : §6Réservé aux §eVIP");
@@ -83,7 +84,7 @@ public class MenuManager {
             }
         } else {
             lore.add("§7------------");
-            lore.add("§aVous possédez " + (cosmetiqueType == CosmetiqueType.PARTICLE ? "cette particule." : cosmetiqueType == CosmetiqueType.GADGET ? "ce gadget." : "ce pet."));
+            lore.add("§a» Equiper " + (cosmetiqueType == CosmetiqueType.PARTICLE ? "cette Particule." : cosmetiqueType == CosmetiqueType.GADGET ? "ce Gadget." : "ce Pet."));
         }
 
         finalItemMeta.setDisplayName(displayName);

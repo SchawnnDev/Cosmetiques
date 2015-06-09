@@ -45,7 +45,7 @@ public class Pet_SubMenu implements Listener {
     }
 
     public static void open(Player player){
-        Inventory inv = Bukkit.createInventory(null, 6*9, "               §6§oPets");
+        Inventory inv = Bukkit.createInventory(null, 6*9, "Pets");
 
         ItemStack glassStack = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)0, GlassColor.WHITE.getData());
         ItemMeta glassMeta = glassStack.getItemMeta();
@@ -78,8 +78,7 @@ public class Pet_SubMenu implements Listener {
 
         ItemStack retour = new ItemStack(Material.ARROW);
         ItemMeta retourMeta = retour.getItemMeta();
-        retourMeta.setDisplayName("§7<===");
-        retourMeta.setLore(MenuManager.getNewLore("§6Page précédente"));
+        retourMeta.setDisplayName("§6Page précédente");
         retour.setItemMeta(retourMeta);
 
         inv.setItem(positionConverter.convert(1, 1), cosmetiques);
@@ -164,7 +163,6 @@ public class Pet_SubMenu implements Listener {
                 if (player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")) {
                     player.closeInventory();
                     player.sendMessage("§aTu viens de séléctionner le pet §b" + name + "§a !");
-                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                     PetManager.addPlayerPet(player, cosmetique);
                 } else {
                     player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
@@ -175,7 +173,6 @@ public class Pet_SubMenu implements Listener {
                 if (SQLManager.hasBuyCosmetic(player, id)) {
                     player.closeInventory();
                     player.sendMessage("§aTu viens de séléctionner le pet §b" + name + "§a !");
-                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                     PetManager.addPlayerPet(player, cosmetique);
                 } else {
                     Achat achat = new Achat(id, cosmetique, player);
@@ -188,7 +185,7 @@ public class Pet_SubMenu implements Listener {
 
     @EventHandler
     public void onClick(InventoryClickEvent e){
-        if(e.getInventory() != null && e.getInventory().getName() != null && e.getInventory().getName().equals("               §6§oPets")){
+        if(e.getInventory() != null && e.getInventory().getName() != null && e.getInventory().getName().equals("Pets")){
             Player player = (Player) e.getWhoClicked();
 
             e.setCancelled(true);
@@ -198,7 +195,7 @@ public class Pet_SubMenu implements Listener {
 
                 switch (e.getCurrentItem().getItemMeta().getDisplayName()){
 
-                    case "§7<===":
+                    case "§6Page précédente":
                         Main_Menu.open(player);
                         break;
 

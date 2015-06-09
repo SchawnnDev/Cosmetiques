@@ -42,8 +42,6 @@ public class GadgetTNT extends Gadget implements Listener {
     @Getter
     public CosmetiqueManager.Cosmetique cosmetique = CosmetiqueManager.Cosmetique.TNT;
 
-    public static List<UUID> cooldowns = new ArrayList<>();
-
     @Override
     public void start(UUID uuid){
         // useless

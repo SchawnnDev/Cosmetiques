@@ -77,14 +77,14 @@ public class Achat {
         this.generated = false;
         this.isOpened = false;
         this.allowToBuy = true;
-        this.inventoryName = "§6Achat: §c" + id.toLowerCase().substring(0, 1).toUpperCase() + id.toLowerCase().substring(1);
+        this.inventoryName = "Confirmation d'achat";
         this.cosmetique = cosmetique;
         System.out.println("Nouvel achat de " + player.getName() + " | id: " + id + " | date: " + new Date().toLocaleString());
         Manager.achats.add(this);
     }
 
     public void generate(){
-        inventory = Bukkit.createInventory(null, InventoryType.DISPENSER, inventoryName);
+        inventory = Bukkit.createInventory(null, InventoryType.HOPPER, inventoryName);
 
         PositionConverter converter = new PositionConverter();
 
@@ -93,23 +93,23 @@ public class Achat {
         woolGreenMeta.setDisplayName("§aValider");
         woolGreen.setItemMeta(woolGreenMeta);
 
-        inventory.setItem(3, woolGreen);
+        inventory.setItem(0, woolGreen);
 
         ItemStack woolRed = new ItemStack(Material.WOOL, 1, (short)0, (byte) 14);
         ItemMeta woolRedMeta = woolRed.getItemMeta();
         woolRedMeta.setDisplayName("§cAnnuler");
         woolRed.setItemMeta(woolRedMeta);
 
-        inventory.setItem(5, woolRed);
+        inventory.setItem(4, woolRed);
 
         ItemStack itemStack = cosmetique.getItemStack();
         ItemMeta itemMeta = itemStack.getItemMeta();
         String cosmetiqueTypeString = cosmetique.getCosmetiqueType().toString().toLowerCase().substring(0, 1).toUpperCase() + cosmetique.getCosmetiqueType().toString().toLowerCase().substring(1);
-        itemMeta.setDisplayName("§6" + cosmetiqueTypeString + ": §a" + id.toLowerCase().substring(0, 1).toUpperCase() + id.toLowerCase().substring(1));
+        itemMeta.setDisplayName("§a" + id.toLowerCase().substring(0, 1).toUpperCase() + id.toLowerCase().substring(1));
         itemMeta.setLore(Arrays.asList("§7------------","§bPrix: §6" + price + " §bLCoins"));
         itemStack.setItemMeta(itemMeta);
 
-        inventory.setItem(4, itemStack);
+        inventory.setItem(2, itemStack);
 
         generated = true;
     }
@@ -149,7 +149,7 @@ public class Achat {
             LCMaster.api.setCoins(player.getName(), money);
 
             finish(false, false);
-            player.sendMessage("§aTu viens d'acheter §b" + id);
+            player.sendMessage("§aTu viens d'acheter §b" + id.toLowerCase().substring(0, 1).toUpperCase() + id.toLowerCase().substring(1));
             System.out.println("Achat confirme de " + player.getName() + " | id: " + id + " | date: " + new Date().toLocaleString());
 
             if(cosmetique.getCosmetiqueType() == CosmetiqueType.PARTICLE)
@@ -157,7 +157,7 @@ public class Achat {
             else if (cosmetique.getCosmetiqueType() == CosmetiqueType.GADGET){
                 player.getInventory().setItem(4, ItemStackManager.getItemStack(cosmetique));
                 GadgetManager.addGadget(player, id, false);
-            } else {
+            } else if (cosmetique.getCosmetiqueType() == CosmetiqueType.PET){
                 PetManager.addPlayerPet(player, cosmetique);
             }
 
@@ -176,7 +176,7 @@ public class Achat {
         player.closeInventory();
 
         if(annuler) {
-            player.sendMessage("§cTu as annulé l'achat de " + id);
+            player.sendMessage("§cTu as annulé l'achat de " + id.toLowerCase().substring(0, 1).toUpperCase() + id.toLowerCase().substring(1));
             System.out.println("Achat annule (annule par joueur) de " + player.getName() + " | id: " + id + " | date: " + new Date().toLocaleString());
         }
 

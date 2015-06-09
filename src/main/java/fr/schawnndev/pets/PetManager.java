@@ -19,6 +19,7 @@ import fr.schawnndev.pets.pets.*;
 import fr.schawnndev.sql.SQLManager;
 import lombok.Getter;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftEntity;
 import org.bukkit.entity.*;
 
@@ -47,11 +48,37 @@ public class PetManager {
         return false;
     }
 
+    public static void playSound(Player player, Cosmetique cosmetique){
+        if(player == null || !player.isOnline()) return;
+
+        if(cosmetique == Cosmetique.POULET)
+            player.playSound(player.getLocation(), Sound.CHICKEN_IDLE, 1f, 2f);
+        else if (cosmetique == Cosmetique.CHEVAL)
+            player.playSound(player.getLocation(), Sound.HORSE_BREATHE, 1f, 2f);
+        else if (cosmetique == Cosmetique.ZOMBIE)
+            player.playSound(player.getLocation(), Sound.ZOMBIE_IDLE, 1f, 2f);
+        else if (cosmetique == Cosmetique.SQUELETTE)
+            player.playSound(player.getLocation(), Sound.SKELETON_IDLE, 1f, 2f);
+        else if (cosmetique == Cosmetique.PIGMAN)
+            player.playSound(player.getLocation(), Sound.ZOMBIE_PIG_IDLE, 1f, 2f);
+        else if (cosmetique == Cosmetique.VACHE_CHAMPIGNON)
+            player.playSound(player.getLocation(), Sound.COW_IDLE, 1f, 2f);
+        else if (cosmetique == Cosmetique.VACHE)
+            player.playSound(player.getLocation(), Sound.COW_IDLE, 1f, 2f);
+        else if (cosmetique == Cosmetique.MOUTON)
+            player.playSound(player.getLocation(), Sound.SHEEP_IDLE, 1f, 2f);
+        else if (cosmetique == Cosmetique.CREEPER)
+            player.playSound(player.getLocation(), Sound.CREEPER_HISS, 1f, 2f);
+        else if (cosmetique == Cosmetique.LOUP)
+            player.playSound(player.getLocation(), Sound.WOLF_BARK, 1f, 2f);
+    }
+
     public static void addPlayerPet(Player owner, Cosmetique cosmetique){
         if (hasActivePet(owner))
             if (getPet(owner) != null)
                 removePet(owner);
 
+        playSound(owner, cosmetique);
 
         Pet pet = spawn(cosmetique, owner);
         activePets.put(owner.getUniqueId(), pet);
@@ -64,6 +91,7 @@ public class PetManager {
             if (getPet(owner) != null)
                 removePet(owner);
 
+        playSound(owner, cosmetique);
 
         Pet pet = spawn(cosmetique, owner);
         activePets.put(owner.getUniqueId(), pet);

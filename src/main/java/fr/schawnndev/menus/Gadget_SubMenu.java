@@ -45,7 +45,7 @@ public class Gadget_SubMenu implements Listener {
     }
 
     public static void open(Player player){
-        Inventory inv = Bukkit.createInventory(null, 6*9, "               §6§oGadgets");
+        Inventory inv = Bukkit.createInventory(null, 6*9, "Gadgets");
 
         ItemStack glassStack = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)0, GlassColor.WHITE.getData());
         ItemMeta glassMeta = glassStack.getItemMeta();
@@ -78,8 +78,7 @@ public class Gadget_SubMenu implements Listener {
 
         ItemStack retour = new ItemStack(Material.ARROW);
         ItemMeta retourMeta = retour.getItemMeta();
-        retourMeta.setDisplayName("§7<===");
-        retourMeta.setLore(MenuManager.getNewLore("§6Page précédente"));
+        retourMeta.setDisplayName("§6Page précédente");
         retour.setItemMeta(retourMeta);
 
         inv.setItem(positionConverter.convert(1, 1), cosmetiques);
@@ -116,7 +115,7 @@ public class Gadget_SubMenu implements Listener {
         List<String> cosmetics = SQLManager.getCosmetics(player);
 
         List<String> doublejumpLore = new ArrayList<>();
-        doublejumpLore.add("§7Double Jump sur les §aHubs§7.");
+        doublejumpLore.add("§7Sautez tel un lapin.");
         doublejumpLore.add("  ");
         doublejumpLore.add("§7Recharge : §a5 secondes§7.");
 
@@ -138,13 +137,13 @@ public class Gadget_SubMenu implements Listener {
 
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.CAKE), CosmetiqueManager.Cosmetique.GATEAU_EMPOISONNE, player, "§3Gâteau Empoisonné", cakeLore , cosmetics.contains("gateauempoisonne")));
 
-        List<String> laisseLore = new ArrayList<>();
-        laisseLore.add("§7Attrapez les joueurs avec un simple clic");
-        laisseLore.add("§7et baladez les sur toute la map !");
-        laisseLore.add("  ");
-        laisseLore.add("§7Recharge : §a10 secondes§7.");
+        List<String> glaceLore = new ArrayList<>();
+        glaceLore.add("§7Lancez une boule de neige dans les airs");
+        glaceLore.add("§7qui traçera un chemin en blocs de glaces !");
+        glaceLore.add("  ");
+        glaceLore.add("§7Recharge : §a20 secondes§7.");
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.LEASH), CosmetiqueManager.Cosmetique.LAISSE, player, "§4Attrape moi, si tu peux !", laisseLore, cosmetics.contains("laisse")));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.SNOW_BALL), CosmetiqueManager.Cosmetique.GLACE, player, "§cça glisse !", glaceLore, cosmetics.contains("laisse")));
 
         List<String> canonLore = new ArrayList<>();
         canonLore.add("§7Invoquez aléatoirement un monstre parmis");
@@ -156,7 +155,9 @@ public class Gadget_SubMenu implements Listener {
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.SULPHUR), CosmetiqueManager.Cosmetique.CANON, player, "§fCanon", canonLore, cosmetics.contains("canon")));
 
         List<String> appleLore = new ArrayList<>();
-        appleLore.add("§7Oh yééééééé !");
+        appleLore.add("§7Faites sortir des pommes de votre");
+        appleLore.add("§7tête tel un magicien qui ferait sortir");
+        appleLore.add("§7un lapin de son chapeau magique !");
         appleLore.add("  ");
         appleLore.add("§7Recharge : §a40 secondes§7.");
 
@@ -165,7 +166,7 @@ public class Gadget_SubMenu implements Listener {
         List<String> encreLore = new ArrayList<>();
         encreLore.add("§7Aveuglez le joueur ciblé pendant §a5 secondes§7 !");
         encreLore.add("  ");
-        encreLore.add("§7Recharge : §a10 secondes§7.");
+        encreLore.add("§7Recharge : §a25 secondes§7.");
 
         itemStacks.add(MenuManager.buildItem(new ItemStack(351), CosmetiqueManager.Cosmetique.ENCRE, player, "§cEncre", encreLore, cosmetics.contains("encre")));
 
@@ -204,9 +205,47 @@ public class Gadget_SubMenu implements Listener {
         return itemStacks;
     }
 
+    private void proceedClick(Player player, CosmetiqueManager.Cosmetique cosmetique,  String id){
+        if(GadgetManager.hasGadget(player, id)){
+            player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
+        } else {
+
+            String name = id.toLowerCase().substring(0, 1).toUpperCase() + id.toLowerCase().substring(1);
+
+            if (cosmetique.isVip()) {
+
+                if (player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")) {
+
+                    player.getInventory().setItem(4, ItemStackManager.getItemStack(cosmetique));
+
+                    player.closeInventory();
+                    player.sendMessage("§aTu viens de séléctioner le gadget §b" + name + "§a !");
+                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
+                    GadgetManager.addGadget(player, id, false);
+                } else {
+                    player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
+                    player.sendMessage("§cTu dois VIP pour utiliser le gadget §b" + name + "§c !");
+                }
+
+            } else {
+                if (SQLManager.hasBuyCosmetic(player, id)) {
+                    player.closeInventory();
+                    player.getInventory().setItem(4, ItemStackManager.getItemStack(cosmetique));
+                    player.sendMessage("§aTu viens de séléctioner le gadget §b" + name + "§a !");
+                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
+                    GadgetManager.addGadget(player, id, false);
+                } else {
+                    Achat achat = new Achat(id, cosmetique, player);
+                    achat.generate();
+                    achat.proceedOpening();
+                }
+            }
+        }
+    }
+
     @EventHandler
     public void onClick(InventoryClickEvent e){
-        if(e.getInventory() != null && e.getInventory().getName() != null && e.getInventory().getName().equals("               §6§oGadgets")){
+        if(e.getInventory() != null && e.getInventory().getName() != null && e.getInventory().getName().equals("Gadgets")){
             Player player = (Player) e.getWhoClicked();
 
             e.setCancelled(true);
@@ -215,46 +254,20 @@ public class Gadget_SubMenu implements Listener {
             if(e.getCurrentItem() != null && e.getCurrentItem().hasItemMeta() && e.getCurrentItem().getItemMeta().getDisplayName() != null) {
 
                 switch (e.getCurrentItem().getItemMeta().getDisplayName()){
-                    case "§7<===":
+                    case "§6Page précédente":
                         Main_Menu.open(player);
                         break;
 
                     case "§7TNT":
+                        proceedClick(player, CosmetiqueManager.Cosmetique.TNT, "tnt");
+                        break;
 
-                        if(GadgetManager.hasGadget(player, "tnt")){
-                            player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
-                        } else {
+                    case "§cEncre":
+                        proceedClick(player, CosmetiqueManager.Cosmetique.ENCRE, "encre");
+                        break;
 
-                            if (CosmetiqueManager.Cosmetique.TNT.isVip()) {
-
-                                if (player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")) {
-
-                                    player.getInventory().setItem(4, ItemStackManager.getItemStack(CosmetiqueManager.Cosmetique.TNT));
-
-                                    player.closeInventory();
-                                    player.sendMessage("§aTu viens de séléctionner le gadget §bTNT§a !");
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
-                                    GadgetManager.addGadget(player, "tnt", false);
-                                } else {
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
-                                    player.sendMessage("§cTu dois VIP pour utiliser le gadget §bTNT§c !");
-                                }
-
-                            } else {
-                                if (SQLManager.hasBuyCosmetic(player, "tnt")) {
-                                    player.closeInventory();
-                                    player.getInventory().setItem(4, ItemStackManager.getItemStack(CosmetiqueManager.Cosmetique.TNT));
-                                    player.sendMessage("§aTu viens de séléctioner le gadget §bTNT§a !");
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
-                                    GadgetManager.addGadget(player, "tnt", false);
-                                } else {
-                                    Achat achat = new Achat("tnt", CosmetiqueManager.Cosmetique.TNT, player);
-                                    achat.generate();
-                                    achat.proceedOpening();
-                                }
-                            }
-                        }
-
+                    case "§cça glice !":
+                        proceedClick(player, CosmetiqueManager.Cosmetique.GLACE, "glace");
                         break;
 
                     default:

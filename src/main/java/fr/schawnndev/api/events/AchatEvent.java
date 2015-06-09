@@ -34,7 +34,7 @@ public class AchatEvent implements Listener {
     public void onClick(InventoryClickEvent e){
         Player player = (Player) e.getWhoClicked();
 
-        if(Manager.playersBuying.contains(player.getUniqueId()) && e.getInventory() != null && e.getInventory().getName() != null && e.getInventory().getName().contains("§6Achat:")) {
+        if(Manager.playersBuying.contains(player.getUniqueId()) && e.getInventory() != null && e.getInventory().getName() != null && e.getInventory().getName().contains("Confirmation d'achat")) {
 
             Achat achat = Manager.getAchat(player.getUniqueId());
 

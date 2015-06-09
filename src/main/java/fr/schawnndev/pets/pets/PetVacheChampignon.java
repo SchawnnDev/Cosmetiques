@@ -194,9 +194,6 @@ public class PetVacheChampignon extends EntityMushroomCow implements Pet {
 
     @Override
     public void remove() {
-        if(getPetOwner() != null && getPetOwner().isOnline())
-            getPetOwner().getWorld().playSound(getBukkitEntity().getLocation(), Sound.WOLF_WHINE, 1f, 1f);
-
         stopFollow();
 
         getBukkitEntity().remove();

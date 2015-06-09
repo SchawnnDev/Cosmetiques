@@ -93,7 +93,7 @@ public class PetManager_Menu implements Listener {
         ItemStack nom = new ItemStack(Material.PAPER);
         ItemMeta nomMeta = nom.getItemMeta();
         nomMeta.setDisplayName("§cRename");
-        nomMeta.setLore(Arrays.asList("§7Vous permet de donner", "§7un nom à votre Pet.", "§f--------------", (hasName ? ("§7Nom actuel : §3" + name) : "§7Nom actuel : §cAucun")));
+        nomMeta.setLore(Arrays.asList("§7Vous permet de donner", "§7un nom à votre Pet.", "§7--------------", (hasName ? ("§7Nom actuel : §3" + name) : "§7Nom actuel : §cAucun")));
         nom.setItemMeta(nomMeta);
 
         inv.setItem(positionConverter.convert(3, 2), hat);
