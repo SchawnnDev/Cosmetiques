@@ -180,7 +180,7 @@ public class SQLManager {
     public static void addToDataBase(Player player){
 
         try {
-            statement.executeUpdate("INSERT INTO LC_COSMETIQUES (`uuid`, `achats`, `current_active_particle`, `current_active_gadget`, `current_active_pet`) VALUES ('" + player.getUniqueId().toString() + "', '"+ "aucun" +"', '"+ "aucun"+"', '"+ "aucun"+"', '"+ "aucun"+"');");
+            statement.executeUpdate("INSERT INTO LC_COSMETIQUES (`uuid`, `achats`, `current_active_particle`, `current_active_gadget`, `current_active_pet`, `current_active_petname`) VALUES ('" + player.getUniqueId().toString() + "', '"+ "aucun" +"', '"+ "aucun"+"', '"+ "aucun"+"', '"+ "aucun"+"', '"+ "aucun"+"');");
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -246,6 +246,52 @@ public class SQLManager {
             }
 
             preparedStatement.setString(1, activeCosmetic);
+            preparedStatement.setString(2, player.getUniqueId().toString());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public static boolean hasActivePetName(Player player){
+        return !getActivePetName(player).equalsIgnoreCase("aucun");
+    }
+
+    public static String getActivePetName(Player player){
+
+        if(!isInDataBase(player))
+            addToDataBase(player);
+
+        try {
+
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM LC_COSMETIQUES WHERE uuid = '" + player.getUniqueId().toString() + "';");
+
+            if(resultSet.next()){
+                return resultSet.getString("current_active_petname");
+            } else {
+                return "aucun";
+            }
+
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return "aucun";
+    }
+
+    public static void setActivePetName(Player player, String petName){
+
+        if(!isInDataBase(player))
+            addToDataBase(player);
+
+        try {
+            PreparedStatement preparedStatement;
+
+            preparedStatement = connection.prepareStatement("UPDATE LC_COSMETIQUES SET current_active_petname=? WHERE uuid=?");
+
+            preparedStatement.setString(1, petName);
             preparedStatement.setString(2, player.getUniqueId().toString());
             preparedStatement.executeUpdate();
         } catch (SQLException e){

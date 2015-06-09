@@ -26,6 +26,8 @@ import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.lang.reflect.Field;
 import java.util.UUID;
@@ -35,7 +37,7 @@ public class PetVache extends EntityCow implements Pet {
     private Plugin plugin;
     private Cosmetique cosmetique;
     private UUID owner;
-    private Integer task; // != null
+    private BukkitTask task; // != null
     private boolean hat;
     private boolean riding;
 
@@ -146,31 +148,38 @@ public class PetVache extends EntityCow implements Pet {
     public void startFollow() {
         stopFollow();
 
-        task = Bukkit.getScheduler().runTaskTimer(plugin, new Runnable() {
+        task = new BukkitRunnable() {
 
             @Override
             public void run() {
-                Location entityLocation = getMCEntity().getLocation();
 
-                if (entityLocation.getWorld().equals(getPetOwner().getWorld()))
-                    if (entityLocation.distance(getPetOwner().getLocation()) < 15)
-                        if (entityLocation.distance(getPetOwner().getLocation()) > 4)
-                            follow();
-                        else
-                            navigation.n();
-                    else if (getPetOwner().isOnGround())
-                        teleportToOwner();
+                if(getPetOwner() == null || getMCEntity() == null) {
+                    cancel();
+                } else {
+
+                    Location entityLocation = getMCEntity().getLocation();
+
+                    if (entityLocation.getWorld().equals(getPetOwner().getWorld()))
+                        if (entityLocation.distance(getPetOwner().getLocation()) < 20)
+                            if (entityLocation.distance(getPetOwner().getLocation()) > 3)
+                                follow();
+                            else
+                                navigation.n();
+                        else if (getPetOwner().isOnGround())
+                            teleportToOwner();
+
+                }
 
             }
 
-        }, 0l, 20l).getTaskId();
+        }.runTaskTimer(LCCosmetiques.getInstance(), 0L, 20L);
 
     }
 
     @Override
     public void stopFollow() {
         if (task != null) {
-            Bukkit.getScheduler().cancelTask(task);
+            task.cancel();
             task = null;
         }
     }
@@ -185,7 +194,8 @@ public class PetVache extends EntityCow implements Pet {
 
     @Override
     public void remove() {
-        getPetOwner().getWorld().playSound(getBukkitEntity().getLocation(), Sound.WOLF_WHINE, 1f, 1f);
+        if(getPetOwner() != null && getPetOwner().isOnline())
+            getPetOwner().getWorld().playSound(getBukkitEntity().getLocation(), Sound.WOLF_WHINE, 1f, 1f);
 
         stopFollow();
 

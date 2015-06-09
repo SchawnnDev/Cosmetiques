@@ -24,6 +24,7 @@ import fr.schawnndev.pets.PetChangeNameEvent;
 import fr.schawnndev.pets.PetManager;
 import fr.schawnndev.sql.SQLManager;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.*;
@@ -66,9 +67,16 @@ public class ServerListener implements Listener {
 
         if(hasActiveCosmetic(player, CosmetiqueManager.CosmetiqueType.PET, cosmetiqueTypeStringMap)){
 
-      //      String[] pet = cosmetiqueTypeStringMap.get(CosmetiqueManager.CosmetiqueType.PET).split("|");
+            String petName = SQLManager.getActivePetName(player);
 
-      //      PetManager.addCustomPlayerPet(player, PetManager.getActivePetCosmetique(pet), PetManager.getActivePetName(pet));
+            if(petName.equalsIgnoreCase("aucun")){
+
+                PetManager.addPlayerPet(player, CosmetiqueManager.Cosmetique.getByMySQLName(cosmetiqueTypeStringMap.get(CosmetiqueManager.CosmetiqueType.PET)));
+
+            } else {
+
+                PetManager.addCustomPlayerPet(player, CosmetiqueManager.Cosmetique.getByMySQLName(cosmetiqueTypeStringMap.get(CosmetiqueManager.CosmetiqueType.PET)), ChatColor.translateAlternateColorCodes('&', petName));
+            }
 
         }
 
@@ -128,7 +136,8 @@ public class ServerListener implements Listener {
         // Active pet sql
 
         if(PetManager.hasActivePet(e.getPlayer())){
-            SQLManager.setActiveCosmetic(e.getPlayer(), PetManager.serializeActivePet(PetManager.getPet(e.getPlayer())), CosmetiqueManager.CosmetiqueType.PET);
+            SQLManager.setActiveCosmetic(e.getPlayer(), PetManager.getPet(e.getPlayer()).getCosmetiqueType().getMysqlName(), CosmetiqueManager.CosmetiqueType.PET);
+            SQLManager.setActivePetName(e.getPlayer(), PetManager.getPet(e.getPlayer()).getName());
             PetManager.removePet(e.getPlayer());
         } else {
             SQLManager.setActiveCosmetic(e.getPlayer(), "aucun", CosmetiqueManager.CosmetiqueType.PET);

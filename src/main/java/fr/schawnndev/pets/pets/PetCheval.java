@@ -18,16 +18,21 @@ import fr.schawnndev.LCCosmetiques;
 import fr.schawnndev.pets.Pet;
 import fr.schawnndev.pets.PetManager;
 import net.minecraft.server.v1_8_R1.*;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Sound;
+import net.minecraft.server.v1_8_R1.ItemStack;
+import net.minecraft.server.v1_8_R1.Material;
+import net.minecraft.server.v1_8_R1.World;
+import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
+import org.bukkit.entity.Horse;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.inventory.*;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.lang.reflect.Field;
+import java.util.Random;
 import java.util.UUID;
 
 public class PetCheval extends EntityHorse implements Pet {
@@ -35,7 +40,7 @@ public class PetCheval extends EntityHorse implements Pet {
     private Plugin plugin;
     private Cosmetique cosmetique;
     private UUID owner;
-    private Integer task; // != null
+    private BukkitTask task; // != null
     private boolean hat;
     private boolean riding;
 
@@ -48,7 +53,22 @@ public class PetCheval extends EntityHorse implements Pet {
         this.hat = false;
         this.riding = false;
 
+        Random _r = new Random();
+
+        setHorse(Horse.Style.values()[_r.nextInt(Horse.Style.values().length)],
+                Horse.Variant.values()[_r.nextInt(Horse.Variant.values().length)],
+                Horse.Color.values()[_r.nextInt(Horse.Color.values().length)]);
+
         startFollow();
+    }
+
+    private void setHorse(Horse.Style style, Horse.Variant variant, Horse.Color color){
+        setTame(true);
+        Horse horse = (Horse) getCBukkitEntity();
+        horse.getInventory().setSaddle(new org.bukkit.inventory.ItemStack(272));
+        horse.setStyle(style);
+        horse.setVariant(variant);
+        horse.setColor(color);
     }
 
     @Override
@@ -145,36 +165,41 @@ public class PetCheval extends EntityHorse implements Pet {
     public void startFollow() {
         stopFollow();
 
-        task = Bukkit.getScheduler().runTaskTimer(plugin, new Runnable() {
+        task = new BukkitRunnable() {
 
             @Override
             public void run() {
 
-                Location entityLocation = getMCEntity().getLocation();
+                if(getPetOwner() == null || getMCEntity() == null) {
+                    cancel();
+                } else {
 
-                if (entityLocation.getWorld().equals(getPetOwner().getWorld()))
-                    if (entityLocation.distance(getPetOwner().getLocation()) < 20)
-                        if (entityLocation.distance(getPetOwner().getLocation()) > 3)
-                            follow();
-                        else
-                            navigation.n();
-                    else if (getPetOwner().isOnGround())
-                        teleportToOwner();
+                    Location entityLocation = getMCEntity().getLocation();
+
+                    if (entityLocation.getWorld().equals(getPetOwner().getWorld()))
+                        if (entityLocation.distance(getPetOwner().getLocation()) < 20)
+                            if (entityLocation.distance(getPetOwner().getLocation()) > 3)
+                                follow();
+                            else
+                                navigation.n();
+                        else if (getPetOwner().isOnGround())
+                            teleportToOwner();
+
+                }
 
             }
 
-        }, 0l, 20l).getTaskId();
+        }.runTaskTimer(LCCosmetiques.getInstance(), 0L, 20L);
 
     }
 
     @Override
     public void stopFollow() {
         if (task != null) {
-            Bukkit.getScheduler().cancelTask(task);
+            task.cancel();
             task = null;
         }
     }
-
     @Override
     public PetCheval spawn(Location location, Player owner) {
         World world = ((CraftWorld) location.getWorld()).getHandle();
@@ -185,7 +210,8 @@ public class PetCheval extends EntityHorse implements Pet {
 
     @Override
     public void remove() {
-        getPetOwner().getWorld().playSound(getBukkitEntity().getLocation(), Sound.WOLF_WHINE, 1f, 1f);
+        if(getPetOwner() != null && getPetOwner().isOnline())
+            getPetOwner().getWorld().playSound(getBukkitEntity().getLocation(), Sound.WOLF_WHINE, 1f, 1f);
 
         stopFollow();
 
@@ -202,6 +228,13 @@ public class PetCheval extends EntityHorse implements Pet {
 
     @Override
     protected void dropEquipment(boolean flag, int i) {}
+
+    @Override
+    public void g(EntityHuman human) {}
+
+    @Override
+    public boolean a(EntityHuman human) { return true; }
+
 
     public void g(float sideMot, float forMot) {
         if (passenger == null || !(passenger instanceof EntityHuman)) {

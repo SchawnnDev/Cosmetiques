@@ -47,18 +47,6 @@ public class PetManager {
         return false;
     }
 
-    public static String serializeActivePet(Pet pet){
-        return pet.getCosmetiqueType().getMysqlName() + "|" + pet.getName();
-    }
-
-    public static String getActivePetName(String[] infos){
-        return infos[1];
-    }
-
-    public static Cosmetique getActivePetCosmetique(String[] infos){
-        return Cosmetique.getByMySQLName(infos[0]);
-    }
-
     public static void addPlayerPet(Player owner, Cosmetique cosmetique){
         if (hasActivePet(owner))
             if (getPet(owner) != null)

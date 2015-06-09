@@ -111,9 +111,9 @@ public class PetChangeNameEvent implements Listener {
         } else {
 
             if (PetManager.hasActivePet(player))
-                PetManager.getPet(player).setName(_name);
+                PetManager.getPet(player).setName(name);
 
-            player.sendMessage("§3Le nom de votre Pet a été défini en :§f " + _name + "§3.");
+            player.sendMessage("§3Le nom de votre Pet a été défini en :§f " + name + "§3.");
 
             removePlayerChangingPetName(player);
 
