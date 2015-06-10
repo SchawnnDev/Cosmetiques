@@ -70,7 +70,7 @@ public class MenuManager {
 
                 if (player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")) {
                     lore.add("§7------------");
-                    lore.add("§aVous possédez ce Pet grâce à votre grade.");
+                    lore.add("§aVous possédez " + (cosmetiqueType == CosmetiqueType.PARTICLE ? "cette Particule" : cosmetiqueType == CosmetiqueType.GADGET ? "ce Gadget" : "ce Pet") + " grâce à votre grade.");
                     lore.add("§a» Equiper " + (cosmetiqueType == CosmetiqueType.PARTICLE ? "cette Particule." : cosmetiqueType == CosmetiqueType.GADGET ? "ce Gadget." : "ce Pet."));
                 } else {
                     lore.add("§7------------");
