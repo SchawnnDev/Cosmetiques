@@ -71,9 +71,9 @@ public class Pet_SubMenu implements Listener {
         inv.setItem(positionConverter.convert(3, 6), glassStack);
         inv.setItem(positionConverter.convert(7, 6), glassStack);
 
-        ItemStack cosmetiques = new ItemStack(356);
+        ItemStack cosmetiques = new ItemStack(Material.DIAMOND_BARDING);
         ItemMeta cosmetiquesMeta = cosmetiques.getItemMeta();
-        cosmetiquesMeta.setDisplayName("§cPets");
+        cosmetiquesMeta.setDisplayName("§3Pets");
         cosmetiques.setItemMeta(cosmetiquesMeta);
 
         ItemStack retour = new ItemStack(Material.ARROW);
@@ -130,7 +130,7 @@ public class Pet_SubMenu implements Listener {
                 player, "§eZombie", MenuManager.getNewLore("§7Attention, ça mord !"), cosmetics.contains("zombie")));
 
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.SULPHUR), CosmetiqueManager.Cosmetique.CREEPER,
-                player, "§eCreeper", MenuManager.getNewLore("§7Faites attention, ça peut exploser !"), cosmetics.contains("creeper")));
+                player, "§eCreeper", MenuManager.getNewLore("§7Faites attention, il peut exploser à tout moment !"), cosmetics.contains("creeper")));
 
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.BOW), CosmetiqueManager.Cosmetique.SQUELETTE,
                 player, "§eSquelette", MenuManager.getNewLore("§7Ayez une visée de sniper !"), cosmetics.contains("squelette")));
@@ -145,7 +145,7 @@ public class Pet_SubMenu implements Listener {
                 player, "§eCheval", MenuManager.getNewLore("§7Devenez un vrai aventurier."), cosmetics.contains("cheval")));
 
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.RED_MUSHROOM), CosmetiqueManager.Cosmetique.VACHE_CHAMPIGNON,
-                player, "§eVache Champignon", MenuManager.getNewLore("§7Des gros champignons partout D:"), cosmetics.contains("vache_champignon")));
+                player, "§eVache Champignon", MenuManager.getNewLore("§7Attention, elle est peut être toxique !"), cosmetics.contains("vache_champignon")));
 
         return itemStacks;
     }
@@ -154,9 +154,9 @@ public class Pet_SubMenu implements Listener {
 
         String name = cosmetique == CosmetiqueManager.Cosmetique.VACHE_CHAMPIGNON ? "Vache Champignon" : id.toLowerCase().substring(0, 1).toUpperCase() + id.toLowerCase().substring(1);
 
-        if(PetManager.hasActivePet(player) && PetManager.getPet(player).getCosmetiqueType() == cosmetique){
-            player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
-        } else {
+        if(PetManager.hasActivePet(player) && PetManager.getPet(player).getCosmetiqueType() == cosmetique){}
+
+        else {
 
             if (cosmetique.isVip()) {
 
@@ -165,7 +165,6 @@ public class Pet_SubMenu implements Listener {
                     player.sendMessage("§aTu viens de séléctionner le pet §b" + name + "§a !");
                     PetManager.addPlayerPet(player, cosmetique);
                 } else {
-                    player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
                     player.sendMessage("§cTu dois VIP pour avoir le pet §b" + name + "§c !");
                 }
 

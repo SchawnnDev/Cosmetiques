@@ -19,6 +19,7 @@ import fr.schawnndev.gadgets.Gadget;
 import fr.schawnndev.utils.ResetBlock;
 import lombok.Getter;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -51,6 +52,15 @@ public class GadgetGlace extends Gadget implements Listener {
                 e.setCancelled(true);
     }
 
+    public boolean isAlreadyResetBlock(Location location, List<ResetBlock> resetBlockList){
+
+        for(ResetBlock resetBlock : resetBlockList)
+            if(resetBlock.getLocation().equals(location))
+                return true;
+
+        return false;
+    }
+
     @Override
     public void start(UUID uuid) {
 
@@ -77,8 +87,8 @@ public class GadgetGlace extends Gadget implements Listener {
                             @Override
                             public void run() {
 
-                                for(ResetBlock b : blockList)
-                                    b.reset();
+                                for(int i = 0; i < blockList.size(); i++)
+                                    blockList.get(i).reset();
 
                             }
 
@@ -98,8 +108,10 @@ public class GadgetGlace extends Gadget implements Listener {
                             && blockLoc.getType() != Material.WOOD_BUTTON && blockLoc.getType() != Material.WHEAT
                             && blockLoc.getType() != Material.LEVER && blockLoc.getType() != Material.TORCH
                             && blockLoc.getType() != Material.REDSTONE_TORCH_OFF && blockLoc.getType() != Material.REDSTONE_TORCH_ON){
-                        blockList.add(new ResetBlock(blockLoc.getLocation(), blockLoc.getType(), blockLoc.getData()));
-                        blockLoc.setType(material);
+                        if(!isAlreadyResetBlock(blockLoc.getLocation(), blockList)) {
+                            blockList.add(new ResetBlock(blockLoc.getLocation(), blockLoc.getType(), blockLoc.getData()));
+                            blockLoc.setType(material);
+                        }
                     }
                 }
 

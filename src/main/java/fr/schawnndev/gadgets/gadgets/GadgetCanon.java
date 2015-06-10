@@ -51,10 +51,9 @@ public class GadgetCanon extends Gadget implements Listener {
     }
 
     @EventHandler
-    public void onInteract(PlayerInteractEntityEvent e){
-        if(e.getRightClicked().hasMetadata("gadget_canon")){
+    public void onInteract(EntityDamageByEntityEvent e){
+        if(e.getDamager() instanceof Snowball && e.getDamager().hasMetadata("gadget_canon"))
             e.setCancelled(true);
-        }
     }
 
     @Override

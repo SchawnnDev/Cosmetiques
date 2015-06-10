@@ -52,8 +52,6 @@ public class GadgetTNT extends Gadget implements Listener {
         for(Entity e : ((World)Bukkit.getWorlds().toArray()[0]).getEntities()){
             if(e != null && e.getLocation().distance(location) <= 15){
                 e.setVelocity(e.getLocation().getDirection().multiply(-2.13f).setY(1.7560f));
-                if(e instanceof Player)
-                    ((Player)e).playSound(((Player)e).getLocation(), Sound.WOLF_HURT, 1f, 1f);
             }
         }
     }

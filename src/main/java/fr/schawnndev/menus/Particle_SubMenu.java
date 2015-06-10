@@ -125,9 +125,7 @@ public class Particle_SubMenu implements Listener {
 
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.WATER_BUCKET), Cosmetique.PLUIE, player, "§3Pluie", pluieLore, cosmetics.contains("pluie")));
 
-        List<String> laveLore = new ArrayList<>();
-        laveLore.add("§7Un bon bain dans de la lave, qui");
-        laveLore.add("§7n'en a jamais rêvé ?");
+        List<String> laveLore = MenuManager.getNewLore("§7Très pratique en hiver, cette particule remplacera votre chauffage.");
 
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.LAVA_BUCKET), Cosmetique.LAVE, player, "§6Lave", laveLore, cosmetics.contains("lave")));
 
@@ -147,8 +145,8 @@ public class Particle_SubMenu implements Listener {
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.SULPHUR), Cosmetique.FUMEE, player, "§7Fumée", fumeeLore, cosmetics.contains("fumee")));
 
         List<String> flamesLore = new ArrayList<>();
-        flamesLore.add("§7Les flammes vous encerclent telle une barrière");
-        flamesLore.add("§7protectrice.");
+        flamesLore.add("§7Les flammes vous encerclent,");
+        flamesLore.add("§7telle une barrière protectrice.");
 
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.MOB_SPAWNER), Cosmetique.FLAMES, player, "§eFlames", flamesLore, cosmetics.contains("flames")));
 
@@ -156,7 +154,7 @@ public class Particle_SubMenu implements Listener {
 
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.POTION), Cosmetique.SPIRALES, player, "§bSpirales", spiralesLore, cosmetics.contains("spirales")));
 
-        List<String> redstoneLore = MenuManager.getNewLore("§7Vous ressemblez à aypierre...");
+        List<String> redstoneLore = MenuManager.getNewLore("§7Attention à ne pas faire court-circuiter les serveurs !");
 
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.REDSTONE), Cosmetique.REDSTONE, player, "§4Redstone", redstoneLore, cosmetics.contains("redstone")));
 
@@ -168,7 +166,7 @@ public class Particle_SubMenu implements Listener {
         legendaryLore.add("§7Seuls les riches auront la chance de pouvoir");
         legendaryLore.add("§7se payer cette particule si secrète !");
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.GOLDEN_APPLE, 1, (short)0, (byte)1), Cosmetique.LEGENDARY, player, "§cLege§3ndary", legendaryLore, cosmetics.contains("legendary")));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.GOLDEN_APPLE, 1, (short)0, (byte)1), Cosmetique.LEGENDARY, player, "§c§lLegendary", legendaryLore, cosmetics.contains("legendary")));
 
         return itemStacks;
     }
@@ -201,10 +199,8 @@ public class Particle_SubMenu implements Listener {
 
                                     player.closeInventory();
                                     player.sendMessage("§aTu viens d'activer la particule §bLave§a !");
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "lave");
                                 } else {
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
                                     player.sendMessage("§cTu dois être VIP pour utiliser §blave !");
                                 }
 
@@ -217,7 +213,6 @@ public class Particle_SubMenu implements Listener {
 
                                     player.closeInventory();
                                     player.sendMessage("§aTu viens d'activer la particule §bLave§a !");
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "lave");
                                 } else {
                                     Achat achat = new Achat("lave", Cosmetique.LAVE, player);
@@ -225,8 +220,6 @@ public class Particle_SubMenu implements Listener {
                                     achat.proceedOpening();
                                 }
                             }
-                        } else {
-                            player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
                         }
 
                         break;
@@ -243,10 +236,8 @@ public class Particle_SubMenu implements Listener {
 
                                     player.closeInventory();
                                     player.sendMessage("§aTu viens d'activer la particule §bFumée§a !");
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "fumee");
                                 } else {
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
                                     player.sendMessage("§cTu dois être VIP pour utiliser §bFumée !");
                                 }
 
@@ -259,7 +250,6 @@ public class Particle_SubMenu implements Listener {
 
                                     player.closeInventory();
                                     player.sendMessage("§aTu viens d'activer la particule §bFumée§a !");
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "fumee");
                                 } else {
                                     Achat achat = new Achat("fumee", Cosmetique.FUMEE, player);
@@ -267,8 +257,6 @@ public class Particle_SubMenu implements Listener {
                                     achat.proceedOpening();
                                 }
                             }
-                        } else {
-                            player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
                         }
 
                         break;
@@ -285,10 +273,8 @@ public class Particle_SubMenu implements Listener {
 
                                     player.closeInventory();
                                     player.sendMessage("§aTu viens d'activer la particule §bMagicien§a !");
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "magicien");
                                 } else {
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
                                     player.sendMessage("§cTu dois être VIP pour utiliser §bMagicien !");
                                 }
 
@@ -301,7 +287,6 @@ public class Particle_SubMenu implements Listener {
 
                                     player.closeInventory();
                                     player.sendMessage("§aTu viens d'activer la particule §bMagicien§a !");
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "magicien");
                                 } else {
                                     Achat achat = new Achat("magicien", Cosmetique.MAGICIEN, player);
@@ -309,8 +294,6 @@ public class Particle_SubMenu implements Listener {
                                     achat.proceedOpening();
                                 }
                             }
-                        } else {
-                            player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
                         }
 
                         break;
@@ -327,10 +310,8 @@ public class Particle_SubMenu implements Listener {
 
                                     player.closeInventory();
                                     player.sendMessage("§aTu viens d'activer la particule §bRedstone§a !");
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "redstone");
                                 } else {
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
                                     player.sendMessage("§cTu dois être VIP pour utiliser §bRedstone !");
                                 }
 
@@ -343,7 +324,6 @@ public class Particle_SubMenu implements Listener {
 
                                     player.closeInventory();
                                     player.sendMessage("§aTu viens d'activer la particule §bRedstone§a !");
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "redstone");
                                 } else {
                                     Achat achat = new Achat("redstone", Cosmetique.REDSTONE, player);
@@ -351,8 +331,6 @@ public class Particle_SubMenu implements Listener {
                                     achat.proceedOpening();
                                 }
                             }
-                        } else {
-                            player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
                         }
 
                         break;
@@ -369,10 +347,8 @@ public class Particle_SubMenu implements Listener {
 
                                     player.closeInventory();
                                     player.sendMessage("§aTu viens d'activer la particule §bCoeurs§a !");
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "coeurs");
                                 } else {
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
                                     player.sendMessage("§cTu dois être VIP pour utiliser §bCoeurs !");
                                 }
 
@@ -385,7 +361,6 @@ public class Particle_SubMenu implements Listener {
 
                                     player.closeInventory();
                                     player.sendMessage("§aTu viens d'activer la particule §bCoeurs§a !");
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "coeurs");
                                 } else {
                                     Achat achat = new Achat("coeurs", Cosmetique.COEURS, player);
@@ -393,8 +368,6 @@ public class Particle_SubMenu implements Listener {
                                     achat.proceedOpening();
                                 }
                             }
-                        } else {
-                            player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
                         }
 
                         break;
@@ -411,10 +384,8 @@ public class Particle_SubMenu implements Listener {
 
                                     player.closeInventory();
                                     player.sendMessage("§aTu viens d'activer la particule §bFlames§a !");
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "flames");
                                 } else {
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
                                     player.sendMessage("§cTu dois être VIP pour utiliser §bFlames !");
                                 }
 
@@ -427,7 +398,6 @@ public class Particle_SubMenu implements Listener {
 
                                     player.closeInventory();
                                     player.sendMessage("§aTu viens d'activer la particule §bFlames§a !");
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "flames");
                                 } else {
                                     Achat achat = new Achat("flames", Cosmetique.FLAMES, player);
@@ -436,8 +406,6 @@ public class Particle_SubMenu implements Listener {
                                 }
                             }
 
-                        } else {
-                            player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
                         }
 
                         break;
@@ -454,10 +422,8 @@ public class Particle_SubMenu implements Listener {
 
                                     player.closeInventory();
                                     player.sendMessage("§aTu viens d'activer la particule §bContent§a !");
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "content");
                                 } else {
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
                                     player.sendMessage("§cTu dois être VIP pour utiliser §bContent !");
                                 }
 
@@ -470,7 +436,6 @@ public class Particle_SubMenu implements Listener {
 
                                     player.closeInventory();
                                     player.sendMessage("§aTu viens d'activer la particule §bContent§a !");
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "content");
                                 } else {
                                     Achat achat = new Achat("content", Cosmetique.CONTENT, player);
@@ -479,8 +444,6 @@ public class Particle_SubMenu implements Listener {
                                 }
                             }
 
-                        } else {
-                            player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
                         }
 
                         break;
@@ -496,10 +459,8 @@ public class Particle_SubMenu implements Listener {
 
                                     player.closeInventory();
                                     player.sendMessage("§aTu viens d'activer la particule §bNotes§a !");
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "notes");
                                 } else {
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
                                     player.sendMessage("§cTu dois être VIP pour utiliser §bNotes !");
                                 }
 
@@ -512,7 +473,6 @@ public class Particle_SubMenu implements Listener {
 
                                     player.closeInventory();
                                     player.sendMessage("§aTu viens d'activer la particule §bNotes§a !");
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "notes");
                                 } else {
                                     Achat achat = new Achat("notes", Cosmetique.NOTES, player);
@@ -521,9 +481,8 @@ public class Particle_SubMenu implements Listener {
                                 }
                             }
 
-                        } else {
-                            player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
                         }
+
                         break;
                     case "§bSpirales":
 
@@ -538,10 +497,8 @@ public class Particle_SubMenu implements Listener {
 
                                     player.closeInventory();
                                     player.sendMessage("§aTu viens d'activer la particule §bSpirales§a !");
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "spirales");
                                 } else {
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
                                     player.sendMessage("§cTu dois être VIP pour utiliser §bSpirales !");
                                 }
 
@@ -554,7 +511,6 @@ public class Particle_SubMenu implements Listener {
 
                                     player.closeInventory();
                                     player.sendMessage("§aTu viens d'activer la particule §bSpirales§a !");
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "spirales");
                                 } else {
                                     Achat achat = new Achat("spirales", Cosmetique.SPIRALES, player);
@@ -563,8 +519,6 @@ public class Particle_SubMenu implements Listener {
                                 }
                             }
 
-                        } else {
-                            player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
                         }
 
                         break;
@@ -580,10 +534,8 @@ public class Particle_SubMenu implements Listener {
 
                                     player.closeInventory();
                                     player.sendMessage("§aTu viens d'activer la particule §bPluie§a !");
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "pluie");
                                 } else {
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
                                     player.sendMessage("§cTu dois être VIP pour utiliser §bPluie !");
                                 }
 
@@ -596,7 +548,6 @@ public class Particle_SubMenu implements Listener {
 
                                     player.closeInventory();
                                     player.sendMessage("§aTu viens d'activer la particule §bPluie§a !");
-                                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                                     ParticleManager.activeParticleByName(player, "pluie");
                                 } else {
                                     Achat achat = new Achat("pluie", Cosmetique.PLUIE, player);
@@ -605,9 +556,8 @@ public class Particle_SubMenu implements Listener {
                                 }
                             }
 
-                        } else {
-                            player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
                         }
+
                         break;
                     default:
                         break;

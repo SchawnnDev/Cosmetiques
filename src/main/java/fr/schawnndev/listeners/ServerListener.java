@@ -32,6 +32,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.*;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -60,10 +61,13 @@ public class ServerListener implements Listener {
 
         final Player player = e.getPlayer();
 
+        final float start = System.currentTimeMillis();
+
         final Map<CosmetiqueManager.CosmetiqueType, String> cosmetiqueTypeStringMap = new HashMap<>();
 
         for(CosmetiqueManager.CosmetiqueType c : CosmetiqueManager.CosmetiqueType.values())
             cosmetiqueTypeStringMap.put(c, SQLManager.getActiveCosmetic(player, c));
+
 
         if(hasActiveCosmetic(player, CosmetiqueManager.CosmetiqueType.PET, cosmetiqueTypeStringMap)){
 
@@ -92,6 +96,7 @@ public class ServerListener implements Listener {
         if(hasActiveCosmetic(player, CosmetiqueManager.CosmetiqueType.GADGET, cosmetiqueTypeStringMap)) {
             _gadget = cosmetiqueTypeStringMap.get(CosmetiqueManager.CosmetiqueType.GADGET);
             _hasActiveGadget = true;
+
         }
 
         final String gadget = _gadget;
@@ -137,7 +142,12 @@ public class ServerListener implements Listener {
 
         if(PetManager.hasActivePet(e.getPlayer())){
             SQLManager.setActiveCosmetic(e.getPlayer(), PetManager.getPet(e.getPlayer()).getCosmetiqueType().getMysqlName(), CosmetiqueManager.CosmetiqueType.PET);
-            SQLManager.setActivePetName(e.getPlayer(), PetManager.getPet(e.getPlayer()).getName());
+
+            if(PetManager.getPet(e.getPlayer()).getName().contains("entity.Pet"))
+                SQLManager.setActivePetName(e.getPlayer(), "aucun");
+            else
+                SQLManager.setActivePetName(e.getPlayer(), PetManager.getPet(e.getPlayer()).getName());
+
             PetManager.removePet(e.getPlayer());
         } else {
             SQLManager.setActiveCosmetic(e.getPlayer(), "aucun", CosmetiqueManager.CosmetiqueType.PET);

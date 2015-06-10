@@ -30,6 +30,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityInteractEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.UUID;
 
@@ -42,7 +43,7 @@ public class GadgetListener implements Listener {
     @EventHandler
     public void onClick(PlayerInteractEvent e) {
 
-        Player player = e.getPlayer();
+        final Player player = e.getPlayer();
 
         if(e.getAction() == Action.RIGHT_CLICK_BLOCK && e.getClickedBlock() != null){ // Gadgets with click on blocks
 
@@ -118,7 +119,13 @@ public class GadgetListener implements Listener {
 
                     e.setCancelled(true);
 
-                    player.getInventory().setItem(4, ItemStackManager.getItemStackByName("glace"));
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            player.updateInventory();
+                        }
+
+                    }.runTaskLater(LCCosmetiques.getInstance(), 20l);
 
                     if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.GLACE)) {
                         player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.GLACE));

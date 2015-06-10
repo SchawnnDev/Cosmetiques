@@ -115,7 +115,7 @@ public class Gadget_SubMenu implements Listener {
         List<String> cosmetics = SQLManager.getCosmetics(player);
 
         List<String> doublejumpLore = new ArrayList<>();
-        doublejumpLore.add("§7Sautez tel un lapin.");
+        doublejumpLore.add("§7Sautez tel un lapin !");
         doublejumpLore.add("  ");
         doublejumpLore.add("§7Recharge : §a5 secondes§7.");
 
@@ -130,8 +130,8 @@ public class Gadget_SubMenu implements Listener {
         itemStacks.add(MenuManager.buildItem(new ItemStack(2258), CosmetiqueManager.Cosmetique.MUSIC, player, "§2Music", musicLore, cosmetics.contains("music")));
 
         List<String> cakeLore = new ArrayList<>();
-        cakeLore.add("§7Posez un gâteau empoisonné qui va infliger des");
-        cakeLore.add("§7des dégâts d'émpoisonnements qui en mangera");
+        cakeLore.add("§7Posez un gâteau empoissonné qui infligera des");
+        cakeLore.add("§7dégâts à celui ou celle qui en mangera.");
         cakeLore.add("  ");
         cakeLore.add("§7Recharge : §a45 secondes§7.");
 
@@ -146,9 +146,7 @@ public class Gadget_SubMenu implements Listener {
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.SNOW_BALL), CosmetiqueManager.Cosmetique.GLACE, player, "§cça glisse !", glaceLore, cosmetics.contains("laisse")));
 
         List<String> canonLore = new ArrayList<>();
-        canonLore.add("§7Invoquez aléatoirement un monstre parmis");
-        canonLore.add("§7un zombie, une araignée, un cochon zombie");
-        canonLore.add("§7ou encore un squelette.");
+        canonLore.add("§7Invoquez aléatoirement un monstre passif.");
         canonLore.add("  ");
         canonLore.add("§7Recharge : §a15 secondes§7.");
 
@@ -164,7 +162,7 @@ public class Gadget_SubMenu implements Listener {
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.GOLDEN_APPLE), CosmetiqueManager.Cosmetique.APPLE, player, "§eApple", appleLore, cosmetics.contains("apple")));
 
         List<String> encreLore = new ArrayList<>();
-        encreLore.add("§7Aveuglez le joueur ciblé pendant §a5 secondes§7 !");
+        encreLore.add("§7Aveuglez le joueur ciblé pendant 5 secondes§7 !");
         encreLore.add("  ");
         encreLore.add("§7Recharge : §a25 secondes§7.");
 
@@ -220,10 +218,8 @@ public class Gadget_SubMenu implements Listener {
 
                     player.closeInventory();
                     player.sendMessage("§aTu viens de séléctioner le gadget §b" + name + "§a !");
-                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                     GadgetManager.addGadget(player, id, false);
                 } else {
-                    player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
                     player.sendMessage("§cTu dois VIP pour utiliser le gadget §b" + name + "§c !");
                 }
 
@@ -232,7 +228,6 @@ public class Gadget_SubMenu implements Listener {
                     player.closeInventory();
                     player.getInventory().setItem(4, ItemStackManager.getItemStack(cosmetique));
                     player.sendMessage("§aTu viens de séléctioner le gadget §b" + name + "§a !");
-                    player.playSound(player.getLocation(), Sound.VILLAGER_YES, 1f, 1f);
                     GadgetManager.addGadget(player, id, false);
                 } else {
                     Achat achat = new Achat(id, cosmetique, player);
