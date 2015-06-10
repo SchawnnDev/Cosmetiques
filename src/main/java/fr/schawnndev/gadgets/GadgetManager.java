@@ -15,10 +15,7 @@ package fr.schawnndev.gadgets;
 
 import fr.schawnndev.CosmetiqueManager;
 import fr.schawnndev.LCCosmetiques;
-import fr.schawnndev.gadgets.gadgets.GadgetEncre;
-import fr.schawnndev.gadgets.gadgets.GadgetFireBall;
-import fr.schawnndev.gadgets.gadgets.GadgetGlace;
-import fr.schawnndev.gadgets.gadgets.GadgetTNT;
+import fr.schawnndev.gadgets.gadgets.*;
 import fr.schawnndev.sql.SQLManager;
 import fr.schawnndev.utils.Cooldown;
 import lombok.Getter;
@@ -41,6 +38,9 @@ public class GadgetManager {
 
     @Getter
     private static GadgetGlace gadgetGlace = new GadgetGlace();
+
+    @Getter
+    private static GadgetCanon gadgetCanon = new GadgetCanon();
 
     @Getter
     private static Map<UUID, String> activeGadgets = new HashMap<>();

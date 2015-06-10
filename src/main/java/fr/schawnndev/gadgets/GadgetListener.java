@@ -15,6 +15,7 @@ package fr.schawnndev.gadgets;
 
 import fr.schawnndev.CosmetiqueManager;
 import fr.schawnndev.LCCosmetiques;
+import fr.schawnndev.data.ItemStackManager;
 import fr.schawnndev.utils.Cooldown;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -113,9 +114,11 @@ public class GadgetListener implements Listener {
                  *  Glace
                  */
 
-                if (e.getAction() == Action.RIGHT_CLICK_AIR && e.getItem().getType() == Material.SNOW_BALL && e.getItem().getItemMeta().getDisplayName().equals("§cça glice !") && GadgetManager.hasGadget(e.getPlayer(), "glace")) {
+                if (e.getAction() == Action.RIGHT_CLICK_AIR && e.getItem().getType() == Material.SNOW_BALL && e.getItem().getItemMeta().getDisplayName().equals("§cça glisse !") && GadgetManager.hasGadget(e.getPlayer(), "glace")) {
 
                     e.setCancelled(true);
+
+                    player.getInventory().setItem(4, ItemStackManager.getItemStackByName("glace"));
 
                     if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.GLACE)) {
                         player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.GLACE));
@@ -125,6 +128,25 @@ public class GadgetListener implements Listener {
                         final UUID uuid = player.getUniqueId();
 
                         GadgetManager.getGadgetGlace().start(uuid);
+
+                        return;
+                    }
+                }
+
+                /**
+                 *  Canon
+                 */
+
+                if (e.getAction() == Action.RIGHT_CLICK_AIR && e.getItem().getType() == Material.SULPHUR && e.getItem().getItemMeta().getDisplayName().equals("§fCanon") && GadgetManager.hasGadget(e.getPlayer(), "canon")) {
+
+                    if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.CANON)) {
+                        player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.CANON));
+                        return;
+                    } else {
+                        GadgetManager.addCooldown(new Cooldown(player, CosmetiqueManager.Cosmetique.CANON, 15, true));
+                        final UUID uuid = player.getUniqueId();
+
+                        GadgetManager.getGadgetCanon().start(uuid);
 
                         return;
                     }

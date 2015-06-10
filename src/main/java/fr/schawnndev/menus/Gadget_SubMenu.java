@@ -266,8 +266,12 @@ public class Gadget_SubMenu implements Listener {
                         proceedClick(player, CosmetiqueManager.Cosmetique.ENCRE, "encre");
                         break;
 
-                    case "§cça glice !":
+                    case "§cça glisse !":
                         proceedClick(player, CosmetiqueManager.Cosmetique.GLACE, "glace");
+                        break;
+
+                    case "§fCanon":
+                        proceedClick(player, CosmetiqueManager.Cosmetique.CANON, "canon");
                         break;
 
                     default:
