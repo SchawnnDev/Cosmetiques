@@ -220,7 +220,10 @@ public class Gadget_SubMenu implements Listener {
                     player.sendMessage("§aTu viens de séléctioner le gadget §b" + name + "§a !");
                     GadgetManager.addGadget(player, id, false);
                 } else {
-                    player.sendMessage("§cTu dois VIP pour utiliser le gadget §b" + name + "§c !");
+
+                    player.sendMessage("§cVous devez être §eVIP §cpour utiliser ce Gadget.");
+                    player.sendMessage("§b§lCliquez-ici §r§bpour le devenir : §chttp://store.legendcraft.fr");
+
                 }
 
             } else {

@@ -20,6 +20,7 @@ import fr.schawnndev.api.Achat;
 import fr.schawnndev.api.utils.GlassColor;
 import fr.schawnndev.api.utils.ItemDisponibility;
 import fr.schawnndev.data.ItemStackManager;
+import fr.schawnndev.gadgets.GadgetManager;
 import fr.schawnndev.math.PositionConverter;
 import fr.schawnndev.particules.ParticleManager;
 import fr.schawnndev.sql.SQLManager;
@@ -171,6 +172,49 @@ public class Particle_SubMenu implements Listener {
         return itemStacks;
     }
 
+    private void proceedClick(Player player, CosmetiqueManager.Cosmetique cosmetique,  String id){
+
+        if(!ParticleManager.isParticleActive(player, id)){
+
+            String name = id.toLowerCase().substring(0, 1).toUpperCase() + id.toLowerCase().substring(1);
+
+            if(cosmetique.isVip()){
+
+                if(player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")){
+                    if(ParticleManager.hasParticleActive(player)){
+                        ParticleManager.removeActiveParticle(player);
+                    }
+
+                    player.closeInventory();
+                    player.sendMessage("§aTu viens d'activer la particule §b" + name + "§a !");
+                    ParticleManager.activeParticleByName(player, id);
+                } else {
+
+                    player.sendMessage("§cVous devez être §eVIP §cpour utiliser cette Particule.");
+                    player.sendMessage("§b§lCliquez-ici §r§bpour le devenir : §chttp://store.legendcraft.fr");
+
+                }
+
+            } else {
+                if(SQLManager.hasBuyCosmetic(player, id)){
+
+                    if(ParticleManager.hasParticleActive(player)){
+                        ParticleManager.removeActiveParticle(player);
+                    }
+
+                    player.closeInventory();
+                    player.sendMessage("§aTu viens d'activer la particule §b" + name + "§a !");
+                    ParticleManager.activeParticleByName(player, id);
+                } else {
+                    Achat achat = new Achat(id, cosmetique, player);
+                    achat.generate();
+                    achat.proceedOpening();
+                }
+            }
+        }
+
+    }
+
     @EventHandler
     public void onClick(InventoryClickEvent e){
         if(e.getInventory() != null && e.getInventory().getName() != null && e.getInventory().getName().equals("Particules")){
@@ -188,375 +232,52 @@ public class Particle_SubMenu implements Listener {
 
                     case "§6Lave":
 
-                        if(!ParticleManager.isParticleActive(player, "lave")){
-
-                            if(Cosmetique.LAVE.isVip()){
-
-                                if(player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")){
-                                    if(ParticleManager.hasParticleActive(player)){
-                                        ParticleManager.removeActiveParticle(player);
-                                    }
-
-                                    player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bLave§a !");
-                                    ParticleManager.activeParticleByName(player, "lave");
-                                } else {
-                                    player.sendMessage("§cTu dois être VIP pour utiliser §blave !");
-                                }
-
-                            } else {
-                                if(SQLManager.hasBuyCosmetic(player, "lave")){
-
-                                    if(ParticleManager.hasParticleActive(player)){
-                                        ParticleManager.removeActiveParticle(player);
-                                    }
-
-                                    player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bLave§a !");
-                                    ParticleManager.activeParticleByName(player, "lave");
-                                } else {
-                                    Achat achat = new Achat("lave", Cosmetique.LAVE, player);
-                                    achat.generate();
-                                    achat.proceedOpening();
-                                }
-                            }
-                        }
+                        proceedClick(player, Cosmetique.LAVE, "lave");
 
                         break;
                     case "§7Fumée":
 
-                        if(!ParticleManager.isParticleActive(player, "fumee")){
-
-                            if(Cosmetique.FUMEE.isVip()){
-
-                                if(player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")){
-                                    if(ParticleManager.hasParticleActive(player)){
-                                        ParticleManager.removeActiveParticle(player);
-                                    }
-
-                                    player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bFumée§a !");
-                                    ParticleManager.activeParticleByName(player, "fumee");
-                                } else {
-                                    player.sendMessage("§cTu dois être VIP pour utiliser §bFumée !");
-                                }
-
-                            } else {
-                                if(SQLManager.hasBuyCosmetic(player, "fumee")){
-
-                                    if(ParticleManager.hasParticleActive(player)){
-                                        ParticleManager.removeActiveParticle(player);
-                                    }
-
-                                    player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bFumée§a !");
-                                    ParticleManager.activeParticleByName(player, "fumee");
-                                } else {
-                                    Achat achat = new Achat("fumee", Cosmetique.FUMEE, player);
-                                    achat.generate();
-                                    achat.proceedOpening();
-                                }
-                            }
-                        }
+                        proceedClick(player, Cosmetique.FUMEE, "fumee");
 
                         break;
                     case "§5Magicien":
 
-                        if(!ParticleManager.isParticleActive(player, "magicien")){
-
-                            if(Cosmetique.MAGICIEN.isVip()){
-
-                                if(player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")){
-                                    if(ParticleManager.hasParticleActive(player)){
-                                        ParticleManager.removeActiveParticle(player);
-                                    }
-
-                                    player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bMagicien§a !");
-                                    ParticleManager.activeParticleByName(player, "magicien");
-                                } else {
-                                    player.sendMessage("§cTu dois être VIP pour utiliser §bMagicien !");
-                                }
-
-                            } else {
-                                if(SQLManager.hasBuyCosmetic(player, "magicien")){
-
-                                    if(ParticleManager.hasParticleActive(player)){
-                                        ParticleManager.removeActiveParticle(player);
-                                    }
-
-                                    player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bMagicien§a !");
-                                    ParticleManager.activeParticleByName(player, "magicien");
-                                } else {
-                                    Achat achat = new Achat("magicien", Cosmetique.MAGICIEN, player);
-                                    achat.generate();
-                                    achat.proceedOpening();
-                                }
-                            }
-                        }
+                        proceedClick(player, Cosmetique.MAGICIEN, "magicien");
 
                         break;
                     case "§4Redstone":
 
-                        if(!ParticleManager.isParticleActive(player, "redstone")){
-
-                            if(Cosmetique.REDSTONE.isVip()){
-
-                                if(player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")){
-                                    if(ParticleManager.hasParticleActive(player)){
-                                        ParticleManager.removeActiveParticle(player);
-                                    }
-
-                                    player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bRedstone§a !");
-                                    ParticleManager.activeParticleByName(player, "redstone");
-                                } else {
-                                    player.sendMessage("§cTu dois être VIP pour utiliser §bRedstone !");
-                                }
-
-                            } else {
-                                if(SQLManager.hasBuyCosmetic(player, "redstone")){
-
-                                    if(ParticleManager.hasParticleActive(player)){
-                                        ParticleManager.removeActiveParticle(player);
-                                    }
-
-                                    player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bRedstone§a !");
-                                    ParticleManager.activeParticleByName(player, "redstone");
-                                } else {
-                                    Achat achat = new Achat("redstone", Cosmetique.REDSTONE, player);
-                                    achat.generate();
-                                    achat.proceedOpening();
-                                }
-                            }
-                        }
+                        proceedClick(player, Cosmetique.REDSTONE, "redstone");
 
                         break;
                     case "§cCoeurs":
 
-                        if(!ParticleManager.isParticleActive(player, "coeurs")){
-
-                            if(Cosmetique.COEURS.isVip()){
-
-                                if(player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")){
-                                    if(ParticleManager.hasParticleActive(player)){
-                                        ParticleManager.removeActiveParticle(player);
-                                    }
-
-                                    player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bCoeurs§a !");
-                                    ParticleManager.activeParticleByName(player, "coeurs");
-                                } else {
-                                    player.sendMessage("§cTu dois être VIP pour utiliser §bCoeurs !");
-                                }
-
-                            } else {
-                                if(SQLManager.hasBuyCosmetic(player, "coeurs")){
-
-                                    if(ParticleManager.hasParticleActive(player)){
-                                        ParticleManager.removeActiveParticle(player);
-                                    }
-
-                                    player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bCoeurs§a !");
-                                    ParticleManager.activeParticleByName(player, "coeurs");
-                                } else {
-                                    Achat achat = new Achat("coeurs", Cosmetique.COEURS, player);
-                                    achat.generate();
-                                    achat.proceedOpening();
-                                }
-                            }
-                        }
+                        proceedClick(player, Cosmetique.COEURS, "coeurs");
 
                         break;
                     case "§eFlames":
 
-                        if(!ParticleManager.isParticleActive(player, "flames")){
-
-                            if(Cosmetique.FLAMES.isVip()){
-
-                                if(player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")){
-                                    if(ParticleManager.hasParticleActive(player)){
-                                        ParticleManager.removeActiveParticle(player);
-                                    }
-
-                                    player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bFlames§a !");
-                                    ParticleManager.activeParticleByName(player, "flames");
-                                } else {
-                                    player.sendMessage("§cTu dois être VIP pour utiliser §bFlames !");
-                                }
-
-                            } else {
-                                if(SQLManager.hasBuyCosmetic(player, "flames")){
-
-                                    if(ParticleManager.hasParticleActive(player)){
-                                        ParticleManager.removeActiveParticle(player);
-                                    }
-
-                                    player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bFlames§a !");
-                                    ParticleManager.activeParticleByName(player, "flames");
-                                } else {
-                                    Achat achat = new Achat("flames", Cosmetique.FLAMES, player);
-                                    achat.generate();
-                                    achat.proceedOpening();
-                                }
-                            }
-
-                        }
+                        proceedClick(player, Cosmetique.FLAMES, "flames");
 
                         break;
                     case "§aContent":
 
-                        if(!ParticleManager.isParticleActive(player, "content")){
-
-                            if(Cosmetique.CONTENT.isVip()){
-
-                                if(player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")){
-                                    if(ParticleManager.hasParticleActive(player)){
-                                        ParticleManager.removeActiveParticle(player);
-                                    }
-
-                                    player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bContent§a !");
-                                    ParticleManager.activeParticleByName(player, "content");
-                                } else {
-                                    player.sendMessage("§cTu dois être VIP pour utiliser §bContent !");
-                                }
-
-                            } else {
-                                if(SQLManager.hasBuyCosmetic(player, "content")){
-
-                                    if(ParticleManager.hasParticleActive(player)){
-                                        ParticleManager.removeActiveParticle(player);
-                                    }
-
-                                    player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bContent§a !");
-                                    ParticleManager.activeParticleByName(player, "content");
-                                } else {
-                                    Achat achat = new Achat("content", Cosmetique.CONTENT, player);
-                                    achat.generate();
-                                    achat.proceedOpening();
-                                }
-                            }
-
-                        }
+                        proceedClick(player, Cosmetique.CONTENT, "content");
 
                         break;
                     case "§dNotes":
-                        if(!ParticleManager.isParticleActive(player, "notes")){
 
-                            if(Cosmetique.NOTES.isVip()){
-
-                                if(player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")){
-                                    if(ParticleManager.hasParticleActive(player)){
-                                        ParticleManager.removeActiveParticle(player);
-                                    }
-
-                                    player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bNotes§a !");
-                                    ParticleManager.activeParticleByName(player, "notes");
-                                } else {
-                                    player.sendMessage("§cTu dois être VIP pour utiliser §bNotes !");
-                                }
-
-                            } else {
-                                if(SQLManager.hasBuyCosmetic(player, "notes")){
-
-                                    if(ParticleManager.hasParticleActive(player)){
-                                        ParticleManager.removeActiveParticle(player);
-                                    }
-
-                                    player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bNotes§a !");
-                                    ParticleManager.activeParticleByName(player, "notes");
-                                } else {
-                                    Achat achat = new Achat("notes", Cosmetique.NOTES, player);
-                                    achat.generate();
-                                    achat.proceedOpening();
-                                }
-                            }
-
-                        }
+                        proceedClick(player, Cosmetique.NOTES, "notes");
 
                         break;
                     case "§bSpirales":
 
-                        if(!ParticleManager.isParticleActive(player, "spirales")){
-
-                            if(Cosmetique.SPIRALES.isVip()){
-
-                                if(player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")){
-                                    if(ParticleManager.hasParticleActive(player)){
-                                        ParticleManager.removeActiveParticle(player);
-                                    }
-
-                                    player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bSpirales§a !");
-                                    ParticleManager.activeParticleByName(player, "spirales");
-                                } else {
-                                    player.sendMessage("§cTu dois être VIP pour utiliser §bSpirales !");
-                                }
-
-                            } else {
-                                if(SQLManager.hasBuyCosmetic(player, "spirales")){
-
-                                    if(ParticleManager.hasParticleActive(player)){
-                                        ParticleManager.removeActiveParticle(player);
-                                    }
-
-                                    player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bSpirales§a !");
-                                    ParticleManager.activeParticleByName(player, "spirales");
-                                } else {
-                                    Achat achat = new Achat("spirales", Cosmetique.SPIRALES, player);
-                                    achat.generate();
-                                    achat.proceedOpening();
-                                }
-                            }
-
-                        }
+                        proceedClick(player, Cosmetique.SPIRALES, "spirales");
 
                         break;
                     case "§3Pluie":
-                        if(!ParticleManager.isParticleActive(player, "pluie")){
 
-                            if(Cosmetique.PLUIE.isVip()){
-
-                                if(player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")){
-                                    if(ParticleManager.hasParticleActive(player)){
-                                        ParticleManager.removeActiveParticle(player);
-                                    }
-
-                                    player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bPluie§a !");
-                                    ParticleManager.activeParticleByName(player, "pluie");
-                                } else {
-                                    player.sendMessage("§cTu dois être VIP pour utiliser §bPluie !");
-                                }
-
-                            } else {
-                                if(SQLManager.hasBuyCosmetic(player, "pluie")){
-
-                                    if(ParticleManager.hasParticleActive(player)){
-                                        ParticleManager.removeActiveParticle(player);
-                                    }
-
-                                    player.closeInventory();
-                                    player.sendMessage("§aTu viens d'activer la particule §bPluie§a !");
-                                    ParticleManager.activeParticleByName(player, "pluie");
-                                } else {
-                                    Achat achat = new Achat("pluie", Cosmetique.PLUIE, player);
-                                    achat.generate();
-                                    achat.proceedOpening();
-                                }
-                            }
-
-                        }
+                        proceedClick(player, Cosmetique.PLUIE, "pluie");
 
                         break;
                     default:

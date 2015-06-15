@@ -165,7 +165,10 @@ public class Pet_SubMenu implements Listener {
                     player.sendMessage("§aTu viens de séléctionner le pet §b" + name + "§a !");
                     PetManager.addPlayerPet(player, cosmetique);
                 } else {
-                    player.sendMessage("§cTu dois VIP pour avoir le pet §b" + name + "§c !");
+
+                    player.sendMessage("§cVous devez être §eVIP §cpour utiliser ce Pet.");
+                    player.sendMessage("§b§lCliquez-ici §r§bpour le devenir : §chttp://store.legendcraft.fr");
+
                 }
 
             } else {
