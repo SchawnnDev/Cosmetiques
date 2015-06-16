@@ -43,6 +43,9 @@ public class GadgetManager {
     private static GadgetCanon gadgetCanon = new GadgetCanon();
 
     @Getter
+    private static GadgetApple gadgetApple = new GadgetApple();
+
+    @Getter
     private static Map<UUID, String> activeGadgets = new HashMap<>();
 
     @Getter

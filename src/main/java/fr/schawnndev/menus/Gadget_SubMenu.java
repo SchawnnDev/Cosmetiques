@@ -272,6 +272,10 @@ public class Gadget_SubMenu implements Listener {
                         proceedClick(player, CosmetiqueManager.Cosmetique.CANON, "canon");
                         break;
 
+                    case "§eApple":
+                        proceedClick(player, CosmetiqueManager.Cosmetique.APPLE, "apple");
+                        break;
+
                     default:
                         break;
                 }

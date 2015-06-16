@@ -123,9 +123,10 @@ public class GadgetListener implements Listener {
                         @Override
                         public void run() {
                             player.updateInventory();
+                            player.updateInventory();
                         }
 
-                    }.runTaskLater(LCCosmetiques.getInstance(), 20l);
+                    }.runTaskLater(LCCosmetiques.getInstance(), 25l);
 
                     if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.GLACE)) {
                         player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.GLACE));
@@ -158,6 +159,26 @@ public class GadgetListener implements Listener {
                         return;
                     }
                 }
+
+                /**
+                 *  Apple
+                 */
+
+                if (e.getAction() == Action.RIGHT_CLICK_AIR && e.getItem().getType() == Material.GOLDEN_APPLE && e.getItem().getItemMeta().getDisplayName().equals("§eApple") && GadgetManager.hasGadget(e.getPlayer(), "apple")) {
+
+                    if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.APPLE)) {
+                        player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.APPLE));
+                        return;
+                    } else {
+                        GadgetManager.addCooldown(new Cooldown(player, CosmetiqueManager.Cosmetique.APPLE, 40, true));
+                        final UUID uuid = player.getUniqueId();
+
+                        GadgetManager.getGadgetApple().start(uuid);
+
+                        return;
+                    }
+                }
+
 
 
 
