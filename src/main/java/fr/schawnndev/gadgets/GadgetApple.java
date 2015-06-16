@@ -23,15 +23,19 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -64,27 +68,38 @@ public class GadgetApple extends Gadget implements Listener {
 
             final long start = System.currentTimeMillis();
 
+            final List<Entity> entities = new ArrayList<>();
+
             new BukkitRunnable() {
 
                 @Override
                 public void run() {
 
-                    if(((System.currentTimeMillis() - start)/1000) > 8){
+                    if(((System.currentTimeMillis() - start)/1000) < 8) {
+
+                        for (int i = 0; i <= 7; i++) {
+
+                            ItemStack apple = new ItemStack(Material.GOLDEN_APPLE);
+                            ItemMeta appleMeta = apple.getItemMeta();
+                            appleMeta.setDisplayName("hey" + (random.nextFloat() * i));
+                            apple.setItemMeta(appleMeta);
+
+                            Item item = player.getWorld().dropItem(player.getLocation().clone().add(0d, 2d, 0d), apple);
+                            item.setMetadata("gadget_apple", new FixedMetadataValue(LCCosmetiques.getInstance(), "hello"));
+                            item.setVelocity(new Vector(Randoms.randomRangeFloat(-0.5f, 0.5f), Randoms.randomRangeFloat(0.2f, 0.5f), Randoms.randomRangeFloat(-0.5f, 0.5f)));
+                            entities.add(item);
+                        }
+
+                    } else if (((System.currentTimeMillis() - start)/1000) < 12){
+
+                        for(Entity entity : entities)
+                            if(entity != null && entity.isValid())
+                                entity.remove();
+
+                        entities.clear();
                         cancel();
                         return;
                     }
-
-                    final int r = random.nextInt(8);
-
-                    for(int i = 0; i <= r; i++){
-
-                        Entity item = player.getWorld().dropItem(player.getLocation().clone().add(0d, 3d,0d), new ItemStack(Material.GOLDEN_APPLE));
-                        item.setMetadata("gadget_apple", new FixedMetadataValue(LCCosmetiques.getInstance(), "hello"));
-                        item.setCustomName("hey"+(random.nextFloat() * r));
-                        item.setVelocity(new Vector(Randoms.randomRangeFloat(-0.5f, 0.5f), Randoms.randomRangeFloat(0.2f, 0.5f), Randoms.randomRangeFloat(-0.5f, 0.5f)));
-
-                    }
-
 
 
                 }

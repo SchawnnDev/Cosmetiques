@@ -23,6 +23,7 @@ import org.bukkit.Server;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Snowball;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -118,15 +119,7 @@ public class GadgetListener implements Listener {
                 if (e.getAction() == Action.RIGHT_CLICK_AIR && e.getItem().getType() == Material.SNOW_BALL && e.getItem().getItemMeta().getDisplayName().equals("§cça glisse !") && GadgetManager.hasGadget(e.getPlayer(), "glace")) {
 
                     e.setCancelled(true);
-
-                    new BukkitRunnable() {
-                        @Override
-                        public void run() {
-                            player.updateInventory();
-                            player.updateInventory();
-                        }
-
-                    }.runTaskLater(LCCosmetiques.getInstance(), 25l);
+                    e.setUseItemInHand(Event.Result.DENY);
 
                     if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.GLACE)) {
                         player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.GLACE));
@@ -167,6 +160,7 @@ public class GadgetListener implements Listener {
                 if (e.getAction() == Action.RIGHT_CLICK_AIR && e.getItem().getType() == Material.GOLDEN_APPLE && e.getItem().getItemMeta().getDisplayName().equals("§eApple") && GadgetManager.hasGadget(e.getPlayer(), "apple")) {
 
                     e.setCancelled(true);
+                    e.setUseItemInHand(Event.Result.DENY);
 
                     if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.APPLE)) {
                         player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.APPLE));
