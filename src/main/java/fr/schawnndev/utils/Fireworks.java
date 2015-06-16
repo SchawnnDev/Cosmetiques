@@ -18,11 +18,9 @@ import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Location;
 import org.bukkit.FireworkEffect.Type;
-import org.bukkit.craftbukkit.v1_8_R1.entity.CraftFirework;
 import org.bukkit.entity.Firework;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.scheduler.BukkitRunnable;
-import sun.java2d.cmm.ColorTransform;
 
 import java.util.*;
 

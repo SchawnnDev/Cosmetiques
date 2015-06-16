@@ -48,6 +48,40 @@ public class GadgetListener implements Listener {
         final Player player = e.getPlayer();
 
         /**
+         *  14 juillet
+         */
+
+
+        if (e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR && e.getItem().getType() == Material.FIREWORK && e.getItem().getItemMeta().getDisplayName().equals("§514 juillet") && GadgetManager.hasGadget(e.getPlayer(), "artifice")) {
+
+            e.setCancelled(true);
+            e.setUseItemInHand(Event.Result.DENY);
+
+            player.getInventory().setItem(4, new ItemStack(Material.AIR));
+
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.getInventory().setItem(4, ItemStackManager.getItemStack(CosmetiqueManager.Cosmetique.ARTIFICE));
+                    player.updateInventory();
+                }
+
+            }.runTaskLater(LCCosmetiques.getInstance(), 2l);
+
+            if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.ARTIFICE)) {
+                player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.ARTIFICE));
+                return;
+            } else {
+                GadgetManager.addCooldown(new Cooldown(player, CosmetiqueManager.Cosmetique.ARTIFICE, 15, true));
+                final UUID uuid = player.getUniqueId();
+
+                GadgetManager.getGadgetArtifice().start(uuid);
+
+                return;
+            }
+        }
+
+        /**
          *  Apple
          */
 
@@ -64,7 +98,7 @@ public class GadgetListener implements Listener {
                     player.updateInventory();
                 }
 
-            }.runTaskLater(LCCosmetiques.getInstance(), 5l);
+            }.runTaskLater(LCCosmetiques.getInstance(), 2l);
 
             if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.APPLE)) {
                 player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.APPLE));
@@ -108,40 +142,6 @@ public class GadgetListener implements Listener {
 
             if(e.getItem() != null && e.getItem().hasItemMeta()
                     && e.getItem().getItemMeta().getDisplayName() != null){
-
-                /**
-                 *  14 juillet
-                 */
-
-
-                if (e.getItem().getType() == Material.FIREWORK && e.getItem().getItemMeta().getDisplayName().equals("§514 juillet") && GadgetManager.hasGadget(e.getPlayer(), "artifice")) {
-
-                    e.setCancelled(true);
-                    e.setUseItemInHand(Event.Result.DENY);
-
-                    player.getInventory().setItem(4, new ItemStack(Material.AIR));
-
-                    new BukkitRunnable() {
-                        @Override
-                        public void run() {
-                            player.getInventory().setItem(4, ItemStackManager.getItemStack(CosmetiqueManager.Cosmetique.ARTIFICE));
-                            player.updateInventory();
-                        }
-
-                    }.runTaskLater(LCCosmetiques.getInstance(), 5l);
-
-                    if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.ARTIFICE)) {
-                        player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.ARTIFICE));
-                        return;
-                    } else {
-                        GadgetManager.addCooldown(new Cooldown(player, CosmetiqueManager.Cosmetique.ARTIFICE, 15, true));
-                        final UUID uuid = player.getUniqueId();
-
-                        GadgetManager.getGadgetArtifice().start(uuid);
-
-                        return;
-                    }
-                }
 
                 /**
                  *  Fireball
@@ -190,7 +190,7 @@ public class GadgetListener implements Listener {
                             player.updateInventory();
                         }
 
-                    }.runTaskLater(LCCosmetiques.getInstance(), 10l);
+                    }.runTaskLater(LCCosmetiques.getInstance(), 2l);
 
                     if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.GLACE)) {
                         player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.GLACE));
