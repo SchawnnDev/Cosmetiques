@@ -166,6 +166,8 @@ public class GadgetListener implements Listener {
 
                 if (e.getAction() == Action.RIGHT_CLICK_AIR && e.getItem().getType() == Material.GOLDEN_APPLE && e.getItem().getItemMeta().getDisplayName().equals("§eApple") && GadgetManager.hasGadget(e.getPlayer(), "apple")) {
 
+                    e.setCancelled(true);
+
                     if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.APPLE)) {
                         player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.APPLE));
                         return;
