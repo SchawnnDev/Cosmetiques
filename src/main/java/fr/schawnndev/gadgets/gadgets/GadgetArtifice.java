@@ -16,12 +16,13 @@ package fr.schawnndev.gadgets.gadgets;
 import fr.schawnndev.CosmetiqueManager;
 import fr.schawnndev.LCCosmetiques;
 import fr.schawnndev.gadgets.Gadget;
+import fr.schawnndev.utils.Fireworks;
 import lombok.Getter;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
-import java.util.Random;
 import java.util.UUID;
 
 public class GadgetArtifice extends Gadget implements Listener {
@@ -38,9 +39,17 @@ public class GadgetArtifice extends Gadget implements Listener {
 
         if (Bukkit.getPlayer(uuid) != null) {
 
-            final Player player = Bukkit.getPlayer(uuid);
+            Player player = Bukkit.getPlayer(uuid);
 
-            final Random random = new Random();
+            final int power = 3; // All the power in you :DD
+
+            Firework f = Fireworks.longFireFirework(player.getLocation(), power);
+            f.setPassenger(player);
+
+            Fireworks.longFireFirework(player.getLocation().clone().add(1d, 0d, 1d), power);
+            Fireworks.longFireFirework(player.getLocation().clone().add(-1d, 0d, 1d), power);
+            Fireworks.longFireFirework(player.getLocation().clone().add(1d, 0d, 0d), power);
+            Fireworks.longFireFirework(player.getLocation().clone().add(1d, 0d, -1d), power);
 
 
         }

@@ -47,6 +47,38 @@ public class GadgetListener implements Listener {
 
         final Player player = e.getPlayer();
 
+        /**
+         *  Apple
+         */
+
+        if (e.getItem() != null && e.getItem().hasItemMeta()
+                && e.getItem().getItemMeta().getDisplayName() != null && e.getItem().getType() == Material.GOLDEN_APPLE && e.getItem().getItemMeta().getDisplayName().equals("§eApple") && GadgetManager.hasGadget(e.getPlayer(), "apple")) {
+
+            e.setCancelled(true);
+            player.getInventory().setItem(4, new ItemStack(Material.AIR));
+
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.getInventory().setItem(4, ItemStackManager.getItemStack(CosmetiqueManager.Cosmetique.APPLE));
+                    player.updateInventory();
+                }
+
+            }.runTaskLater(LCCosmetiques.getInstance(), 5l);
+
+            if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.APPLE)) {
+                player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.APPLE));
+                return;
+            } else {
+                GadgetManager.addCooldown(new Cooldown(player, CosmetiqueManager.Cosmetique.APPLE, 40, true));
+                final UUID uuid = player.getUniqueId();
+
+                GadgetManager.getGadgetApple().start(uuid);
+
+                return;
+            }
+        }
+
         if(e.getAction() == Action.RIGHT_CLICK_BLOCK && e.getClickedBlock() != null){ // Gadgets with click on blocks
 
             if(e.getItem() != null && e.getItem().hasItemMeta()
@@ -66,11 +98,6 @@ public class GadgetListener implements Listener {
                         final UUID uuid = player.getUniqueId();
 
                         GadgetManager.getGadgetTNT().setBomb(e.getClickedBlock().getLocation());
-
-                        for (Player p : Bukkit.getOnlinePlayers())
-                            if (p.getLocation().distance(e.getClickedBlock().getLocation()) <= 15)
-                                p.playSound(p.getLocation(), Sound.FUSE, 4f, 4f);
-
                         return;
                     }
                 }
@@ -81,6 +108,40 @@ public class GadgetListener implements Listener {
 
             if(e.getItem() != null && e.getItem().hasItemMeta()
                     && e.getItem().getItemMeta().getDisplayName() != null){
+
+                /**
+                 *  14 juillet
+                 */
+
+
+                if (e.getItem().getType() == Material.FIREWORK && e.getItem().getItemMeta().getDisplayName().equals("§514 juillet") && GadgetManager.hasGadget(e.getPlayer(), "artifice")) {
+
+                    e.setCancelled(true);
+                    e.setUseItemInHand(Event.Result.DENY);
+
+                    player.getInventory().setItem(4, new ItemStack(Material.AIR));
+
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            player.getInventory().setItem(4, ItemStackManager.getItemStack(CosmetiqueManager.Cosmetique.ARTIFICE));
+                            player.updateInventory();
+                        }
+
+                    }.runTaskLater(LCCosmetiques.getInstance(), 5l);
+
+                    if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.ARTIFICE)) {
+                        player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.ARTIFICE));
+                        return;
+                    } else {
+                        GadgetManager.addCooldown(new Cooldown(player, CosmetiqueManager.Cosmetique.ARTIFICE, 15, true));
+                        final UUID uuid = player.getUniqueId();
+
+                        GadgetManager.getGadgetArtifice().start(uuid);
+
+                        return;
+                    }
+                }
 
                 /**
                  *  Fireball
@@ -163,36 +224,6 @@ public class GadgetListener implements Listener {
                     }
                 }
 
-                /**
-                 *  Apple
-                 */
-
-                if (e.getAction() == Action.RIGHT_CLICK_AIR && e.getItem().getType() == Material.GOLDEN_APPLE && e.getItem().getItemMeta().getDisplayName().equals("§eApple") && GadgetManager.hasGadget(e.getPlayer(), "apple")) {
-
-                    e.setCancelled(true);
-                    player.getInventory().setItem(4, new ItemStack(Material.AIR));
-
-                    new BukkitRunnable() {
-                        @Override
-                        public void run() {
-                            player.getInventory().setItem(4, ItemStackManager.getItemStack(CosmetiqueManager.Cosmetique.APPLE));
-                            player.updateInventory();
-                        }
-
-                    }.runTaskLater(LCCosmetiques.getInstance(), 5l);
-
-                    if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.APPLE)) {
-                        player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.APPLE));
-                        return;
-                    } else {
-                        GadgetManager.addCooldown(new Cooldown(player, CosmetiqueManager.Cosmetique.APPLE, 40, true));
-                        final UUID uuid = player.getUniqueId();
-
-                        GadgetManager.getGadgetApple().start(uuid);
-
-                        return;
-                    }
-                }
 
 
 

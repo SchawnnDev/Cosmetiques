@@ -62,6 +62,10 @@ public class GadgetTNT extends Gadget implements Listener {
         TNTPrimed tntPrimed = location.getWorld().spawn(location, TNTPrimed.class);
         tntPrimed.setMetadata("gadget_tnt", new FixedMetadataValue(LCCosmetiques.getInstance(), "hello"));
 
+        for (Player p : Bukkit.getOnlinePlayers())
+            if (p.getLocation().distance(location) <= 15)
+                p.playSound(location, Sound.FUSE, 4f, 4f);
+
     }
 
     @EventHandler
