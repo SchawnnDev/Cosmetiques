@@ -23,6 +23,7 @@ import org.bukkit.Server;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Snowball;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -119,6 +120,7 @@ public class GadgetListener implements Listener {
                 if (e.getAction() == Action.RIGHT_CLICK_AIR && e.getItem().getType() == Material.SNOW_BALL && e.getItem().getItemMeta().getDisplayName().equals("§cça glisse !") && GadgetManager.hasGadget(e.getPlayer(), "glace")) {
 
                     e.setCancelled(true);
+                    e.setUseItemInHand(Event.Result.DENY);
 
                     new BukkitRunnable() {
                         @Override
@@ -127,7 +129,7 @@ public class GadgetListener implements Listener {
                             player.updateInventory();
                         }
 
-                    }.runTaskLater(LCCosmetiques.getInstance(), 25l);
+                    }.runTaskLater(LCCosmetiques.getInstance(), 10l);
 
                     if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.GLACE)) {
                         player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.GLACE));
