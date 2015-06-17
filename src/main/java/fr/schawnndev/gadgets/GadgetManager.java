@@ -14,15 +14,12 @@
 package fr.schawnndev.gadgets;
 
 import fr.schawnndev.CosmetiqueManager;
-import fr.schawnndev.LCCosmetiques;
 import fr.schawnndev.gadgets.gadgets.*;
 import fr.schawnndev.sql.SQLManager;
 import fr.schawnndev.utils.Cooldown;
 import lombok.Getter;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
-import java.security.KeyStore;
 import java.util.*;
 
 public class GadgetManager {
@@ -44,6 +41,9 @@ public class GadgetManager {
 
     @Getter
     private static GadgetApple gadgetApple = new GadgetApple();
+
+    @Getter
+    private static GadgetPeche gadgetPeche = new GadgetPeche();
 
     @Getter
     private static GadgetArtifice gadgetArtifice = new GadgetArtifice();
