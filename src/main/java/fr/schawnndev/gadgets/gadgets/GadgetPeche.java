@@ -20,7 +20,6 @@ import fr.schawnndev.gadgets.GadgetManager;
 import fr.schawnndev.utils.Cooldown;
 import lombok.Getter;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -50,7 +49,7 @@ public class GadgetPeche extends Gadget implements Listener {
             } else {
                 GadgetManager.addCooldown(new Cooldown(player, CosmetiqueManager.Cosmetique.CANNE_A_PECHE, 5, true));
                 player.playSound(player.getLocation(), Sound.BAT_TAKEOFF, 1.0F, 2.0F);
-                player.setVelocity(player.getVelocity().multiply(0.54f).setY(0.84f));
+                player.setVelocity(player.getLocation().getDirection().multiply(1.54f).setY(0.84f));
                 player.getItemInHand().setDurability((short)-1);
                 return;
             }

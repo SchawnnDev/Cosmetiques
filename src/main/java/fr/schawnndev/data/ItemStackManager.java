@@ -72,9 +72,16 @@ public class ItemStackManager {
 
         Cosmetique cosmetique = Cosmetique.AUCUN;
 
-        try {
-             cosmetique = Cosmetique.valueOf(cosmetic.toUpperCase());
-        } catch (Exception e){}
+        if(cosmetic.equalsIgnoreCase("canneapeche")) {
+            cosmetique = Cosmetique.CANNE_A_PECHE;
+        } else {
+
+            try {
+                cosmetique = Cosmetique.valueOf(cosmetic.toUpperCase());
+            } catch (Exception e) {
+            }
+
+        }
 
         return (playerItems.containsKey(cosmetique) ? playerItems.get(cosmetique) : new ItemStack(Material.AIR));
     }
