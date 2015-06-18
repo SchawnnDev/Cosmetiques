@@ -49,9 +49,9 @@ public class GadgetPeche extends Gadget implements Listener {
                 return;
             } else {
                 GadgetManager.addCooldown(new Cooldown(player, CosmetiqueManager.Cosmetique.CANNE_A_PECHE, 5, true));
-                player.playSound(player.getLocation(), Sound.NOTE_PLING, 1.0F, 2.0F);
-                player.teleport(new Location(e.getHook().getWorld(), e.getHook().getLocation().getX(), e.getHook().getLocation().getY(), e.getHook().getLocation().getZ(), player.getLocation().getYaw(), player.getLocation().getPitch()));
-
+                player.playSound(player.getLocation(), Sound.BAT_TAKEOFF, 1.0F, 2.0F);
+                player.setVelocity(player.getVelocity().multiply(0.54f).setY(0.84f));
+                player.getItemInHand().setDurability((short)-1);
                 return;
             }
         }

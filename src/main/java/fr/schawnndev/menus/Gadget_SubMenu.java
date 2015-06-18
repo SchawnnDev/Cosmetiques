@@ -210,6 +210,9 @@ public class Gadget_SubMenu implements Listener {
 
             String name = id.toLowerCase().substring(0, 1).toUpperCase() + id.toLowerCase().substring(1);
 
+            if(cosmetique == CosmetiqueManager.Cosmetique.CANNE_A_PECHE)
+                name = "Canne à Pêche";
+
             if (cosmetique.isVip()) {
 
                 if (player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")) {
