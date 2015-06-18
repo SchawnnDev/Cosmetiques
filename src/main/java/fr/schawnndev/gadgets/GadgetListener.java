@@ -53,14 +53,12 @@ public class GadgetListener implements Listener {
          */
 
 
-        if ((e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR) && e.getItem().getType() == Material.FISHING_ROD && e.getItem().getItemMeta().getDisplayName().equals("§6Canne à pêche") && GadgetManager.hasGadget(e.getPlayer(), "artifice")) {
-
-            e.setCancelled(true);
-            e.setUseItemInHand(Event.Result.DENY);
+        if ((e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR) && e.getItem().getType() == Material.FISHING_ROD && e.getItem().getItemMeta().getDisplayName().equals("§6Canne à pêche") && GadgetManager.hasGadget(e.getPlayer(), "canneapeche")) {
 
             if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.CANNE_A_PECHE)) {
                 player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.CANNE_A_PECHE));
                 e.setCancelled(true);
+                e.setUseItemInHand(Event.Result.DENY);
                 return;
             }
         }
