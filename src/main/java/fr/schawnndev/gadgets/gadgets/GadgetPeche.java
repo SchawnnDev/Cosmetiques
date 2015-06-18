@@ -43,13 +43,10 @@ public class GadgetPeche extends Gadget implements Listener {
                 && e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equals("§6Canne à pêche") && GadgetManager.hasGadget(e.getPlayer(), "canneapeche")){
             Player player = e.getPlayer();
 
-            if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.CANNE_A_PECHE)) {
-                player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.CANNE_A_PECHE));
-                return;
-            } else {
+            if (!GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.CANNE_A_PECHE)) {
                 GadgetManager.addCooldown(new Cooldown(player, CosmetiqueManager.Cosmetique.CANNE_A_PECHE, 5, true));
                 player.playSound(player.getLocation(), Sound.BAT_TAKEOFF, 1.0F, 2.0F);
-                player.setVelocity(player.getLocation().getDirection().multiply(1.54f).setY(0.84f));
+                player.setVelocity(player.getLocation().getDirection().multiply(1.68f).setY(0.84f));
                 player.getItemInHand().setDurability((short)-1);
                 return;
             }

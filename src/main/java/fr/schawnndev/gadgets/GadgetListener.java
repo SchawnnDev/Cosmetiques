@@ -49,6 +49,23 @@ public class GadgetListener implements Listener {
         final Player player = e.getPlayer();
 
         /**
+         *  Canne à pêche
+         */
+
+
+        if ((e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR) && e.getItem().getType() == Material.FISHING_ROD && e.getItem().getItemMeta().getDisplayName().equals("§6Canne à pêche") && GadgetManager.hasGadget(e.getPlayer(), "artifice")) {
+
+            e.setCancelled(true);
+            e.setUseItemInHand(Event.Result.DENY);
+
+            if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.ARTIFICE)) {
+                player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.ARTIFICE));
+                e.setCancelled(true);
+                return;
+            }
+        }
+
+        /**
          *  14 juillet
          */
 
