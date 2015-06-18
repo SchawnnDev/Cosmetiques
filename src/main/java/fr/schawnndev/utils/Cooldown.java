@@ -56,7 +56,7 @@ public class Cooldown {
             @Override
             public void run() {
 
-                if(cooldown <= 0){
+                if(cooldown <= 1){
                     cancel();
                     stop();
                     return;
