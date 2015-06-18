@@ -58,8 +58,8 @@ public class GadgetListener implements Listener {
             e.setCancelled(true);
             e.setUseItemInHand(Event.Result.DENY);
 
-            if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.ARTIFICE)) {
-                player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.ARTIFICE));
+            if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.CANNE_A_PECHE)) {
+                player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.CANNE_A_PECHE));
                 e.setCancelled(true);
                 return;
             }
