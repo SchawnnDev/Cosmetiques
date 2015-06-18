@@ -27,10 +27,6 @@ import java.util.UUID;
 
 public class GadgetArtifice extends Gadget implements Listener {
 
-    public GadgetArtifice(){
-        Bukkit.getPluginManager().registerEvents(this, LCCosmetiques.getInstance());
-    }
-
     @Getter
     public CosmetiqueManager.Cosmetique cosmetique = CosmetiqueManager.Cosmetique.ARTIFICE;
 

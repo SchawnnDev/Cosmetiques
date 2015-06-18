@@ -68,8 +68,8 @@ public class ParticleRedstone extends Particle {
                                 float r = FastMath.sin(t * 2.718f * 12 / 150);
                                 float s = r * PI * t;
 
-                                v.setX(1.0f * r * -Math.cos(s));
-                                v.setZ(1.0f * r * -Math.sin(s));
+                                v.setX(1.0f * r * -FastMath.cos(s));
+                                v.setZ(1.0f * r * -FastMath.sin(s));
                                 v.setY(0.2f);
 
                                 RotateVector.rotateVector(v, xRotation, yRotation, zRotation);

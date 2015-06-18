@@ -133,7 +133,7 @@ public class Gadget_SubMenu implements Listener {
         cakeLore.add("§7Posez un gâteau empoissonné qui infligera des");
         cakeLore.add("§7dégâts à celui ou celle qui en mangera.");
         cakeLore.add("  ");
-        cakeLore.add("§7Recharge : §a45 secondes§7.");
+        cakeLore.add("§7Recharge : §a2 minutes§7.");
 
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.CAKE), CosmetiqueManager.Cosmetique.GATEAU_EMPOISONNE, player, "§3Gâteau Empoisonné", cakeLore , cosmetics.contains("gateauempoisonne")));
 

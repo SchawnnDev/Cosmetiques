@@ -53,7 +53,7 @@ public class GadgetListener implements Listener {
          */
 
 
-        if ((e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR) && e.getItem().getType() == Material.FISHING_ROD && e.getItem().getItemMeta().getDisplayName().equals("§6Canne à pêche") && GadgetManager.hasGadget(e.getPlayer(), "canneapeche")) {
+        if ((e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR) && e.getItem() != null && e.getItem().getType() == Material.FISHING_ROD && e.getItem().getItemMeta().getDisplayName().equals("§6Canne à pêche") && GadgetManager.hasGadget(e.getPlayer(), "canneapeche")) {
 
             if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.CANNE_A_PECHE)) {
                 player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.CANNE_A_PECHE));
@@ -134,11 +134,11 @@ public class GadgetListener implements Listener {
             if(e.getItem() != null && e.getItem().hasItemMeta()
                     && e.getItem().getItemMeta().getDisplayName() != null) {
 
-                if (e.getItem().getType() == Material.TNT && e.getItem().getItemMeta().getDisplayName().equals("§7TNT") && GadgetManager.hasGadget(e.getPlayer(), "tnt")) {
+                /**
+                 *  TNT
+                 */
 
-                    /**
-                     *  TNT
-                     */
+                if (e.getItem().getType() == Material.TNT && e.getItem().getItemMeta().getDisplayName().equals("§7TNT") && GadgetManager.hasGadget(e.getPlayer(), "tnt")) {
 
                     if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.TNT)) {
                         player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.TNT));
@@ -151,6 +151,30 @@ public class GadgetListener implements Listener {
                         return;
                     }
                 }
+
+                /**
+                 *  Gateau empoisonné
+                 */
+
+                if ((e.getItem().getType() == Material.CAKE || e.getItem().getType() == Material.CAKE_BLOCK) && e.getItem().getItemMeta().getDisplayName().equals("§3Gâteau Empoisonné") && GadgetManager.hasGadget(e.getPlayer(), "gateauempoisonne")) {
+
+                    e.setCancelled(true);
+
+                    if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.GATEAU_EMPOISONNE)) {
+                        player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.GATEAU_EMPOISONNE));
+                        return;
+                    } else {
+                        GadgetManager.addCooldown(new Cooldown(player, CosmetiqueManager.Cosmetique.GATEAU_EMPOISONNE, 120, true));
+                        final UUID uuid = player.getUniqueId();
+
+                        if(!GadgetManager.getGadgetGateauEmpoisonne().setCake(e.getClickedBlock().getLocation())){
+                            player.sendMessage("§cCe block est déjà utilisé ! !");
+                        }
+
+                        return;
+                    }
+                }
+
             }
         }
 

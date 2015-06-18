@@ -24,6 +24,10 @@ import java.util.*;
 
 public class GadgetManager {
 
+    /**
+     *  Gadgets
+     */
+
     @Getter
     private static GadgetFireBall gadgetFireBall = new GadgetFireBall();
 
@@ -47,6 +51,13 @@ public class GadgetManager {
 
     @Getter
     private static GadgetArtifice gadgetArtifice = new GadgetArtifice();
+
+    @Getter
+    private static GadgetGateauEmpoisonne gadgetGateauEmpoisonne = new GadgetGateauEmpoisonne();
+
+    /**
+     *  Etc
+     */
 
     @Getter
     private static Map<UUID, String> activeGadgets = new HashMap<>();

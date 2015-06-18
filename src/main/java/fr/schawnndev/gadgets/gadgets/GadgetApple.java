@@ -47,7 +47,7 @@ public class GadgetApple extends Gadget implements Listener {
     public CosmetiqueManager.Cosmetique cosmetique = CosmetiqueManager.Cosmetique.APPLE;
 
     @EventHandler
-    public void onDamage(PlayerPickupItemEvent e){
+    public void onPickup(PlayerPickupItemEvent e){
         if(e.getItem() != null && e.getItem().getItemStack() != null)
             if(e.getItem().getItemStack().getType() == Material.GOLDEN_APPLE)
             if(e.getItem().hasMetadata("gadget_apple"))

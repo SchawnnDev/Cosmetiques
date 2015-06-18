@@ -22,8 +22,11 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -39,6 +42,14 @@ public class GadgetEncre extends Gadget implements Listener {
     @Getter
     public CosmetiqueManager.Cosmetique cosmetique = CosmetiqueManager.Cosmetique.ENCRE;
 
+    @EventHandler
+    public void onPickup(PlayerPickupItemEvent e){
+        if(e.getItem() != null && e.getItem().getItemStack() != null)
+            if(e.getItem().getItemStack().getType() == Material.INK_SACK)
+                if(e.getItem().hasMetadata("gadget_encre"))
+                    e.setCancelled(true);
+    }
+
     @Override
     public void start(UUID uuid) {
 
@@ -50,6 +61,7 @@ public class GadgetEncre extends Gadget implements Listener {
 
             final Entity ink = location.getWorld().dropItem(player.getEyeLocation().clone().subtract(0d, 0.2d, 0d), new ItemStack(Material.INK_SACK));
 
+            ink.setMetadata("gadget_encre", new FixedMetadataValue(LCCosmetiques.getInstance(), "slt"));
             ink.setVelocity(player.getLocation().getDirection().multiply(2.000415f));
 
             new BukkitRunnable() {

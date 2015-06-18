@@ -35,7 +35,7 @@ public class ItemStackManager {
         playerItems.put(Cosmetique.AUCUN, new ItemStack(Material.AIR));
         playerItems.put(Cosmetique.DOUBLE_JUMP, buildItemStack(Material.FEATHER, "§bDouble Jump"));
         playerItems.put(Cosmetique.MUSIC, buildItemStack(Material.getMaterial(2258), "§2Music"));
-        playerItems.put(Cosmetique.GATEAU_EMPOISONNE, buildItemStack(Material.CAKE, "§3Gâteau empoisonné"));
+        playerItems.put(Cosmetique.GATEAU_EMPOISONNE, buildItemStack(Material.CAKE, "§3Gâteau Empoisonné"));
         playerItems.put(Cosmetique.GLACE, buildItemStack(Material.SNOW_BALL, "§cça glisse !"));
         playerItems.put(Cosmetique.CANON, buildItemStack(Material.SULPHUR, "§fCanon"));
         playerItems.put(Cosmetique.APPLE, buildItemStack(Material.GOLDEN_APPLE, "§eApple"));
