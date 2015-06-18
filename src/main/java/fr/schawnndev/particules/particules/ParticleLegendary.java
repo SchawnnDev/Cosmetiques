@@ -32,7 +32,7 @@ public class ParticleLegendary extends Particle {
 
     @Override
     public void startParticle(UUID uuid) {
-
+        // TODO: this
     }
 
     @Override

@@ -17,7 +17,7 @@ import java.util.UUID;
 
 public abstract class Particle {
 
-    public final double PI = 3.14159265358979323846;
+    public final float PI = 3.14159265358979323846f;
 
     public abstract void startParticle(UUID uuid);
 

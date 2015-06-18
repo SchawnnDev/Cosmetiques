@@ -50,13 +50,6 @@ public class ParticleSpirales extends Particle {
                 Bukkit.getScheduler().runTaskTimer(LCCosmetiques.getInstance(), new Runnable() {
 
                     Player player = Bukkit.getPlayer(uuid);
-                    private int p = 150;
-                    private int pPerIteration = 12;
-                    private float s = 1.0F;
-                    private float xFactor = 1.0F;
-                    private float yFactor = 0.6F;
-                    private float zFactor = 1.0F;
-                    private float yOffset = 0.6F;
                     private double xRotation;
                     private double yRotation;
                     private double zRotation = 0.0D;
@@ -69,16 +62,16 @@ public class ParticleSpirales extends Particle {
                             Location l = player.getLocation();
                             Vector v = new Vector();
 
-                            for (int i = 0; i < pPerIteration; i++) {
+                            for (int i = 0; i < 12; i++) {
                                 step += 1;
 
-                                float t = 3.14f / p * step;
-                                float r = FastMath.sin(t * 2.718f * pPerIteration / p) * s;
-                                float s = r * 3.1415F * t;
+                                float t = PI / 150 * step;
+                                float r = FastMath.sin(t * 2.718f * 12 / 150);
+                                float s = r * PI * t;
 
-                                v.setX(xFactor * r * -Math.cos(s));
-                                v.setZ(zFactor * r * -Math.sin(s));
-                                v.setY(yFactor + yOffset - 1.0F);
+                                v.setX(1.0f * r * -FastMath.cos(s));
+                                v.setZ(1.0f * r * -FastMath.sin(s));
+                                v.setY(0.2f);
 
                                 RotateVector.rotateVector(v, xRotation, yRotation, zRotation);
                                 ParticleEffect.SPELL_WITCH.display(0f, 0f, 0f, 0f, 1, l.add(v), 128);

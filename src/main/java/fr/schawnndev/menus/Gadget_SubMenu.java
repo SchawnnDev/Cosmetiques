@@ -212,6 +212,8 @@ public class Gadget_SubMenu implements Listener {
 
             if(cosmetique == CosmetiqueManager.Cosmetique.CANNE_A_PECHE)
                 name = "Canne à Pêche";
+            else if (cosmetique == CosmetiqueManager.Cosmetique.GATEAU_EMPOISONNE)
+                name = "Gâteau Empoisonné";
 
             if (cosmetique.isVip()) {
 
@@ -257,6 +259,10 @@ public class Gadget_SubMenu implements Listener {
                 switch (e.getCurrentItem().getItemMeta().getDisplayName()){
                     case "§6Page précédente":
                         Main_Menu.open(player);
+                        break;
+
+                    case "§3Gâteau Empoisonné":
+                        proceedClick(player, CosmetiqueManager.Cosmetique.GATEAU_EMPOISONNE, "gateauempoisonne");
                         break;
 
                     case "§7TNT":
