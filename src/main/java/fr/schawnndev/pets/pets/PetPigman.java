@@ -212,32 +212,26 @@ public class PetPigman extends EntityPigZombie implements Pet {
     public void g(float sideMot, float forMot) {
         if (passenger == null || !(passenger instanceof EntityHuman)) {
             super.g(sideMot, forMot);
-            S = 0.5f;    // Make sure the entity can walk over half slabs, instead of jumping
+            S = 0.5f;
             return;
         }
 
         lastYaw = yaw = passenger.yaw;
         pitch = passenger.pitch * 0.5f;
 
-        // Set the entity's pitch, yaw, head rotation etc.
-        setYawPitch(this.yaw, pitch); //[url]https://github.com/Bukkit/mc-dev/blob/master/net/minecraft/server/Entity.java#L163-L166[/url]
+        setYawPitch(this.yaw, pitch);
         aI = (this.aG = yaw);
 
-        S = 1.0f;    // The custom entity will now automatically climb up 1 high blocks
+        S = 1.0f;
 
         sideMot = ((EntityLiving) passenger).aX * 0.5f;
         forMot = ((EntityLiving) passenger).aY;
 
-		/*
-        if (forMot <= 0.0F) {
-			forMot *= 0.25F;    // Make backwards slower
-		}
-		*/
-        sideMot *= 0.75f;    // Also make sideways slower
+        sideMot *= 0.75f;
 
-        float speed = 0.25f;    // 0.2 is the default entity speed. I made it slightly faster so that riding is better than walking
-        j(speed);    // Apply the speed
-        super.g(sideMot, forMot);    // Apply the motion to the entity
+        float speed = 0.25f;
+        j(speed);
+        super.g(sideMot, forMot);
 
         Field jump = null;
         try {
@@ -247,17 +241,16 @@ public class PetPigman extends EntityPigZombie implements Pet {
         }
         jump.setAccessible(true);
 
-        if (jump != null && onGround) {    // Wouldn't want it jumping while on the ground would we?
+        if (jump != null && onGround) {
             try {
                 if (jump.getBoolean(passenger)) {
                     double jumpHeight = 0.5d;
-                    motY = jumpHeight;    // Used all the time in NMS for entity jumping
+                    motY = jumpHeight;
                 }
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
         }
-
     }
 
     public EntityCreature getCBukkitEntity() {
