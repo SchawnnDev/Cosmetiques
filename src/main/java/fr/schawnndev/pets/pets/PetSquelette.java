@@ -6,6 +6,8 @@
  *  *
  *  * Created by SchawnnDev on 08/06/15 12:53.
  *  *
+ *  * Helped by [http://past.is/6xpTx].
+ *  *
  *  * LCCosmetiques can not be copied and/or distributed without the express
  *  * permission of SchawnnDev.
  *  ******************************************************
@@ -21,7 +23,6 @@ import net.minecraft.server.v1_8_R1.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.CreatureSpawnEvent;

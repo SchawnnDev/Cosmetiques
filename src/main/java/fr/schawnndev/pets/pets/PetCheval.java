@@ -6,6 +6,8 @@
  *  *
  *  * Created by SchawnnDev on 08/06/15 13:05.
  *  *
+ *  * Helped by [http://past.is/6xpTx].
+ *  *
  *  * LCCosmetiques can not be copied and/or distributed without the express
  *  * permission of SchawnnDev.
  *  ******************************************************
@@ -18,7 +20,6 @@ import fr.schawnndev.LCCosmetiques;
 import fr.schawnndev.pets.Pet;
 import fr.schawnndev.pets.PetManager;
 import net.minecraft.server.v1_8_R1.*;
-import net.minecraft.server.v1_8_R1.ItemStack;
 import net.minecraft.server.v1_8_R1.Material;
 import net.minecraft.server.v1_8_R1.World;
 import org.bukkit.*;
@@ -26,7 +27,6 @@ import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.CreatureSpawnEvent;
-import org.bukkit.inventory.*;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;

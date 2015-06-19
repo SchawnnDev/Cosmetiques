@@ -6,6 +6,8 @@
  *  *
  *  * Created by SchawnnDev on 06/06/15 17:38.
  *  *
+ *  * Helped by [http://past.is/6xpTx].
+ *  *
  *  * LCCosmetiques can not be copied and/or distributed without the express
  *  * permission of SchawnnDev.
  *  ******************************************************
