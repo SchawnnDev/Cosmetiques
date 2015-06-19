@@ -97,6 +97,9 @@ public class ServerListener implements Listener {
             _gadget = cosmetiqueTypeStringMap.get(CosmetiqueManager.CosmetiqueType.GADGET);
             _hasActiveGadget = true;
 
+            if(_gadget != null && _gadget.equalsIgnoreCase("doublejump"))
+                player.setAllowFlight(true);
+
         }
 
         final String gadget = _gadget;
@@ -133,6 +136,11 @@ public class ServerListener implements Listener {
 
         if(GadgetManager.hasGadgetActive(e.getPlayer())) {
             SQLManager.setActiveCosmetic(e.getPlayer(), GadgetManager.getGadget(e.getPlayer()), CosmetiqueManager.CosmetiqueType.GADGET);
+
+            if(GadgetManager.getGadget(e.getPlayer()).equalsIgnoreCase("doublejump"))
+                e.getPlayer().setAllowFlight(false);
+
+
             GadgetManager.getActiveGadgets().remove(e.getPlayer().getUniqueId());
         } else {
             SQLManager.setActiveCosmetic(e.getPlayer(), "aucun", CosmetiqueManager.CosmetiqueType.GADGET);

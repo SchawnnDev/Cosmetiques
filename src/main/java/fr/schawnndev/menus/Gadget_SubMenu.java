@@ -210,10 +210,17 @@ public class Gadget_SubMenu implements Listener {
 
             String name = id.toLowerCase().substring(0, 1).toUpperCase() + id.toLowerCase().substring(1);
 
+            if(player.getAllowFlight()) // Double Jump
+                player.setAllowFlight(false);
+
             if(cosmetique == CosmetiqueManager.Cosmetique.CANNE_A_PECHE)
                 name = "Canne à Pêche";
             else if (cosmetique == CosmetiqueManager.Cosmetique.GATEAU_EMPOISONNE)
                 name = "Gâteau Empoisonné";
+            else if (cosmetique == CosmetiqueManager.Cosmetique.DOUBLE_JUMP) {
+                name = "Double Jump";
+                player.setAllowFlight(true);
+            }
 
             if (cosmetique.isVip()) {
 
@@ -291,6 +298,10 @@ public class Gadget_SubMenu implements Listener {
 
                     case "§6Canne à pêche":
                         proceedClick(player, CosmetiqueManager.Cosmetique.CANNE_A_PECHE, "canneapeche");
+                        break;
+
+                    case "§bDouble Jump":
+                        proceedClick(player, CosmetiqueManager.Cosmetique.DOUBLE_JUMP, "doublejump");
                         break;
 
                     default:
