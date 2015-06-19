@@ -94,11 +94,13 @@ public class GadgetDoubleJump extends Gadget implements Listener {
 
                 players.add(player.getUniqueId());
                 player.setAllowFlight(false);
+                player.setFlying(false);
 
                 GadgetManager.addCooldown(new Cooldown(player, CosmetiqueManager.Cosmetique.DOUBLE_JUMP, 5, true));
 
             } else {
-                player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.ARTIFICE));
+                e.setCancelled(true);
+                player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.DOUBLE_JUMP));
             }
         }
     }

@@ -50,6 +50,9 @@ public class GadgetManager {
     private static GadgetPeche gadgetPeche = new GadgetPeche();
 
     @Getter
+    private static GadgetDoubleJump gadgetDoubleJump = new GadgetDoubleJump();
+
+    @Getter
     private static GadgetArtifice gadgetArtifice = new GadgetArtifice();
 
     @Getter
@@ -86,7 +89,7 @@ public class GadgetManager {
     }
 
     public static String getString(Player player, CosmetiqueManager.Cosmetique cosmetique){
-        return getCooldown(player, cosmetique).getMessage();
+        return hasCooldown(player, cosmetique) ? getCooldown(player, cosmetique).getMessage() : ("§cERREUR: NullPointerException (GadgetManager.class , line: 92)");
     }
 
     public static Cooldown getCooldown(Player player, CosmetiqueManager.Cosmetique cosmetique){
