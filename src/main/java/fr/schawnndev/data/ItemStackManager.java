@@ -76,6 +76,8 @@ public class ItemStackManager {
             cosmetique = Cosmetique.CANNE_A_PECHE;
         } else if (cosmetic.equalsIgnoreCase("gateauempoisonne")){
             cosmetique = Cosmetique.GATEAU_EMPOISONNE;
+        } else if (cosmetic.equalsIgnoreCase("doublejump")){
+            cosmetique = Cosmetique.DOUBLE_JUMP;
         } else {
 
             try {
