@@ -126,7 +126,9 @@ public class Particle_SubMenu implements Listener {
 
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.WATER_BUCKET), Cosmetique.PLUIE, player, "§3Pluie", pluieLore, cosmetics.contains("pluie")));
 
-        List<String> laveLore = MenuManager.getNewLore("§7Très pratique en hiver, cette particule remplacera votre chauffage.");
+        List<String> laveLore = new ArrayList<>();
+        laveLore.add("§7Très pratique en hiver, cette");
+        laveLore.add("particule remplacera votre chauffage.");
 
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.LAVA_BUCKET), Cosmetique.LAVE, player, "§6Lave", laveLore, cosmetics.contains("lave")));
 

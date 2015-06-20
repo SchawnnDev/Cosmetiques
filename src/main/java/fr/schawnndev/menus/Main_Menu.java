@@ -156,6 +156,7 @@ public class Main_Menu implements Listener {
          *  Open
          */
 
+        player.playSound(player.getLocation(), Sound.NOTE_PLING, 1.0f, 2.0f);
         player.openInventory(inv);
     }
 

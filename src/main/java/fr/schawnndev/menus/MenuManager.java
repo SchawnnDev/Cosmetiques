@@ -71,7 +71,7 @@ public class MenuManager {
                 if (player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")) {
                     lore.add("§7------------");
                     lore.add("§aVous possédez " + (cosmetiqueType == CosmetiqueType.PARTICLE ? "cette Particule" : cosmetiqueType == CosmetiqueType.GADGET ? "ce Gadget" : "ce Pet") + " grâce à votre grade.");
-                    lore.add("§a» Equiper " + (cosmetiqueType == CosmetiqueType.PARTICLE ? "cette Particule." : cosmetiqueType == CosmetiqueType.GADGET ? "ce Gadget." : "ce Pet."));
+                    lore.add("§e» §aEquiper " + (cosmetiqueType == CosmetiqueType.PARTICLE ? "cette Particule." : cosmetiqueType == CosmetiqueType.GADGET ? "ce Gadget." : "ce Pet."));
                 } else {
                     lore.add("§7------------");
                     lore.add("§bPrix : §6Réservé aux §eVIP");
@@ -84,7 +84,7 @@ public class MenuManager {
             }
         } else {
             lore.add("§7------------");
-            lore.add("§a» Equiper " + (cosmetiqueType == CosmetiqueType.PARTICLE ? "cette Particule." : cosmetiqueType == CosmetiqueType.GADGET ? "ce Gadget." : "ce Pet."));
+            lore.add("§e» §aEquiper " + (cosmetiqueType == CosmetiqueType.PARTICLE ? "cette Particule." : cosmetiqueType == CosmetiqueType.GADGET ? "ce Gadget." : "ce Pet."));
         }
 
         finalItemMeta.setDisplayName(displayName);
