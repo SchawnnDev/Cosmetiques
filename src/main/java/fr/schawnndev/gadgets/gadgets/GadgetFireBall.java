@@ -40,8 +40,6 @@ public class GadgetFireBall extends Gadget implements Listener {
     @Getter
     private Map<UUID, Integer> tasks = new HashMap<>();
 
-    public static List<UUID> cooldowns = new ArrayList<>();
-
     @Override
     public void start(UUID uuid){
 
