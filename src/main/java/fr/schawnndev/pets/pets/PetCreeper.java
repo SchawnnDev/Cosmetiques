@@ -160,8 +160,8 @@ public class PetCreeper extends EntityCreeper implements Pet {
                     Location entityLocation = getMCEntity().getLocation();
 
                     if (entityLocation.getWorld().equals(getPetOwner().getWorld()))
-                        if (entityLocation.distanceSquared(getPetOwner().getLocation()) < 20)
-                            if (entityLocation.distanceSquared(getPetOwner().getLocation()) > 3)
+                        if (entityLocation.distanceSquared(getPetOwner().getLocation()) < (20 * 3))
+                            if (entityLocation.distanceSquared(getPetOwner().getLocation()) > (3 * 3))
                                 follow();
                             else
                                 navigation.n();

@@ -27,6 +27,8 @@ import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.*;
+import org.bukkit.util.Vector;
 
 import java.util.*;
 
@@ -52,10 +54,10 @@ public class GadgetMusic extends Gadget implements Listener {
             final long start = System.currentTimeMillis();
             final Entity item = location.getWorld().dropItem(location.clone().add(0d, 2d, 0d), new ItemStack(Material.getMaterial(disc.getKey())));
             item.setMetadata("gadget_music", new FixedMetadataValue(LCCosmetiques.getInstance(), "slt"));
+            item.setVelocity(new Vector(0f,0f,0f));
             location.getBlock().setType(Material.JUKEBOX);
             location.getBlock().setMetadata("gadget_music", new FixedMetadataValue(LCCosmetiques.getInstance(), "slt"));
-            location.getWorld().playEffect(location, Effect.RECORD_PLAY, disc.getKey());
-
+            location.getWorld().playEffect(location, Effect.RECORD_PLAY, Material.getMaterial(disc.getKey()));
 
             new BukkitRunnable() {
 
