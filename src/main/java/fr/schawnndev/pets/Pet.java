@@ -14,7 +14,6 @@
 package fr.schawnndev.pets;
 
 import fr.schawnndev.CosmetiqueManager.Cosmetique;
-import fr.schawnndev.pets.pets.PetPoulet;
 import net.minecraft.server.v1_8_R1.EntityCreature;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;

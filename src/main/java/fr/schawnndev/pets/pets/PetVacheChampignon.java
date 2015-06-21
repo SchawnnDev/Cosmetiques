@@ -173,7 +173,7 @@ public class PetVacheChampignon extends EntityMushroomCow implements Pet {
 
             }
 
-        }.runTaskTimer(LCCosmetiques.getInstance(), 0l, 20l);
+        }.runTaskTimer(plugin, 0l, 20l);
 
     }
 

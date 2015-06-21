@@ -172,7 +172,7 @@ public class PetPigman extends EntityPigZombie implements Pet {
 
             }
 
-        }.runTaskTimer(LCCosmetiques.getInstance(), 0l, 20l);
+        }.runTaskTimer(plugin, 0l, 20l);
 
     }
 

@@ -172,7 +172,7 @@ public class PetLoup extends EntityWolf implements Pet {
 
             }
 
-        }.runTaskTimer(LCCosmetiques.getInstance(), 0l, 20l);
+        }.runTaskTimer(plugin, 0l, 20l);
 
     }
 

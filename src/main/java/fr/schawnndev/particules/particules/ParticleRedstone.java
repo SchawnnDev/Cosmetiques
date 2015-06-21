@@ -13,7 +13,6 @@
 
 package fr.schawnndev.particules.particules;
 
-import fr.schawnndev.CosmetiqueManager;
 import fr.schawnndev.CosmetiqueManager.Cosmetique;
 import fr.schawnndev.LCCosmetiques;
 import fr.schawnndev.math.FastMath;

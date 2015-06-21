@@ -20,7 +20,9 @@ import net.minecraft.server.v1_8_R1.*;
 import org.bukkit.entity.EntityType;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public enum PetEntityType {
 

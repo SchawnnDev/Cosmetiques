@@ -13,8 +13,7 @@
 
 package fr.schawnndev.sql;
 
-import fr.schawnndev.CosmetiqueManager;
-import fr.schawnndev.CosmetiqueManager.*;
+import fr.schawnndev.CosmetiqueManager.CosmetiqueType;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.entity.Player;

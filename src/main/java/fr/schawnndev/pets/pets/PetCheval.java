@@ -20,9 +20,9 @@ import fr.schawnndev.LCCosmetiques;
 import fr.schawnndev.pets.Pet;
 import fr.schawnndev.pets.PetManager;
 import net.minecraft.server.v1_8_R1.*;
-import net.minecraft.server.v1_8_R1.Material;
-import net.minecraft.server.v1_8_R1.World;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Player;
@@ -187,7 +187,7 @@ public class PetCheval extends EntityHorse implements Pet {
 
             }
 
-        }.runTaskTimer(LCCosmetiques.getInstance(), 0l, 20l);
+        }.runTaskTimer(plugin, 0l, 20l);
 
     }
 

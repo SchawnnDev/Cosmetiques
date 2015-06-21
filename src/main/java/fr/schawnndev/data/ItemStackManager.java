@@ -13,18 +13,18 @@
 
 package fr.schawnndev.data;
 
-import com.icroque.lcperms.LCPerms;
 import fr.lyneteam.lcmaster.LCMaster;
-import fr.schawnndev.CosmetiqueManager.*;
+import fr.schawnndev.CosmetiqueManager.Cosmetique;
 import lombok.Getter;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ItemStackManager {
 

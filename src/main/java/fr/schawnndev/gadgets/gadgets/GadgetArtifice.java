@@ -14,7 +14,6 @@
 package fr.schawnndev.gadgets.gadgets;
 
 import fr.schawnndev.CosmetiqueManager;
-import fr.schawnndev.LCCosmetiques;
 import fr.schawnndev.gadgets.Gadget;
 import fr.schawnndev.utils.Fireworks;
 import lombok.Getter;

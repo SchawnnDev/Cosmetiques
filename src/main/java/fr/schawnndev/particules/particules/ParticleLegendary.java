@@ -13,8 +13,8 @@
 
 package fr.schawnndev.particules.particules;
 
-import fr.schawnndev.particules.Particle;
 import fr.schawnndev.CosmetiqueManager.Cosmetique;
+import fr.schawnndev.particules.Particle;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 

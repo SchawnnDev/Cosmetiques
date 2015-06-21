@@ -16,7 +16,6 @@ package fr.schawnndev.api.events;
 import fr.schawnndev.api.enums.ClickType;
 import lombok.Getter;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerAchievementAwardedEvent;
 
 public class ClickEvent {
 

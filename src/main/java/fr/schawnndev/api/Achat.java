@@ -14,21 +14,17 @@
 package fr.schawnndev.api;
 
 import fr.lyneteam.lcmaster.LCMaster;
-import fr.schawnndev.CosmetiqueManager;
-import fr.schawnndev.CosmetiqueManager.*;
-import fr.schawnndev.api.utils.GlassColor;
+import fr.schawnndev.CosmetiqueManager.Cosmetique;
+import fr.schawnndev.CosmetiqueManager.CosmetiqueType;
 import fr.schawnndev.data.ItemStackManager;
 import fr.schawnndev.gadgets.GadgetManager;
 import fr.schawnndev.math.PositionConverter;
 import fr.schawnndev.particules.ParticleManager;
-import fr.schawnndev.particules.particules.ParticleMagicien;
 import fr.schawnndev.pets.PetManager;
 import fr.schawnndev.sql.SQLManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.block.Dispenser;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
@@ -37,7 +33,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
 import java.util.Date;
-import java.util.Random;
 
 public class Achat {
 

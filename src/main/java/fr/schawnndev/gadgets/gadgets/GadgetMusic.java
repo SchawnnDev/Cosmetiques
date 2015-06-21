@@ -19,7 +19,10 @@ import fr.schawnndev.gadgets.Gadget;
 import fr.schawnndev.math.Randoms;
 import fr.schawnndev.particules.ParticleEffect;
 import lombok.Getter;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Effect;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,10 +30,12 @@ import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.*;
 import org.bukkit.util.Vector;
 
-import java.util.*;
+import java.util.AbstractMap;
+import java.util.Map;
+import java.util.Random;
+import java.util.UUID;
 
 public class GadgetMusic extends Gadget implements Listener {
 

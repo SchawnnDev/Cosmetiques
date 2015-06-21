@@ -13,7 +13,6 @@
 
 package fr.schawnndev.menus;
 
-import fr.schawnndev.CosmetiqueManager;
 import fr.schawnndev.LCCosmetiques;
 import fr.schawnndev.api.Manager;
 import fr.schawnndev.api.utils.GlassColor;
@@ -22,8 +21,6 @@ import fr.schawnndev.gadgets.GadgetManager;
 import fr.schawnndev.math.PositionConverter;
 import fr.schawnndev.particules.ParticleManager;
 import fr.schawnndev.pets.PetManager;
-import fr.schawnndev.sql.SQLManager;
-import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;

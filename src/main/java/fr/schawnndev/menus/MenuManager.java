@@ -13,7 +13,8 @@
 
 package fr.schawnndev.menus;
 
-import fr.schawnndev.CosmetiqueManager.*;
+import fr.schawnndev.CosmetiqueManager.Cosmetique;
+import fr.schawnndev.CosmetiqueManager.CosmetiqueType;
 import fr.schawnndev.api.utils.ItemDisponibility;
 import fr.schawnndev.pets.PetChangeNameEvent;
 import lombok.Getter;

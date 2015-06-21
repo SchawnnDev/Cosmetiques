@@ -18,10 +18,10 @@ import fr.schawnndev.LCCosmetiques;
 import fr.schawnndev.gadgets.Gadget;
 import fr.schawnndev.particules.ParticleEffect;
 import fr.schawnndev.utils.Fireworks;
-import fr.schawnndev.utils.ResetBlock;
 import lombok.Getter;
-import org.bukkit.*;
-import org.bukkit.block.Block;
+import org.bukkit.Bukkit;
+import org.bukkit.Color;
+import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -30,11 +30,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.*;
+import java.util.Random;
+import java.util.UUID;
 
 public class GadgetCanon extends Gadget implements Listener {
 

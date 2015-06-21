@@ -16,13 +16,11 @@ package fr.schawnndev.gadgets.gadgets;
 import fr.schawnndev.CosmetiqueManager;
 import fr.schawnndev.LCCosmetiques;
 import fr.schawnndev.gadgets.Gadget;
-import fr.schawnndev.utils.LocationUtils;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.World;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
@@ -31,7 +29,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 
-import java.util.*;
+import java.util.UUID;
 
 public class GadgetTNT extends Gadget implements Listener {
 

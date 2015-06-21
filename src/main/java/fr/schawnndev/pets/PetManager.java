@@ -13,17 +13,19 @@
 
 package fr.schawnndev.pets;
 
-import fr.schawnndev.CosmetiqueManager.*;
-import fr.schawnndev.LCCosmetiques;
+import fr.schawnndev.CosmetiqueManager.Cosmetique;
 import fr.schawnndev.pets.pets.*;
-import fr.schawnndev.sql.SQLManager;
 import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftEntity;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class PetManager {
 

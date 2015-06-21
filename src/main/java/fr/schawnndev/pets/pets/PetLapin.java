@@ -176,7 +176,7 @@ public class PetLapin extends EntityRabbit implements Pet {
 
             }
 
-        }.runTaskTimer(LCCosmetiques.getInstance(), 0l, 20l);
+        }.runTaskTimer(plugin, 0l, 20l);
 
     }
 
