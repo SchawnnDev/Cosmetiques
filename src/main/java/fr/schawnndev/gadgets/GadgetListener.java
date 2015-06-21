@@ -69,7 +69,7 @@ public class GadgetListener implements Listener {
          */
 
 
-        if ((e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR) && e.getItem().getType() == Material.FIREWORK && e.getItem().getItemMeta().getDisplayName().equals("§514 juillet") && GadgetManager.hasGadget(e.getPlayer(), "artifice")) {
+        if ((e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR) && e.getItem() != null && e.getItem().getType() == Material.FIREWORK && e.getItem().getItemMeta().getDisplayName().equals("§514 juillet") && GadgetManager.hasGadget(e.getPlayer(), "artifice")) {
 
             e.setCancelled(true);
             e.setUseItemInHand(Event.Result.DENY);
