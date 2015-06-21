@@ -78,8 +78,8 @@ public class GadgetEncre extends Gadget implements Listener {
                     for(Entity e : ink.getNearbyEntities(1d, 1d, 1d)){
                         if(e instanceof Player && e != player){
                             ink.remove();
-                            player.sendMessage("§aVous avez fait perdre la vue à §b<player> §a!".replace("<player>", ((Player)e).getName()));
-                            ((Player) e).sendMessage("§aVous avez été aveuglé par §b<player> &a!".replace("<player>", player.getName()));
+                            player.sendMessage("§aVous avez fait perdre la vue à §b<player> §a!".replace("<player>", e.getName()));
+                            e.sendMessage("§aVous avez été aveuglé par §b<player> &a!".replace("<player>", player.getName()));
                             ((Player) e).addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 5 * 20, 5));
                             cancel();
                             return;
