@@ -164,8 +164,8 @@ public class PetLapin extends EntityRabbit implements Pet {
                     Location entityLocation = getMCEntity().getLocation();
 
                     if (entityLocation.getWorld().equals(getPetOwner().getWorld()))
-                        if (entityLocation.distanceSquared(getPetOwner().getLocation()) < 20)
-                            if (entityLocation.distanceSquared(getPetOwner().getLocation()) > 3)
+                        if (entityLocation.distanceSquared(getPetOwner().getLocation()) < (20 * 3))
+                            if (entityLocation.distanceSquared(getPetOwner().getLocation()) > (3 * 3))
                                 follow();
                             else
                                 navigation.n();
@@ -179,6 +179,8 @@ public class PetLapin extends EntityRabbit implements Pet {
         }.runTaskTimer(LCCosmetiques.getInstance(), 0l, 20l);
 
     }
+
+
 
     @Override
     public void stopFollow() {

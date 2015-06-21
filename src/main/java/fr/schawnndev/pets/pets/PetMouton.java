@@ -176,6 +176,7 @@ public class PetMouton extends EntitySheep implements Pet {
 
     }
 
+
     @Override
     public void stopFollow() {
         if (task != null) {
