@@ -182,6 +182,8 @@ public class GadgetListener implements Listener {
 
                 if (e.getItem().getType() == Material.getMaterial(2258) && e.getItem().getItemMeta().getDisplayName().equals("§2Music") && GadgetManager.hasGadget(e.getPlayer(), "music")) {
 
+                    e.setCancelled(true);
+
                     if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.MUSIC)) {
                         player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.MUSIC));
                         return;
