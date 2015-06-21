@@ -47,7 +47,7 @@ public class GadgetMusic extends Gadget implements Listener {
     }
 
     public boolean setJukebox(final Location location){
-        location.add(0d, 1d, 0d);
+        location.add(.5d, 1d, .5d);
 
         if(location.getBlock().isEmpty()){
             final Map.Entry<Integer, Integer> disc = getRandomDisc(new Random().nextInt(12));
@@ -65,7 +65,7 @@ public class GadgetMusic extends Gadget implements Listener {
                 public void run() {
                     if((((System.currentTimeMillis() - start) / 1000) * 20) < disc.getValue()){
                         for(int i = 0; i < 4; i++)
-                            ParticleEffect.NOTE.display(new ParticleEffect.NoteColor(Randoms.randomRangeInt(0, 24)), location.clone().add(0d, .5d, 0d), 128);
+                            ParticleEffect.NOTE.display(new ParticleEffect.NoteColor(Randoms.randomRangeInt(0, 24)), location.clone().add(i/3.5, 1d, -(i/1.20)), 128);
                     } else if ((((System.currentTimeMillis() - start) / 1000) * 20) > (disc.getValue() + 20)) {
                         location.getBlock().setType(Material.AIR);
 
@@ -77,7 +77,7 @@ public class GadgetMusic extends Gadget implements Listener {
                     }
                 }
 
-            }.runTaskTimer(LCCosmetiques.getInstance(), 0l, 5l);
+            }.runTaskTimer(LCCosmetiques.getInstance(), 0l, 10l);
 
             return true;
         } else {
