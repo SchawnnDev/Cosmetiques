@@ -176,6 +176,27 @@ public class GadgetListener implements Listener {
                     }
                 }
 
+                /**
+                 *  Music
+                 */
+
+                if (e.getItem().getType() == Material.getMaterial(2258) && e.getItem().getItemMeta().getDisplayName().equals("§2Music") && GadgetManager.hasGadget(e.getPlayer(), "music")) {
+
+                    if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.MUSIC)) {
+                        player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.MUSIC));
+                        return;
+                    } else {
+                        GadgetManager.addCooldown(new Cooldown(player, CosmetiqueManager.Cosmetique.MUSIC, 120, true));
+                        final UUID uuid = player.getUniqueId();
+
+                        if(!GadgetManager.getGadgetMusic().setJukebox(e.getClickedBlock().getLocation())){
+                            player.sendMessage("§cCe block est déjà utilisé ! !");
+                        }
+
+                        return;
+                    }
+                }
+
             }
         }
 

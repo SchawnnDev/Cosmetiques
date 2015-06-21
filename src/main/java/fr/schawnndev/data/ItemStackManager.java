@@ -87,7 +87,7 @@ public class ItemStackManager {
 
         }
 
-        return (playerItems.containsKey(cosmetique) ? playerItems.get(cosmetique) : new ItemStack(Material.AIR));
+        return getItemStack(cosmetique);
     }
 
     public static ItemStack getItemStack(Cosmetique cosmetique){

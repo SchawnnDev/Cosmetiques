@@ -304,6 +304,10 @@ public class Gadget_SubMenu implements Listener {
                         proceedClick(player, CosmetiqueManager.Cosmetique.DOUBLE_JUMP, "doublejump");
                         break;
 
+                    case "§2Music":
+                        proceedClick(player, CosmetiqueManager.Cosmetique.MUSIC, "music");
+                        break;
+
                     default:
                         break;
                 }

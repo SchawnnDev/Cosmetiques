@@ -58,6 +58,10 @@ public class GadgetManager {
     @Getter
     private static GadgetGateauEmpoisonne gadgetGateauEmpoisonne = new GadgetGateauEmpoisonne();
 
+    @Getter
+    private static GadgetMusic gadgetMusic = new GadgetMusic();
+
+
     /**
      *  Etc
      */

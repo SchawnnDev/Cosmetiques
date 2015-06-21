@@ -15,6 +15,7 @@ package fr.schawnndev.particules.particules;
 
 import fr.schawnndev.CosmetiqueManager;
 import fr.schawnndev.LCCosmetiques;
+import fr.schawnndev.math.FastMath;
 import fr.schawnndev.math.Randoms;
 import fr.schawnndev.particules.Particle;
 import fr.schawnndev.particules.ParticleEffect;
@@ -65,9 +66,9 @@ public class ParticleContent extends Particle {
 
                             Location loc = player.getLocation();
 
-                            float x = (float) (loc.getX() + Math.cos(a));
+                            float x = (float) (loc.getX() + FastMath.cos(a));
                             float y = (float) (loc.getY() + c/4);
-                            float z = (float) (loc.getZ() + Math.sin(a));
+                            float z = (float) (loc.getZ() + FastMath.sin(a));
 
                             ParticleEffect.VILLAGER_HAPPY.display(0f, 0f, 0f, 0.01f, 1, new Location(loc.getWorld(), x, y, z), 128);
 
