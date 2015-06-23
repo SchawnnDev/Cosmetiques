@@ -121,6 +121,7 @@ public class Gadget_SubMenu implements Listener {
 
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.FEATHER), CosmetiqueManager.Cosmetique.DOUBLE_JUMP, player, "§bDouble Jump", doublejumpLore, cosmetics.contains("doublejump")));
 
+/*
         List<String> musicLore = new ArrayList<>();
         musicLore.add("§7Faites profiter votre entourage de belles");
         musicLore.add("§7musiques de Minecraft dans un rayon de 30 blocs.");
@@ -128,6 +129,8 @@ public class Gadget_SubMenu implements Listener {
         musicLore.add("§7Recharge : §a2 minutes§7.");
 
         itemStacks.add(MenuManager.buildItem(new ItemStack(2258), CosmetiqueManager.Cosmetique.MUSIC, player, "§2Music", musicLore, cosmetics.contains("music")));
+
+*/
 
         List<String> cakeLore = new ArrayList<>();
         cakeLore.add("§7Posez un gâteau empoissonné qui infligera des");
