@@ -26,14 +26,9 @@
             <version>1.8-R0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>bukkit</artifactId>
-            <version>1.8-R0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>net.minecraft.server.v1_8_R1</groupId>
-            <artifactId>craftbukkit</artifactId>
-            <version>1.8</version>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot</artifactId>
+            <version>1.8.6</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/spigot.jar</systemPath>
             <optional>true</optional>

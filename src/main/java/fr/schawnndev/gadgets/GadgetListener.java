@@ -37,7 +37,7 @@ public class GadgetListener implements Listener {
         Bukkit.getPluginManager().registerEvents(this, LCCosmetiques.getInstance());
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onClick(PlayerInteractEvent e) {
 
         final Player player = e.getPlayer();

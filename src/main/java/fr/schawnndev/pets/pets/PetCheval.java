@@ -19,11 +19,11 @@ import fr.schawnndev.CosmetiqueManager.Cosmetique;
 import fr.schawnndev.LCCosmetiques;
 import fr.schawnndev.pets.Pet;
 import fr.schawnndev.pets.PetManager;
-import net.minecraft.server.v1_8_R1.*;
+import net.minecraft.server.v1_8_R3.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.CreatureSpawnEvent;
@@ -231,7 +231,6 @@ public class PetCheval extends EntityHorse implements Pet {
     @Override
     public boolean a(EntityHuman human) { return true; }
 
-
     public void g(float sideMot, float forMot) {
         if (passenger == null || !(passenger instanceof EntityHuman)) {
             super.g(sideMot, forMot);
@@ -247,18 +246,18 @@ public class PetCheval extends EntityHorse implements Pet {
 
         S = 1.0f;
 
-        sideMot = ((EntityLiving) passenger).aX * 0.5f;
-        forMot = ((EntityLiving) passenger).aY;
+        sideMot = ((EntityLiving) passenger).aZ * 0.5f;
+        forMot = ((EntityLiving) passenger).ba;
 
         sideMot *= 0.75f;
 
         float speed = 0.25f;
-        j(speed);
+        k(speed);
         super.g(sideMot, forMot);
 
         Field jump = null;
         try {
-            jump = EntityLiving.class.getDeclaredField("aW");
+            jump = EntityLiving.class.getDeclaredField("aY");
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }

@@ -16,7 +16,7 @@
 package fr.schawnndev.pets.pets;
 
 import lombok.Getter;
-import net.minecraft.server.v1_8_R1.*;
+import net.minecraft.server.v1_8_R3.*;
 import org.bukkit.entity.EntityType;
 
 import java.lang.reflect.Field;
@@ -115,9 +115,9 @@ public enum PetEntityType {
                     Field list = BiomeBase.class.getDeclaredField(field);
                     list.setAccessible(true);
                     @SuppressWarnings("unchecked")
-                    List<BiomeMeta> mobList = (List<BiomeMeta>) list.get(biomeBase);
+                    List<BiomeBase.BiomeMeta> mobList = (List<BiomeBase.BiomeMeta>) list.get(biomeBase);
 
-                    for (BiomeMeta meta : mobList)
+                    for (BiomeBase.BiomeMeta meta : mobList)
                         for (PetEntityType entity : values())
                             if (entity.getCustomClass().equals(meta.b))
                                 meta.b = entity.getNMSClass();
