@@ -43,10 +43,6 @@ public class LCCosmetiques extends JavaPlugin{
 
         instance = this;
 
-        // API Inutile pour le moment
-
-        // new ItemDisponibility();
-
         // Listeners
 
         new ServerListener();
@@ -88,32 +84,6 @@ public class LCCosmetiques extends JavaPlugin{
         sql.stop();
         PetEntityType.unregisterEntities();
 
-    }
-
-    /**
-     *
-     *  TEST
-     *
-     */
-
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
-        if(label.equalsIgnoreCase("a")){
-            Player player = (Player)sender;
-            player.sendMessage("§aadded pet vache");
-            PetManager.addPlayerPet(player, CosmetiqueManager.Cosmetique.VACHE);
-            return true;
-        }
-
-        if(label.equalsIgnoreCase("b")){
-            Player player = (Player)sender;
-            player.sendMessage("§aadded pet poulet");
-            PetManager.addPlayerPet(player, CosmetiqueManager.Cosmetique.POULET);
-
-        }
-
-        return false;
     }
 
 }

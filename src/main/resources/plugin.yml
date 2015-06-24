@@ -1,13 +1,4 @@
 name: LCCosmetiques
-version: 1.0
+version: 2.0
 main: fr.schawnndev.LCCosmetiques
 author: SchawnnDev
-commands:
-  b:
-    description: Salut
-  a:
-    description: Salut
-  c:
-    description: Salut
-  d:
-    description: Salut

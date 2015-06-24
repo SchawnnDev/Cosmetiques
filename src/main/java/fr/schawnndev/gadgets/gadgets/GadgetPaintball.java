@@ -64,7 +64,13 @@ public class GadgetPaintball extends Gadget implements Listener {
                 if(b != null && !GadgetManager.isAlreadyResetBlock(b) && b.getType() != Material.AIR && b.getType() != Material.SIGN && b.getType() != Material.STONE_BUTTON
                         && b.getType() != Material.WOOD_BUTTON && b.getType() != Material.WHEAT && b.getType() != Material.LEVER
                         && b.getType() != Material.TORCH && b.getType() != Material.REDSTONE_TORCH_OFF
-                        && b.getType() != Material.REDSTONE_TORCH_ON && b.getType() != Material.getMaterial(59) && !(b.getType() == Material.getMaterial(3) & b.getData() == 1)){
+                        && b.getType() != Material.REDSTONE_TORCH_ON) {
+
+                    if(b.getType() == Material.getMaterial(59))
+                        break;
+                    if(b.getType() == Material.getMaterial(3) && b.getData() == 1)
+                        break;
+
 
                     ResetBlock block = new ResetBlock(b.getLocation(), b.getType(), b.getData());
                     blockList.add(block);
