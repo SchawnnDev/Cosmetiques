@@ -59,7 +59,8 @@ public class PetChangeNameEvent implements Listener {
                     player.sendMessage("§3vous devez écrire le nom voulu dans le tchat.");
                 } else if (timer == 2) {
                     player.sendMessage("    ");
-                    player.sendMessage("§3Pour mettre de la couleur, utilisez le préfix " + '"' + " §c& §3" + '"' + " suivi d'un numéro.");
+                    player.sendMessage("§3Pour mettre de la couleur, utilisez le préfix ");
+                    player.sendMessage('"' + " §c& §3" + '"' + " suivi d'un numéro.");
                     player.sendMessage("§3Les numéros de couleurs sont disponible ici : §chttp://bit.ly/1QfKInv");
                 } else if(timer == 3){
                     player.sendMessage("    ");

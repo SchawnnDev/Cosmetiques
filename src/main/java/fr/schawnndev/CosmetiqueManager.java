@@ -45,7 +45,7 @@ public class CosmetiqueManager {
         // Gadgets
 
         DOUBLE_JUMP(CosmetiqueType.GADGET, true, 0, new ItemStack(Material.FEATHER), "doublejump"),
-        MUSIC(CosmetiqueType.GADGET, false, 1350, new ItemStack(2258), "music"),
+        FIREBALL(CosmetiqueType.GADGET, false, 1350, new ItemStack(Material.FIREBALL), "fireball"),
         GATEAU_EMPOISONNE(CosmetiqueType.GADGET, false, 1400, new ItemStack(Material.CAKE), "gateauempoisonne"),
         GLACE(CosmetiqueType.GADGET, true, 0, new ItemStack(Material.ICE), "glace"),
         CANON(CosmetiqueType.GADGET, false, 2500, new ItemStack(Material.SULPHUR), "canon"),

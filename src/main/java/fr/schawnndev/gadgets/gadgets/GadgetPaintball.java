@@ -26,6 +26,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -59,17 +60,23 @@ public class GadgetPaintball extends Gadget implements Listener {
 
             final List<ResetBlock> blockList = new ArrayList<>();
 
-            for(Block b : BlockUtils.getInRadius(e.getEntity().getLocation(), 1.5d, true).keySet()){
+            for(Block b : BlockUtils.getInRadius(e.getEntity().getLocation(), 2d, true).keySet()){
                 if(b != null && !GadgetManager.isAlreadyResetBlock(b) && b.getType() != Material.AIR && b.getType() != Material.SIGN && b.getType() != Material.STONE_BUTTON
                         && b.getType() != Material.WOOD_BUTTON && b.getType() != Material.WHEAT && b.getType() != Material.LEVER
                         && b.getType() != Material.TORCH && b.getType() != Material.REDSTONE_TORCH_OFF
-                        && b.getType() != Material.REDSTONE_TORCH_ON){
+                        && b.getType() != Material.REDSTONE_TORCH_ON && b.getType() != Material.getMaterial(59) && !(b.getType() == Material.getMaterial(3) & b.getData() == 1)){
 
                     ResetBlock block = new ResetBlock(b.getLocation(), b.getType(), b.getData());
                     blockList.add(block);
                     GadgetManager.getResetBlocks().add(block);
                     b.setType(Material.WOOL);
                     b.setData(Randoms.randomRangeByte(0, 15));
+
+                    Projectile projectile = (Projectile) e.getEntity();
+
+                    if(projectile.getShooter() != null && projectile.getShooter() instanceof Player)
+                        ((Player) projectile.getShooter()).playSound(((Player) projectile.getShooter()).getLocation(), Sound.ARROW_HIT, 1f, 2f);
+
                 }
             }
 
@@ -104,7 +111,9 @@ public class GadgetPaintball extends Gadget implements Listener {
             final Player player = Bukkit.getPlayer(uuid);
 
             final Entity boule = player.launchProjectile(EnderPearl.class);
-            boule.setMetadata("gadget_paintball", new FixedMetadataValue(LCCosmetiques.getInstance(), "gadget_paintball"));
+            boule.setMetadata("gadget_paintball", new FixedMetadataValue(LCCosmetiques.getInstance(), "slt"));
+
+            player.playSound(player.getLocation(), Sound.FIREWORK_LAUNCH, 1f, 2f);
 
         }
     }

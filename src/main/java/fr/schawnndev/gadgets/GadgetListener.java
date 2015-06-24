@@ -43,10 +43,31 @@ public class GadgetListener implements Listener {
         final Player player = e.getPlayer();
 
         /**
-         *  Fireball
+         *  FireBall
          */
 
-        if ((e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR) && e.getItem() != null && e.getItem().getType() == Material.IRON_BARDING && e.getItem().getItemMeta().getDisplayName().equals("§2PaintBall") && GadgetManager.hasGadget(e.getPlayer(), "paintball")) {
+        if (e.getAction() == Action.RIGHT_CLICK_AIR && e.getItem() != null && e.getItem().getType() == Material.FIREBALL && e.getItem().getItemMeta().getDisplayName().equals("§2I believe I can Fly") && GadgetManager.hasGadget(e.getPlayer(), "fireball")) {
+
+            e.setCancelled(true);
+            e.setUseItemInHand(Event.Result.DENY);
+
+            if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.FIREBALL)) {
+                player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.FIREBALL));
+                return;
+            } else {
+                GadgetManager.addCooldown(new Cooldown(player, CosmetiqueManager.Cosmetique.FIREBALL, 15, true));
+                final UUID uuid = player.getUniqueId();
+
+                GadgetManager.getGadgetFireBall().start(uuid);
+                return;
+            }
+        }
+
+        /**
+         *  PaintBall
+         */
+
+        if ((e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR) && e.getItem() != null && e.getItem().getType() == Material.IRON_BARDING && e.getItem().getItemMeta().getDisplayName().equals("§dPaintBall") && GadgetManager.hasGadget(e.getPlayer(), "paintball")) {
 
             if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.PAINTBALL)) {
                 player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.PAINTBALL));
@@ -58,7 +79,6 @@ public class GadgetListener implements Listener {
                 GadgetManager.getGadgetPaintball().start(uuid);
                 return;
             }
-
         }
 
         /**
@@ -153,6 +173,9 @@ public class GadgetListener implements Listener {
 
                 if (e.getItem().getType() == Material.TNT && e.getItem().getItemMeta().getDisplayName().equals("§7TNT") && GadgetManager.hasGadget(e.getPlayer(), "tnt")) {
 
+                    e.setCancelled(true);
+                    e.setUseItemInHand(Event.Result.DENY);
+
                     if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.TNT)) {
                         player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.TNT));
                         return;
@@ -181,29 +204,6 @@ public class GadgetListener implements Listener {
                         final UUID uuid = player.getUniqueId();
 
                         if(!GadgetManager.getGadgetGateauEmpoisonne().setCake(e.getClickedBlock().getLocation())){
-                            player.sendMessage("§cCe block est déjà utilisé ! !");
-                        }
-
-                        return;
-                    }
-                }
-
-                /**
-                 *  Music
-                 */
-
-                if (e.getItem().getType() == Material.getMaterial(2258) && e.getItem().getItemMeta().getDisplayName().equals("§2Music") && GadgetManager.hasGadget(e.getPlayer(), "music")) {
-
-                    e.setCancelled(true);
-
-                    if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.MUSIC)) {
-                        player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.MUSIC));
-                        return;
-                    } else {
-                        GadgetManager.addCooldown(new Cooldown(player, CosmetiqueManager.Cosmetique.MUSIC, 120, true));
-                        final UUID uuid = player.getUniqueId();
-
-                        if(!GadgetManager.getGadgetMusic().setJukebox(e.getClickedBlock().getLocation())){
                             player.sendMessage("§cCe block est déjà utilisé ! !");
                         }
 

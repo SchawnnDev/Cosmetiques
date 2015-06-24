@@ -121,13 +121,14 @@ public class Gadget_SubMenu implements Listener {
 
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.FEATHER), CosmetiqueManager.Cosmetique.DOUBLE_JUMP, player, "§bDouble Jump", doublejumpLore, cosmetics.contains("doublejump")));
 
-        List<String> musicLore = new ArrayList<>();
-        musicLore.add("§7Faites profiter votre entourage de belles");
-        musicLore.add("§7musiques de Minecraft dans un rayon de 30 blocs.");
-        musicLore.add("  ");
-        musicLore.add("§7Recharge : §a2 minutes§7.");
+        List<String> ibelieveicanflyLore = new ArrayList<>();
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(2258), CosmetiqueManager.Cosmetique.MUSIC, player, "§2Music", musicLore, cosmetics.contains("music")));
+        ibelieveicanflyLore.add("§7Vous rêvez de vous envoyer en l'air ?");
+        ibelieveicanflyLore.add("§7cette fireball est faite pour vous !");
+        ibelieveicanflyLore.add("  ");
+        ibelieveicanflyLore.add("§7Recharge : §a15 secondes§7.");
+
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.FIREBALL), CosmetiqueManager.Cosmetique.FIREBALL, player, "§2I believe I can Fly", ibelieveicanflyLore, cosmetics.contains("fireball")));
 
         List<String> cakeLore = new ArrayList<>();
         cakeLore.add("§7Posez un gâteau empoissonné qui infligera des");
@@ -181,7 +182,7 @@ public class Gadget_SubMenu implements Listener {
         paintballLore.add("  ");
         paintballLore.add("§7Recharge : §a5 secondes§7.");
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.IRON_BARDING), CosmetiqueManager.Cosmetique.PAINTBALL, player, "§2PaintBall", paintballLore, cosmetics.contains("paintball")));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.IRON_BARDING), CosmetiqueManager.Cosmetique.PAINTBALL, player, "§dPaintBall", paintballLore, cosmetics.contains("paintball")));
 
         List<String> tntLore = new ArrayList<>();
 
@@ -309,11 +310,11 @@ public class Gadget_SubMenu implements Listener {
                         proceedClick(player, CosmetiqueManager.Cosmetique.DOUBLE_JUMP, "doublejump");
                         break;
 
-                    case "§2Music":
-                        proceedClick(player, CosmetiqueManager.Cosmetique.MUSIC, "music");
+                    case "§2I believe I can Fly":
+                        proceedClick(player, CosmetiqueManager.Cosmetique.FIREBALL, "fireball");
                         break;
 
-                    case "§2PaintBall":
+                    case "§dPaintBall":
                         proceedClick(player, CosmetiqueManager.Cosmetique.PAINTBALL, "paintball");
                         break;
 

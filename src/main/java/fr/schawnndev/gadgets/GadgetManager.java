@@ -32,6 +32,9 @@ public class GadgetManager {
      */
 
     @Getter
+    private static GadgetFireBall gadgetFireBall = new GadgetFireBall();
+
+    @Getter
     private static GadgetPaintball gadgetPaintball = new GadgetPaintball();
 
     @Getter

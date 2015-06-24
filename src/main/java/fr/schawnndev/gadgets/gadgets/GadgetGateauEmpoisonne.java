@@ -52,12 +52,24 @@ public class GadgetGateauEmpoisonne extends Gadget implements Listener {
         // useless
     }
 
-    public boolean setCake(Location location){
+    public boolean setCake(final Location location){
         location.add(0d, 1d, 0d);
 
         if(location.getBlock().isEmpty()){
             location.getBlock().setType(Material.CAKE_BLOCK);
             location.getBlock().setMetadata("gadget_gateauempoisonne", new FixedMetadataValue(LCCosmetiques.getInstance(), "slt"));
+
+            new BukkitRunnable(){
+                @Override
+                public void run() {
+                    if(location.getBlock().getType() == Material.CAKE_BLOCK || location.getBlock().getType() == Material.CAKE)
+                        location.getBlock().setType(Material.AIR);
+                }
+            }.runTaskLater(LCCosmetiques.getInstance(), 20 * 60 * 2);
+
+
+
+
             return true;
         } else {
             return false;

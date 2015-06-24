@@ -43,8 +43,8 @@ public class GadgetMusic extends Gadget implements Listener {
         Bukkit.getPluginManager().registerEvents(this, LCCosmetiques.getInstance());
     }
 
-    @Getter
-    public CosmetiqueManager.Cosmetique cosmetique = CosmetiqueManager.Cosmetique.MUSIC;
+   // @Getter
+   //  public CosmetiqueManager.Cosmetique cosmetique = CosmetiqueManager.Cosmetique.MUSIC;
 
     @Override
     public void start(UUID uuid){

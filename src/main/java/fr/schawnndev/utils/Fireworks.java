@@ -28,7 +28,7 @@ import java.util.Random;
 
 public class Fireworks {
 
-    private static final Color[] colors = { Color.AQUA, Color.BLACK, Color.BLUE, Color.FUCHSIA, Color.YELLOW,
+    public static final Color[] colors = { Color.AQUA, Color.BLACK, Color.BLUE, Color.FUCHSIA, Color.YELLOW,
                                             Color.TEAL, Color.WHITE, Color.SILVER, Color.RED, Color.PURPLE, Color.NAVY,
                                             Color.GREEN, Color.OLIVE, Color.MAROON, Color.GRAY, Color.LIME, Color.ORANGE };
 

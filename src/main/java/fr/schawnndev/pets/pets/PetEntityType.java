@@ -20,6 +20,7 @@ import net.minecraft.server.v1_8_R1.*;
 import org.bukkit.entity.EntityType;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -60,6 +61,15 @@ public enum PetEntityType {
 
     @SuppressWarnings("unchecked")
     public static void registerEntities() {
+
+        try {
+            Method a = EntityTypes.class.getDeclaredMethod("a", Class.class, String.class, int.class);
+            a.setAccessible(true);
+            a.invoke(a, CustomFireball.class, "GadgetFireBall", 123);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         for (PetEntityType entity : values()) {
             try {
                 List<Map<?, ?>> dataMaps = new ArrayList<>();

@@ -34,14 +34,14 @@ public class ItemStackManager {
     public ItemStackManager(){
         playerItems.put(Cosmetique.AUCUN, new ItemStack(Material.AIR));
         playerItems.put(Cosmetique.DOUBLE_JUMP, buildItemStack(Material.FEATHER, "§bDouble Jump"));
-        playerItems.put(Cosmetique.MUSIC, buildItemStack(Material.getMaterial(2258), "§2Music"));
+        playerItems.put(Cosmetique.FIREBALL, buildItemStack(Material.FIREBALL, "§2I believe I can Fly"));
         playerItems.put(Cosmetique.GATEAU_EMPOISONNE, buildItemStack(Material.CAKE, "§3Gâteau Empoisonné"));
         playerItems.put(Cosmetique.GLACE, buildItemStack(Material.SNOW_BALL, "§cça glisse !"));
         playerItems.put(Cosmetique.CANON, buildItemStack(Material.SULPHUR, "§fCanon"));
         playerItems.put(Cosmetique.APPLE, buildItemStack(Material.GOLDEN_APPLE, "§eApple"));
         playerItems.put(Cosmetique.ENCRE, buildItemStack(Material.INK_SACK, "§cEncre"));
         playerItems.put(Cosmetique.CANNE_A_PECHE, buildItemStack(Material.FISHING_ROD, "§6Canne à pêche"));
-        playerItems.put(Cosmetique.PAINTBALL, buildItemStack(Material.IRON_BARDING, "§2PaintBall"));
+        playerItems.put(Cosmetique.PAINTBALL, buildItemStack(Material.IRON_BARDING, "§dPaintBall"));
         playerItems.put(Cosmetique.TNT, buildItemStack(Material.TNT, "§7TNT"));
         playerItems.put(Cosmetique.ARTIFICE, buildItemStack(Material.FIREWORK, "§514 juillet"));
     }
@@ -82,8 +82,7 @@ public class ItemStackManager {
 
             try {
                 cosmetique = Cosmetique.valueOf(cosmetic.toUpperCase());
-            } catch (Exception e) {
-            }
+            } catch (Exception e) {}
 
         }
 
