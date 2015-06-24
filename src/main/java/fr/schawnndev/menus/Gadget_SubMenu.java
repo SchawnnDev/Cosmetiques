@@ -175,14 +175,13 @@ public class Gadget_SubMenu implements Listener {
 
         itemStacks.add(MenuManager.buildItem(new ItemStack(Material.FISHING_ROD), CosmetiqueManager.Cosmetique.CANNE_A_PECHE, player, "§6Canne à pêche", canneapechesLore, cosmetics.contains("canneapeche")));
 
-        List<String> ibelieveicanflyLore = new ArrayList<>();
+        List<String> paintballLore = new ArrayList<>();
 
-        ibelieveicanflyLore.add("§7Vous rêvez de vous envoyer en l'air ?");
-        ibelieveicanflyLore.add("§7cette fireball est faite pour vous !");
-        ibelieveicanflyLore.add("  ");
-        ibelieveicanflyLore.add("§7Recharge : §a15 secondes§7.");
+        paintballLore.add("§7De la couleur partout !");
+        paintballLore.add("  ");
+        paintballLore.add("§7Recharge : §a5 secondes§7.");
 
-        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.FIREBALL), CosmetiqueManager.Cosmetique.FIREBALL, player, "§2I believe I can Fly", ibelieveicanflyLore, cosmetics.contains("fireball")));
+        itemStacks.add(MenuManager.buildItem(new ItemStack(Material.IRON_BARDING), CosmetiqueManager.Cosmetique.PAINTBALL, player, "§2PaintBall", paintballLore, cosmetics.contains("paintball")));
 
         List<String> tntLore = new ArrayList<>();
 
@@ -203,7 +202,13 @@ public class Gadget_SubMenu implements Listener {
         return itemStacks;
     }
 
-    private void proceedClick(Player player, CosmetiqueManager.Cosmetique cosmetique,  String id){
+    /**
+     * @param player The player to proceed click
+     * @param cosmetique The cosmetique (Gadget) to proceed click
+     * @param id The mysql name (id) to proceed click
+     */
+
+    private void proceedClick(Player player, CosmetiqueManager.Cosmetique cosmetique, String id){
         if(GadgetManager.hasGadget(player, id)){
             player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
         } else {
@@ -306,6 +311,10 @@ public class Gadget_SubMenu implements Listener {
 
                     case "§2Music":
                         proceedClick(player, CosmetiqueManager.Cosmetique.MUSIC, "music");
+                        break;
+
+                    case "§2PaintBall":
+                        proceedClick(player, CosmetiqueManager.Cosmetique.PAINTBALL, "paintball");
                         break;
 
                     default:

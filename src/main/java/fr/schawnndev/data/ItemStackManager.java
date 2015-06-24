@@ -41,7 +41,7 @@ public class ItemStackManager {
         playerItems.put(Cosmetique.APPLE, buildItemStack(Material.GOLDEN_APPLE, "§eApple"));
         playerItems.put(Cosmetique.ENCRE, buildItemStack(Material.INK_SACK, "§cEncre"));
         playerItems.put(Cosmetique.CANNE_A_PECHE, buildItemStack(Material.FISHING_ROD, "§6Canne à pêche"));
-        playerItems.put(Cosmetique.FIREBALL, buildItemStack(Material.FIREBALL, "§2I believe I can Fly"));
+        playerItems.put(Cosmetique.PAINTBALL, buildItemStack(Material.IRON_BARDING, "§2PaintBall"));
         playerItems.put(Cosmetique.TNT, buildItemStack(Material.TNT, "§7TNT"));
         playerItems.put(Cosmetique.ARTIFICE, buildItemStack(Material.FIREWORK, "§514 juillet"));
     }

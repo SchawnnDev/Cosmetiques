@@ -149,6 +149,12 @@ public class Pet_SubMenu implements Listener {
         return itemStacks;
     }
 
+    /**
+     * @param player The player to proceed click
+     * @param cosmetique The cosmetique (Pet) to proceed click
+     * @param id The mysql name (id) to proceed click
+     */
+
     private void proceedClick(Player player, CosmetiqueManager.Cosmetique cosmetique,  String id){
 
         String name = cosmetique == CosmetiqueManager.Cosmetique.VACHE_CHAMPIGNON ? "Vache Champignon" : id.toLowerCase().substring(0, 1).toUpperCase() + id.toLowerCase().substring(1);

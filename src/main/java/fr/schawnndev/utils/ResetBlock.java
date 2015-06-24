@@ -29,11 +29,21 @@ public class ResetBlock {
     @Getter
     private byte data;
 
+    /**
+     * @param location The location of the ResetBlock
+     * @param material The start material before the set
+     * @param data The start data before the set
+     */
+
     public ResetBlock(Location location, Material material, byte data){
         this.location = location;
         this.material = material;
         this.data = data;
     }
+
+    /**
+     * Reset the block to the local material and data
+     */
 
     public void reset(){
         Block block = location.getBlock();

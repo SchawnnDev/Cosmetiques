@@ -172,6 +172,12 @@ public class Particle_SubMenu implements Listener {
         return itemStacks;
     }
 
+    /**
+     * @param player The player to proceed click
+     * @param cosmetique The cosmetique (Particle) to proceed click
+     * @param id The mysql name (id) to proceed click
+     */
+
     private void proceedClick(Player player, CosmetiqueManager.Cosmetique cosmetique,  String id){
 
         if(!ParticleManager.isParticleActive(player, id)){

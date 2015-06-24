@@ -24,34 +24,6 @@ import java.util.Map;
 
 public class CosmetiqueManager {
 
-    public static void setCurrentCosmetique(Player player, Cosmetique cosmetique, boolean withMessage){
-        player.getInventory().setItem(4, ItemStackManager.getItemStack(cosmetique));
-
-        if(withMessage)
-            player.sendMessage("§aTu viens d'activer §b"+ cosmetique.toString());
-    }
-
-    public static Cosmetique getCosmetiqueFromString(String cosmetique){
-        for(Cosmetique c : Cosmetique.values())
-            if(c.toString().equalsIgnoreCase(cosmetique))
-                return c;
-        return Cosmetique.AUCUN;
-    }
-
-    public static ItemStack getPlayerItem(Cosmetique cosmetique){
-        return ItemStackManager.getPlayerItems().get(cosmetique);
-    }
-
-    public static boolean isParticle(String cosmetique){
-        cosmetique.toUpperCase();
-
-        for(Cosmetique c : Cosmetique.values())
-            if(c.getCosmetiqueType() == CosmetiqueType.PARTICLE && c.toString().toUpperCase().equals(cosmetique))
-                return true;
-
-        return  false;
-    }
-
     public enum CosmetiqueType {
         GADGET("current_active_gadget"),
         PET("current_active_pet"),
@@ -80,7 +52,7 @@ public class CosmetiqueManager {
         APPLE(CosmetiqueType.GADGET, true, 0, new ItemStack(Material.GOLDEN_APPLE), "apple"),
         ENCRE(CosmetiqueType.GADGET, false, 2800, new ItemStack(Material.INK_SACK), "encre"),
         CANNE_A_PECHE(CosmetiqueType.GADGET, false, 1800, new ItemStack(Material.FISHING_ROD), "canneapeche"),
-        FIREBALL(CosmetiqueType.GADGET, true, 0, new ItemStack(Material.FIREBALL), "fireball"),
+        PAINTBALL(CosmetiqueType.GADGET, true, 0, new ItemStack(Material.IRON_BARDING), "paintball"),
         TNT(CosmetiqueType.GADGET, false, 1100, new ItemStack(Material.TNT), "tnt"),
         ARTIFICE(CosmetiqueType.GADGET, false, 900, new ItemStack(Material.FIREWORK), "artifice"),
 
@@ -137,13 +109,26 @@ public class CosmetiqueManager {
             }
         }
 
+        /**
+         * @param cosmetiqueType Cosmetique type
+         * @param vip If gadget is vip or not
+         * @param price The price of the gadget. 0 if vip
+         * @param itemStack The itemstack from the gadget
+         * @param mysqlName The mysql name from the gadget
+         */
+
         private Cosmetique(CosmetiqueType cosmetiqueType, boolean vip, int price, ItemStack itemStack, String mysqlName){
             this.cosmetiqueType = cosmetiqueType;
-            this.vip=vip;
-            this.price=price;
-            this.itemStack=itemStack;
+            this.vip = vip;
+            this.price = price;
+            this.itemStack = itemStack;
             this.mysqlName = mysqlName;
         }
+
+        /**
+         * @param name The MySQL name (id) of the gadget
+         * @return The gadget from the name
+         */
 
         public static final Cosmetique getByMySQLName(String name){
             for(Map.Entry<Cosmetique, String> s : MYSQL_NAMES.entrySet())
@@ -151,6 +136,11 @@ public class CosmetiqueManager {
                     return  s.getKey();
             return AUCUN;
         }
+
+        /**
+         * @param name The name of the gadget
+         * @return The gadget from the name
+         */
 
         public static final Cosmetique getByName(String name){
             for(Map.Entry<Cosmetique, String> s : ENUM_NAMES.entrySet())

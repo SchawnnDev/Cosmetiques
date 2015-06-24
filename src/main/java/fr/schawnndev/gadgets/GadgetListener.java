@@ -43,6 +43,25 @@ public class GadgetListener implements Listener {
         final Player player = e.getPlayer();
 
         /**
+         *  Fireball
+         */
+
+        if ((e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR) && e.getItem() != null && e.getItem().getType() == Material.IRON_BARDING && e.getItem().getItemMeta().getDisplayName().equals("§2PaintBall") && GadgetManager.hasGadget(e.getPlayer(), "paintball")) {
+
+            if (GadgetManager.isInCooldown(player, CosmetiqueManager.Cosmetique.PAINTBALL)) {
+                player.sendMessage(GadgetManager.getString(player, CosmetiqueManager.Cosmetique.PAINTBALL));
+                return;
+            } else {
+                GadgetManager.addCooldown(new Cooldown(player, CosmetiqueManager.Cosmetique.PAINTBALL, 5, true));
+                final UUID uuid = player.getUniqueId();
+
+                GadgetManager.getGadgetPaintball().start(uuid);
+                return;
+            }
+
+        }
+
+        /**
          *  Canne à pêche
          */
 
@@ -199,18 +218,6 @@ public class GadgetListener implements Listener {
 
             if(e.getItem() != null && e.getItem().hasItemMeta()
                     && e.getItem().getItemMeta().getDisplayName() != null){
-
-                /**
-                 *  Fireball
-                 */
-
-
-                if (e.getItem().getType() == Material.FIREBALL && e.getItem().getItemMeta().getDisplayName().equals("§2I believe I can Fly")) {
-                    final UUID uuid = player.getUniqueId();
-
-                    GadgetManager.getGadgetFireBall().start(uuid);
-
-                }
 
                 /**
                  *  Encre

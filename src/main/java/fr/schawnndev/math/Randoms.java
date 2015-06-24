@@ -52,4 +52,15 @@ public class Randoms {
         return min + r.nextInt(max - min);
     }
 
+    /**
+     * @param min Nombre minimum (integer)
+     * @param max Nombre maximum (integer)
+     * @return Un random entre min et max
+     * @author SchawnnDev
+     */
+
+    public static byte randomRangeByte(int min, int max) {
+        return (byte) randomRangeInt(min, max);
+    }
+
 }

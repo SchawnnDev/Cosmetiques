@@ -16,6 +16,7 @@ package fr.schawnndev.gadgets.gadgets;
 import fr.schawnndev.CosmetiqueManager;
 import fr.schawnndev.LCCosmetiques;
 import fr.schawnndev.gadgets.Gadget;
+import fr.schawnndev.gadgets.GadgetManager;
 import fr.schawnndev.utils.ResetBlock;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -52,14 +53,7 @@ public class GadgetGlace extends Gadget implements Listener {
                 e.setCancelled(true);
     }
 
-    public boolean isAlreadyResetBlock(Location location, List<ResetBlock> resetBlockList){
 
-        for(ResetBlock resetBlock : resetBlockList)
-            if(resetBlock.getLocation().equals(location))
-                return true;
-
-        return false;
-    }
 
     @Override
     public void start(UUID uuid) {
@@ -87,9 +81,11 @@ public class GadgetGlace extends Gadget implements Listener {
                             @Override
                             public void run() {
 
-                                for(int i = 0; i < blockList.size(); i++)
-                                    blockList.get(i).reset();
-
+                                for(int i = 0; i < blockList.size(); i++) {
+                                    ResetBlock resetBlock = blockList.get(i);
+                                    GadgetManager.getResetBlocks().remove(resetBlock);
+                                    resetBlock.reset();
+                                }
                             }
 
                         }.runTaskLater(LCCosmetiques.getInstance(), 20*10);
@@ -108,9 +104,11 @@ public class GadgetGlace extends Gadget implements Listener {
                             && blockLoc.getType() != Material.WOOD_BUTTON && blockLoc.getType() != Material.WHEAT
                             && blockLoc.getType() != Material.LEVER && blockLoc.getType() != Material.TORCH
                             && blockLoc.getType() != Material.REDSTONE_TORCH_OFF && blockLoc.getType() != Material.REDSTONE_TORCH_ON){
-                        if(!isAlreadyResetBlock(blockLoc.getLocation(), blockList)) {
-                            blockList.add(new ResetBlock(blockLoc.getLocation(), blockLoc.getType(), blockLoc.getData()));
+                        if(!GadgetManager.isAlreadyResetBlock(blockLoc)) {
+                            ResetBlock resetBlock = new ResetBlock(blockLoc.getLocation(), blockLoc.getType(), blockLoc.getData());
+                            blockList.add(resetBlock);
                             blockLoc.setType(material);
+                            GadgetManager.getResetBlocks().add(resetBlock);
                         }
                     }
                 }
