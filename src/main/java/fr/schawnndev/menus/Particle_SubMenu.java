@@ -186,8 +186,7 @@ public class Particle_SubMenu implements Listener {
 
             if(cosmetique.isVip()){
 
-                if(player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")){
-                    if(ParticleManager.hasParticleActive(player)){
+                if (player.hasPermission("lcmaster.cosmetiques") || player.isOp() || player.hasPermission("lcmaster.*")) {                   if(ParticleManager.hasParticleActive(player)){
                         ParticleManager.removeActiveParticle(player);
                     }
 

@@ -69,8 +69,7 @@ public class MenuManager {
 
             if (vip) {
 
-                if (player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")) {
-                    lore.add("§7------------");
+                if (player.hasPermission("lcmaster.cosmetiques") || player.isOp() || player.hasPermission("lcmaster.*")) {                  lore.add("§7------------");
                     lore.add("§aVous possédez " + (cosmetiqueType == CosmetiqueType.PARTICLE ? "cette Particule" : cosmetiqueType == CosmetiqueType.GADGET ? "ce Gadget" : "ce Pet") + " grâce à votre grade.");
                     lore.add("§e» §aEquiper " + (cosmetiqueType == CosmetiqueType.PARTICLE ? "cette Particule." : cosmetiqueType == CosmetiqueType.GADGET ? "ce Gadget." : "ce Pet."));
                 } else {

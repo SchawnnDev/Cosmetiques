@@ -165,8 +165,7 @@ public class Pet_SubMenu implements Listener {
 
             if (cosmetique.isVip()) {
 
-                if (player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")) {
-                    player.closeInventory();
+                if (player.hasPermission("lcmaster.cosmetiques") || player.isOp() || player.hasPermission("lcmaster.*")) {                  player.closeInventory();
                     player.sendMessage("§aTu viens de séléctionner le pet §b" + name + "§a !");
                     PetManager.addPlayerPet(player, cosmetique);
                 } else {

@@ -230,7 +230,7 @@ public class Gadget_SubMenu implements Listener {
 
             if (cosmetique.isVip()) {
 
-                if (player.hasPermission("lccosmetiques.vip") || player.isOp() || player.hasPermission("lccosmetiques.*")) {
+                if (player.hasPermission("lcmaster.cosmetiques") || player.isOp() || player.hasPermission("lcmaster.*")) {
 
                     player.getInventory().setItem(4, ItemStackManager.getItemStack(cosmetique));
 
