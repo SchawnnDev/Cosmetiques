@@ -2,3 +2,6 @@ name: LCCosmetiques
 version: 2.0
 main: fr.schawnndev.LCCosmetiques
 author: SchawnnDev
+commands:
+  reduction:
+    description: Mettre une reduction à la boutique
