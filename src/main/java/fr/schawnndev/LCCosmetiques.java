@@ -204,7 +204,7 @@ public class LCCosmetiques extends JavaPlugin{
 
                         if(!ReductionManager.hasReduction(cosmetique)){
                             ReductionManager.addReduction(cosmetique, reduction);
-                            player.sendMessage("§aTu as bien ajouté la réduction §f" + args[1] + "§a|§f (-" + reduction + "%) §a!");
+                            player.sendMessage("§aTu as bien ajouté la réduction §f" + args[1] + " §a|§f (-" + reduction + "%) §a!");
                             System.out.println(player.getName() + " a ajoute la reduction " + args[1] + " a " + new Date().toLocaleString());
                             return true;
                         } else {
