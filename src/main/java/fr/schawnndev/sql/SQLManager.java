@@ -30,7 +30,6 @@ public class SQLManager {
     @Getter @Setter
     protected static Statement statement;
 
-
     public static void init(){
 
         try {

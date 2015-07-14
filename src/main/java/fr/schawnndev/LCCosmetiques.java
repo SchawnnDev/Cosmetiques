@@ -21,6 +21,7 @@ import fr.schawnndev.listeners.ServerListener;
 import fr.schawnndev.menus.MenuManager;
 import fr.schawnndev.pets.PetListener;
 import fr.schawnndev.pets.pets.PetEntityType;
+import fr.schawnndev.reduction.ReductionManager;
 import fr.schawnndev.sql.SQL;
 import fr.schawnndev.sql.SQLManager;
 import lombok.Getter;
@@ -74,12 +75,25 @@ public class LCCosmetiques extends JavaPlugin{
 
         IndesirableStringDictionnary.init();
 
+        // Reductions
+
+        ReductionManager.enable();
+
     }
 
     public void onDisable() {
 
+        // SQL
+
         sql.stop();
+
+        // Pets
+
         PetEntityType.unregisterEntities();
+
+        // Reductions
+
+        ReductionManager.disable();
 
     }
 

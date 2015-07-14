@@ -3,3 +3,5 @@ db:
   repo: default
   user: user
   pass: pass
+reductions:
+  - 'aucune'
