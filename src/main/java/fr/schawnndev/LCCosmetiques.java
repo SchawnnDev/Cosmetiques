@@ -140,6 +140,12 @@ public class LCCosmetiques extends JavaPlugin{
                             player.sendMessage("§f- §a" + cosmetique.getMysqlName() + (cosmetique.isVip() ? " (VIP)" : ""));
 
                         return true;
+                    } else if (args[0].equalsIgnoreCase("remove")){
+                        player.sendMessage("§cIl manque un argument: §6/reduction remove <cosmetique>");
+                        return true;
+                    } else if (args[0].equalsIgnoreCase("add")){
+                        player.sendMessage("§cIl manque deux arguments: §6/reduction add <cosmetique> <%>");
+                        return true;
                     }
 
                 } else if (args.length == 2) {
@@ -164,6 +170,9 @@ public class LCCosmetiques extends JavaPlugin{
                             return true;
                         }
 
+                    } else if (args[0].equalsIgnoreCase("add")){
+                        player.sendMessage("§cIl manque un argument: §6/reduction add " + args[1] + " <%>");
+                        return true;
                     }
 
                 } else if(args.length == 3){
