@@ -137,7 +137,7 @@ public class LCCosmetiques extends JavaPlugin{
                     } else if (args[0].equalsIgnoreCase("listcosmetiques")){
 
                         for(CosmetiqueManager.Cosmetique cosmetique : CosmetiqueManager.Cosmetique.values())
-                            player.sendMessage("§f- §a" + cosmetique.getMysqlName());
+                            player.sendMessage("§f- §a" + cosmetique.getMysqlName() + (cosmetique.isVip() ? " (VIP)" : ""));
 
                         return true;
                     }
