@@ -17,6 +17,7 @@ import fr.schawnndev.CosmetiqueManager.Cosmetique;
 import fr.schawnndev.CosmetiqueManager.CosmetiqueType;
 import fr.schawnndev.api.utils.ItemDisponibility;
 import fr.schawnndev.pets.PetChangeNameEvent;
+import fr.schawnndev.reduction.Reduction;
 import fr.schawnndev.reduction.ReductionManager;
 import lombok.Getter;
 import org.bukkit.Material;
@@ -82,9 +83,9 @@ public class MenuManager {
                     lore.add("§7------------");
 
                     if(ReductionManager.hasReduction(cosmetique)){
+                        Reduction reduction = ReductionManager.getReduction(cosmetique);
 
-                        lore.add("§bPrix : §6" + prix + " §bLCoins");
-                        
+                        lore.add("§bPrix : §6§m" + prix + "§b§m LCoins§f§l (-" + reduction.getReduction() + "%) : §b§n§l" + reduction.getPriceAfterReduction() + " LCoins");
                     } else {
                         lore.add("§bPrix : §6" + prix + " §bLCoins");
                     }
