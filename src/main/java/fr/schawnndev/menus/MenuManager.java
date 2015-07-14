@@ -84,7 +84,7 @@ public class MenuManager {
 
                     if(ReductionManager.hasReduction(cosmetique)){
                         Reduction reduction = ReductionManager.getReduction(cosmetique);
-                        lore.add("§bPrix : §6§m" + prix + "§b§m LCoins§f§l (-" + reduction.getReduction() + "%) : §b§n§l" + reduction.getPriceAfterReduction() + " LCoins");
+                        lore.add("§bPrix : §6§m" + prix + "§b§m LCoins§f§l (-" + reduction.getReduction() + "%) : §a§n§l" + reduction.getPriceAfterReduction() + " LCoins");
                     } else {
                         lore.add("§bPrix : §6" + prix + " §bLCoins");
                     }

@@ -21,6 +21,8 @@ import fr.schawnndev.gadgets.GadgetManager;
 import fr.schawnndev.math.PositionConverter;
 import fr.schawnndev.particules.ParticleManager;
 import fr.schawnndev.pets.PetManager;
+import fr.schawnndev.reduction.Reduction;
+import fr.schawnndev.reduction.ReductionManager;
 import fr.schawnndev.sql.SQLManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -68,6 +70,12 @@ public class Achat {
     public Achat(String id, Cosmetique cosmetique, Player player){
         this.id = id;
         this.price = cosmetique.getPrice();
+
+        if(ReductionManager.hasReduction(cosmetique))
+            this.price = ReductionManager.getReduction(cosmetique).getPriceAfterReduction();
+        else
+            this.price = cosmetique.getPrice();
+
         this.player = player;
         this.generated = false;
         this.isOpened = false;
@@ -101,7 +109,13 @@ public class Achat {
         ItemMeta itemMeta = itemStack.getItemMeta();
         String cosmetiqueTypeString = cosmetique.getCosmetiqueType().toString().toLowerCase().substring(0, 1).toUpperCase() + cosmetique.getCosmetiqueType().toString().toLowerCase().substring(1);
         itemMeta.setDisplayName("§a" + id.toLowerCase().substring(0, 1).toUpperCase() + id.toLowerCase().substring(1));
-        itemMeta.setLore(Arrays.asList("§7------------","§bPrix: §6" + price + " §bLCoins"));
+
+        if(ReductionManager.hasReduction(cosmetique)) {
+            Reduction reduction = ReductionManager.getReduction(cosmetique);
+            itemMeta.setLore(Arrays.asList("§7------------", "§bPrix : §6§m" + cosmetique.getPrice() + "§b§m LCoins§f§l (-" + reduction.getReduction() + "%) : §a§n§l" + reduction.getPriceAfterReduction() + " LCoins"));
+        } else {
+            itemMeta.setLore(Arrays.asList("§7------------", "§bPrix: §6" + price + " §bLCoins"));
+        }
         itemStack.setItemMeta(itemMeta);
 
         inventory.setItem(2, itemStack);
@@ -145,7 +159,7 @@ public class Achat {
 
             finish(false, false);
             player.sendMessage("§aTu viens d'acheter §b" + id.toLowerCase().substring(0, 1).toUpperCase() + id.toLowerCase().substring(1));
-            System.out.println("Achat confirme de " + player.getName() + " | id: " + id + " | date: " + new Date().toLocaleString());
+            System.out.println("Achat confirme de " + player.getName() + " | id: " + id + " | avecReduction: " + (price == cosmetique.getPrice() ? "non" : "oui") + " | date: " + new Date().toLocaleString());
 
             if(cosmetique.getCosmetiqueType() == CosmetiqueType.PARTICLE)
                 ParticleManager.activeParticleByName(player, id);
