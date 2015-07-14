@@ -30,6 +30,26 @@ public class SQLManager {
     @Getter @Setter
     protected static Statement statement;
 
+
+    public static void init(){
+
+        try {
+            statement.executeQuery("CREATE TABLE IF NOT EXISTS `LC_COSMETIQUES` (\n" +
+                    "  `uuid` char(36) NOT NULL,\n" +
+                    "  `achats` varchar(1000) NOT NULL,\n" +
+                    "  `current_active_particle` varchar(55) NOT NULL,\n" +
+                    "  `current_active_gadget` varchar(55) NOT NULL,\n" +
+                    "  `current_active_pet` varchar(55) NOT NULL,\n" +
+                    "  `current_active_petname` varchar(50) NOT NULL,\n" +
+                    "  PRIMARY KEY (`uuid`)\n" +
+                    ") ENGINE=InnoDB DEFAULT CHARSET=latin1;");
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+    }
+
+
     /**
      *
      *  PARTIE ACHAT

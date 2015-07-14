@@ -20,15 +20,11 @@ import fr.schawnndev.gadgets.GadgetListener;
 import fr.schawnndev.listeners.ServerListener;
 import fr.schawnndev.menus.MenuManager;
 import fr.schawnndev.pets.PetListener;
-import fr.schawnndev.pets.PetManager;
 import fr.schawnndev.pets.pets.PetEntityType;
 import fr.schawnndev.sql.SQL;
+import fr.schawnndev.sql.SQLManager;
 import lombok.Getter;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-
 
 public class LCCosmetiques extends JavaPlugin{
 
@@ -54,6 +50,7 @@ public class LCCosmetiques extends JavaPlugin{
 
         sql = new SQL(getConfig().getString("db.host"), getConfig().getString("db.repo"), getConfig().getString("db.user"), getConfig().getString("db.pass"));
         sql.start();
+        SQLManager.init();
 
         // Items
 
