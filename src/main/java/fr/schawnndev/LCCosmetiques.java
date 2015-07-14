@@ -30,6 +30,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Date;
 
@@ -57,7 +58,6 @@ public class LCCosmetiques extends JavaPlugin{
 
         sql = new SQL(getConfig().getString("db.host"), getConfig().getString("db.repo"), getConfig().getString("db.user"), getConfig().getString("db.pass"));
         sql.start();
-        SQLManager.init();
 
         // Items
 
@@ -165,8 +165,8 @@ public class LCCosmetiques extends JavaPlugin{
 
                     if(args[0].equalsIgnoreCase("add")){
 
-                        int reduction = 0;
-                        CosmetiqueManager.Cosmetique cosmetique = CosmetiqueManager.Cosmetique.AUCUN;
+                        int reduction;
+                        CosmetiqueManager.Cosmetique cosmetique;
 
                         try {
                             cosmetique = CosmetiqueManager.Cosmetique.getByMySQLName(args[1]);
@@ -182,7 +182,7 @@ public class LCCosmetiques extends JavaPlugin{
                             return true;
                         }
 
-                        if(reduction < 1 || reduction >= 100){
+                        if(reduction < 1 || reduction > 99){
                             player.sendMessage("§cLe % de réduction doit être entre 1 et 99 !");
                             return true;
                         }

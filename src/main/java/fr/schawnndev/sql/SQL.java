@@ -45,6 +45,7 @@ public class SQL {
     }
 
     public void start() {
+
         this.task_id = Bukkit.getScheduler().runTaskTimer(LCCosmetiques.getInstance(), new Runnable() {
 
             @Override
@@ -59,6 +60,9 @@ public class SQL {
             }
 
         }, 0, 20 * 60 * 30).getTaskId();
+
+        SQLManager.init();
+
     }
 
     public void stop(){
