@@ -36,10 +36,13 @@ public class SQL {
 
     private int task_id;
 
+    private boolean isInit;
+
     public SQL(String hostname, String database, String user, String password){
         this.hostname = hostname;
         this.database = database;
         this.user = user;
+        this.isInit = false;
 
         this.password = password.equalsIgnoreCase("no") ? "" : password;
     }
@@ -54,6 +57,12 @@ public class SQL {
                     Class.forName("com.mysql.jdbc.Driver");
                     SQLManager.setConnection(DriverManager.getConnection("jdbc:mysql://" + hostname + ":3306/" + database, user, password));
                     SQLManager.setStatement(SQLManager.getConnection().createStatement());
+
+                    if (!isInit) {
+                        SQLManager.init();
+                        isInit = true;
+                    }
+
                 } catch (ClassNotFoundException | SQLException e) {
                     e.printStackTrace();
                 }
@@ -61,7 +70,6 @@ public class SQL {
 
         }, 0, 20 * 60 * 30).getTaskId();
 
-        SQLManager.init();
 
     }
 
