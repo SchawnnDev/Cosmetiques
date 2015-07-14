@@ -34,7 +34,7 @@ public class SQLManager {
     public static void init(){
 
         try {
-            statement.executeQuery("CREATE TABLE IF NOT EXISTS `LC_COSMETIQUES` (`uuid` char(36) NOT NULL, `achats` varchar(1000) NOT NULL, `current_active_particle` varchar(55) NOT NULL, `current_active_gadget` varchar(55) NOT NULL, `current_active_pet` varchar(55) NOT NULL, `current_active_petname` varchar(50) NOT NULL, `reductions` varchar(300) NOT NULL, PRIMARY KEY (`uuid`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
+            statement.executeQuery("CREATE TABLE IF NOT EXISTS `LC_COSMETIQUES` (`uuid` char(36) NOT NULL, `achats` varchar(1000) NOT NULL, `current_active_particle` varchar(55) NOT NULL, `current_active_gadget` varchar(55) NOT NULL, `current_active_pet` varchar(55) NOT NULL, `current_active_petname` varchar(50) NOT NULL, PRIMARY KEY (`uuid`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
         } catch (SQLException e){
             e.printStackTrace();
         }
