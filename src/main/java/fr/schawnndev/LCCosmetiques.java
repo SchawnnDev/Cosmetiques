@@ -125,6 +125,11 @@ public class LCCosmetiques extends JavaPlugin{
 
                     if(args[0].equalsIgnoreCase("list")){
 
+                        if(ReductionManager.getReductions().size() < 1){
+                            player.sendMessage("§cIl n'y a pas de réductions !");
+                            return true;
+                        }
+
                         for(Reduction reduction : ReductionManager.getReductions())
                             player.sendMessage("§f- §aReduction §6" + reduction.getCosmetique().getMysqlName() + "§a : §6-" + reduction.getReduction() + "% §aNouveau prix: §6" + reduction.getPriceAfterReduction());
 
