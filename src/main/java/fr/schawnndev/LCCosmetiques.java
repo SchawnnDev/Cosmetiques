@@ -32,7 +32,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.Date;
+import java.util.*;
 
 public class LCCosmetiques extends JavaPlugin{
 
@@ -180,13 +180,20 @@ public class LCCosmetiques extends JavaPlugin{
                     if(args[0].equalsIgnoreCase("add")){
 
                         int reduction;
-                        CosmetiqueManager.Cosmetique cosmetique;
+                        CosmetiqueManager.Cosmetique cosmetique = null;
+                        boolean category = false;
+                        String category_name = null;
 
-                        try {
-                            cosmetique = CosmetiqueManager.Cosmetique.getByMySQLName(args[1]);
-                        } catch (Exception e){
-                            player.sendMessage("§cERREUR : " + e.getMessage());
-                            return true;
+                        if(args[1].equalsIgnoreCase("pets") || args[1].equalsIgnoreCase("gadgets") || args[1].equalsIgnoreCase("particules")){
+                            category_name = args[1];
+                            category = true;
+                        } else {
+                            try {
+                                cosmetique = CosmetiqueManager.Cosmetique.getByMySQLName(args[1]);
+                            } catch (Exception e){
+                                player.sendMessage("§cERREUR : " + e.getMessage());
+                                return true;
+                            }
                         }
 
                         try {
@@ -201,18 +208,62 @@ public class LCCosmetiques extends JavaPlugin{
                             return true;
                         }
 
+                        if(!category) {
 
-                        if(!ReductionManager.hasReduction(cosmetique)){
-                            ReductionManager.addReduction(cosmetique, reduction);
-                            player.sendMessage("§aTu as bien ajouté la réduction §f" + args[1] + " §a|§f (-" + reduction + "%) §a!");
-                            System.out.println(player.getName() + " a ajoute la reduction " + args[1] + " a " + new Date().toLocaleString());
-                            return true;
+                            if (!ReductionManager.hasReduction(cosmetique)) {
+                                ReductionManager.addReduction(cosmetique, reduction);
+                                player.sendMessage("§aTu as bien ajouté la réduction §f" + args[1] + " §a|§f (-" + reduction + "%) §a!");
+                                System.out.println(player.getName() + " a ajoute la reduction " + args[1] + " a " + new Date().toLocaleString());
+                                return true;
+                            } else {
+                                player.sendMessage("§cCette cosmetique a déjà une réduction !");
+                                return true;
+                            }
+
                         } else {
-                            player.sendMessage("§cCette cosmetique a déjà une réduction !");
+
+                            CosmetiqueManager.CosmetiqueType cosmetiqueType = CosmetiqueManager.CosmetiqueType.valueOf(category_name.replace("particules", "particle").replace("gadgets", "gadget").replace("pets", "pet").toUpperCase());
+                            List<Map.Entry<CosmetiqueManager.Cosmetique, String>> entryList = new ArrayList<>();
+
+                            for (CosmetiqueManager.Cosmetique c : CosmetiqueManager.Cosmetique.values()) {
+                                if (c.getCosmetiqueType() == cosmetiqueType) {
+                                    if (!c.isVip()) {
+
+                                        if (!ReductionManager.hasReduction(c)) {
+                                            ReductionManager.addReduction(c, reduction);
+                                            System.out.println(player.getName() + " a ajoute la reduction " + args[1] + " a " + new Date().toLocaleString());
+                                            entryList.add(new AbstractMap.SimpleEntry<>(c, "bon"));
+                                        } else {
+                                            entryList.add(new AbstractMap.SimpleEntry<>(c, "deja"));
+                                        }
+
+
+                                    } else {
+                                        entryList.add(new AbstractMap.SimpleEntry<>(c, "vip"));
+                                    }
+                                }
+                            }
+
+                            for(Map.Entry<CosmetiqueManager.Cosmetique, String> entry : entryList){
+
+                                if(entry.getValue().equalsIgnoreCase("bon")) {
+
+                                    player.sendMessage("§f- §6Added §c" + entry.getKey().getMysqlName() + " §6with §c-" + reduction + "% ");
+
+                                } else if(entry.getValue().equalsIgnoreCase("vip")) {
+
+                                    player.sendMessage("§f- §6Not Added §c" + entry.getKey().getMysqlName() + " §6with §c-" + reduction + "% §6Cause: §cVIP");
+
+                                } else if(entry.getValue().equalsIgnoreCase("deja")) {
+
+                                    player.sendMessage("§f- §6Not Added §c" + entry.getKey().getMysqlName() + " §6with §c-" + reduction + "% §6Cause: §cDEJA");
+
+                                }
+
+                            }
+
                             return true;
                         }
-
-
                     }
 
 
