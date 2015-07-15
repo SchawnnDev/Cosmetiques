@@ -159,7 +159,7 @@ public class CosmetiqueManager {
     }
 
     public static void open(Player player){
-        Inventory inventory = Bukkit.createInventory(null, 6*9, "§aCosmetiques List");
+        Inventory inventory = Bukkit.createInventory(null, 4*9, "§aCosmetiques List");
         int i = 0;
 
         for(Cosmetique cosmetique : Cosmetique.values()) {
@@ -168,7 +168,8 @@ public class CosmetiqueManager {
 
                 ItemStack itemStack = cosmetique.getItemStack();
                 ItemMeta itemMeta = itemStack.getItemMeta();
-                itemMeta.setDisplayName((ChatColor.AQUA + cosmetique.getMysqlName()));
+                String mysqlName = cosmetique.getMysqlName().toLowerCase().substring(0, 1).toUpperCase() + cosmetique.getMysqlName().toLowerCase().substring(1);
+                itemMeta.setDisplayName(ChatColor.AQUA + mysqlName);
                 List<String> lore = new ArrayList<>();
                 lore.add("§7----------------");
 
@@ -178,9 +179,9 @@ public class CosmetiqueManager {
 
                     lore.add("§6Réduction: §aOui");
                     lore.add("§7---------------- ");
-                    lore.add("§6Pourentage: §f-" + reduction.getReduction());
-                    lore.add("§6Prix normal: §f" + cosmetique.getPrice());
-                    lore.add("§6Prix réduit: §f" + reduction.getPriceAfterReduction());
+                    lore.add("§6Pourentage: §3-" + reduction.getReduction());
+                    lore.add("§6Prix normal: §3" + cosmetique.getPrice());
+                    lore.add("§6Prix réduit: §3" + reduction.getPriceAfterReduction());
                     lore.add("§7----------------  ");
 
                 } else {
@@ -196,7 +197,6 @@ public class CosmetiqueManager {
                 inventory.setItem(i, itemStack);
 
                 i++;
-
             }
         }
 

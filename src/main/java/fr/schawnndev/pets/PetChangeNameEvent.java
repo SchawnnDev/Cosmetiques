@@ -126,7 +126,7 @@ public class PetChangeNameEvent implements Listener {
         return playerChangePetName.contains(player.getUniqueId());
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onChat(AsyncPlayerChatEvent e){
 
         Player player = e.getPlayer();

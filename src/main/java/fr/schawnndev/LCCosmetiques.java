@@ -17,6 +17,7 @@ import fr.schawnndev.api.events.AchatEvent;
 import fr.schawnndev.data.IndesirableStringDictionnary;
 import fr.schawnndev.data.ItemStackManager;
 import fr.schawnndev.gadgets.GadgetListener;
+import fr.schawnndev.listeners.CosmetiqueListener;
 import fr.schawnndev.listeners.ServerListener;
 import fr.schawnndev.menus.MenuManager;
 import fr.schawnndev.pets.PetListener;
@@ -51,6 +52,7 @@ public class LCCosmetiques extends JavaPlugin{
         new AchatEvent();
         new GadgetListener();
         new PetListener();
+        new CosmetiqueListener();
 
         // SQL
 
