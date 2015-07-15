@@ -13,14 +13,18 @@
 
 package fr.schawnndev;
 
-import fr.schawnndev.data.ItemStackManager;
+import fr.schawnndev.math.PositionConverter;
+import fr.schawnndev.reduction.Reduction;
+import fr.schawnndev.reduction.ReductionManager;
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class CosmetiqueManager {
 
@@ -148,6 +152,51 @@ public class CosmetiqueManager {
                     return s.getKey();
             return AUCUN;
         }
+
+    }
+
+    public static void open(Player player){
+        Inventory inventory = Bukkit.createInventory(null, 6*9, "§aCosmetiques List");
+        int i = 0;
+
+        for(Cosmetique cosmetique : Cosmetique.values()){
+
+            if(cosmetique == Cosmetique.AUCUN) break;
+
+            ItemStack itemStack = cosmetique.getItemStack();
+            ItemMeta itemMeta = itemStack.getItemMeta();
+            itemMeta.setDisplayName("§b" + cosmetique.getMysqlName());
+            List<String> lore = new ArrayList<>();
+            lore.add("§7----------------");
+
+            if(ReductionManager.hasReduction(cosmetique)) {
+
+                Reduction reduction = ReductionManager.getReduction(cosmetique);
+
+                lore.add("§6Réduction: §aOui");
+                lore.add("§7---------------- ");
+                lore.add("§6Pourentage: §f-" + reduction.getReduction());
+                lore.add("§6Prix normal: §f" + cosmetique.getPrice());
+                lore.add("§6Prix réduit: §f" + reduction.getPriceAfterReduction());
+                lore.add("§7----------------  ");
+
+            } else {
+
+                lore.add("§6Réduction: §cNon");
+                lore.add("§7---------------- ");
+
+            }
+
+            itemMeta.setLore(lore);
+            itemStack.setItemMeta(itemMeta);
+
+            inventory.setItem(i, itemStack);
+
+            i++;
+
+        }
+
+        player.openInventory(inventory);
 
     }
 

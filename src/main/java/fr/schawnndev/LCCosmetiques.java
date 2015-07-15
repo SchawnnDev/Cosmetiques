@@ -24,13 +24,11 @@ import fr.schawnndev.pets.pets.PetEntityType;
 import fr.schawnndev.reduction.Reduction;
 import fr.schawnndev.reduction.ReductionManager;
 import fr.schawnndev.sql.SQL;
-import fr.schawnndev.sql.SQLManager;
 import lombok.Getter;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
 
@@ -114,6 +112,8 @@ public class LCCosmetiques extends JavaPlugin{
 
                 if(args.length == 0){
 
+                    player.chat("/reduction");
+
                     player.sendMessage("§7---- §bReduction Help §7----");
                     player.sendMessage("§fListe des cosmétiques: §6/reduction listcosmetiques");
                     player.sendMessage("§fListe des reductions: §6/reduction list");
@@ -136,8 +136,11 @@ public class LCCosmetiques extends JavaPlugin{
                         return true;
                     } else if (args[0].equalsIgnoreCase("listcosmetiques")){
 
-                        for(CosmetiqueManager.Cosmetique cosmetique : CosmetiqueManager.Cosmetique.values())
-                            player.sendMessage("§f- §a" + cosmetique.getMysqlName() + (cosmetique.isVip() ? " (VIP)" : ""));
+
+                        // for(CosmetiqueManager.Cosmetique cosmetique : CosmetiqueManager.Cosmetique.values())
+                        //    player.sendMessage("§f- §a" + cosmetique.getMysqlName() + (cosmetique.isVip() ? " (VIP)" : ""));
+
+                        CosmetiqueManager.open(player);
 
                         return true;
                     } else if (args[0].equalsIgnoreCase("remove")){
@@ -152,22 +155,67 @@ public class LCCosmetiques extends JavaPlugin{
 
                     if (args[0].equalsIgnoreCase("remove")){
 
-                        try {
-                            CosmetiqueManager.Cosmetique cosmetique = CosmetiqueManager.Cosmetique.getByMySQLName(args[1]);
+                        if(args[1].equalsIgnoreCase("pets") || args[1].equalsIgnoreCase("gadgets") || args[1].equalsIgnoreCase("particules")){
 
-                            if(ReductionManager.hasReduction(cosmetique)){
-                                ReductionManager.removeReduction(cosmetique);
-                                player.sendMessage("§aTu as bien supprimé la réduction §f" + args[1] + " §a!");
-                                System.out.println(player.getName() + " a supprime la reduction " + args[1] + " a " + new Date().toLocaleString());
-                                return true;
-                            } else {
-                                player.sendMessage("§cCette cosmetique n'a pas de réduction !");
+                            CosmetiqueManager.CosmetiqueType cosmetiqueType = CosmetiqueManager.CosmetiqueType.valueOf(args[1].replace("particules", "particle").replace("gadgets", "gadget").replace("pets", "pet").toUpperCase());
+                            List<Map.Entry<CosmetiqueManager.Cosmetique, String>> entryList = new ArrayList<>();
+
+                            for (CosmetiqueManager.Cosmetique c : CosmetiqueManager.Cosmetique.values()) {
+                                if (c.getCosmetiqueType() == cosmetiqueType) {
+                                    if (!c.isVip()) {
+
+                                        if (ReductionManager.hasReduction(c)) {
+                                            ReductionManager.removeReduction(c);
+                                            System.out.println(player.getName() + " a supprime la reduction " + args[1] + " a " + new Date().toLocaleString());
+                                            entryList.add(new AbstractMap.SimpleEntry<>(c, "bon"));
+                                        } else {
+                                            entryList.add(new AbstractMap.SimpleEntry<>(c, "deja"));
+                                        }
+
+                                    } else {
+                                        entryList.add(new AbstractMap.SimpleEntry<>(c, "vip"));
+                                    }
+                                }
+                            }
+
+                            for(Map.Entry<CosmetiqueManager.Cosmetique, String> entry : entryList){
+
+                                if(entry.getValue().equalsIgnoreCase("bon")) {
+
+                                    player.sendMessage("§f- §6Removed §c" + entry.getKey().getMysqlName());
+
+                                } else if(entry.getValue().equalsIgnoreCase("vip")) {
+
+                                    player.sendMessage("§f- §6Not Removed §c" + entry.getKey().getMysqlName() + " §6Cause: §cVIP");
+
+                                } else if(entry.getValue().equalsIgnoreCase("deja")) {
+
+                                    player.sendMessage("§f- §6Not Removed §c" + entry.getKey().getMysqlName() + " §6Cause: §cDEJA");
+
+                                }
+
+                            }
+
+                        } else {
+
+                            try {
+                                CosmetiqueManager.Cosmetique cosmetique = CosmetiqueManager.Cosmetique.getByMySQLName(args[1]);
+
+                                if (ReductionManager.hasReduction(cosmetique)) {
+                                    ReductionManager.removeReduction(cosmetique);
+                                    player.sendMessage("§aTu as bien supprimé la réduction §f" + args[1] + " §a!");
+                                    System.out.println(player.getName() + " a supprime la reduction " + args[1] + " a " + new Date().toLocaleString());
+                                    return true;
+                                } else {
+                                    player.sendMessage("§cCette cosmetique n'a pas de réduction !");
+                                    return true;
+                                }
+
+                            } catch (Exception e) {
+                                player.sendMessage("§cERREUR : " + e.getMessage());
                                 return true;
                             }
 
-                        } catch (Exception e){
-                            player.sendMessage("§cERREUR : " + e.getMessage());
-                            return true;
                         }
 
                     } else if (args[0].equalsIgnoreCase("add")){
