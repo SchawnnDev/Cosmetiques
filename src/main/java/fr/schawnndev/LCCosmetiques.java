@@ -25,14 +25,9 @@ import fr.schawnndev.reduction.Reduction;
 import fr.schawnndev.reduction.ReductionManager;
 import fr.schawnndev.sql.SQL;
 import lombok.Getter;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.*;
@@ -127,8 +122,6 @@ public class LCCosmetiques extends JavaPlugin{
                 } else if(args.length == 1){
 
                     if(args[0].equalsIgnoreCase("list")){
-
-
 
                         if(ReductionManager.getReductions().size() < 1){
                             player.sendMessage("§cIl n'y a pas de réductions !");

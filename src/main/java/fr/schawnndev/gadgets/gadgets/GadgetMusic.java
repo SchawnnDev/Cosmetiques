@@ -13,12 +13,10 @@
 
 package fr.schawnndev.gadgets.gadgets;
 
-import fr.schawnndev.CosmetiqueManager;
 import fr.schawnndev.LCCosmetiques;
 import fr.schawnndev.gadgets.Gadget;
 import fr.schawnndev.math.Randoms;
 import fr.schawnndev.particules.ParticleEffect;
-import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Location;
