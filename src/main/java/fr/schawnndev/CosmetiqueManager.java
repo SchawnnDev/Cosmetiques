@@ -13,7 +13,6 @@
 
 package fr.schawnndev;
 
-import fr.schawnndev.math.PositionConverter;
 import fr.schawnndev.reduction.Reduction;
 import fr.schawnndev.reduction.ReductionManager;
 import lombok.Getter;
@@ -161,10 +160,11 @@ public class CosmetiqueManager {
 
         for(Cosmetique cosmetique : Cosmetique.values()){
 
-            if(cosmetique == Cosmetique.AUCUN) break;
+            if(cosmetique != null && cosmetique != Cosmetique.AUCUN) continue;
 
-            ItemStack itemStack = cosmetique.getItemStack();
-            ItemMeta itemMeta = itemStack.getItemMeta();
+            ItemStack itemStack = new ItemStack(cosmetique.getItemStack().getType(), 1);
+            ItemMeta itemMeta = Bukkit.getItemFactory().getItemMeta(itemStack.getType());
+            System.out.println("itemMeta == null ?" + (itemMeta == null ? "true" : "false"));
             itemMeta.setDisplayName("§b" + cosmetique.getMysqlName());
             List<String> lore = new ArrayList<>();
             lore.add("§7----------------");
@@ -190,7 +190,7 @@ public class CosmetiqueManager {
             itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);
 
-            inventory.setItem(i, itemStack);
+            inventory.addItem(itemStack);
 
             i++;
 
