@@ -112,8 +112,6 @@ public class LCCosmetiques extends JavaPlugin{
 
                 if(args.length == 0){
 
-                    player.chat("/reduction");
-
                     player.sendMessage("§7---- §bReduction Help §7----");
                     player.sendMessage("§fListe des cosmétiques: §6/reduction listcosmetiques");
                     player.sendMessage("§fListe des reductions: §6/reduction list");
