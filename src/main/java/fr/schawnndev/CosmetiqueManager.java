@@ -17,6 +17,7 @@ import fr.schawnndev.reduction.Reduction;
 import fr.schawnndev.reduction.ReductionManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -163,9 +164,10 @@ public class CosmetiqueManager {
             if(cosmetique != null && cosmetique != Cosmetique.AUCUN) continue;
 
             ItemStack itemStack = new ItemStack(cosmetique.getItemStack().getType(), 1);
+            System.out.println("itemStack == null ?" + (itemStack == null ? "true" : "false"));
             ItemMeta itemMeta = Bukkit.getItemFactory().getItemMeta(itemStack.getType());
             System.out.println("itemMeta == null ?" + (itemMeta == null ? "true" : "false"));
-            itemMeta.setDisplayName("§b" + cosmetique.getMysqlName());
+            itemMeta.setDisplayName((ChatColor.AQUA + cosmetique.getMysqlName()));
             List<String> lore = new ArrayList<>();
             lore.add("§7----------------");
 
@@ -190,7 +192,7 @@ public class CosmetiqueManager {
             itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);
 
-            inventory.addItem(itemStack);
+            inventory.setItem(i, itemStack);
 
             i++;
 
