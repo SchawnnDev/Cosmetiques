@@ -52,14 +52,14 @@ public class CosmetiqueManager {
         // Gadgets
 
         DOUBLE_JUMP(CosmetiqueType.GADGET, true, 0, new ItemStack(Material.FEATHER), "doublejump"),
-        MUSIC(CosmetiqueType.GADGET, false, 1350, new ItemStack(2258), "music"),
+        FIREBALL(CosmetiqueType.GADGET, false, 1350, new ItemStack(Material.FIREBALL), "fireball"),
         GATEAU_EMPOISONNE(CosmetiqueType.GADGET, false, 1400, new ItemStack(Material.CAKE), "gateauempoisonne"),
         GLACE(CosmetiqueType.GADGET, true, 0, new ItemStack(Material.ICE), "glace"),
         CANON(CosmetiqueType.GADGET, false, 2500, new ItemStack(Material.SULPHUR), "canon"),
         APPLE(CosmetiqueType.GADGET, true, 0, new ItemStack(Material.GOLDEN_APPLE), "apple"),
         ENCRE(CosmetiqueType.GADGET, false, 2800, new ItemStack(Material.INK_SACK), "encre"),
         CANNE_A_PECHE(CosmetiqueType.GADGET, false, 1800, new ItemStack(Material.FISHING_ROD), "canneapeche"),
-        FIREBALL(CosmetiqueType.GADGET, true, 0, new ItemStack(Material.FIREBALL), "fireball"),
+        PAINTBALL(CosmetiqueType.GADGET, true, 0, new ItemStack(Material.IRON_BARDING), "paintball"),
         TNT(CosmetiqueType.GADGET, false, 1100, new ItemStack(Material.TNT), "tnt"),
         ARTIFICE(CosmetiqueType.GADGET, false, 900, new ItemStack(Material.FIREWORK), "artifice"),
 
