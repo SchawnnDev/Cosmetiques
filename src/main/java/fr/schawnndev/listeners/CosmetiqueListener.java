@@ -27,20 +27,23 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class CosmetiqueListener implements Listener {
 
-    public CosmetiqueListener(){
+    private static Map<UUID, CosmetiqueManager.Cosmetique> playerReduction = new HashMap<>();
+
+    public CosmetiqueListener() {
         Bukkit.getPluginManager().registerEvents(this, LCCosmetiques.getInstance());
     }
 
-    private static Map<UUID, CosmetiqueManager.Cosmetique> playerReduction = new HashMap<>();
-
     @EventHandler
-    public void onClick(InventoryClickEvent e){
+    public void onClick(InventoryClickEvent e) {
 
-        if(e.getInventory() != null && e.getInventory().getName() != null && e.getInventory().getName().equals("§aCosmetiques List")) {
+        if (e.getInventory() != null && e.getInventory().getName() != null && e.getInventory().getName().equals("§aCosmetiques List")) {
             Player player = (Player) e.getWhoClicked();
 
             e.setCancelled(true);
@@ -48,8 +51,8 @@ public class CosmetiqueListener implements Listener {
 
             if (e.getCurrentItem() != null && e.getCurrentItem().hasItemMeta() && e.getCurrentItem().getItemMeta().getDisplayName() != null) {
 
-                for(CosmetiqueManager.Cosmetique cosmetique : CosmetiqueManager.Cosmetique.values())
-                    if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§b" + cosmetique.getMysqlName())){
+                for (CosmetiqueManager.Cosmetique cosmetique : CosmetiqueManager.Cosmetique.values())
+                    if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§b" + cosmetique.getMysqlName())) {
                         playerReduction.put(player.getUniqueId(), cosmetique);
                         player.closeInventory();
                         player.playSound(player.getLocation(), Sound.NOTE_BASS, 1.0f, 1.0f);
@@ -59,15 +62,14 @@ public class CosmetiqueListener implements Listener {
 
             }
         }
-
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
-    public void onChat(AsyncPlayerChatEvent e){
+    public void onChat(AsyncPlayerChatEvent e) {
 
         Player player = e.getPlayer();
 
-        if(playerReduction.containsKey(player.getUniqueId())){
+        if (playerReduction.containsKey(player.getUniqueId())) {
             e.setCancelled(true);
 
             CosmetiqueManager.Cosmetique cosmetique = playerReduction.get(player.getUniqueId());
@@ -75,13 +77,18 @@ public class CosmetiqueListener implements Listener {
 
             try {
                 reduction = Integer.parseInt(e.getMessage());
-            } catch (NumberFormatException ex){
+            } catch (NumberFormatException ex) {
                 player.sendMessage("§cERREUR : " + ex.getMessage() + " §c(§fLa réduction doit être un nombre§c)");
                 return;
             }
 
-            if(reduction < 1 || reduction > 99){
+            if (reduction < 1 || reduction > 99) {
                 player.sendMessage("§cLe % de réduction doit être entre 1 et 99 !");
+                return;
+            }
+
+            if (cosmetique.isVip()) {
+                player.sendMessage("§cUne réduction ne peux être appliquée à une cosmétique VIP !");
                 return;
             }
 
@@ -92,9 +99,6 @@ public class CosmetiqueListener implements Listener {
             } else {
                 player.sendMessage("§cCette cosmetique a déjà une réduction !");
             }
-
         }
-
     }
-
 }

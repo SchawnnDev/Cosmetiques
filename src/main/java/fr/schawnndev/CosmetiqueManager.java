@@ -173,13 +173,17 @@ public class CosmetiqueManager {
                 List<String> lore = new ArrayList<>();
                 lore.add("§7----------------");
 
-                if (ReductionManager.hasReduction(cosmetique)) {
+                if(cosmetique.isVip()) {
+
+                    lore.add("§3La cosmétique est VIP.");
+
+                } else if (ReductionManager.hasReduction(cosmetique)) {
 
                     Reduction reduction = ReductionManager.getReduction(cosmetique);
 
                     lore.add("§6Réduction: §aOui");
                     lore.add("§7---------------- ");
-                    lore.add("§6Pourentage: §3-" + reduction.getReduction());
+                    lore.add("§6Pourcentage: §3-" + reduction.getReduction());
                     lore.add("§6Prix normal: §3" + cosmetique.getPrice());
                     lore.add("§6Prix réduit: §3" + reduction.getPriceAfterReduction());
                     lore.add("§7----------------  ");

@@ -37,17 +37,17 @@ import java.util.Map;
 
 public class ServerListener implements Listener {
 
-    public ServerListener(){
+    public ServerListener() {
         Bukkit.getPluginManager().registerEvents(this, LCCosmetiques.getInstance());
     }
 
     @Deprecated
-    private boolean hasActiveCosmetic(Player player, CosmetiqueManager.CosmetiqueType cosmetiqueType, Map<CosmetiqueManager.CosmetiqueType, String> cosmetiqueTypeStringMap){
+    private boolean hasActiveCosmetic(Player player, CosmetiqueManager.CosmetiqueType cosmetiqueType, Map<CosmetiqueManager.CosmetiqueType, String> cosmetiqueTypeStringMap) {
 
-        if(!cosmetiqueTypeStringMap.containsKey(cosmetiqueType))
+        if (!cosmetiqueTypeStringMap.containsKey(cosmetiqueType))
             return false;
 
-        if(cosmetiqueTypeStringMap.get(cosmetiqueType).equalsIgnoreCase("aucun"))
+        if (cosmetiqueTypeStringMap.get(cosmetiqueType).equalsIgnoreCase("aucun"))
             return false;
 
         return true;
@@ -55,7 +55,7 @@ public class ServerListener implements Listener {
 
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent e){
+    public void onJoin(PlayerJoinEvent e) {
 
         final Player player = e.getPlayer();
 
@@ -63,15 +63,15 @@ public class ServerListener implements Listener {
 
         final Map<CosmetiqueManager.CosmetiqueType, String> cosmetiqueTypeStringMap = new HashMap<>();
 
-        for(CosmetiqueManager.CosmetiqueType c : CosmetiqueManager.CosmetiqueType.values())
+        for (CosmetiqueManager.CosmetiqueType c : CosmetiqueManager.CosmetiqueType.values())
             cosmetiqueTypeStringMap.put(c, SQLManager.getActiveCosmetic(player, c));
 
 
-        if(hasActiveCosmetic(player, CosmetiqueManager.CosmetiqueType.PET, cosmetiqueTypeStringMap)){
+        if (hasActiveCosmetic(player, CosmetiqueManager.CosmetiqueType.PET, cosmetiqueTypeStringMap)) {
 
             String petName = SQLManager.getActivePetName(player);
 
-            if(petName.equalsIgnoreCase("aucun")){
+            if (petName.equalsIgnoreCase("aucun")) {
 
                 PetManager.addPlayerPet(player, CosmetiqueManager.Cosmetique.getByMySQLName(cosmetiqueTypeStringMap.get(CosmetiqueManager.CosmetiqueType.PET)));
 
@@ -82,7 +82,7 @@ public class ServerListener implements Listener {
 
         }
 
-        if(hasActiveCosmetic(player, CosmetiqueManager.CosmetiqueType.PARTICLE, cosmetiqueTypeStringMap)){
+        if (hasActiveCosmetic(player, CosmetiqueManager.CosmetiqueType.PARTICLE, cosmetiqueTypeStringMap)) {
 
             ParticleManager.activeParticleByName(player, cosmetiqueTypeStringMap.get(CosmetiqueManager.CosmetiqueType.PARTICLE));
 
@@ -91,11 +91,11 @@ public class ServerListener implements Listener {
         boolean _hasActiveGadget = false;
         String _gadget = null;
 
-        if(hasActiveCosmetic(player, CosmetiqueManager.CosmetiqueType.GADGET, cosmetiqueTypeStringMap)) {
+        if (hasActiveCosmetic(player, CosmetiqueManager.CosmetiqueType.GADGET, cosmetiqueTypeStringMap)) {
             _gadget = cosmetiqueTypeStringMap.get(CosmetiqueManager.CosmetiqueType.GADGET);
             _hasActiveGadget = true;
 
-            if(_gadget != null && _gadget.equalsIgnoreCase("doublejump"))
+            if (_gadget != null && _gadget.equalsIgnoreCase("doublejump"))
                 player.setAllowFlight(true);
 
         }
@@ -103,13 +103,13 @@ public class ServerListener implements Listener {
         final String gadget = _gadget;
         final boolean hasActiveGadget = _hasActiveGadget;
 
-        new BukkitRunnable(){
+        new BukkitRunnable() {
             @Override
             public void run() {
 
                 player.getInventory().setItem(8, MenuManager.getCosmeticItem());
 
-                if(hasActiveGadget) {
+                if (hasActiveGadget) {
                     player.getInventory().setItem(4, ItemStackManager.getItemStackByName(gadget));
                     GadgetManager.addGadget(player, gadget, false);
                 }
@@ -119,11 +119,11 @@ public class ServerListener implements Listener {
     }
 
     @EventHandler
-    public void onQuit(PlayerQuitEvent e){
+    public void onQuit(PlayerQuitEvent e) {
 
         // Active particle sql
 
-        if(ParticleManager.getActiveParticles().containsKey(e.getPlayer().getUniqueId())) {
+        if (ParticleManager.getActiveParticles().containsKey(e.getPlayer().getUniqueId())) {
             SQLManager.setActiveCosmetic(e.getPlayer(), ParticleManager.getActiveParticles().get(e.getPlayer().getUniqueId()), CosmetiqueManager.CosmetiqueType.PARTICLE);
             ParticleManager.getActiveParticles().remove(e.getPlayer().getUniqueId());
         } else {
@@ -132,10 +132,10 @@ public class ServerListener implements Listener {
 
         // Active gadget sql
 
-        if(GadgetManager.hasGadgetActive(e.getPlayer())) {
+        if (GadgetManager.hasGadgetActive(e.getPlayer())) {
             SQLManager.setActiveCosmetic(e.getPlayer(), GadgetManager.getGadget(e.getPlayer()), CosmetiqueManager.CosmetiqueType.GADGET);
 
-            if(GadgetManager.getGadget(e.getPlayer()).equalsIgnoreCase("doublejump"))
+            if (GadgetManager.getGadget(e.getPlayer()).equalsIgnoreCase("doublejump"))
                 e.getPlayer().setAllowFlight(false);
 
 
@@ -146,10 +146,10 @@ public class ServerListener implements Listener {
 
         // Active pet sql
 
-        if(PetManager.hasActivePet(e.getPlayer())){
+        if (PetManager.hasActivePet(e.getPlayer())) {
             SQLManager.setActiveCosmetic(e.getPlayer(), PetManager.getPet(e.getPlayer()).getCosmetiqueType().getMysqlName(), CosmetiqueManager.CosmetiqueType.PET);
 
-            if(PetManager.getPet(e.getPlayer()).getName().contains("entity.Pet"))
+            if (PetManager.getPet(e.getPlayer()).getName().contains("entity.Pet"))
                 SQLManager.setActivePetName(e.getPlayer(), "aucun");
             else
                 SQLManager.setActivePetName(e.getPlayer(), PetManager.getPet(e.getPlayer()).getName());
@@ -161,15 +161,15 @@ public class ServerListener implements Listener {
 
         // Achats
 
-        if(Manager.playersBuying.contains(e.getPlayer().getUniqueId()))
+        if (Manager.playersBuying.contains(e.getPlayer().getUniqueId()))
             Manager.playersBuying.remove(e.getPlayer().getUniqueId());
 
-        if(Manager.hasAchat(e.getPlayer().getUniqueId()))
+        if (Manager.hasAchat(e.getPlayer().getUniqueId()))
             Manager.achats.remove(Manager.getAchat(e.getPlayer().getUniqueId()));
 
         // PetChangeName
 
-        if(PetChangeNameEvent.isChangingPetName(e.getPlayer()))
+        if (PetChangeNameEvent.isChangingPetName(e.getPlayer()))
             PetChangeNameEvent.removePlayerChangingPetName(e.getPlayer());
 
     }
