@@ -16,7 +16,7 @@
     </repositories>
 
     <scm>
-        <connection>scm:git:git@git.uhcwork.net:schawnndev/lccosmetiques.git</connection>
+        <connection>scm:git:gitLCCosmetiques.git</connection>
     </scm>
 
     <dependencies>
