@@ -1,4 +1,4 @@
 language: java
-script: mvn install -DskipTests=true
+script: mvn install -DskipTests=true -DrepoToken=hsPhY0vnF9N4LWtTyyQ2HLjJ3KFzrruRo
 notifications:
   slack: legendcraft:HIsRxeJX20Z002YvPzziRvyM
